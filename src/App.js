@@ -1,24 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./styles/App.scss";
+import {
+  BrowserRouter as Router,
+  Route,
+  // Redirect,
+  Switch,
+} from "react-router-dom";
+
+import { MenuProvider } from "./contexts/menu.context";
+import { ToastProvider } from "react-toast-notifications";
+import { UtilitiesProvider } from "./contexts/utilities.context";
+import { PlayersProvider } from "./contexts/players.context";
+
+import Home from "./pages/home/home.js";
+import AddChart from "./pages/add-birth-chart/add-birth-chart.js";
+import InPlay from "./pages/in-play/in-play.js";
+import AliceChart from "./pages/alice-chart/alice-chart.js";
+import Generator from "./pages/generator/generator.js";
+import PublicDisplay from "./pages/public-display/public-display.js";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <ToastProvider autoDismiss={true}>
+        <UtilitiesProvider>
+          <PlayersProvider>
+            <MenuProvider>
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/add-birth-chart" component={AddChart} />
+                <Route exact path="/in-play" component={InPlay} />
+                <Route exact path="/alice-chart" component={AliceChart} />
+                <Route exact path="/generator" component={Generator} />
+                <Route exact path="/public-display" component={PublicDisplay} />
+              </Switch>
+            </MenuProvider>
+          </PlayersProvider>
+        </UtilitiesProvider>
+      </ToastProvider>
+    </Router>
   );
 }
 
