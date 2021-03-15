@@ -76,6 +76,7 @@ function BirthDataForm({ initialValues }) {
   const geoMountLat = document.getElementById("latitude");
   const geoMountLong = document.getElementById("longitude");
   const dateTimeInput = document.getElementById("dtob");
+  const utcInput = document.getElementById("utcoffset");
 
   const locationSubmit = async (locationForm) => {
     console.log("lf values", locationForm.location.value);
@@ -159,24 +160,42 @@ function BirthDataForm({ initialValues }) {
 
   // FIND UTC OFFSET
 
-  async function findUTCOffset(datetime, lat = "52", long = "14") {
-    const utcInput = document.getElementById("utcoffset");
+  function findUTCOffset(datetime, lat = "52", long = "14") {
     const timestamp = Date.parse(datetime) / 1000;
     // console.log("timestamp", timestamp);
     const fetchURLUTC = `https://maps.googleapis.com/maps/api/timezone/json?location=${lat},${long}&timestamp=${timestamp}&key=${TIME_API_KEY}`;
     console.log("fetchURLUTC", fetchURLUTC);
     // getUTC(fetchURLUTC, renderUTC);
-    const { results } = await makeCall(fetchURLUTC);
-    console.log("results utc", results);
-    if (!results) {
+    getUTC(fetchURLUTC, renderUTC);
+  }
+
+  function renderUTC(report, mount = utcInput) {
+    if (!report) {
       utcInput.innerHTML = "No UTC report";
       return;
     }
-    const offset = (results.rawOffset += results.dstOffset);
-    console.log("offset", offset);
+    const offset = (report.rawOffset += report.dstOffset);
+    // console.log("offset", offset);
     const offsetUTC = Math.floor(offset / 60 / 60);
-    console.log("offsetUTC", offsetUTC);
+    // console.log("offsetUTC", offsetUTC);
     utcInput.value = offsetUTC;
+  }
+
+  async function getUTC(currentURL, handler = renderUTC) {
+    try {
+      const response = await fetch(currentURL);
+
+      if (!response.ok) throw response;
+
+      const data = await response.json();
+      handler(data);
+    } catch (err) {
+      addToast({
+        html: `<h2>Error getting UTC</h2><p>${err.message}</p>`,
+        classes: ["toast", "error"],
+      });
+      console.log(err);
+    }
   }
 
   //FINAL SUBMIT
