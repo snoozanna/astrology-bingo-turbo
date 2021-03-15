@@ -75,6 +75,7 @@ function BirthDataForm({ initialValues }) {
   //INPUTS
   const geoMountLat = document.getElementById("latitude");
   const geoMountLong = document.getElementById("longitude");
+  const dateTimeInput = document.getElementById("dtob");
 
   const locationSubmit = async (locationForm) => {
     console.log("lf values", locationForm.location.value);
@@ -82,11 +83,10 @@ function BirthDataForm({ initialValues }) {
     // const data = locationForm.location.value;
     const FD = new FormData(locationForm);
     const data = Object.fromEntries(FD);
-    console.log("data", data);
+    // console.log("data", data);
     locationForm.setAttribute("disabled", "disabled");
     console.log(locationForm.elements);
     for (const el of locationForm.elements) {
-      console.log("el", el);
       el.setAttribute("disabled", "disabled");
       el.classList.add("disabled");
       el.classList.remove("valid");
@@ -104,9 +104,6 @@ function BirthDataForm({ initialValues }) {
     console.log(GEO_API_URL);
 
     const { results } = await makeCall(GEO_API_URL);
-    console.log("results", results);
-    const { options } = results[0].address_components;
-    console.log("options", options);
 
     // Show a list or warn no match and reset
     if (!results?.length) {
@@ -142,6 +139,7 @@ function BirthDataForm({ initialValues }) {
 
       geoMountLat.value = lat;
       geoMountLong.value = lng;
+
       locationForm.reset();
       locationForm.setAttribute("disabled", "disabled");
     });
@@ -157,6 +155,28 @@ function BirthDataForm({ initialValues }) {
     // const elems = document.querySelectorAll("select");
     // const options = {};
     // M.FormSelect.init(elems, options);
+  }
+
+  // FIND UTC OFFSET
+
+  async function findUTCOffset(datetime, lat = "52", long = "14") {
+    const utcInput = document.getElementById("utcoffset");
+    const timestamp = Date.parse(datetime) / 1000;
+    // console.log("timestamp", timestamp);
+    const fetchURLUTC = `https://maps.googleapis.com/maps/api/timezone/json?location=${lat},${long}&timestamp=${timestamp}&key=${TIME_API_KEY}`;
+    console.log("fetchURLUTC", fetchURLUTC);
+    // getUTC(fetchURLUTC, renderUTC);
+    const { results } = await makeCall(fetchURLUTC);
+    console.log("results utc", results);
+    if (!results) {
+      utcInput.innerHTML = "No UTC report";
+      return;
+    }
+    const offset = (results.rawOffset += results.dstOffset);
+    console.log("offset", offset);
+    const offsetUTC = Math.floor(offset / 60 / 60);
+    console.log("offsetUTC", offsetUTC);
+    utcInput.value = offsetUTC;
   }
 
   //FINAL SUBMIT
@@ -292,6 +312,27 @@ function BirthDataForm({ initialValues }) {
             InputLabelProps={{
               shrink: true,
             }}
+            rules={{ required: true }}
+          />
+          <Button onClick={() => findUTCOffset(dateTimeInput.value)}>
+            Find UTC offset
+          </Button>
+        </div>
+        <div className={classes.formRow}>
+          {/* <label htmlFor="firstName">First Name</label>
+              <input type="text" id="firstName" name="firstName" ref={register} />
+              {errors.firstName && "Title name is required"} */}
+          <Controller
+            as={TextField}
+            // disabled
+            error={!!errors.utcoffset}
+            helperText={errors.utcoffset && errors.utcoffset.message}
+            id="utcoffset"
+            type="number"
+            name="utcoffset"
+            placeholder="UTC offset"
+            className={classes.textField}
+            control={control}
             rules={{ required: true }}
           />
         </div>
