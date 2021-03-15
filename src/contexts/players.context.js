@@ -25,7 +25,7 @@ export const PlayersProvider = (props) => {
     };
     console.log("new player", newPlayer);
     setPlayers([...players, newPlayer]);
-    addToast(`Saved ${newPlayer}`, {
+    addToast(`Saved ${newPlayer.firstName} ${newPlayer.lastName}`, {
       appearance: "success",
     });
   };
@@ -35,11 +35,11 @@ export const PlayersProvider = (props) => {
   const deletePlayer = async (id) => {
     // Get index
     console.log("trying to delete player");
-    const index = players.findIndex((color) => color._id === id);
+    const index = players.findIndex((player) => player._id === id);
     const deletedPlayer = players[index];
 
     if (index === -1) {
-      addToast(`Error: Failed to delete color id: ${id}`, {
+      addToast(`Error: Failed to delete player id: ${id}`, {
         appearance: "error",
       });
       return;
@@ -50,7 +50,7 @@ export const PlayersProvider = (props) => {
       ...players.slice(index + 1),
     ];
     setPlayers(updatedPlayers);
-    addToast(`Deleted ${deletedPlayer}`, {
+    addToast(`Deleted ${deletedPlayer.firstName} ${deletedPlayer.lastName}`, {
       appearance: "success",
     });
   };

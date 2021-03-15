@@ -15,22 +15,15 @@ export const UtilitiesContext = createContext({
 });
 
 export const UtilitiesProvider = (props) => {
+  const { addToast } = useToasts();
+
   const uuidv4 = () => {
-    console.log("hello from utilities context");
     return "xxxxx".replace(/[xy]/g, function (c) {
       var r = (Math.random() * 16) | 0,
         v = c == "x" ? r : (r & 0x3) | 0x8;
       return v.toString(16);
     });
   };
-
-  //  function uuidv4() {
-  //   return "xxxxx".replace(/[xy]/g, function (c) {
-  //     var r = (Math.random() * 16) | 0,
-  //       v = c == "x" ? r : (r & 0x3) | 0x8;
-  //     return v.toString(16);
-  //   });
-  // }
 
   function getRandomIntInclusive(min, max) {
     min = Math.ceil(min);
@@ -74,19 +67,23 @@ export const UtilitiesProvider = (props) => {
 
   //TODO work out why M is undefined
 
-  // const makeCall = async (url = "", options = {}) => {
-  //   try {
-  //     const response = await fetch(url, options);
-  //     if (!response.ok) {
-  //       throw response;
-  //     }
-  //     const data = await response.json();
-  //     return data;
-  //   } catch (err) {
-  //     M.toast({html: `<h2>Error</h2><p>${err.message}</p>`, classes: ['toast', 'error']});
-  //     return err;
-  //   }
-  // }
+  const makeCall = async (url = "", options = {}) => {
+    try {
+      const response = await fetch(url, options);
+      if (!response.ok) {
+        throw response;
+      }
+      const data = await response.json();
+      return data;
+    } catch (err) {
+      addToast({
+        html: `<h2>Error</h2><p>${err.message}</p>`,
+        classes: ["toast", "error"],
+      });
+      return err;
+    }
+  };
+
   // async function makeCall(url = "", options = {}) {
   //   try {
   //     const response = await fetch(url, options);
@@ -96,7 +93,10 @@ export const UtilitiesProvider = (props) => {
   //     const data = await response.json();
   //     return data;
   //   } catch (err) {
-  //     M.toast({html: `<h2>Error</h2><p>${err.message}</p>`, classes: ['toast', 'error']});
+  //     addToast(({
+  //       html: `<h2>Error</h2><p>${err.message}</p>`,
+  //       classes: ["toast", "error"],
+  //     });
   //     return err;
   //   }
   // }
@@ -159,7 +159,7 @@ export const UtilitiesProvider = (props) => {
         getRandomIntInclusive,
         deepFreeze,
         isElement,
-        // makeCall,
+        makeCall,
         connectToWebSocket,
       }}
     >
