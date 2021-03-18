@@ -120,13 +120,13 @@ export const PlayersProvider = (props) => {
   //   }
   // }
 
-  const addPlayer = (formData) => {
+  const addPlayer = async (formData) => {
     let newPlayer = {
       ...formData,
       _id: uuidv4(),
     };
     const fetchURL = createBirthChartURL(newPlayer);
-    newPlayer.chart = fetchBirthChart(fetchURL, newPlayer);
+    newPlayer.chart = await fetchBirthChart(fetchURL, newPlayer);
     console.log("new player", newPlayer);
     setPlayers([...players, newPlayer]);
     addToast(`Saved ${newPlayer.firstName} ${newPlayer.lastName}`, {

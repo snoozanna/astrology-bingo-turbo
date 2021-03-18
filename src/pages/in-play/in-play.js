@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import Header from "./../../components/Header/Header";
+import ChartList from "./../../components/ChartList/ChartList"
 
 import { PlayersContext } from "./../../contexts/players.context";
 
@@ -20,6 +21,10 @@ function InPlay() {
                 <p>First name: {player.firstName}</p>
                 <p>Last name: {player.lastName}</p>
                 <p>Email: {player.email}</p>
+                <p>
+                  Chart:
+                 <ChartList data={player.chart}/>
+                </p>
                 <button onClick={() => deletePlayer(player._id)}>Delete</button>
               </li>
             ))}
