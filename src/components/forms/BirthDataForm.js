@@ -57,10 +57,12 @@ function BirthDataForm({ initialValues }) {
   );
   const { makeCall } = useContext(UtilitiesContext);
 
-  const { handleSubmit, errors, control, reset, formState } = useForm({
-    resolver: yupResolver(schema),
-    mode: "onChange",
-  });
+  const { handleSubmit, setValue, errors, control, reset, formState } = useForm(
+    {
+      resolver: yupResolver(schema),
+      mode: "onChange",
+    },
+  );
 
   if (initialValues && !populated) {
     reset(initialValues);
@@ -138,8 +140,8 @@ function BirthDataForm({ initialValues }) {
         },
       } = results[e.target.value];
 
-      geoMountLat.value = lat;
-      geoMountLong.value = lng;
+      setValue("latitude", lat);
+      setValue("longitude", lng);
 
       locationForm.reset();
       locationForm.setAttribute("disabled", "disabled");
@@ -162,10 +164,7 @@ function BirthDataForm({ initialValues }) {
 
   function findUTCOffset(datetime, lat = "52", long = "14") {
     const timestamp = Date.parse(datetime) / 1000;
-    // console.log("timestamp", timestamp);
     const fetchURLUTC = `https://maps.googleapis.com/maps/api/timezone/json?location=${lat},${long}&timestamp=${timestamp}&key=${TIME_API_KEY}`;
-    console.log("fetchURLUTC", fetchURLUTC);
-    // getUTC(fetchURLUTC, renderUTC);
     getUTC(fetchURLUTC, renderUTC);
   }
 
@@ -175,19 +174,16 @@ function BirthDataForm({ initialValues }) {
       return;
     }
     const offset = (report.rawOffset += report.dstOffset);
-    // console.log("offset", offset);
     const offsetUTC = Math.floor(offset / 60 / 60);
-    // console.log("offsetUTC", offsetUTC);
-    utcInput.value = offsetUTC;
+    setValue("utcoffset", offsetUTC);
   }
 
   async function getUTC(currentURL, handler = renderUTC) {
     try {
       const response = await fetch(currentURL);
-
       if (!response.ok) throw response;
-
       const data = await response.json();
+      console.log("utc data", data);
       handler(data);
     } catch (err) {
       addToast({
