@@ -11,6 +11,7 @@ import { MenuProvider } from "./contexts/menu.context";
 import { ToastProvider } from "react-toast-notifications";
 import { UtilitiesProvider } from "./contexts/utilities.context";
 import { PlayersProvider } from "./contexts/players.context";
+import { BirthChartProvider } from "./contexts/birthchart.context";
 
 import Home from "./pages/home/home.js";
 import AddChart from "./pages/add-birth-chart/add-birth-chart.js";
@@ -24,18 +25,24 @@ function App() {
     <Router>
       <ToastProvider autoDismiss={true}>
         <UtilitiesProvider>
-          <PlayersProvider>
-            <MenuProvider>
-              <Switch>
-                <Route exact path="/" component={Home} />
-                <Route exact path="/add-birth-chart" component={AddChart} />
-                <Route exact path="/in-play" component={InPlay} />
-                <Route exact path="/alice-chart" component={AliceChart} />
-                <Route exact path="/generator" component={Generator} />
-                <Route exact path="/public-display" component={PublicDisplay} />
-              </Switch>
-            </MenuProvider>
-          </PlayersProvider>
+          <BirthChartProvider>
+            <PlayersProvider>
+              <MenuProvider>
+                <Switch>
+                  <Route exact path="/" component={Home} />
+                  <Route exact path="/add-birth-chart" component={AddChart} />
+                  <Route exact path="/in-play" component={InPlay} />
+                  <Route exact path="/alice-chart" component={AliceChart} />
+                  <Route exact path="/generator" component={Generator} />
+                  <Route
+                    exact
+                    path="/public-display"
+                    component={PublicDisplay}
+                  />
+                </Switch>
+              </MenuProvider>
+            </PlayersProvider>
+          </BirthChartProvider>
         </UtilitiesProvider>
       </ToastProvider>
     </Router>
