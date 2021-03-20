@@ -216,17 +216,17 @@ export const BirthChartProvider = (props) => {
       this._id = _id;
     }
 
-    // markCalled({ planet: p, sign }) {
-    //   const planet = this[p];
-    //   if (planet.sign === sign) {
-    //     planet.called = true;
-    //   }
-    // }
-    // unMarkCalled() {
-    //   for (const planet of BirthChart.planets) {
-    //     this[planet].called = false;
-    //   }
-    // }
+    markCalled({ planet: p, sign }) {
+      const planet = this[p];
+      if (planet.sign === sign) {
+        planet.called = true;
+      }
+    }
+    unMarkCalled() {
+      for (const planet of BirthChart.planets) {
+        this[planet].called = false;
+      }
+    }
 
     bcReport() {
       return `

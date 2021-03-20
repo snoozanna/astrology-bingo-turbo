@@ -15,7 +15,6 @@ export const MenuProvider = (props) => {
   const open = () => setState(true);
   const close = () => setState(false);
   const toggle = () => {
-    console.log('toggling')
     setState(!isOpen);
   };
   return (

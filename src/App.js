@@ -16,7 +16,7 @@ import { BirthChartProvider } from "./contexts/birthchart.context";
 import Home from "./pages/home/home.js";
 import AddChart from "./pages/add-birth-chart/add-birth-chart.js";
 import InPlay from "./pages/in-play/in-play.js";
-import AliceChart from "./pages/alice-chart/alice-chart.js";
+import AliceChart from "./pages/alice-chart/alice-chart";
 import Generator from "./pages/generator/generator.js";
 import PublicDisplay from "./pages/public-display/public-display.js";
 

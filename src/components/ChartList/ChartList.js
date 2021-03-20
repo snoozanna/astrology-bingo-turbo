@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import List from "@material-ui/core/List";
 // import { makeStyles } from "@material-ui/core/styles";
 import ListItem from "@material-ui/core/ListItem";
@@ -20,7 +20,6 @@ import ThreeDRotation from "@material-ui/icons/ThreeDRotation";
 // }));
 
 const ChartList = ({ data, ordered = false, ItemComponent }) => {
-  // const classes = useStyles();
   return (
     <>
       {Object.entries(data).map(([planet, sign]) => (

@@ -2,39 +2,12 @@ import React, { useContext } from "react";
 import Header from "./../../components/Header/Header";
 import ChartList from "./../../components/ChartList/ChartList";
 
-import { PlayersContext } from "./../../contexts/players.context"
-import { BirthChartContext } from "../../contexts/birthchart.context";
+import { PlayersContext } from "./../../contexts/players.context";
 
 function InPlay() {
   const { players, deletePlayer, deleteAllPlayers } = useContext(
     PlayersContext,
   );
-
-  const { BirthChart } = useContext(BirthChartContext);
-
-  const alice = {
-    Ascendant: "Scorpio",
-    Chiron: "Cancer",
-    Descendant: "Taurus",
-    Jupiter: "Cancer",
-    Mars: "Aries",
-    Mercury: "Cancer",
-    Moon: "Sagittarius",
-    Neptune: "Capricorn",
-    Pluto: "Scorpio",
-    Saturn: "Capricorn",
-    Sun: "Cancer",
-    Uranus: "Capricorn",
-    Venus: "Gemini",
-    birthday: "1990/07/04",
-    latitude: 53.4083714,
-    longitude: -2.9915726,
-    ownerName: "Alice",
-    time: "1800",
-  };
-
-  const aliceChart = new BirthChart(alice);
-  console.log("alice chart", aliceChart);
 
   return (
     <>

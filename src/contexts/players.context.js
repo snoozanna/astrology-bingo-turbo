@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState } from "react";
 import { useToasts } from "react-toast-notifications";
 import { UtilitiesContext } from "./utilities.context";
+import { BirthChartContext } from "./birthchart.context";
 import { TIME_API_KEY } from "./../config";
 // import cloneDeep from 'lodash.cloneDeep'
 
@@ -23,9 +24,10 @@ export const PlayersProvider = (props) => {
   const [loading, setLoading] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const { addToast } = useToasts();
-  const { uuidv4 } = useContext(UtilitiesContext);
 
-  //TODO change to datetime
+  const { uuidv4 } = useContext(UtilitiesContext);
+  const { BirthChart } = useContext(BirthChartContext);
+
   const createBirthChartURL = ({
     datetime,
     latitude,
@@ -33,18 +35,7 @@ export const PlayersProvider = (props) => {
     utcoffset,
   }) => {
     const dob = datetime.slice(0, 10).replaceAll("-", "");
-    console.log("dob", dob);
     const tob = datetime.slice(11, 16).replace(":", "");
-    console.log("tob", tob);
-    // const year = Number(dob.slice(0, 4));
-    // // console.log("year", year);
-    // const month = Number(dob.slice(4, 6));
-    // // console.log("month", month);
-    // const jsMonth = month - 1;
-    // const date = Number(dob.slice(6, 8));
-    // // console.log("date", date);
-    // const [hours, minutes] = tob.split(":");
-    // // console.log("hours", hours, "minutes", minutes);
     const d = new Date(datetime);
     const timestamp = d.getTime();
 
@@ -56,11 +47,11 @@ export const PlayersProvider = (props) => {
     console.log("params", params);
 
     const fetchURL = `http://localhost:8000/formatData?date=${dob}&time=${tob}&location1=${latitude}&location2=${longitude}&utc=${utcoffset}&action=`;
-    console.log("fetchURL", fetchURL);
+    // console.log("fetchURL", fetchURL);
     return fetchURL;
   };
 
-  const fetchBirthChart = async (fetchURL, { firstname, lastname }) => {
+  const fetchBirthChart = async (fetchURL, { firstName, lastName }) => {
     // console.log('loading', loading);
     // console.log('error', error);
     if (loading || loaded || error) {
@@ -75,10 +66,10 @@ export const PlayersProvider = (props) => {
       }
       let chartData = await response.json();
       chartData = JSON.parse(chartData);
-      // chartData.Ascendant = chartData.Asc;
-      // chartData.Descendant = BirthChart.descDict[chartData.Ascendant];
-      // delete chartData.Asc;
-      // chartData.ownerName = `${firstname} ${lastname}`;
+      chartData.Ascendant = chartData.Asc;
+      chartData.Descendant = BirthChart.descDict[chartData.Ascendant];
+      delete chartData.Asc;
+      chartData.ownerName = `${firstName} ${lastName}`;
       console.log("chartdata", chartData);
       return chartData;
       // setLoading(false);
@@ -126,7 +117,8 @@ export const PlayersProvider = (props) => {
       _id: uuidv4(),
     };
     const fetchURL = createBirthChartURL(newPlayer);
-    newPlayer.chart = await fetchBirthChart(fetchURL, newPlayer);
+    const fetchData = await fetchBirthChart(fetchURL, newPlayer);
+    newPlayer.chart = new BirthChart(fetchData);
     console.log("new player", newPlayer);
     setPlayers([...players, newPlayer]);
     addToast(`Saved ${newPlayer.firstName} ${newPlayer.lastName}`, {

@@ -72,11 +72,9 @@ function BirthDataForm({ initialValues }) {
   // FORMS
 
   const locationForm = document.getElementById("locationForm");
-  const mainForm = document.getElementById("mainForm");
+
 
   //INPUTS
-  const geoMountLat = document.getElementById("latitude");
-  const geoMountLong = document.getElementById("longitude");
   const dateTimeInput = document.getElementById("dtob");
   const utcInput = document.getElementById("utcoffset");
 
@@ -183,7 +181,7 @@ function BirthDataForm({ initialValues }) {
       const response = await fetch(currentURL);
       if (!response.ok) throw response;
       const data = await response.json();
-      console.log("utc data", data);
+      // console.log("utc data", data);
       handler(data);
     } catch (err) {
       addToast({
@@ -196,8 +194,8 @@ function BirthDataForm({ initialValues }) {
 
   //FINAL SUBMIT
   const onSubmit = async (formValues) => {
-    console.log("formValues", formValues);
-    console.log("on submit function fires");
+    // console.log("formValues", formValues);
+
     // formValues._id = id; // pulled from the URL using router 'useParams' hook
 
     // if (populated) {

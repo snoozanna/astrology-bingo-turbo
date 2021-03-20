@@ -26,7 +26,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "start:hug": "hug -f get-birth-chart.py"
+    "start:hug": "hug -f ./src/get-birth-chart.py"
   },
   "eslintConfig": {
     "extends": [

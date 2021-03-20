@@ -40,7 +40,7 @@ const NavDrawer = () => {
             { text: "Add Birth Chart", to: "/add-birth-chart" },
             { text: "Generator", to: "/generator" },
             { text: "Public Display", to: "/public-display" },
-            { text: "Alice's chart", to: "/alices-chart" },
+            { text: "Alice's chart", to: "/alice-chart" },
             { text: "In play", to: "/in-play" },
           ].map(({ text, to }) => (
             <ListItem button component={NavLink} to={to} key={text}>
