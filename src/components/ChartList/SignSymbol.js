@@ -13,6 +13,7 @@ import { ReactComponent as PiscesSymbol } from "./../../assets/symbols/pisces.sv
 import { ReactComponent as SagittariusSymbol } from "./../../assets/symbols/sagittarius.svg";
 import { ReactComponent as ScorpioSymbol } from "./../../assets/symbols/scorpio.svg";
 import { ReactComponent as VirgoSymbol } from "./../../assets/symbols/virgo.svg";
+import AriesIcon from "./Icons/AriesIcon";
 // import { ReactComponent as Symbol } from `./../../assets/symbols/${sign}.svg`;
 
 const useStyles = makeStyles((theme) => ({
@@ -30,7 +31,9 @@ const SignSymbol = ({ sign }) => {
   const getIconComponent = (sign) => {
     switch (sign) {
       case "Aries":
-        return <AriesSymbol className={classes.icon} />;
+        //TRYING WITH THE ICON BEING A REAL COMPONENT
+        // return <AriesSymbol className={classes.icon} />;
+        return <AriesIcon />;
         break;
       case "Taurus":
         return <TaurusSymbol className={classes.icon} />;

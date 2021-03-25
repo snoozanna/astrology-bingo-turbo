@@ -281,6 +281,7 @@ export const PlayersProvider = (props) => {
     const fetchData = await fetchBirthChart(fetchURL, newPlayer);
     newPlayer.chart = new BirthChart(fetchData);
     // console.log("new player", newPlayer);
+    console.log("JSON new player ", JSON.stringify(newPlayer));
     setPlayers([...players, newPlayer]);
     addToast(`Saved ${newPlayer.firstName} ${newPlayer.lastName}`, {
       appearance: "success",
