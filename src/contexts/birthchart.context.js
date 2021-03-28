@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 import { UtilitiesContext } from "./utilities.context";
+import SignSymbol from "./../components/ChartList/SignSymbol";
 
 export const BirthChartContext = createContext({
   // BirthChart, /// how do you do this for a class?
@@ -559,6 +560,22 @@ export const BirthChartProvider = (props) => {
           break;
       }
     }
+
+    static signArr = (data) => {
+      const arr = [];
+      console.log("data", data);
+      Object.entries(data.data).map(([key, value]) => {
+        if (BirthChart.planets.includes(key)) {
+          const { sign } = value;
+          console.log("sign", sign);
+          arr.push(sign);
+        } else {
+          return null;
+        }
+      });
+       console.log("arr", arr);
+       return arr;
+    };
 
     static descDict = Object.freeze({
       Aries: "Libra",

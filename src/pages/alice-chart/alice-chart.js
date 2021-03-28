@@ -195,8 +195,8 @@ function AliceChart() {
         <Header />
         <main>
           <h1>Alice's Chart </h1>
-          <ChartList data={alice.chart} />
-          <ChartImage data={alice.chart} />
+          {/* <ChartList data={alice.chart} /> */}
+          {/* <ChartImage data={alice.chart} /> */}
           <ChartImageTwo data={alice.chart} />
         </main>
       </div>

@@ -26,7 +26,7 @@ const ChartImage = (data) => {
 
   return (
     <>
-      <p>Template chart as a ReactComponent</p>
+      <p>Template chart as a ReactComponent</p> 
       <TemplateChart>{iconsToShow(data.data)}</TemplateChart>
     </>
   );
