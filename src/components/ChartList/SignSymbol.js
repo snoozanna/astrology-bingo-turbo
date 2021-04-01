@@ -1,19 +1,17 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-
-import { ReactComponent as TaurusSymbol } from "./../../assets/symbols/taurus.svg";
-import { ReactComponent as AriesSymbol } from "./../../assets/symbols/aries.svg";
-import { ReactComponent as AquariusSymbol } from "./../../assets/symbols/aquarius.svg";
-import { ReactComponent as CancerSymbol } from "./../../assets/symbols/cancer.svg";
-import { ReactComponent as CapricornSymbol } from "./../../assets/symbols/capricorn.svg";
-import { ReactComponent as GeminiSymbol } from "./../../assets/symbols/gemini.svg";
-import { ReactComponent as LeoSymbol } from "./../../assets/symbols/leo.svg";
-import { ReactComponent as LibraSymbol } from "./../../assets/symbols/libra.svg";
-import { ReactComponent as PiscesSymbol } from "./../../assets/symbols/pisces.svg";
-import { ReactComponent as SagittariusSymbol } from "./../../assets/symbols/sagittarius.svg";
-import { ReactComponent as ScorpioSymbol } from "./../../assets/symbols/scorpio.svg";
-import { ReactComponent as VirgoSymbol } from "./../../assets/symbols/virgo.svg";
-import AriesComp from "./Icons/AriesComp";
+import AriesIcon from "./Icons/AriesIcon";
+import GeminiIcon from "./Icons/GeminiIcon";
+import CancerIcon from "./Icons/CancerIcon";
+import CapricornIcon from "./Icons/CapricornIcon";
+import AquariusIcon from "./Icons/AquariusIcon";
+import SagittariusIcon from "./Icons/SagittariusIcon";
+import ScorpioIcon from "./Icons/ScorpioIcon";
+import TaurusIcon from "./Icons/TaurusIcon";
+import VirgoIcon from "./Icons/VirgoIcon";
+import LeoIcon from "./Icons/LeoIcon";
+import LibraIcon from "./Icons/LibraIcon";
+import PiscesIcon from "./Icons/PiscesIcon";
 // import { ReactComponent as Symbol } from `./../../assets/symbols/${sign}.svg`;
 
 const useStyles = makeStyles((theme) => ({
@@ -34,41 +32,41 @@ const SignSymbol = ({ sign }) => {
       case "Aries":
         //TRYING WITH THE ICON BEING A REAL COMPONENT
         // return <AriesSymbol className={classes.icon} />;
-        return <AriesComp />;
+        return <AriesIcon />;
         break;
       case "Taurus":
         console.log("taurus");
-        return <TaurusSymbol className={classes.icon} />;
+        return <TaurusIcon />;
         break;
       case "Gemini":
-        return <GeminiSymbol className={classes.icon} />;
+        return <GeminiIcon />;
         break;
       case "Cancer":
-        return <CancerSymbol className={classes.icon} />;
+        return <CancerIcon />;
         break;
       case "Leo":
-        return <LeoSymbol className={classes.icon} />;
+        return <LeoIcon />;
         break;
       case "Virgo":
-        return <VirgoSymbol className={classes.icon} />;
+        return <VirgoIcon />;
         break;
       case "Libra":
-        return <LibraSymbol className={classes.icon} />;
+        return <LibraIcon />;
         break;
       case "Scorpio":
-        return <ScorpioSymbol className={classes.icon} />;
+        return <ScorpioIcon />;
         break;
       case "Sagittarius":
-        return <SagittariusSymbol className={classes.icon} />;
+        return <SagittariusIcon />;
         break;
       case "Capricorn":
-        return <CapricornSymbol className={classes.icon} />;
+        return <CapricornIcon />;
         break;
       case "Aquarius":
-        return <AquariusSymbol className={classes.icon} />;
+        return <AquariusIcon />;
         break;
       case "Pisces":
-        return <PiscesSymbol className={classes.icon} />;
+        return <PiscesIcon />;
         break;
       default:
         // console.log("default");
