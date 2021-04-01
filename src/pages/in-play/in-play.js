@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import Header from "./../../components/Header/Header";
 import ChartList from "./../../components/ChartList/ChartList";
+import PlayerListing from "./../../components/PlayerListing/PlayerListing";
 
 import { PlayersContext } from "./../../contexts/players.context";
 
@@ -17,16 +18,8 @@ function InPlay() {
           <h1>Birth Charts in play</h1>
           <ul>
             {players.map((player) => (
-              <li key={player._id}>
-                <p>First name: {player.firstName}</p>
-                <p>Last name: {player.lastName}</p>
-                <p>Email: {player.email}</p>
-                <p>
-                  Chart:
-                  <ChartList data={player.chart} />
-                </p>
-                <button onClick={() => deletePlayer(player._id)}>Delete</button>
-              </li>
+              // console.log("player", player),
+              <PlayerListing player={player} />
             ))}
           </ul>
           <button onClick={() => deleteAllPlayers}>Delete all players</button>

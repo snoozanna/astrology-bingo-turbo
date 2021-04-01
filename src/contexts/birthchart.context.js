@@ -3,7 +3,6 @@ import { UtilitiesContext } from "./utilities.context";
 import SignSymbol from "./../components/ChartList/SignSymbol";
 
 export const BirthChartContext = createContext({
-  // BirthChart, /// how do you do this for a class?
   BirthChart: () => {},
 });
 

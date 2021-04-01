@@ -23,19 +23,13 @@ const useStyles = makeStyles((theme) => ({
 const viewBox = "100 100 400 400";
 
 const SignSymbol = ({ sign }) => {
-  console.log("hello from sign symbol");
   const classes = useStyles();
-
   const getIconComponent = (sign) => {
-    console.log("getting icon component");
     switch (sign) {
       case "Aries":
-        //TRYING WITH THE ICON BEING A REAL COMPONENT
-        // return <AriesSymbol className={classes.icon} />;
         return <AriesIcon />;
         break;
       case "Taurus":
-        console.log("taurus");
         return <TaurusIcon />;
         break;
       case "Gemini":
@@ -69,7 +63,7 @@ const SignSymbol = ({ sign }) => {
         return <PiscesIcon />;
         break;
       default:
-        // console.log("default");
+        console.log("default");
         break;
     }
   };
