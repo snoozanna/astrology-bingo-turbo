@@ -205,7 +205,7 @@ export const PlayersProvider = (props) => {
     params.append("timestamp", timestamp);
     params.append("key", TIME_API_KEY);
 
-    console.log("params", params);
+    // console.log("params", params);
 
     const fetchURL = `http://localhost:8000/formatData?date=${dob}&time=${tob}&location1=${latitude}&location2=${longitude}&utc=${utcoffset}&action=`;
     // console.log("fetchURL", fetchURL);
@@ -277,11 +277,11 @@ export const PlayersProvider = (props) => {
       ...formData,
       _id: uuidv4(),
     };
+    console.log("new player", newPlayer);
     const fetchURL = createBirthChartURL(newPlayer);
     const fetchData = await fetchBirthChart(fetchURL, newPlayer);
     newPlayer.chart = new BirthChart(fetchData);
     // console.log("new player", newPlayer);
-    console.log("JSON new player ", JSON.stringify(newPlayer));
     setPlayers([...players, newPlayer]);
     addToast(`Saved ${newPlayer.firstName} ${newPlayer.lastName}`, {
       appearance: "success",

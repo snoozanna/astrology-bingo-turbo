@@ -19,6 +19,7 @@ import InPlay from "./pages/in-play/in-play.js";
 import AliceChart from "./pages/alice-chart/alice-chart";
 import Generator from "./pages/generator/generator.js";
 import PublicDisplay from "./pages/public-display/public-display.js";
+import "./styles/App.scss";
 
 function App() {
   return (

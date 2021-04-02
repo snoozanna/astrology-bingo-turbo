@@ -86,10 +86,10 @@ export default function Header() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
+          {/* <Typography className={classes.title} variant="h6" noWrap>
             Astrology Bingo
-          </Typography>
-          <div className={classes.search}>
+          </Typography> */}
+          {/* <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
             </div>
@@ -101,7 +101,7 @@ export default function Header() {
               }}
               inputProps={{ "aria-label": "search" }}
             />
-          </div>
+          </div> */}
         </Toolbar>
       </AppBar>
     </div>

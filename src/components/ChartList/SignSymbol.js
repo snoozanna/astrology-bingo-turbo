@@ -16,51 +16,49 @@ import PiscesIcon from "./Icons/PiscesIcon";
 
 const useStyles = makeStyles((theme) => ({
   icon: {
-    width: 40,
+    width: 30,
   },
 }));
-
-const viewBox = "100 100 400 400";
 
 const SignSymbol = ({ sign }) => {
   const classes = useStyles();
   const getIconComponent = (sign) => {
     switch (sign) {
       case "Aries":
-        return <AriesIcon />;
+        return <AriesIcon className={classes.icon} className={classes.icon} />;
         break;
       case "Taurus":
-        return <TaurusIcon />;
+        return <TaurusIcon className={classes.icon} />;
         break;
       case "Gemini":
-        return <GeminiIcon />;
+        return <GeminiIcon className={classes.icon} />;
         break;
       case "Cancer":
-        return <CancerIcon />;
+        return <CancerIcon className={classes.icon} />;
         break;
       case "Leo":
-        return <LeoIcon />;
+        return <LeoIcon className={classes.icon} />;
         break;
       case "Virgo":
-        return <VirgoIcon />;
+        return <VirgoIcon className={classes.icon} />;
         break;
       case "Libra":
-        return <LibraIcon />;
+        return <LibraIcon className={classes.icon} />;
         break;
       case "Scorpio":
-        return <ScorpioIcon />;
+        return <ScorpioIcon className={classes.icon} />;
         break;
       case "Sagittarius":
-        return <SagittariusIcon />;
+        return <SagittariusIcon className={classes.icon} />;
         break;
       case "Capricorn":
-        return <CapricornIcon />;
+        return <CapricornIcon className={classes.icon} />;
         break;
       case "Aquarius":
-        return <AquariusIcon />;
+        return <AquariusIcon className={classes.icon} />;
         break;
       case "Pisces":
-        return <PiscesIcon />;
+        return <PiscesIcon className={classes.icon} />;
         break;
       default:
         console.log("default");

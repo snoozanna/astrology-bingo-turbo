@@ -1,10 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import BirthDataForm from "../../components/forms/BirthDataForm";
 import Header from "./../../components/Header/Header";
 
-
 function AddChart() {
-  console.log("hello");
   return (
     <>
       <div className="App">

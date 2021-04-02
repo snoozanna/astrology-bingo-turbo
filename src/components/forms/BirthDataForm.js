@@ -21,10 +21,14 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 120,
     display: "flex",
     justifyContent: "center",
+    marginBlockEnd: 30,
+  },
+  formRowItem: {
+    marginInlineEnd: 10,
   },
   container: {
-    display: "flex",
-    flexWrap: "wrap",
+    // display: "flex",
+    // flexWrap: "wrap",
   },
   textField: {
     marginLeft: theme.spacing(1),
@@ -73,20 +77,14 @@ function BirthDataForm({ initialValues }) {
 
   const locationForm = document.getElementById("locationForm");
 
-
   //INPUTS
   const dateTimeInput = document.getElementById("dtob");
   const utcInput = document.getElementById("utcoffset");
 
   const locationSubmit = async (locationForm) => {
-    console.log("lf values", locationForm.location.value);
-    console.log("loc submit function fires");
-    // const data = locationForm.location.value;
     const FD = new FormData(locationForm);
     const data = Object.fromEntries(FD);
-    // console.log("data", data);
     locationForm.setAttribute("disabled", "disabled");
-    console.log(locationForm.elements);
     for (const el of locationForm.elements) {
       el.setAttribute("disabled", "disabled");
       el.classList.add("disabled");
@@ -100,9 +98,7 @@ function BirthDataForm({ initialValues }) {
   };
 
   async function getGeo(placename) {
-    console.log("placename", placename);
     const GEO_API_URL = `https://maps.googleapis.com/maps/api/geocode/json?address=${placename.location}&key=${GEO_API_KEY}`;
-    console.log(GEO_API_URL);
 
     const { results } = await makeCall(GEO_API_URL);
 
@@ -219,14 +215,14 @@ function BirthDataForm({ initialValues }) {
 
   return (
     <>
-      <h2>Where were you born?</h2>
       <form
-        className={(classes.container, "location-form")}
+        className={classes.container}
         id="locationForm"
         onSubmit={handleSubmit(locationSubmit)}
         noValidate
       >
         <div className={classes.formRow}>
+          <h2 className={classes.formRowItem}>Where were you born?</h2>
           {/* <label htmlFor="firstName">First Name</label>
               <input type="text" id="firstName" name="firstName" ref={register} />
               {errors.firstName && "Title name is required"} */}
@@ -239,23 +235,25 @@ function BirthDataForm({ initialValues }) {
             label="Location"
             control={control}
             rules={{ required: true }}
+            className={(classes.button, classes.formRowItem)}
           />
+
+          <Button
+            onClick={() => locationSubmit(locationForm)}
+            type="submit"
+            variant="contained"
+            color="primary"
+            className={(classes.button, classes.formRowItem)}
+            // disabled={!formState.isValid}
+          >
+            Find Lat/Long
+          </Button>
         </div>
-        <Button
-          onClick={() => locationSubmit(locationForm)}
-          type="submit"
-          variant="contained"
-          color="primary"
-          className={classes.button}
-          // disabled={!formState.isValid}
-        >
-          Find Lat/Long
-        </Button>
         <div id="location-choices"></div>
       </form>
 
       <form
-        className={(classes.container, "main-form")}
+        className={classes.container}
         id="mainForm"
         onSubmit={handleSubmit(onSubmit)}
         noValidate
@@ -267,16 +265,15 @@ function BirthDataForm({ initialValues }) {
           <Controller
             as={TextField}
             // disabled
-            error={!!errors.lastName}
-            helperText={errors.lastName && errors.lastName.message}
+            error={!!errors.firstName}
+            helperText={errors.firstName && errors.firstName.message}
             id="firstName"
             name="firstName"
             label="First Name"
             control={control}
             rules={{ required: true }}
+            className={classes.formRowItem}
           />
-        </div>
-        <div className={classes.formRow}>
           {/* <label htmlFor="lastName">Last Name</label>
               <input type="text" id="lastName" name="lastName" ref={register} />
               {errors.lastName && "Title name is required"} */}
@@ -290,9 +287,9 @@ function BirthDataForm({ initialValues }) {
             label="Last Name"
             control={control}
             rules={{ required: true }}
+            className={classes.formRowItem}
           />
-        </div>
-        <div className={classes.formRow}>
+
           {/* <label htmlFor="email">Email</label>
               <input type="email" name="email" ref={register} />
               {errors.email && "Title name is required"} */}
@@ -327,7 +324,12 @@ function BirthDataForm({ initialValues }) {
             }}
             rules={{ required: true }}
           />
-          <Button onClick={() => findUTCOffset(dateTimeInput.value)}>
+          <Button
+            variant="contained"
+            color="primary"
+            className={classes.button}
+            onClick={() => findUTCOffset(dateTimeInput.value)}
+          >
             Find UTC offset
           </Button>
         </div>
@@ -348,8 +350,7 @@ function BirthDataForm({ initialValues }) {
             control={control}
             rules={{ required: true }}
           />
-        </div>
-        <div className={classes.formRow}>
+
           {/* <label htmlFor="firstName">First Name</label>
               <input type="text" id="firstName" name="firstName" ref={register} />
               {errors.firstName && "Title name is required"} */}
@@ -366,8 +367,7 @@ function BirthDataForm({ initialValues }) {
             control={control}
             rules={{ required: true }}
           />
-        </div>
-        <div className={classes.formRow}>
+
           {/* <label htmlFor="firstName">First Name</label>
               <input type="text" id="firstName" name="firstName" ref={register} />
               {errors.firstName && "Title name is required"} */}

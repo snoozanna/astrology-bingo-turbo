@@ -1,11 +1,7 @@
 import React, { useContext } from "react";
 import { ReactComponent as TemplateChart } from "./../../assets/template.svg";
-import { PlayersContext } from "../../contexts/players.context";
-import { ReactComponent as TaurusSymbol } from "./../../assets/symbols/taurus.svg";
-import { BirthChartContext } from "./../../contexts/birthchart.context";
 
-// populate depending on chart
-
+import { BirthChartContext } from "./../../contexts/birthchart.context"
 const ChartImage = (data) => {
   const { BirthChart } = useContext(BirthChartContext);
 
@@ -26,7 +22,7 @@ const ChartImage = (data) => {
 
   return (
     <>
-      <p>Template chart as a ReactComponent</p> 
+      <p>Template chart as a ReactComponent</p>
       <TemplateChart>{iconsToShow(data.data)}</TemplateChart>
     </>
   );

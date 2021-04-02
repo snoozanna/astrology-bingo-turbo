@@ -1,14 +1,23 @@
 import React, { useContext } from "react";
 import Header from "./../../components/Header/Header";
-import ChartList from "./../../components/ChartList/ChartList";
 import PlayerListing from "./../../components/PlayerListing/PlayerListing";
+import { makeStyles } from "@material-ui/core/styles";
 
 import { PlayersContext } from "./../../contexts/players.context";
 
+const useStyles = makeStyles({
+  listGroup: {
+    display: "flex",
+    // gridTemplateColumns: "repeat(4, 1fr)",
+    gridGap: 15,
+    listStyleType: "none",
+    padding: 0,
+  },
+});
+
 function InPlay() {
-  const { players, deletePlayer, deleteAllPlayers } = useContext(
-    PlayersContext,
-  );
+  const { players, deleteAllPlayers } = useContext(PlayersContext);
+  const classes = useStyles();
 
   return (
     <>
@@ -16,7 +25,7 @@ function InPlay() {
         <Header />
         <main>
           <h1>Birth Charts in play</h1>
-          <ul>
+          <ul className={classes.listGroup}>
             {players.map((player) => (
               // console.log("player", player),
               <PlayerListing player={player} />

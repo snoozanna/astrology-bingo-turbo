@@ -1,16 +1,26 @@
 import React, { useContext } from "react";
 import ChartList from "./../../components/ChartList/ChartList";
-
+import { makeStyles } from "@material-ui/core/styles";
 import { PlayersContext } from "./../../contexts/players.context";
 
+const useStyles = makeStyles({
+  listGroupItem: {
+    padding: "7px 15px 15px",
+    border: "1px black solid",
+    borderRadius: 15,
+    backgroundColor: "lavender",
+    maxWidth: "45%",
+  },
+});
+
 const PlayerListing = (player) => {
+  const classes = useStyles();
   const { deletePlayer } = useContext(PlayersContext);
   const playerData = player.player;
-  console.log("player", playerData);
+
   return (
     <>
-      <li key={playerData._id}>
-        {console.log("player from listimg ", playerData)}
+      <li key={playerData._id} className={classes.listGroupItem}>
         <p>First name: {playerData.firstName}</p>
         <p>Last name: {playerData.lastName}</p>
         <p>Email: {playerData.email}</p>
@@ -19,6 +29,8 @@ const PlayerListing = (player) => {
           <ChartList data={playerData.chart} />
         </p>
         <button onClick={() => deletePlayer(playerData._id)}>Delete</button>
+        <button onClick={() => {}}>Show Chart</button>
+        <button onClick={() => {}}>Print Chart</button>
       </li>
     </>
   );

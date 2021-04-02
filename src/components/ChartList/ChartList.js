@@ -1,21 +1,31 @@
 import React, { useContext } from "react";
 import List from "@material-ui/core/List";
-// import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ThreeDRotation from "@material-ui/icons/ThreeDRotation";
 
 import SignSymbol from "./SignSymbol";
 
 import { BirthChartContext } from "./../../contexts/birthchart.context";
 
+const useStyles = makeStyles({
+  listGroup: {
+    display: "flex",
+    gridTemplateColumns: "repeat(4, 1fr)",
+    gridGap: 15,
+    flexFlow: "wrap",
+    justifyContent: "space-around",
+    padding: 0,
+  },
+});
+
 const ChartList = ({ data, ordered = false, ItemComponent }) => {
   const { BirthChart } = useContext(BirthChartContext);
-
+  const classes = useStyles();
   return (
     <>
       <List>
-        <ListItem>
+        <ListItem className={classes.listGroup}>
           {Object.entries(data).map(([key, value]) => {
             // console.log("key", key, "value", value);
             if (BirthChart.planets.includes(key)) {
