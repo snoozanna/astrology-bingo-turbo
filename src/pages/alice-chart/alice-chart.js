@@ -192,9 +192,8 @@ function AliceChart() {
   return (
     <>
       <div className="App">
-        <Header />
+        <Header pageName="Alice's Chart" />
         <main>
-          <h1>Alice's Chart </h1>
           {/* <ChartList data={alice.chart} /> */}
           {/* <ChartImage data={alice.chart} /> */}
           <ChartImageTwo data={alice.chart} />

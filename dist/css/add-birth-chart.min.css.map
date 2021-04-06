@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "../../src/pages/add-birth-chart/add-birth-chart.scss"
+    ],
+    "names": [],
+    "file": "add-birth-chart.min.css"
+}

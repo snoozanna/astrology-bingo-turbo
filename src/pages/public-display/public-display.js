@@ -6,11 +6,10 @@ function PublicDisplay() {
   return (
     <>
       <div className="App">
-        <Header />
+        <Header pageName="Public Display" />
         <main>
-          <h1>Public Display</h1>
-        </main>
         <GameDisplayGrid />
+        </main>
       </div>
     </>
   );

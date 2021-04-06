@@ -1,18 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import Header from "./../../components/Header/Header";
 import GameDisplayGrid from "./../../components/GameDisplay/Grid/GameDisplayGrid.js";
 import PhraseDisplay from "../../components/GameDisplay/PhraseDisplay";
 
+import { GameContext } from "./../../contexts/game.context";
+
 function Generator() {
+  const { pick } = useContext(GameContext);
   return (
     <>
       <div className="App">
-        <Header />
+        <Header pageName="Generator (Fig admin view)" />
         <main>
-          <h1>Generator (Fig admin view)</h1>
+          <PhraseDisplay planet="Pluto" sign="Leo" />
+          <button onClick={() => pick()}>CALL</button>
+          <GameDisplayGrid />
         </main>
-        <PhraseDisplay planet="Pluto" sign="Leo" />
-        <GameDisplayGrid />
       </div>
     </>
   );

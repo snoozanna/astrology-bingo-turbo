@@ -1,15 +1,17 @@
 import React from "react";
 import BirthDataForm from "../../components/forms/BirthDataForm";
 import Header from "./../../components/Header/Header";
+import "./add-birth-chart.scss";
 
 function AddChart() {
   return (
     <>
       <div className="App">
-        <Header></Header>
+        <Header pageName="Add Birth Chart"></Header>
         <main>
-          <h1>Add Birth Chart</h1>
-          <BirthDataForm />
+          <div className="formContainer">
+            <BirthDataForm />
+          </div>
         </main>
       </div>
     </>

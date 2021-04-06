@@ -1,62 +1,12 @@
 @import "_variables";
 
-.App {
+body {
   text-align: center;
-  font-family: "Courier";
+  font-family: "Lato", sans-serif;
+  background-color: $background;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-//Variable Example
-$main-color: purple;
-
-h1 {
-  color: $main-color;
-  // font-size: 20px;
-}
-
-// Nested Rules
-$bgcolor: #c1c1c1;
-
-#nested {
-  background-color: $bgcolor;
-  h3 {
-    color: green;
-  }
-}
 
 ul,
 ol {
@@ -67,43 +17,3 @@ ol.typographic,
 ul.typographic {
   list-style: initial;
 }
-
-// //Interpolation Example
-// @mixin text-style($name, $bold-or-normal, $size, $color) {
-//   #{$name} {
-//     font-size: #{$size}px;
-//     font-weight: #{$bold-or-normal};
-//     color: #{$color};
-//   }
-// }
-
-// @include text-style(".interpolation", bold, 25, blue);
-
-// //Function Example
-
-// @function invert($color, $amount: 100%) {
-//   $inverse: change-color($color, $hue: hue($color) + 180);
-//   @return mix($inverse, $color, $amount);
-// }
-
-// $primary-color: green;
-// #function {
-//   background-color: invert($primary-color, 80%);
-//   h3 {
-//     color: white;
-//   }
-// }
-
-// //Mixin Example
-
-// @mixin default-text-style {
-//   padding: 20px;
-//   font-size: 16px;
-//   font-weight: bold;
-// }
-
-// #mixin {
-//   p {
-//     @include default-text-style;
-//   }
-// }

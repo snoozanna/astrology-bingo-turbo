@@ -8,7 +8,8 @@ const useStyles = makeStyles({
     padding: "7px 15px 15px",
     border: "1px black solid",
     borderRadius: 15,
-    backgroundColor: "lavender",
+    backgroundColor: "hsla(19, 90%, 62%, 50%)",
+    minWidth:"20%",
     maxWidth: "45%",
   },
 });

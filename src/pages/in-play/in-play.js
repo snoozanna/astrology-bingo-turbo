@@ -22,9 +22,8 @@ function InPlay() {
   return (
     <>
       <div className="App">
-        <Header />
+        <Header pageName="Birth Charts in play" />
         <main>
-          <h1>Birth Charts in play</h1>
           <ul className={classes.listGroup}>
             {players.map((player) => (
               // console.log("player", player),
