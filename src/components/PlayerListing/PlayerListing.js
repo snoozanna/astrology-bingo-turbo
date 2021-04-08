@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import "./PlayerListing.scss";
 import ChartList from "./../../components/ChartList/ChartList";
 import { makeStyles } from "@material-ui/core/styles";
 import { PlayersContext } from "./../../contexts/players.context";
@@ -9,7 +10,7 @@ const useStyles = makeStyles({
     border: "1px black solid",
     borderRadius: 15,
     backgroundColor: "hsla(19, 90%, 62%, 50%)",
-    minWidth:"20%",
+    minWidth: "20%",
     maxWidth: "45%",
   },
 });
@@ -22,9 +23,10 @@ const PlayerListing = (player) => {
   return (
     <>
       <li key={playerData._id} className={classes.listGroupItem}>
-        <p>First name: {playerData.firstName}</p>
-        <p>Last name: {playerData.lastName}</p>
-        <p>Email: {playerData.email}</p>
+        <div className="nameContainer">
+          <h3 className="first name">{playerData.firstName}</h3>
+          <h3 className="second name">{playerData.lastName}</h3>
+        </div>
         <p>
           Chart:
           <ChartList data={playerData.chart} />

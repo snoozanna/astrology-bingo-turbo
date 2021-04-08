@@ -1,0 +1,10 @@
+@import "./../../styles/_variables";
+
+.nameContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.first.name {
+  margin-inline-end: 10px;
+}

@@ -1,6 +1,6 @@
 import React from "react"
 
-const BirthChart = (player) => {
+const BirthChart = ({player}) => {
 //takes in player data
 //spits out full birth chart
   return(

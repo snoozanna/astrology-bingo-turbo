@@ -24,11 +24,6 @@ const GameDisplayGrid = () => {
   const classes = useStyles();
   const { BirthChart } = useContext(BirthChartContext);
   const { alreadyCalled } = useContext(GameContext);
-  // alreadyCalled.map(([key, value]) => {
-  //   console.log(key, value);
-  //   return;
-  // });
-  console.log("alreadyCalled", alreadyCalled);
   const Text = ({ alreadyCalled, myPlanet, mySign }) => {
     for (const [key, value] of Object.entries(alreadyCalled)) {
       const { planet, sign } = value;

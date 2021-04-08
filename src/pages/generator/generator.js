@@ -6,13 +6,38 @@ import PhraseDisplay from "../../components/GameDisplay/PhraseDisplay";
 import { GameContext } from "./../../contexts/game.context";
 
 function Generator() {
-  const { pick } = useContext(GameContext);
+  const { pick, alreadyCalled } = useContext(GameContext);
+  let p = "Mars";
+  let s = "Leo";
+  console.log("p to begin ", p);
+
+  const getPlanet = (alreadyCalled) => {
+    if (alreadyCalled.length > 1) {
+      // debugger;
+      let lastPlanet = alreadyCalled[alreadyCalled.length - 1].planet;
+      p = lastPlanet;
+      return p;
+    }
+    return p;
+  };
+  getPlanet(alreadyCalled);
+
+  const getSign = (alreadyCalled) => {
+    if (alreadyCalled.length > 1) {
+      let lastSign = alreadyCalled[alreadyCalled.length - 1].sign;
+      return lastSign;
+    }
+    return s;
+  };
+  getSign(alreadyCalled);
+
   return (
     <>
       <div className="App">
         <Header pageName="Generator (Fig admin view)" />
         <main>
-          <PhraseDisplay planet="Pluto" sign="Leo" />
+          <PhraseDisplay planet={p} sign={s} />
+          {/* <PhraseDisplay planet={"Jupiter"} sign={"Saturn"} /> */}
           <button onClick={() => pick()}>CALL</button>
           <GameDisplayGrid />
         </main>
