@@ -9,6 +9,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 
 import { BirthChartContext } from "./../../../contexts/birthchart.context";
+import { GameContext } from "./../../../contexts/game.context";
 
 const useStyles = makeStyles({
   table: {
@@ -21,9 +22,27 @@ const useStyles = makeStyles({
 
 const GameDisplayGrid = () => {
   const classes = useStyles();
-  const [planet, setPlanet] = useState("");
-  const [sign, setSign] = useState("");
   const { BirthChart } = useContext(BirthChartContext);
+  const { alreadyCalled } = useContext(GameContext);
+  // alreadyCalled.map(([key, value]) => {
+  //   console.log(key, value);
+  //   return;
+  // });
+  console.log("alreadyCalled", alreadyCalled);
+  const Text = ({ alreadyCalled, myPlanet, mySign }) => {
+    for (const [key, value] of Object.entries(alreadyCalled)) {
+      const { planet, sign } = value;
+      if (planet === myPlanet && sign === mySign) {
+        return (
+          <p>
+            {planet} in {sign}
+          </p>
+        );
+      }
+    }
+
+    return Text;
+  };
 
   return (
     <TableContainer component={Paper}>
@@ -49,6 +68,11 @@ const GameDisplayGrid = () => {
               </TableCell>
               {BirthChart.planets.map((planet) => (
                 <TableCell sign={sign} planet={planet}>
+                  <Text
+                    alreadyCalled={alreadyCalled}
+                    mySign={sign}
+                    myPlanet={planet}
+                  />
                 </TableCell>
               ))}
             </TableRow>

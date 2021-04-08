@@ -25,14 +25,14 @@ export const GameProvider = (props) => {
   const getRandomPlanet = () => {
     const Rn = getRandomIntInclusive(0, BirthChart.planets.length - 1);
     let planetToCall = BirthChart.planets[Rn];
-    console.log("planetToCall", planetToCall);
+    // console.log("planetToCall", planetToCall);
     return planetToCall;
   };
 
   const getRandomSign = () => {
     const Rn = getRandomIntInclusive(0, BirthChart.signs.length - 1);
     let signToCall = BirthChart.signs[Rn];
-    console.log("signToCall", signToCall);
+    // console.log("signToCall", signToCall);
     return signToCall;
   };
 
