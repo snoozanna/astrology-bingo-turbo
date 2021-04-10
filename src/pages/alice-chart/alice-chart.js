@@ -1,11 +1,9 @@
 import React from "react";
 import Header from "./../../components/Header/Header";
-import BirthChartComponent from "./../../components/BirthChart/BirthChart";
+import BirthChartComponent from "../../components/BirthChart/BirthChartComponent";
 import ChartList from "./../../components/ChartList/ChartList";
 import ChartImage from "./../../components/ChartList/ChartImage";
-import ChartImageTwo from "./../../components/ChartList/ChartImage2";
 import SignSymbol from "../../components/ChartList/SignSymbol";
-import { ReactComponent as TemplateChart } from "./../../assets/template.svg";
 
 function AliceChart() {
   // const alice = {
@@ -233,8 +231,7 @@ function AliceChart() {
         <main>
           <ChartList data={alice.chart} />
           <BirthChartComponent player={aliceBasic} />
-          {/* <ChartImage data={alice.chart} /> */}
-          {/* <ChartImageTwo data={alice.chart} /> */}
+          <ChartImage player={aliceBasic.chartData} />
         </main>
       </div>
     </>

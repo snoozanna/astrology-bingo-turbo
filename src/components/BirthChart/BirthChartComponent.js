@@ -1,6 +1,6 @@
 //still in progress
 import React, { useContext } from "react";
-import { BirthChartContext } from "./../../contexts/birthchart.context";
+import { BirthChartContext } from "../../contexts/birthchart.context";
 
 const BirthChartComponent = ({ player }) => {
   const { BirthChart } = useContext(BirthChartContext);

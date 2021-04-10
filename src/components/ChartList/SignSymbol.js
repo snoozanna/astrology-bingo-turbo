@@ -15,54 +15,84 @@ import PiscesIcon from "./Icons/PiscesIcon";
 // import { ReactComponent as Symbol } from `./../../assets/symbols/${sign}.svg`;
 
 const useStyles = makeStyles((theme) => ({
-  icon: {
-    width: 30,
-  },
+  icon: {},
 }));
 
-const SignSymbol = ({ sign }) => {
+const SignSymbol = ({ sign, width, location, x, y }) => {
   const classes = useStyles();
+  console.log("location", sign, location);
   const getIconComponent = (sign) => {
-    switch (sign) {
-      case "Aries":
-        return <AriesIcon className={classes.icon} className={classes.icon} />;
-        break;
-      case "Taurus":
-        return <TaurusIcon className={classes.icon} />;
-        break;
-      case "Gemini":
-        return <GeminiIcon className={classes.icon} />;
-        break;
-      case "Cancer":
-        return <CancerIcon className={classes.icon} />;
-        break;
-      case "Leo":
-        return <LeoIcon className={classes.icon} />;
-        break;
-      case "Virgo":
-        return <VirgoIcon className={classes.icon} />;
-        break;
-      case "Libra":
-        return <LibraIcon className={classes.icon} />;
-        break;
-      case "Scorpio":
-        return <ScorpioIcon className={classes.icon} />;
-        break;
-      case "Sagittarius":
-        return <SagittariusIcon className={classes.icon} />;
-        break;
-      case "Capricorn":
-        return <CapricornIcon className={classes.icon} />;
-        break;
-      case "Aquarius":
-        return <AquariusIcon className={classes.icon} />;
-        break;
-      case "Pisces":
-        return <PiscesIcon className={classes.icon} />;
-        break;
-      default:
-        console.log("default");
-        break;
+    if (!sign) {
+      throw new Error("Sign not provided. Need sign.");
+    } else {
+      switch (sign) {
+        case "Aries":
+          return (
+            <AriesIcon className={classes.icon} width={width} x={x} y={y} />
+          );
+          break;
+        case "Taurus":
+          return (
+            <TaurusIcon className={classes.icon} width={width} x={x} y={y} />
+          );
+          break;
+        case "Gemini":
+          return (
+            <GeminiIcon className={classes.icon} width={width} x={x} y={y} />
+          );
+          break;
+        case "Cancer":
+          return (
+            <CancerIcon className={classes.icon} width={width} x={x} y={y} />
+          );
+          break;
+        case "Leo":
+          return <LeoIcon className={classes.icon} width={width} x={x} y={y} />;
+          break;
+        case "Virgo":
+          return (
+            <VirgoIcon className={classes.icon} width={width} x={x} y={y} />
+          );
+          break;
+        case "Libra":
+          return (
+            <LibraIcon className={classes.icon} width={width} x={x} y={y} />
+          );
+          break;
+        case "Scorpio":
+          return (
+            <ScorpioIcon className={classes.icon} width={width} x={x} y={y} />
+          );
+          break;
+        case "Sagittarius":
+          return (
+            <SagittariusIcon
+              className={classes.icon}
+              width={width}
+              x={x}
+              y={y}
+            />
+          );
+          break;
+        case "Capricorn":
+          return (
+            <CapricornIcon className={classes.icon} width={width} x={x} y={y} />
+          );
+          break;
+        case "Aquarius":
+          return (
+            <AquariusIcon className={classes.icon} width={width} x={x} y={y} />
+          );
+          break;
+        case "Pisces":
+          return (
+            <PiscesIcon className={classes.icon} width={width} x={x} y={y} />
+          );
+          break;
+        default:
+          console.log("default");
+          break;
+      }
     }
   };
 
