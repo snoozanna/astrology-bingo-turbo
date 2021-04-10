@@ -231,7 +231,7 @@ export const PlayersProvider = (props) => {
       chartData.Descendant = BirthChart.descDict[chartData.Ascendant];
       delete chartData.Asc;
       chartData.ownerName = `${firstName} ${lastName}`;
-      // console.log("chartdata", chartData);
+      console.log("chartdata", chartData);
       return chartData;
       // setLoading(false);
     } catch (err) {
@@ -280,8 +280,9 @@ export const PlayersProvider = (props) => {
     console.log("new player", newPlayer);
     const fetchURL = createBirthChartURL(newPlayer);
     const fetchData = await fetchBirthChart(fetchURL, newPlayer);
-    newPlayer.chart = new BirthChart(fetchData);
-    // console.log("new player", newPlayer);
+    newPlayer.chartData = fetchData;
+    // newPlayer.chart = new BirthChart(fetchData);
+    console.log("new player", JSON.stringify(newPlayer));
     setPlayers([...players, newPlayer]);
     addToast(`Saved ${newPlayer.firstName} ${newPlayer.lastName}`, {
       appearance: "success",

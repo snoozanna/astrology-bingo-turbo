@@ -12,7 +12,7 @@ function Generator() {
   console.log("p to begin ", p);
 
   const getPlanet = (alreadyCalled) => {
-    if (alreadyCalled.length > 1) {
+    if (alreadyCalled.length > 0) {
       // debugger;
       let lastPlanet = alreadyCalled[alreadyCalled.length - 1].planet;
       p = lastPlanet;
@@ -23,9 +23,9 @@ function Generator() {
   getPlanet(alreadyCalled);
 
   const getSign = (alreadyCalled) => {
-    if (alreadyCalled.length > 1) {
+    if (alreadyCalled.length > 0) {
       let lastSign = alreadyCalled[alreadyCalled.length - 1].sign;
-      return lastSign;
+      s = lastSign;
     }
     return s;
   };
