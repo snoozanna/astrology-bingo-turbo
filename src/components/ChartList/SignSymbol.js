@@ -18,9 +18,8 @@ const useStyles = makeStyles((theme) => ({
   icon: {},
 }));
 
-const SignSymbol = ({ sign, width, location, x, y }) => {
+const SignSymbol = ({ sign, width, x, y }) => {
   const classes = useStyles();
-  console.log("location", sign, location);
   const getIconComponent = (sign) => {
     if (!sign) {
       throw new Error("Sign not provided. Need sign.");

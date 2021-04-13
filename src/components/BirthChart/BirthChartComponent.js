@@ -1,4 +1,5 @@
-//still in progress
+//REDUNDANT
+
 import React, { useContext } from "react";
 import { BirthChartContext } from "../../contexts/birthchart.context";
 
@@ -138,4 +139,3 @@ const BirthChartComponent = ({ player }) => {
 };
 
 export default BirthChartComponent;
-

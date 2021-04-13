@@ -15,23 +15,23 @@ const useStyles = makeStyles({
   },
 });
 
-const PlayerListing = (player) => {
+const PlayerListing = ({ player }) => {
   const classes = useStyles();
+  console.log("player", JSON.stringify(player));
   const { deletePlayer } = useContext(PlayersContext);
-  const playerData = player.player;
 
   return (
     <>
-      <li key={playerData._id} className={classes.listGroupItem}>
+      <li key={player._id} className={classes.listGroupItem}>
         <div className="nameContainer">
-          <h3 className="first name">{playerData.firstName}</h3>
-          <h3 className="second name">{playerData.lastName}</h3>
+          <h3 className="first name">{player.firstName}</h3>
+          <h3 className="second name">{player.lastName}</h3>
         </div>
         <p>
           Chart:
-          <ChartList data={playerData.chart} />
+          <ChartList player={player.chartData} />
         </p>
-        <button onClick={() => deletePlayer(playerData._id)}>Delete</button>
+        <button onClick={() => deletePlayer(player._id)}>Delete</button>
         <button onClick={() => {}}>Show Chart</button>
         <button onClick={() => {}}>Print Chart</button>
       </li>
