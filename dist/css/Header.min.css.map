@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "",
-    "sources": [
-        "../../src/components/Header/Header.scss"
-    ],
-    "names": [],
-    "file": "Header.min.css"
-}
