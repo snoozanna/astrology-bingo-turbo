@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import "./ChartImage.scss";
-import ChartTemplate from "../ChartList/ChartTemplate";
+import ChartTemplate from "../ChartTemplate/ChartTemplate";
 import SignSymbol from "../ChartList/SignSymbol";
 import SignWord from "../ChartList/SignWord";
 

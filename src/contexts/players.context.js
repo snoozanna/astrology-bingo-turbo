@@ -3,6 +3,8 @@ import { useToasts } from "react-toast-notifications";
 import { UtilitiesContext } from "./utilities.context";
 import { BirthChartContext } from "./birthchart.context";
 import { TIME_API_KEY } from "./../config";
+import ChartImage from "../components/ChartImage/ChartImage";
+import ChartList from "./../components/ChartList/ChartList";
 // import cloneDeep from 'lodash.cloneDeep'
 
 //we provide empty fn as defaults so it doesn't break the app if forget to pass a fn
@@ -12,6 +14,7 @@ export const PlayersContext = createContext({
   fetchBirthChart: () => {},
   deletePlayer: () => {},
   deleteAllPlayers: () => {},
+  showChart: () => {},
   error: null,
   players: [],
   loaded: false,
@@ -224,6 +227,20 @@ export const PlayersProvider = (props) => {
   //   }
   // };
 
+  const showChart = ({ player }, format = "list" | "image") => {
+    console.log("player", player);
+    console.log("format", format);
+    if (format === "list") {
+      return <ChartList player={player} />;
+    } else if (format === "image") {
+      return (
+        <div>
+          <ChartImage player={player} />
+        </div>
+      );
+    }
+  };
+
   return (
     <PlayersContext.Provider
       value={{
@@ -232,6 +249,7 @@ export const PlayersProvider = (props) => {
         deleteAllPlayers,
         createBirthChartURL,
         fetchBirthChart,
+        showChart,
         error: null,
         players,
       }}

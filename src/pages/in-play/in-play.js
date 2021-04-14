@@ -8,10 +8,12 @@ import { PlayersContext } from "./../../contexts/players.context";
 const useStyles = makeStyles({
   listGroup: {
     display: "flex",
-    // gridTemplateColumns: "repeat(4, 1fr)",
+    justifyContent: "center",
+    gridTemplateColumns: "repeat(4, 1fr)",
     gridGap: 15,
     listStyleType: "none",
     padding: 0,
+    width: "100%",
   },
 });
 
@@ -24,12 +26,14 @@ function InPlay() {
       <div className="App">
         <Header pageName="Birth Charts in play" />
         <main>
-          <ul className={classes.listGroup}>
-            {players.map((player) => (
-              // console.log("player", player),
-              <PlayerListing player={player} />
-            ))}
-          </ul>
+          <div className="playerContainer">
+            <ul className={classes.listGroup}>
+              {players.map((player) => (
+                // console.log("player", player),
+                <PlayerListing player={player} />
+              ))}
+            </ul>
+          </div>
           <button onClick={() => deleteAllPlayers}>Delete all players</button>
         </main>
       </div>

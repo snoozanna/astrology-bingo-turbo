@@ -1,8 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./PlayerListing.scss";
 import ChartList from "./../../components/ChartList/ChartList";
+import ChartImage from "./../ChartImage/ChartImage";
 import { makeStyles } from "@material-ui/core/styles";
 import { PlayersContext } from "./../../contexts/players.context";
+import { UtilitiesContext } from "./../../contexts/utilities.context";
 
 const useStyles = makeStyles({
   listGroupItem: {
@@ -10,15 +12,17 @@ const useStyles = makeStyles({
     border: "1px black solid",
     borderRadius: 15,
     backgroundColor: "hsla(19, 90%, 62%, 50%)",
-    minWidth: "20%",
+    minWidth: "45%",
     maxWidth: "45%",
   },
 });
 
 const PlayerListing = ({ player }) => {
   const classes = useStyles();
-  console.log("player", JSON.stringify(player));
+
   const { deletePlayer } = useContext(PlayersContext);
+  const { useToggle } = useContext(UtilitiesContext);
+  const [isOn, toggleIsOn] = useToggle();
 
   return (
     <>
@@ -29,10 +33,14 @@ const PlayerListing = ({ player }) => {
         </div>
         <p>
           Chart:
-          <ChartList player={player.chartData} />
+          {isOn ? (
+            <ChartList player={player.chartData} />
+          ) : (
+            <ChartImage player={player.chartData} />
+          )}
         </p>
         <button onClick={() => deletePlayer(player._id)}>Delete</button>
-        <button onClick={() => {}}>Show Chart</button>
+        <button onClick={() => toggleIsOn()}>Show Chart</button>
         <button onClick={() => {}}>Print Chart</button>
       </li>
     </>

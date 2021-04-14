@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useCallback } from "react";
 import { useToasts } from "react-toast-notifications";
 
 /****************************************************************
@@ -12,6 +12,7 @@ export const UtilitiesContext = createContext({
   isElement: () => {},
   makeCall: () => {},
   connectToWebSocket: () => {},
+  useToggle: () => {},
   catchPhraseDict: {},
 });
 
@@ -326,6 +327,14 @@ export const UtilitiesProvider = (props) => {
     return socket;
   }
 
+  function useToggle(initialValue = false) {
+    const [value, setValue] = useState(initialValue);
+    const toggle = useCallback(() => {
+      setValue((v) => !v);
+    }, []);
+    return [value, toggle];
+  }
+
   return (
     <UtilitiesContext.Provider
       value={{
@@ -335,6 +344,7 @@ export const UtilitiesProvider = (props) => {
         isElement,
         makeCall,
         connectToWebSocket,
+        useToggle,
         catchPhraseDict,
       }}
     >
