@@ -13,7 +13,7 @@ const CancerWord = ({ transform, x, y, className, font }) => {
           y={y}
           className={className}
         >
-          CAN
+          Can
         </text>
       </svg>
     </>

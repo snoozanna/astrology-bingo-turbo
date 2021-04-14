@@ -13,7 +13,7 @@ const LeoWord = ({ transform, x, y, className, font }) => {
           y={y}
           className={className}
         >
-          LEO
+          Leo
         </text>
       </svg>
     </>

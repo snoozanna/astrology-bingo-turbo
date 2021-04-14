@@ -13,7 +13,7 @@ const PiscesWord = ({ transform, x, y, className, font }) => {
           y={y}
           className={className}
         >
-          PIS
+          Pis
         </text>
       </svg>
     </>

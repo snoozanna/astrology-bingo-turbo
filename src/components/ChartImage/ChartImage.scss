@@ -1,0 +1,49 @@
+/* WORD ROTATION */
+
+.innerWord.sun {
+  transform: rotate(-69deg);
+}
+
+.innerWord.moon {
+  transform: rotate(71deg);
+}
+
+.innerWord.ascendant {
+  transform: rotate(15deg);
+}
+
+.innerWord.mars {
+  transform: rotate(24deg);
+}
+
+.innerWord.mercury {
+  transform: rotate(-34deg);
+}
+
+.innerWord.venus {
+  transform: rotate(-22deg);
+}
+
+.innerWord.jupiter {
+  transform: rotate(50deg);
+}
+
+.innerWord.descendant {
+  transform: rotate(42deg);
+}
+
+.innerWord.pluto {
+  transform: rotate(-21deg);
+}
+
+.innerWord.neptune {
+  transform: rotate(-42deg);
+}
+
+.innerWord.uranus {
+  transform: rotate(-69deg);
+}
+
+.innerWord.saturn {
+  transform: rotate(80deg);
+}

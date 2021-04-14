@@ -2,7 +2,7 @@ import React from "react";
 import Header from "./../../components/Header/Header";
 
 import ChartList from "./../../components/ChartList/ChartList";
-import ChartImage from "./../../components/ChartList/ChartImage";
+import ChartImage from "../../components/ChartImage/ChartImage";
 import SignSymbol from "../../components/ChartList/SignSymbol";
 
 function AliceChart() {

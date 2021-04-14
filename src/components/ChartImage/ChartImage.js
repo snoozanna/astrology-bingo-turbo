@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
-import ChartTemplate from "./ChartTemplate";
-import SignSymbol from "./SignSymbol";
-import SignWord from "./SignWord";
+import "./ChartImage.scss";
+import ChartTemplate from "../ChartList/ChartTemplate";
+import SignSymbol from "../ChartList/SignSymbol";
+import SignWord from "../ChartList/SignWord";
 
-import { BirthChartContext } from "./../../contexts/birthchart.context";
+import { BirthChartContext } from "../../contexts/birthchart.context";
 const ChartImage = ({ player }) => {
   const { BirthChart } = useContext(BirthChartContext);
 
@@ -61,40 +62,40 @@ const ChartImage = ({ player }) => {
     } else {
       switch (planet) {
         case "Mars":
-          return { x: 675, y: 260 };
+          return { x: 254, y: 65 };
           break;
         case "Jupiter":
-          return { x: 550, y: 420 };
+          return { x: 266, y: -16 };
           break;
         case "Saturn":
-          return { x: 530, y: 495 };
+          return { x: 231, y: -112 };
           break;
         case "Uranus":
-          return { x: 340, y: 490 };
+          return { x: -190, y: 195 };
           break;
         case "Neptune":
-          return { x: 190, y: 395 };
+          return { x: -100, y: 205 };
           break;
         case "Pluto":
-          return { x: 95, y: 245 };
+          return { x: -26, y: 179 };
           break;
         case "Ascendant":
-          return { x: 90, y: 40 };
+          return { x: 69, y: 107 };
           break;
         case "Descendant":
-          return { x: 150, y: -140 };
+          return { x: 93, y: 14 };
           break;
         case "Moon":
-          return { x: 315, y: -250 };
+          return { x: 71, y: -87 };
           break;
         case "Sun":
-          return { x: 450, y: -260 };
+          return { x: -17, y: 184 };
           break;
         case "Mercury":
-          return { x: 630, y: -120 };
+          return { x: 102, y: 192 };
           break;
         case "Venus":
-          return { x: 700, y: 30 };
+          return { x: 139, y: 204 };
           break;
         default:
           console.log("default");
@@ -103,54 +104,53 @@ const ChartImage = ({ player }) => {
     }
   };
 
-  // const getWordRotation = (planet) => {
-  //TODO
-  //   if (!planet) {
-  //     throw new Error("Sign not provided. Need planet.");
-  //   } else {
-  //     switch (planet) {
-  //       case "Mars":
-  //         return "rotate(45deg)";
-  //         break;
-  //       case "Jupiter":
-  //         return { x: 550, y: 420 };
-  //         break;
-  //       case "Saturn":
-  //         return { x: 530, y: 495 };
-  //         break;
-  //       case "Uranus":
-  //         return { x: 340, y: 490 };
-  //         break;
-  //       case "Neptune":
-  //         return { x: 190, y: 395 };
-  //         break;
-  //       case "Pluto":
-  //         return { x: 95, y: 245 };
-  //         break;
-  //       case "Ascendant":
-  //         return { x: 90, y: 40 };
-  //         break;
-  //       case "Descendant":
-  //         return { x: 150, y: -140 };
-  //         break;
-  //       case "Moon":
-  //         return { x: 315, y: -250 };
-  //         break;
-  //       case "Sun":
-  //         return { x: 450, y: -260 };
-  //         break;
-  //       case "Mercury":
-  //         return { x: 630, y: -120 };
-  //         break;
-  //       case "Venus":
-  //         return { x: 700, y: 30 };
-  //         break;
-  //       default:
-  //         console.log("default");
-  //         break;
-  //     }
-  //   }
-  // };
+  const getWordRotation = (planet) => {
+    if (!planet) {
+      throw new Error("Sign not provided. Need planet.");
+    } else {
+      switch (planet) {
+        case "Mars":
+          return "rotate(24)";
+          break;
+        case "Jupiter":
+          return "rotate(50)";
+          break;
+        case "Saturn":
+          return "rotate(80)";
+          break;
+        case "Uranus":
+          return "rotate(-69)";
+          break;
+        case "Neptune":
+          return "rotate(-42)";
+          break;
+        case "Pluto":
+          return "rotate(-21)";
+          break;
+        case "Ascendant":
+          return "rotate(15)";
+          break;
+        case "Descendant":
+          return "rotate(42)";
+          break;
+        case "Moon":
+          return "rotate(71)";
+          break;
+        case "Sun":
+          return "rotate(-69)";
+          break;
+        case "Mercury":
+          return "rotate(-34)";
+          break;
+        case "Venus":
+          return "rotate(-22)";
+          break;
+        default:
+          console.log("default");
+          break;
+      }
+    }
+  };
 
   return (
     <>
@@ -167,16 +167,18 @@ const ChartImage = ({ player }) => {
               <>
                 <SignSymbol
                   sign={sign}
-                  width="35px"
+                  width="60px"
                   x={getIconLocation(planet).x}
                   y={getIconLocation(planet).y}
+                  className={planet}
                 />
                 <SignWord
                   sign={sign}
                   x={getWordLocation(planet).x}
                   y={getWordLocation(planet).y}
-                  font="18px"
-                  transform="rotate(45deg)"
+                  font="25px"
+                  transform={getWordRotation(planet)}
+                  className={planet}
                 />
               </>
             );

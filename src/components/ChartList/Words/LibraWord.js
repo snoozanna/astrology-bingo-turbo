@@ -13,7 +13,7 @@ const LibraWord = ({ transform, x, y, className, font }) => {
           y={y}
           className={className}
         >
-          LIB
+          Lib
         </text>
       </svg>
     </>

@@ -1,6 +1,6 @@
 import React from "react";
 
-const ChartTemplate = ({ player, box = "-30 -30 1060 1060", children }) => {
+const ChartTemplate = ({ box = "-30 -30 1060 1060", children }) => {
   return (
     <>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox={box}>

@@ -13,7 +13,7 @@ const CapricornWord = ({ transform, x, y, className, font }) => {
           y={y}
           className={className}
         >
-          CAP
+          Cap
         </text>
       </svg>
     </>

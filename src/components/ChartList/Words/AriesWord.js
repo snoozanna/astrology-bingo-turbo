@@ -13,7 +13,7 @@ const AriesWord = ({ transform, x, y, className, font }) => {
           y={y}
           className={className}
         >
-          ARI
+          Ari
         </text>
       </svg>
     </>

@@ -13,7 +13,7 @@ const GeminiWord = ({ transform, x, y, className, font }) => {
           y={y}
           className={className}
         >
-          GEM
+          Gem
         </text>
       </svg>
     </>

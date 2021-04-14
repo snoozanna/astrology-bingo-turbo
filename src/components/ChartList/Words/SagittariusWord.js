@@ -13,7 +13,7 @@ const SagittariusWord = ({ transform, x, y, className, font }) => {
           y={y}
           className={className}
         >
-          SAG
+          Sag
         </text>
       </svg>
     </>

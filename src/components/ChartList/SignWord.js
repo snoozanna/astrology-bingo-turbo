@@ -14,7 +14,7 @@ import LibraWord from "./Words/LibraWord";
 import PiscesWord from "./Words/PiscesWord";
 // import { ReactComponent as Symbol } from `./../../assets/symbols/${sign}.svg`;
 
-const SignWord = ({ sign, font, x, y, transform }) => {
+const SignWord = ({ sign, font, x, y, transform, className }) => {
   // console.log("rotation", transform);
   const getWordComponent = (sign) => {
     if (!sign) {
@@ -24,7 +24,7 @@ const SignWord = ({ sign, font, x, y, transform }) => {
         case "Aries":
           return (
             <AriesWord
-              className="word"
+              className={("innerWord", className)}
               font={font}
               x={x}
               y={y}
@@ -35,7 +35,7 @@ const SignWord = ({ sign, font, x, y, transform }) => {
         case "Taurus":
           return (
             <TaurusWord
-              className="word"
+              className={("innerWord", className)}
               font={font}
               x={x}
               y={y}
@@ -46,7 +46,7 @@ const SignWord = ({ sign, font, x, y, transform }) => {
         case "Gemini":
           return (
             <GeminiWord
-              className="word"
+              className={("innerWord", className)}
               font={font}
               x={x}
               y={y}
@@ -57,7 +57,7 @@ const SignWord = ({ sign, font, x, y, transform }) => {
         case "Cancer":
           return (
             <CancerWord
-              className="word"
+              className={("innerWord", className)}
               font={font}
               x={x}
               y={y}
@@ -68,7 +68,7 @@ const SignWord = ({ sign, font, x, y, transform }) => {
         case "Leo":
           return (
             <LeoWord
-              className="word"
+              className={("innerWord", className)}
               font={font}
               x={x}
               y={y}
@@ -79,7 +79,7 @@ const SignWord = ({ sign, font, x, y, transform }) => {
         case "Virgo":
           return (
             <VirgoWord
-              className="word"
+              className={("innerWord", className)}
               font={font}
               x={x}
               y={y}
@@ -90,7 +90,7 @@ const SignWord = ({ sign, font, x, y, transform }) => {
         case "Libra":
           return (
             <LibraWord
-              className="word"
+              className={("innerWord", className)}
               font={font}
               x={x}
               y={y}
@@ -101,18 +101,18 @@ const SignWord = ({ sign, font, x, y, transform }) => {
         case "Scorpio":
           return (
             <ScorpioWord
-              className="word"
+              className={("innerWord", className)}
               font={font}
               x={x}
               y={y}
-              transform="rotate(45)"
+              transform={transform}
             />
           );
           break;
         case "Sagittarius":
           return (
             <SagittariusWord
-              className="word"
+              className={("innerWord", className)}
               font={font}
               x={x}
               y={y}
@@ -123,7 +123,7 @@ const SignWord = ({ sign, font, x, y, transform }) => {
         case "Capricorn":
           return (
             <CapricornWord
-              className="word"
+              className={("innerWord", className)}
               font={font}
               x={x}
               y={y}
@@ -134,7 +134,7 @@ const SignWord = ({ sign, font, x, y, transform }) => {
         case "Aquarius":
           return (
             <AquariusWord
-              className="word"
+              className={("innerWord", className)}
               font={font}
               x={x}
               y={y}
@@ -145,7 +145,7 @@ const SignWord = ({ sign, font, x, y, transform }) => {
         case "Pisces":
           return (
             <PiscesWord
-              className="word"
+              className={("innerWord", className)}
               font={font}
               x={x}
               y={y}
