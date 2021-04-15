@@ -19,40 +19,56 @@ const SignSymbol = ({ sign, width, x, y }) => {
     } else {
       switch (sign) {
         case "Aries":
-          return <AriesIcon width={width} x={x} y={y} />;
+          return <AriesIcon width={width} x={x} y={y} className="signSymbol" />;
           break;
         case "Taurus":
-          return <TaurusIcon width={width} x={x} y={y} />;
+          return (
+            <TaurusIcon width={width} x={x} y={y} className="signSymbol" />
+          );
           break;
         case "Gemini":
-          return <GeminiIcon width={width} x={x} y={y} />;
+          return (
+            <GeminiIcon width={width} x={x} y={y} className="signSymbol" />
+          );
           break;
         case "Cancer":
-          return <CancerIcon width={width} x={x} y={y} />;
+          return (
+            <CancerIcon width={width} x={x} y={y} className="signSymbol" />
+          );
           break;
         case "Leo":
-          return <LeoIcon width={width} x={x} y={y} />;
+          return <LeoIcon width={width} x={x} y={y} className="signSymbol" />;
           break;
         case "Virgo":
-          return <VirgoIcon width={width} x={x} y={y} />;
+          return <VirgoIcon width={width} x={x} y={y} className="signSymbol" />;
           break;
         case "Libra":
-          return <LibraIcon width={width} x={x} y={y} />;
+          return <LibraIcon width={width} x={x} y={y} className="signSymbol" />;
           break;
         case "Scorpio":
-          return <ScorpioIcon width={width} x={x} y={y} />;
+          return (
+            <ScorpioIcon width={width} x={x} y={y} className="signSymbol" />
+          );
           break;
         case "Sagittarius":
-          return <SagittariusIcon width={width} x={x} y={y} />;
+          return (
+            <SagittariusIcon width={width} x={x} y={y} className="signSymbol" />
+          );
           break;
         case "Capricorn":
-          return <CapricornIcon width={width} x={x} y={y} />;
+          return (
+            <CapricornIcon width={width} x={x} y={y} className="signSymbol" />
+          );
           break;
         case "Aquarius":
-          return <AquariusIcon width={width} x={x} y={y} />;
+          return (
+            <AquariusIcon width={width} x={x} y={y} className="signSymbol" />
+          );
           break;
         case "Pisces":
-          return <PiscesIcon width={width} x={x} y={y} />;
+          return (
+            <PiscesIcon width={width} x={x} y={y} className="signSymbol" />
+          );
           break;
         default:
           console.log("default");
