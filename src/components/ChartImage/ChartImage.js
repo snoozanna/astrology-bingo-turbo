@@ -155,9 +155,7 @@ const ChartImage = ({ player }) => {
   return (
     <>
       <ChartTemplate>
-        {/* <SignSymbol sign="Cancer" width="35px" /> */}
         {Object.entries(player).map(([key, value]) => {
-          // console.log("key", key, "value", value);
           if (BirthChart.planets.includes(key)) {
             // console.log(key, value);
             const sign = value;

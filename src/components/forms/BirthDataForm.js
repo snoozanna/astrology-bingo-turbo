@@ -80,7 +80,8 @@ function BirthDataForm({ initialValues }) {
   //INPUTS
   const dateTimeInput = document.getElementById("dtob");
   const utcInput = document.getElementById("utcoffset");
-
+  const latitudeInput = document.getElementById("latitude");
+  const longitudeInput = document.getElementById("longitude");
   const locationSubmit = async (locationForm) => {
     const FD = new FormData(locationForm);
     const data = Object.fromEntries(FD);
@@ -136,6 +137,7 @@ function BirthDataForm({ initialValues }) {
 
       setValue("latitude", lat);
       setValue("longitude", lng);
+      console.log(lat, lng);
 
       locationForm.reset();
       locationForm.setAttribute("disabled", "disabled");
@@ -156,7 +158,7 @@ function BirthDataForm({ initialValues }) {
 
   // FIND UTC OFFSET
 
-  function findUTCOffset(datetime, lat = "52", long = "14") {
+  function findUTCOffset(datetime, lat, long) {
     const timestamp = Date.parse(datetime) / 1000;
     const fetchURLUTC = `https://maps.googleapis.com/maps/api/timezone/json?location=${lat},${long}&timestamp=${timestamp}&key=${TIME_API_KEY}`;
     getUTC(fetchURLUTC, renderUTC);
@@ -177,7 +179,7 @@ function BirthDataForm({ initialValues }) {
       const response = await fetch(currentURL);
       if (!response.ok) throw response;
       const data = await response.json();
-      // console.log("utc data", data);
+      console.log("utc data", data);
       handler(data);
     } catch (err) {
       addToast({
@@ -328,7 +330,13 @@ function BirthDataForm({ initialValues }) {
             variant="contained"
             color="primary"
             className={classes.button}
-            onClick={() => findUTCOffset(dateTimeInput.value)}
+            onClick={() =>
+              findUTCOffset(
+                dateTimeInput.value,
+                latitudeInput.value,
+                longitudeInput.value,
+              )
+            }
           >
             Find UTC offset
           </Button>

@@ -85,7 +85,7 @@ export const PlayersProvider = (props) => {
     // console.log("params", params);
 
     const fetchURL = `http://localhost:8000/formatData?date=${dob}&time=${tob}&location1=${latitude}&location2=${longitude}&utc=${utcoffset}&action=`;
-    // console.log("fetchURL", fetchURL);
+    console.log("fetchURL", fetchURL);
     return fetchURL;
   };
 
@@ -99,12 +99,14 @@ export const PlayersProvider = (props) => {
     }
     try {
       const response = await fetch(fetchURL);
+      console.log("reponse", response);
       if (response.status !== 200) {
         throw response;
       }
       let chartData = await response.json();
       chartData = JSON.parse(chartData);
       chartData.Ascendant = chartData.Asc;
+
       chartData.Descendant = BirthChart.descDict[chartData.Ascendant];
       delete chartData.Asc;
       chartData.ownerName = `${firstName} ${lastName}`;
@@ -156,9 +158,10 @@ export const PlayersProvider = (props) => {
     };
     console.log("new player", newPlayer);
     const fetchURL = createBirthChartURL(newPlayer);
+    console.log("URL", fetchURL);
     const fetchData = await fetchBirthChart(fetchURL, newPlayer);
+    console.log("fetchData", fetchData);
     newPlayer.chartData = fetchData;
-    // newPlayer.chart = new BirthChart(fetchData);
     console.log("new player with chart", JSON.stringify(newPlayer));
     setPlayers([...players, newPlayer]);
     addToast(`Saved ${newPlayer.firstName} ${newPlayer.lastName}`, {
