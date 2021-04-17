@@ -26,7 +26,9 @@ const Result = (props) => {
     <>
       <h2>Does this all look okay?</h2>
       <pre>{JSON.stringify(state, null, 2)}</pre>
-      <button onClick={() => console.log("state from result", state)}>
+      <button
+        onClick={() => console.log("reset form and take back to first page")}
+      >
         Start form again
       </button>
 

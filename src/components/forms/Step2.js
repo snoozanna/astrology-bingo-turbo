@@ -21,10 +21,20 @@ const Step2 = (props) => {
     props.history.push("./step3");
   };
 
+  const locationSubmit = () => {
+    const locationInput = document.getElementById("location");
+    const placename = locationInput.value;
+    console.log("location input ", placename);
+    //  setValue("location", placename)
+    console.log(getGeo(placename));
+  };
+
   async function getGeo(placename) {
     const GEO_API_URL = `https://maps.googleapis.com/maps/api/geocode/json?address=${placename.location}&key=${GEO_API_KEY}`;
+    console.log(GEO_API_URL);
 
     const { results } = await makeCall(GEO_API_URL);
+    console.log("results", results);
 
     // Show a list or warn no match and reset
     if (!results?.length) {
@@ -60,6 +70,7 @@ const Step2 = (props) => {
 
       setValue("latitude", lat);
       setValue("longitude", lng);
+
       console.log(lat, lng);
 
       // locationForm.reset();
@@ -82,6 +93,7 @@ const Step2 = (props) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} id="locationForm">
       <h2>Where were you born?</h2>
+
       <Controller
         as={TextField}
         error={!!errors.location}
@@ -95,15 +107,17 @@ const Step2 = (props) => {
 
       <Button
         // onClick={() => locationSubmit(locationForm)} //TODO
-        onClick={() => getGeo("Leeds")}
+        onClick={() => {
+          locationSubmit();
+        }}
         // type="submit"
         variant="contained"
         color="primary"
-
         // disabled={!formState.isValid}
       >
         Find Lat/Long
       </Button>
+
       <div id="location-choices"></div>
       <Controller
         as={TextField}
