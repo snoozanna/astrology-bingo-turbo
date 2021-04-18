@@ -6,7 +6,9 @@ function Home() {
     <>
       <div className="App">
         <Header pageName="Homepage" />
-        <main></main>
+        <main>
+        <h1>Home Page</h1>
+        </main>
       </div>
     </>
   );
