@@ -243,8 +243,6 @@ export const BirthChartProvider = (props) => {
 
     static planets = Object.freeze([
       "Sun",
-      "Moon",
-      "Ascendant",
       "Mercury",
       "Venus",
       "Mars",
@@ -253,7 +251,9 @@ export const BirthChartProvider = (props) => {
       "Uranus",
       "Neptune",
       "Pluto",
+      "Ascendant",
       "Descendant",
+      "Moon",
     ]);
   }
 

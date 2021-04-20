@@ -9,29 +9,37 @@ import SignSymbol from "./SignSymbol";
 
 import { BirthChartContext } from "./../../contexts/birthchart.context";
 
-// const useStyles = makeStyles({
-//   listGroup: {
-//     display: "flex",
-//     flexFlow: "wrap",
-//   },
-//   listItem: {
-//     gridGap: 15,
-//     flexFlow: "wrap",
-//     justifyContent: "space-between",
-//     marginBlockEnd: 10,
-//     marginInlineEnd: 10,
-//     padding: 1,
-//     maxWidth: "20%",
-//   },
+const useStyles = makeStyles({
+  signSymbol: {
+    width: 45,
+  },
 
-// });
+  planetListItem: {
+    fontWeight: 600,
+  },
+
+  listGroup: {
+    display: "flex",
+    flexFlow: "wrap",
+    justifyContent: "center",
+  },
+
+  listItem: {
+    gridGap: 15,
+    justifyContent: "spaceBetween",
+    marginBlockEnd: 10,
+    marginInlineEnd: 10,
+    padding: 1,
+    maxWidth: "22%",
+  },
+});
 
 const ChartList = ({ player }) => {
   const { BirthChart } = useContext(BirthChartContext);
-  // const classes = useStyles();
+  const classes = useStyles();
   return (
     <>
-      <List className="listGroup">
+      <List className={classes.listGroup}>
         {Object.entries(player).map(([key, value]) => {
           // console.log("key", key, "value", value);
           if (BirthChart.planets.includes(key)) {
@@ -41,8 +49,8 @@ const ChartList = ({ player }) => {
             // console.log("sign", sign);
             // console.log("icon", icon);
             return (
-              <ListItem className="listItem">
-                <div className="chartListItem">
+              <ListItem className={classes.listItem}>
+                <div className={classes.chartListItem}>
                   <div className="planetListItem">{planet} :</div>
                   <div className="signListItem">{sign} </div>
                 </div>

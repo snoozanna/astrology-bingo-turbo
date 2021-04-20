@@ -2,9 +2,11 @@ import React, { useContext, useState } from "react";
 import "./PlayerListing.scss";
 import ChartList from "./../../components/ChartList/ChartList";
 import ChartImage from "./../ChartImage/ChartImage";
+import IconList from "./../../components/IconList/IconList";
 import { makeStyles } from "@material-ui/core/styles";
 import { PlayersContext } from "./../../contexts/players.context";
 import { UtilitiesContext } from "./../../contexts/utilities.context";
+import { GameContext } from "./../../contexts/game.context";
 
 const useStyles = makeStyles({
   listGroupItem: {
@@ -19,7 +21,8 @@ const useStyles = makeStyles({
 
 const PlayerListing = ({ player }) => {
   const classes = useStyles();
-
+  const { alreadyCalled } = useContext(GameContext);
+  console.log(alreadyCalled);
   const { deletePlayer } = useContext(PlayersContext);
   const { useToggle } = useContext(UtilitiesContext);
   const [isOn, toggleIsOn] = useToggle();
@@ -34,9 +37,9 @@ const PlayerListing = ({ player }) => {
         <p>
           Chart:
           {isOn ? (
-            <ChartList player={player.chartData} />
-          ) : (
             <ChartImage player={player.chartData} />
+          ) : (
+            <IconList player={player.chartData}  />
           )}
         </p>
         <button onClick={() => deletePlayer(player._id)}>Delete</button>
