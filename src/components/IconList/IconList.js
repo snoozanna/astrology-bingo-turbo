@@ -37,58 +37,51 @@ const useStyles = makeStyles({
 const IconList = ({ player }) => {
   const { alreadyCalled } = useContext(GameContext);
   const { BirthChart } = useContext(BirthChartContext);
-  console.log(alreadyCalled);
+  console.log("alreadyCalled", alreadyCalled);
 
   const classes = useStyles();
+
+  const checkCall = (planet, sign) => {
+    // debugger;
+    if (alreadyCalled != null && Array.isArray(alreadyCalled)) {
+      for (const oneCall of alreadyCalled) {
+        return oneCall.planet === planet && oneCall.sign === sign;
+      }
+    }
+  };
 
   return (
     <>
       <List className={classes.listGroup}>
         {Object.entries(player).map(([key, value]) => {
-          // console.log("key", key, "value", value);
-          if (BirthChart.planets.includes(key)) {
-            // const { icon } = value;
-            const sign = value;
-            const planet = key;
-            if (alreadyCalled != null && Array.isArray(alreadyCalled)) {
-              console.log(Object.entries(alreadyCalled));
-              if (alreadyCalled.includes(sign && planet)) {
-                return console.log("yes");
-                // <ListItem className={classes.listItem}>
-                //   <ListItemIcon>
-                //     <SignSymbol
-                //       sign={sign}
-                //       planet={planet}
-                //       className={classes.alreadyCalled}
-                //     />
-                //   </ListItemIcon>
-                // </ListItem>
-              } else {
-                return (
-                  <ListItem className={classes.listItem}>
-                    <ListItemIcon>
-                      <SignSymbol sign={sign} planet={planet} />
-                    </ListItemIcon>
-                  </ListItem>
-                );
-              }
-            } else {
-              if (alreadyCalled != null && !Array.isArray(alreadyCalled)) {
-                console.warn(
-                  `Corrupted data. 'alreadyCalled' should be an array, instead got ${alreadyCalled}`,
-                );
-              }
-            }
-            return (
-              <ListItem className={classes.listItem}>
-                <ListItemIcon>
-                  <SignSymbol sign={sign} planet={planet} />
-                </ListItemIcon>
-              </ListItem>
-            );
-          } else {
+          if (!BirthChart.planets.includes(key)) {
             return null;
           }
+
+          const sign = value;
+          const planet = key;
+          console.log("planet,sign", planet, sign);
+
+          console.log(checkCall(planet, sign));
+          return (
+            <>
+              <p>
+                {sign}
+                {planet}
+              </p>
+              <ListItem className={classes.listItem}>
+                <ListItemIcon>
+                  <SignSymbol
+                    sign={sign}
+                    planet={planet}
+                    className={
+                      checkCall(planet, sign) ? classes.alreadyCalled : ""
+                    }
+                  />
+                </ListItemIcon>
+              </ListItem>
+            </>
+          );
         })}
       </List>
     </>
@@ -96,3 +89,10 @@ const IconList = ({ player }) => {
 };
 
 export default IconList;
+
+// If player object contains a planet
+//>> if alreadyCalled array contains anything
+//>>>> If planet / sign combo is in alreadyCalled
+// >> return sign symbol with pink background
+//>>>> else return normal sign symbol
+// else return nothing

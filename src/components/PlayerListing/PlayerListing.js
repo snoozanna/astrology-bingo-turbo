@@ -22,7 +22,7 @@ const useStyles = makeStyles({
 const PlayerListing = ({ player }) => {
   const classes = useStyles();
   const { alreadyCalled } = useContext(GameContext);
-  console.log(alreadyCalled);
+  // console.log(alreadyCalled);
   const { deletePlayer } = useContext(PlayersContext);
   const { useToggle } = useContext(UtilitiesContext);
   const [isOn, toggleIsOn] = useToggle();
@@ -39,7 +39,7 @@ const PlayerListing = ({ player }) => {
           {isOn ? (
             <ChartImage player={player.chartData} />
           ) : (
-            <IconList player={player.chartData}  />
+            <IconList player={player.chartData} />
           )}
         </p>
         <button onClick={() => deletePlayer(player._id)}>Delete</button>

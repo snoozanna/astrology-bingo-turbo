@@ -9,7 +9,6 @@ function Generator() {
   const { pick, alreadyCalled } = useContext(GameContext);
   let p = "Mars";
   let s = "Leo";
-  console.log("p to begin ", p);
 
   const getPlanet = (alreadyCalled) => {
     if (alreadyCalled.length > 0) {

@@ -14,10 +14,13 @@ export const GameProvider = (props) => {
   const { BirthChart } = useContext(BirthChartContext);
   const { getRandomIntInclusive } = useContext(UtilitiesContext);
   const [alreadyCalled, setAlreadyCalled] = useState([]);
+  // const [potentialCallList, setPotentialCallList] = useState([]);
 
   const potentialCallList = [];
   for (const sign of BirthChart.signs) {
     for (const planet of BirthChart.planets) {
+      console.log(planet, sign);
+      // setPotentialCallList(...potentialCallList, { planet, sign });
       potentialCallList.push({ planet, sign });
     }
   }
@@ -52,8 +55,9 @@ export const GameProvider = (props) => {
     //Todo set State with new potentialcall list?
     const pickedItem = potentialCallList.splice(pickedItemIndex, 1)[0];
     pickedItem.callPosition = alreadyCalled.length + 1;
-    // alreadyCalled.push(pickedItem);
+
     setAlreadyCalled([...alreadyCalled, pickedItem]);
+    console.log("potential call list", potentialCallList);
 
     // for (const player of players) {
     //   player.markCalled(pickedItem);
