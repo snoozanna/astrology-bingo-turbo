@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import "./PlayerListing.scss";
 import ChartList from "./../../components/ChartList/ChartList";
 import ChartImage from "./../ChartImage/ChartImage";

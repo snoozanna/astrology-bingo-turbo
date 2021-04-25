@@ -14,15 +14,17 @@ export const GameProvider = (props) => {
   const { BirthChart } = useContext(BirthChartContext);
   const { getRandomIntInclusive } = useContext(UtilitiesContext);
   const [alreadyCalled, setAlreadyCalled] = useState([]);
-  // const [potentialCallList, setPotentialCallList] = useState([]);
+  const [potentialCallList, setPotentialCallList] = useState([]);
 
-  const potentialCallList = [];
-  for (const sign of BirthChart.signs) {
-    for (const planet of BirthChart.planets) {
-      console.log(planet, sign);
-      // setPotentialCallList(...potentialCallList, { planet, sign });
-      potentialCallList.push({ planet, sign });
+//create an array of potentials then save to context
+  if (!potentialCallList.length) {
+    const calls = [];
+    for (const sign of BirthChart.signs) {
+      for (const planet of BirthChart.planets) {
+        calls.push({ planet, sign });
+      }
     }
+    setPotentialCallList(calls);
   }
 
   const getRandomPlanet = () => {
@@ -51,13 +53,12 @@ export const GameProvider = (props) => {
       ({ sign, planet }) => sign === picked.sign && planet === picked.planet,
     );
 
-    // move from 'potentialCallList' to 'alreadyCalled'
+    // Todo  move from 'potentialCallList' to 'alreadyCalled'
     //Todo set State with new potentialcall list?
     const pickedItem = potentialCallList.splice(pickedItemIndex, 1)[0];
     pickedItem.callPosition = alreadyCalled.length + 1;
 
     setAlreadyCalled([...alreadyCalled, pickedItem]);
-    console.log("potential call list", potentialCallList);
 
     // for (const player of players) {
     //   player.markCalled(pickedItem);

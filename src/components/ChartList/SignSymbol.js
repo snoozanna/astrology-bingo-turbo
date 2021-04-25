@@ -18,6 +18,7 @@ const useStyles = makeStyles({
     width: 45,
     margin: "auto",
   },
+
 });
 
 const SignSymbol = ({ sign, width, x, y }) => {

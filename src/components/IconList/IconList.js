@@ -30,22 +30,40 @@ const useStyles = makeStyles({
   },
 
   alreadyCalled: {
-    backgroundColor: "pink",
+  margin: "auto",
+    maxWidth: "fit-content",
+    padding: "7 15 15",
+    border: "1px black solid",
+    borderRadius: 15,
+    backgroundColor: "#E31C79",
+    '& svg': {
+      fill: "#fff"
+    }
+
   },
+
+  notCalled: {
+    backgroundColor: "red",
+  }
 });
 
 const IconList = ({ player }) => {
   const { alreadyCalled } = useContext(GameContext);
   const { BirthChart } = useContext(BirthChartContext);
-  console.log("alreadyCalled", alreadyCalled);
+  // console.log("alreadyCalled", alreadyCalled);
 
   const classes = useStyles();
 
   const checkCall = (planet, sign) => {
     // debugger;
+    // console.log("alreadyCalled", alreadyCalled);
     if (alreadyCalled != null && Array.isArray(alreadyCalled)) {
       for (const oneCall of alreadyCalled) {
-        return oneCall.planet === planet && oneCall.sign === sign;
+        // return oneCall.planet === planet && oneCall.sign === sign;
+        if (oneCall.planet === planet && oneCall.sign === sign) {
+          console.log("this has been called", planet, sign)
+          return true
+        }
       }
     }
   };
@@ -60,23 +78,22 @@ const IconList = ({ player }) => {
 
           const sign = value;
           const planet = key;
-          console.log("planet,sign", planet, sign);
+          // console.log("planet,sign", planet, sign);
 
-          console.log(checkCall(planet, sign));
+          // console.log(checkCall(planet, sign));
           return (
             <>
-              <p>
-                {sign}
-                {planet}
-              </p>
-              <ListItem className={classes.listItem}>
+    
+              {/* <ListItem className={classes.listItem}> */}
+                  <ListItem className={checkCall(planet, sign) ? classes.alreadyCalled : classes.listItem}>
                 <ListItemIcon>
                   <SignSymbol
                     sign={sign}
                     planet={planet}
-                    className={
-                      checkCall(planet, sign) ? classes.alreadyCalled : ""
-                    }
+                    // className={
+                    //   checkCall(planet, sign) ? classes.alreadyCalled : ""
+                    // }
+                    
                   />
                 </ListItemIcon>
               </ListItem>
