@@ -1,9 +1,10 @@
 @import "_variables";
 
-body {
+.App {
   text-align: center;
   font-family: "Lato", sans-serif;
   background-color: $background;
+  min-height: 100vh;
 }
 
 ul,

@@ -14,8 +14,23 @@ const useStyles = makeStyles({
     border: "1px black solid",
     borderRadius: 15,
     backgroundColor: "hsla(19, 90%, 62%, 50%)",
-    minWidth: "45%",
     maxWidth: "45%",
+  },
+
+  playerContainer: {
+    display: "flex",
+    justifyContent: "center",
+    width: "100%",
+  },
+
+  nameContainer: {
+    display: "flex",
+    justifyContent: "center",
+    fontSize: "1.3rem",
+  },
+
+  firstName: {
+    marginInlineEnd: 4,
   },
 });
 
@@ -30,9 +45,9 @@ const PlayerListing = ({ player }) => {
   return (
     <>
       <li key={player._id} className={classes.listGroupItem}>
-        <div className="nameContainer">
-          <h3 className="first name">{player.firstName}</h3>
-          <h3 className="second name">{player.lastName}</h3>
+        <div className={classes.nameContainer}>
+          <h3 className={classes.firstName}>{player.firstName}</h3>
+          <h3>{player.lastName}</h3>
         </div>
         <p>
           Chart:

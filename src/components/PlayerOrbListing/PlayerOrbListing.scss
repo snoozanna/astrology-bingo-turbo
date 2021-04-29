@@ -1,0 +1,15 @@
+@import "./../../styles/_variables";
+
+.playerContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+.nameContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.first.name {
+  margin-inline-end: 10px;
+}

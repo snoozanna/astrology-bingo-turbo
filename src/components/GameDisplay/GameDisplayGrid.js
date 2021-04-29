@@ -13,10 +13,10 @@ import { GameContext } from "./../../contexts/game.context";
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 650,
     fontVariantCaps: "all-petite-caps",
     fontSize: "1.5rem",
     textAlign: "center",
+    
   },
   head: {
     backgroundColor: "hsl(258.75,53.33%,94.12%)",
