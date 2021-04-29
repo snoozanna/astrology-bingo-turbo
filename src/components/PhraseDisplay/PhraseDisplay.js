@@ -10,7 +10,7 @@ import { UtilitiesContext } from "./../../contexts/utilities.context";
 const PhraseDisplay = ({ planet, sign }) => {
   const { BirthChart } = useContext(BirthChartContext);
   const { catchPhraseDict } = useContext(UtilitiesContext);
-  console.log("from phrase display", planet, sign);
+  // console.log("from phrase display", planet, sign);
 
   const getCatchPhrase = (planet, sign) => {
     // debugger;
