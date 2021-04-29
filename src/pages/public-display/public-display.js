@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "./../../components/Header/Header";
-import GameDisplayGrid from "./../../components/GameDisplay//Grid/GameDisplayGrid";
+import GameDisplayGrid from "./../../components/GameDisplay/GameDisplayGrid.js";
 
 function PublicDisplay() {
   return (

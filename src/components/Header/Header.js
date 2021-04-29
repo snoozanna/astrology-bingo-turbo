@@ -14,7 +14,6 @@ import { MenuContext } from "./../../contexts/menu.context";
 const useStyles = makeStyles({
   HeaderContainer: {
     flexGrow: 1,
-    marginBlockEnd: 40,
     backgroundColor: "rgb(213, 123, 214)",
 
     // display: "none",
