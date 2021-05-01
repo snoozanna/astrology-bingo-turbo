@@ -7,6 +7,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { PlayersContext } from "./../../contexts/players.context";
 import { UtilitiesContext } from "./../../contexts/utilities.context";
 import { GameContext } from "./../../contexts/game.context";
+import { useToggle } from "./../../utils/utils";
 
 const useStyles = makeStyles({
   listGroupItem: {
@@ -24,7 +25,6 @@ const PlayerListing = ({ player }) => {
   const { alreadyCalled } = useContext(GameContext);
   // console.log(alreadyCalled);
   const { deletePlayer } = useContext(PlayersContext);
-  const { useToggle } = useContext(UtilitiesContext);
   const [isOn, toggleIsOn] = useToggle();
 
   return (

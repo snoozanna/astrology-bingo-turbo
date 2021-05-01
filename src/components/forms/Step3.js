@@ -8,14 +8,11 @@ import { useToasts } from "react-toast-notifications";
 import { TIME_API_KEY } from "./../../config";
 
 import { PlayersContext } from "./../../contexts/players.context";
-import { UtilitiesContext } from "../../contexts/utilities.context";
-
-
+import { makeCall } from "../../utils/utils";
 
 const Step3 = (props) => {
   const { register, setValue, handleSubmit, errors, control } = useForm();
   const { state, actions } = useStateMachine({ updateAction });
-  const { makeCall } = useContext(UtilitiesContext);
   const { addToast } = useToasts();
 
   const onSubmit = (data) => {
@@ -87,7 +84,7 @@ const Step3 = (props) => {
           findUTCOffset(
             "1989-12-05T10:25",
             state.data.latitude,
-            state.data.longitude,
+            state.data.longitude
           )
         }
       >

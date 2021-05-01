@@ -1,25 +1,9 @@
 import React, { createContext, useState, useCallback } from "react";
 import { useToasts } from "react-toast-notifications";
 
-/****************************************************************
- * Holds utility functions
- ****************************************************************/
+  
 
-export const UtilitiesContext = createContext({
-  uuidv4: () => {},
-  getRandomIntInclusive: () => {},
-  deepFreeze: () => {},
-  isElement: () => {},
-  makeCall: () => {},
-  connectToWebSocket: () => {},
-  useToggle: () => {},
-  catchPhraseDict: {},
-});
-
-export const UtilitiesProvider = (props) => {
-  const { addToast } = useToasts();
-
-  const catchPhraseDict = {
+  export const catchPhraseDict = {
     Sun: {
       Aries: "A little bit scaries, Sun in Aries",
       Taurus: "Set meal for one Taurus Sun",
@@ -192,21 +176,13 @@ export const UtilitiesProvider = (props) => {
     },
   };
 
-  const uuidv4 = () => {
-    return "xxxxx".replace(/[xy]/g, function (c) {
-      var r = (Math.random() * 16) | 0,
-        v = c == "x" ? r : (r & 0x3) | 0x8;
-      return v.toString(16);
-    });
-  };
-
-  function getRandomIntInclusive(min, max) {
+  export function getRandomIntInclusive(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
   }
 
-  function isElement(obj) {
+  export function isElement(obj) {
     try {
       //Using W3 DOM2 (works for FF, Opera and Chrome)
       return obj instanceof HTMLElement || obj instanceof SVGElement;
@@ -223,7 +199,7 @@ export const UtilitiesProvider = (props) => {
     }
   }
 
-  function deepFreeze(object) {
+  export function deepFreeze(object) {
     // Retrieve the property names defined on object
     const propNames = Object.getOwnPropertyNames(object);
 
@@ -242,7 +218,7 @@ export const UtilitiesProvider = (props) => {
 
   //TODO work out why M is undefined
 
-  const makeCall = async (url = "", options = {}) => {
+  export const makeCall = async (url = "", options = {}) => {
     try {
       const response = await fetch(url, options);
       if (!response.ok) {
@@ -251,10 +227,10 @@ export const UtilitiesProvider = (props) => {
       const data = await response.json();
       return data;
     } catch (err) {
-      addToast({
-        html: `<h2>Error</h2><p>${err.message}</p>`,
-        classes: ["toast", "error"],
-      });
+      // addToast({
+      //   html: `<h2>Error</h2><p>${err.message}</p>`,
+      //   classes: ["toast", "error"],
+      // });
       return err;
     }
   };
@@ -276,7 +252,7 @@ export const UtilitiesProvider = (props) => {
   //   }
   // }
 
-  function connectToWebSocket(
+  export function connectToWebSocket(
     socketURL = "ws://localhost:3001/",
     connectionHandler = function connectionHandler(event) {
       // console.log("Socket open!!");
@@ -290,7 +266,7 @@ export const UtilitiesProvider = (props) => {
     },
     closeHandler,
   ) {
-    let i = 1;
+    // let i = 1;
     // Create WebSocket connection.
     let socket = new WebSocket(socketURL);
 
@@ -327,7 +303,7 @@ export const UtilitiesProvider = (props) => {
     return socket;
   }
 
-  function useToggle(initialValue = false) {
+  export function useToggle(initialValue = false) {
     const [value, setValue] = useState(initialValue);
     const toggle = useCallback(() => {
       setValue((v) => !v);
@@ -335,20 +311,62 @@ export const UtilitiesProvider = (props) => {
     return [value, toggle];
   }
 
-  return (
-    <UtilitiesContext.Provider
-      value={{
-        uuidv4,
-        getRandomIntInclusive,
-        deepFreeze,
-        isElement,
-        makeCall,
-        connectToWebSocket,
-        useToggle,
-        catchPhraseDict,
-      }}
-    >
-      {props.children}
-    </UtilitiesContext.Provider>
-  );
-};
+  export async function getGeo(placename) {
+    const GEO_API_URL = `https://maps.googleapis.com/maps/api/geocode/json?address=${placename.location}&key=${GEO_API_KEY}`;
+
+    const { results } = await makeCall(GEO_API_URL);
+
+    // Show a list or warn no match and reset
+    if (!results?.length) {
+      // addToast({
+      //   html: `<h2>Error</h2><p>${placename} Not found</p>`,
+      //   classes: ["toast", "error"],
+      // });
+      return;
+    }
+
+    
+
+    const choicesMount = document.getElementById("location-choices");
+    const select = document.createElement("select");
+    const holdingOption = document.createElement("option");
+    holdingOption.textContent = "Choose your location";
+    holdingOption.setAttribute("disabled", "disabled");
+    holdingOption.setAttribute("selected", "selected");
+    holdingOption.setAttribute("value", "");
+    select.append(holdingOption);
+
+    for (const [idx, val] of results.entries()) {
+      const opt = document.createElement("option");
+      opt.textContent = val.formatted_address;
+      opt.setAttribute("value", idx);
+      select.append(opt);
+    }
+
+    select.addEventListener("change", (e) => {
+      const {
+        geometry: {
+          location: { lat, lng },
+        },
+      } = results[e.target.value];
+
+      setValue("latitude", lat);
+      setValue("longitude", lng);
+      console.log(lat, lng);
+
+      locationForm.reset();
+      locationForm.setAttribute("disabled", "disabled");
+    });
+
+    choicesMount.innerHTML = "";
+    choicesMount.append(select);
+
+    const lbl = document.createElement("label");
+    lbl.textContent = "Choose your location";
+
+    choicesMount.append(lbl);
+
+    // const elems = document.querySelectorAll("select");
+    // const options = {};
+    // M.FormSelect.init(elems, options);
+  }

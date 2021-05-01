@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 import { BirthChartContext } from "./birthchart.context";
-import { UtilitiesContext } from "./utilities.context";
+import { getRandomIntInclusive } from "./utilities.context";
 
 export const GameContext = createContext({
   getRandomPlanet: () => {},
@@ -12,7 +12,6 @@ export const GameContext = createContext({
 
 export const GameProvider = (props) => {
   const { BirthChart } = useContext(BirthChartContext);
-  const { getRandomIntInclusive } = useContext(UtilitiesContext);
   const [alreadyCalled, setAlreadyCalled] = useState([]);
   const [potentialCallList, setPotentialCallList] = useState([]);
 

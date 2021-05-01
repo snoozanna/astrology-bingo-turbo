@@ -7,12 +7,11 @@ import { Button, TextField } from "@material-ui/core";
 import { useToasts } from "react-toast-notifications";
 import { GEO_API_KEY } from "./../../config";
 
-import { UtilitiesContext } from "../../contexts/utilities.context";
+import { makeCall } from "../../utils/utils";
 
 const Step2 = (props) => {
   const { register, setValue, handleSubmit, errors, control } = useForm();
   const { state, actions } = useStateMachine({ updateAction });
-  const { makeCall } = useContext(UtilitiesContext);
   const { addToast } = useToasts();
 
   const onSubmit = (data) => {

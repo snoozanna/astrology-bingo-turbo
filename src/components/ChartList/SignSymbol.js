@@ -37,7 +37,6 @@ const SignSymbol = ({ sign, width, x, y }) => {
               className={classes.signSymbol}
             />
           );
-          break;
         case "Taurus":
           return (
             <TaurusIcon
@@ -47,7 +46,6 @@ const SignSymbol = ({ sign, width, x, y }) => {
               className={classes.signSymbol}
             />
           );
-          break;
         case "Gemini":
           return (
             <GeminiIcon
@@ -57,7 +55,6 @@ const SignSymbol = ({ sign, width, x, y }) => {
               className={classes.signSymbol}
             />
           );
-          break;
         case "Cancer":
           return (
             <CancerIcon
@@ -67,12 +64,10 @@ const SignSymbol = ({ sign, width, x, y }) => {
               className={classes.signSymbol}
             />
           );
-          break;
         case "Leo":
           return (
             <LeoIcon width={width} x={x} y={y} className={classes.signSymbol} />
           );
-          break;
         case "Virgo":
           return (
             <VirgoIcon
@@ -82,7 +77,6 @@ const SignSymbol = ({ sign, width, x, y }) => {
               className={classes.signSymbol}
             />
           );
-          break;
         case "Libra":
           return (
             <LibraIcon
@@ -92,7 +86,6 @@ const SignSymbol = ({ sign, width, x, y }) => {
               className={classes.signSymbol}
             />
           );
-          break;
         case "Scorpio":
           return (
             <ScorpioIcon
@@ -102,7 +95,6 @@ const SignSymbol = ({ sign, width, x, y }) => {
               className={classes.signSymbol}
             />
           );
-          break;
         case "Sagittarius":
           return (
             <SagittariusIcon
@@ -112,7 +104,6 @@ const SignSymbol = ({ sign, width, x, y }) => {
               className={classes.signSymbol}
             />
           );
-          break;
         case "Capricorn":
           return (
             <CapricornIcon
@@ -122,7 +113,6 @@ const SignSymbol = ({ sign, width, x, y }) => {
               className={classes.signSymbol}
             />
           );
-          break;
         case "Aquarius":
           return (
             <AquariusIcon
@@ -132,7 +122,6 @@ const SignSymbol = ({ sign, width, x, y }) => {
               className={classes.signSymbol}
             />
           );
-          break;
         case "Pisces":
           return (
             <PiscesIcon
@@ -142,10 +131,9 @@ const SignSymbol = ({ sign, width, x, y }) => {
               className={classes.signSymbol}
             />
           );
-          break;
         default:
-          console.log("default");
-          break;
+                    console.log(`default case: sign provided was ${sign}`);
+          throw new Error("getIconComponent: Sign not recognised. Need planet.");
       }
     }
   };

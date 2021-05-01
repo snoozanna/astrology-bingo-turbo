@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
-import { UtilitiesContext } from "./utilities.context";
+import { v4 as uuidv4 } from 'uuid';
+import { isElement } from "./utilities.context";
 import SignSymbol from "./../components/ChartList/SignSymbol";
 
 export const BirthChartContext = createContext({
@@ -7,7 +8,6 @@ export const BirthChartContext = createContext({
 });
 
 export const BirthChartProvider = (props) => {
-  const { uuidv4, isElement } = useContext(UtilitiesContext);
 
   /****************************************************************
    * Constructor for a basic birthchart

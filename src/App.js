@@ -7,11 +7,8 @@ import {
   Switch,
 } from "react-router-dom";
 
-import { StateMachineProvider, createStore } from "little-state-machine";
-
 import { MenuProvider } from "./contexts/menu.context";
 import { ToastProvider } from "react-toast-notifications";
-import { UtilitiesProvider } from "./contexts/utilities.context";
 import { PlayersProvider } from "./contexts/players.context";
 import { BirthChartProvider } from "./contexts/birthchart.context";
 import { GameProvider } from "./contexts/game.context";
@@ -22,16 +19,11 @@ import InPlay from "./pages/in-play/in-play.js";
 import MyBirthChart from "./pages/my-birth-chart/my-birth-chart.js";
 import Generator from "./pages/generator/generator.js";
 import PublicDisplay from "./pages/public-display/public-display.js";
-import Step1 from "./components/forms/Step1";
-import Step2 from "./components/forms/Step2";
-import Result from "./components/forms/Result";
 
 function App() {
   return (
     <Router>
-      <StateMachineProvider>
         <ToastProvider autoDismiss={true}>
-          <UtilitiesProvider>
             <BirthChartProvider>
               <PlayersProvider>
                 <GameProvider>
@@ -43,10 +35,6 @@ function App() {
                         path="/add-birth-chart"
                         component={AddChart}
                       />
-
-                      {/* <Route exact path="/step1" component={Step1} />
-                      <Route path="/step2" component={Step2} />
-                      <Route path="/result" component={Result} /> */}
 
                       <Route exact path="/in-play" component={InPlay} />
                       <Route
@@ -65,9 +53,7 @@ function App() {
                 </GameProvider>
               </PlayersProvider>
             </BirthChartProvider>
-          </UtilitiesProvider>
         </ToastProvider>
-      </StateMachineProvider>
     </Router>
   );
 }

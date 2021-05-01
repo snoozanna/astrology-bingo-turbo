@@ -10,7 +10,11 @@ import { useParams } from "react-router-dom";
 import { PlayersContext } from "./../../contexts/players.context";
 
 import { GEO_API_KEY, TIME_API_KEY } from "./../../config";
-import { UtilitiesContext } from "../../contexts/utilities.context";
+import { makeCall } from "../../utils/utils";
+
+import Step1 from "./Step1";
+import Step2 from "./Step2";
+import Result from "./Result";
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -53,18 +57,18 @@ const emptyValues = {
 function BirthDataForm({ initialValues }) {
   const classes = useStyles();
   const { addToast } = useToasts();
-  // let { id } = useParams();
   const [populated, setPopulated] = useState(false);
 
   const { addPlayer, deletePlayer, deleteAllPlayers } = useContext(
     PlayersContext,
   );
-  const { makeCall } = useContext(UtilitiesContext);
 
   const { handleSubmit, setValue, errors, control, reset, formState } = useForm(
     {
       resolver: yupResolver(schema),
       mode: "onChange",
+      reValidateMode: "onChange",
+      defaultValues,
     },
   );
 
@@ -73,88 +77,9 @@ function BirthDataForm({ initialValues }) {
     setPopulated(true);
   }
 
-  // FORMS
-
-  const locationForm = document.getElementById("locationForm");
-
-  //INPUTS
-  const dateTimeInput = document.getElementById("dtob");
-  const utcInput = document.getElementById("utcoffset");
-  const latitudeInput = document.getElementById("latitude");
-  const longitudeInput = document.getElementById("longitude");
-  const locationSubmit = async (locationForm) => {
-    const FD = new FormData(locationForm);
-    const data = Object.fromEntries(FD);
-    locationForm.setAttribute("disabled", "disabled");
-    for (const el of locationForm.elements) {
-      el.setAttribute("disabled", "disabled");
-      el.classList.add("disabled");
-      el.classList.remove("valid");
-      el.value = "";
-      el.blur();
-    }
-
-    getGeo(data);
+  getGeo(data);
     // getGeo(formValues);
-  };
-
-  async function getGeo(placename) {
-    const GEO_API_URL = `https://maps.googleapis.com/maps/api/geocode/json?address=${placename.location}&key=${GEO_API_KEY}`;
-
-    const { results } = await makeCall(GEO_API_URL);
-
-    // Show a list or warn no match and reset
-    if (!results?.length) {
-      addToast({
-        html: `<h2>Error</h2><p>${placename} Not found</p>`,
-        classes: ["toast", "error"],
-      });
-      return;
-    }
-
-    const choicesMount = document.getElementById("location-choices");
-    const select = document.createElement("select");
-    const holdingOption = document.createElement("option");
-    holdingOption.textContent = "Choose your location";
-    holdingOption.setAttribute("disabled", "disabled");
-    holdingOption.setAttribute("selected", "selected");
-    holdingOption.setAttribute("value", "");
-    select.append(holdingOption);
-
-    for (const [idx, val] of results.entries()) {
-      const opt = document.createElement("option");
-      opt.textContent = val.formatted_address;
-      opt.setAttribute("value", idx);
-      select.append(opt);
-    }
-
-    select.addEventListener("change", (e) => {
-      const {
-        geometry: {
-          location: { lat, lng },
-        },
-      } = results[e.target.value];
-
-      setValue("latitude", lat);
-      setValue("longitude", lng);
-      console.log(lat, lng);
-
-      locationForm.reset();
-      locationForm.setAttribute("disabled", "disabled");
-    });
-
-    choicesMount.innerHTML = "";
-    choicesMount.append(select);
-
-    const lbl = document.createElement("label");
-    lbl.textContent = "Choose your location";
-
-    choicesMount.append(lbl);
-
-    // const elems = document.querySelectorAll("select");
-    // const options = {};
-    // M.FormSelect.init(elems, options);
-  }
+};
 
   // FIND UTC OFFSET
 

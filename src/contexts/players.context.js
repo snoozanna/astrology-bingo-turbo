@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 import { useToasts } from "react-toast-notifications";
-import { UtilitiesContext } from "./utilities.context";
+import { v4 as uuidv4 } from 'uuid';
 import { BirthChartContext } from "./birthchart.context";
 import { TIME_API_KEY } from "./../config";
 import ChartImage from "../components/ChartImage/ChartImage";
@@ -64,7 +64,6 @@ export const PlayersProvider = (props) => {
   const [loaded, setLoaded] = useState(false);
   const { addToast } = useToasts();
 
-  const { uuidv4 } = useContext(UtilitiesContext);
   const { BirthChart } = useContext(BirthChartContext);
   const createBirthChartURL = ({
     datetime,

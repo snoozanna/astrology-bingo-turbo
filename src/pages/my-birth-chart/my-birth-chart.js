@@ -3,10 +3,9 @@ import "./my-birth-chart.scss";
 import Header from "../../components/Header/Header";
 import ChartList from "../../components/ChartList/ChartList";
 import ChartImage from "../../components/ChartImage/ChartImage";
-import { UtilitiesContext } from "./../../contexts/utilities.context";
+import { useToggle } from "./../../utils/utils";
 
 function MyBirthChart() {
-  const { useToggle } = useContext(UtilitiesContext);
   const [isOn, toggleIsOn] = useToggle();
 
   const aliceBasic = {
