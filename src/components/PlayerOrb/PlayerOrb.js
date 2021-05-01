@@ -6,6 +6,7 @@ import SignSymbol from "../ChartList/SignSymbol";
 
 import { makeStyles } from "@material-ui/core/styles";
 import { useSpring, animated } from "react-spring";
+// import { Dimensions } from "react-native";
 
 import { BirthChartContext } from "../../contexts/birthchart.context";
 import { GameContext } from "../../contexts/game.context";
@@ -49,7 +50,34 @@ const chooseColor = () => {
   return colors[random];
 };
 
-chooseColor();
+// chooseScale
+const chooseScale = () => {
+  const randomNumber = Math.random();
+  // console.log(randomNumber);
+  return randomNumber;
+};
+
+// chooseX
+console.log("screen width", window.screen.availWidth);
+
+const chooseX = () => {
+  // const randomX = Math.floor(Math.random() * window.screen.availWidth);
+  const randomX = Math.floor(Math.random() * 100);
+  console.log("random x ", randomX);
+  return randomX;
+};
+
+chooseX();
+
+// chooseY
+
+const chooseY = () => {
+  // const randomY = Math.floor(Math.random() * window.screen.availHeight);
+  const randomY = Math.floor(Math.random() * 100);
+  console.log("random x ", randomY);
+  return randomY;
+};
+// console.log("screen height", window.screen.availHeight);
 
 const PlayerOrb = ({ player }) => {
   const { BirthChart } = useContext(BirthChartContext);
@@ -63,16 +91,18 @@ const PlayerOrb = ({ player }) => {
     from: {
       opacity: 0,
       rotateZ: 360,
-      y: -50,
+      x: chooseX(),
+      y: chooseY(),
       backgroundColor: chooseColor(),
-      transform: "translate3d(0px,0,0) scale(0.8)",
+      transform: `scale(${chooseScale()})`,
     },
     to: {
-      opacity: 1,
+      opacity: 0.8,
       rotateZ: 0,
-      y: 150,
-      backgroundColor: " hsla(46, 96%, 84%, 1.0) ",
-      transform: "translate3d(0px,0,0) scale(1)",
+      x: chooseX(),
+      y: chooseY(),
+      backgroundColor: chooseColor(),
+      transform: `scale(${chooseScale()})`,
     },
   });
   const classes = useStyles();

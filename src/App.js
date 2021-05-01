@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 
 import { StateMachineProvider, createStore } from "little-state-machine";
+import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
 import { MenuProvider } from "./contexts/menu.context";
 import { ToastProvider } from "react-toast-notifications";
@@ -26,48 +27,62 @@ import Step1 from "./components/forms/Step1";
 import Step2 from "./components/forms/Step2";
 import Result from "./components/forms/Result";
 
+const theme = createMuiTheme({
+  typography: {
+    fontFamily: [
+      "Lato",
+      "sans-serif",
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(","),
+  },
+});
+
 function App() {
   return (
     <Router>
-      <StateMachineProvider>
-        <ToastProvider autoDismiss={true}>
-          <UtilitiesProvider>
-            <BirthChartProvider>
-              <PlayersProvider>
-                <GameProvider>
-                  <MenuProvider>
-                    <Switch>
-                      <Route exact path="/" component={Home} />
-                      <Route
-                        exact
-                        path="/add-birth-chart"
-                        component={AddChart}
-                      />
+      <ThemeProvider theme={theme}>
+        <StateMachineProvider>
+          <ToastProvider autoDismiss={true}>
+            <UtilitiesProvider>
+              <BirthChartProvider>
+                <PlayersProvider>
+                  <GameProvider>
+                    <MenuProvider>
+                      <Switch>
+                        <Route exact path="/" component={Home} />
+                        <Route
+                          exact
+                          path="/add-birth-chart"
+                          component={AddChart}
+                        />
 
-                      {/* <Route exact path="/step1" component={Step1} />
+                        {/* <Route exact path="/step1" component={Step1} />
                       <Route path="/step2" component={Step2} />
                       <Route path="/result" component={Result} /> */}
 
-                      <Route exact path="/in-play" component={InPlay} />
-                      <Route
-                        exact
-                        path="/my-birth-chart"
-                        component={MyBirthChart}
-                      />
-                      <Route exact path="/generator" component={Generator} />
-                      <Route
-                        exact
-                        path="/public-display"
-                        component={PublicDisplay}
-                      />
-                    </Switch>
-                  </MenuProvider>
-                </GameProvider>
-              </PlayersProvider>
-            </BirthChartProvider>
-          </UtilitiesProvider>
-        </ToastProvider>
-      </StateMachineProvider>
+                        <Route exact path="/in-play" component={InPlay} />
+                        <Route
+                          exact
+                          path="/my-birth-chart"
+                          component={MyBirthChart}
+                        />
+                        <Route exact path="/generator" component={Generator} />
+                        <Route
+                          exact
+                          path="/public-display"
+                          component={PublicDisplay}
+                        />
+                      </Switch>
+                    </MenuProvider>
+                  </GameProvider>
+                </PlayersProvider>
+              </BirthChartProvider>
+            </UtilitiesProvider>
+          </ToastProvider>
+        </StateMachineProvider>
+      </ThemeProvider>
     </Router>
   );
 }

@@ -58,7 +58,7 @@ const PlayerListing = ({ player }) => {
           )}
         </p>
         <button onClick={() => deletePlayer(player._id)}>Delete</button>
-        <button onClick={() => toggleIsOn()}>Show Chart</button>
+        <button onClick={() => toggleIsOn()}>Show Full Chart</button>
         <button onClick={() => {}}>Print Chart</button>
       </li>
     </>

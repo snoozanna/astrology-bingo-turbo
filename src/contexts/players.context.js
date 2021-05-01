@@ -35,7 +35,6 @@ export const PlayersProvider = (props) => {
       _id: "34dde",
       chartData: {
         Sun: "Leo",
-        Moon: "Gemini",
         Mercury: "Cancer",
         Venus: "Virgo",
         Mars: "Scorpio",
@@ -55,6 +54,7 @@ export const PlayersProvider = (props) => {
         longitude: -1.5490774,
         Ascendant: "Virgo",
         Descendant: "Pisces",
+        Moon: "Gemini",
         ownerName: "Robert De Niro",
       },
     },
@@ -105,6 +105,7 @@ export const PlayersProvider = (props) => {
       }
       let chartData = await response.json();
       chartData = JSON.parse(chartData);
+      // console.log(chartData);
       chartData.Ascendant = chartData.Asc;
 
       chartData.Descendant = BirthChart.descDict[chartData.Ascendant];

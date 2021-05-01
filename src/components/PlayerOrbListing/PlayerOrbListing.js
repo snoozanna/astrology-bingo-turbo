@@ -39,7 +39,6 @@ const PlayerOrbListing = ({ player }) => {
   const classes = useStyles();
   const { alreadyCalled } = useContext(GameContext);
   const props = useSpring({
-
     to: { opacity: 1 },
     from: { opacity: 0 },
   });
