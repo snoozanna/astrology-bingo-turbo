@@ -7,13 +7,11 @@ import { PlayersContext } from "./../../contexts/players.context";
 
 const useStyles = makeStyles({
   listGroup: {
-    display: "flex",
-    justifyContent: "center",
+    display: "grid",
     gridTemplateColumns: "repeat(4, 1fr)",
-    gridGap: 15,
+    gridGap: "15px",
     listStyleType: "none",
     padding: 0,
-    width: "100%",
   },
 });
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import AriesIcon from "./Icons/AriesIcon";
 import GeminiIcon from "./Icons/GeminiIcon";
@@ -18,7 +18,6 @@ const useStyles = makeStyles({
     width: 45,
     margin: "auto",
   },
-
 });
 
 const SignSymbol = ({ sign, width, x, y }) => {
@@ -37,7 +36,7 @@ const SignSymbol = ({ sign, width, x, y }) => {
               className={classes.signSymbol}
             />
           );
-          break;
+        // break;
         case "Taurus":
           return (
             <TaurusIcon
@@ -47,7 +46,7 @@ const SignSymbol = ({ sign, width, x, y }) => {
               className={classes.signSymbol}
             />
           );
-          break;
+        // break;
         case "Gemini":
           return (
             <GeminiIcon
@@ -57,7 +56,7 @@ const SignSymbol = ({ sign, width, x, y }) => {
               className={classes.signSymbol}
             />
           );
-          break;
+        // break;
         case "Cancer":
           return (
             <CancerIcon
@@ -67,12 +66,12 @@ const SignSymbol = ({ sign, width, x, y }) => {
               className={classes.signSymbol}
             />
           );
-          break;
+        // break;
         case "Leo":
           return (
             <LeoIcon width={width} x={x} y={y} className={classes.signSymbol} />
           );
-          break;
+        // break;
         case "Virgo":
           return (
             <VirgoIcon
@@ -82,7 +81,7 @@ const SignSymbol = ({ sign, width, x, y }) => {
               className={classes.signSymbol}
             />
           );
-          break;
+        // break;
         case "Libra":
           return (
             <LibraIcon
@@ -92,7 +91,7 @@ const SignSymbol = ({ sign, width, x, y }) => {
               className={classes.signSymbol}
             />
           );
-          break;
+        // break;
         case "Scorpio":
           return (
             <ScorpioIcon
@@ -102,7 +101,7 @@ const SignSymbol = ({ sign, width, x, y }) => {
               className={classes.signSymbol}
             />
           );
-          break;
+        // break;
         case "Sagittarius":
           return (
             <SagittariusIcon
@@ -112,7 +111,7 @@ const SignSymbol = ({ sign, width, x, y }) => {
               className={classes.signSymbol}
             />
           );
-          break;
+        // break;
         case "Capricorn":
           return (
             <CapricornIcon
@@ -122,7 +121,7 @@ const SignSymbol = ({ sign, width, x, y }) => {
               className={classes.signSymbol}
             />
           );
-          break;
+        // break;
         case "Aquarius":
           return (
             <AquariusIcon
@@ -132,7 +131,7 @@ const SignSymbol = ({ sign, width, x, y }) => {
               className={classes.signSymbol}
             />
           );
-          break;
+        // break;
         case "Pisces":
           return (
             <PiscesIcon
@@ -142,7 +141,7 @@ const SignSymbol = ({ sign, width, x, y }) => {
               className={classes.signSymbol}
             />
           );
-          break;
+        // break;
         default:
           console.log("default");
           break;

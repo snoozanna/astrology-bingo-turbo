@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -16,7 +16,6 @@ const useStyles = makeStyles({
     fontVariantCaps: "all-petite-caps",
     fontSize: "1.5rem",
     textAlign: "center",
-    
   },
   head: {
     backgroundColor: "hsl(258.75,53.33%,94.12%)",

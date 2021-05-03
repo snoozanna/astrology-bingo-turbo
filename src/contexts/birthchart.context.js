@@ -1,6 +1,5 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext } from "react";
 import { UtilitiesContext } from "./utilities.context";
-import SignSymbol from "./../components/ChartList/SignSymbol";
 
 export const BirthChartContext = createContext({
   BirthChart: () => {},

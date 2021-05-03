@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
-import Header from "./../../components/Header/Header";
 import NavIcon from "./../../components/NavIcon/NavIcon";
-import PlayerOrbListing from "./../../components/PlayerOrbListing/PlayerOrbListing";
+import PlayerOrb from "./../../components/PlayerOrb/PlayerOrb";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { PlayersContext } from "./../../contexts/players.context";
@@ -38,7 +37,7 @@ function Home() {
             <ul className={classes.listGroup}>
               {players.map((player) => (
                 // console.log("player", player),
-                <PlayerOrbListing player={player} />
+                <PlayerOrb player={player.chartData} />
               ))}
             </ul>
           </div>

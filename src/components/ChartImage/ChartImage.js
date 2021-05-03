@@ -15,43 +15,43 @@ const ChartImage = ({ player }) => {
       switch (planet) {
         case "Mars":
           return { x: 650, y: 30 };
-          break;
+        // break;
         case "Jupiter":
           return { x: 600, y: 100 };
-          break;
+        // break;
         case "Saturn":
           return { x: 515, y: 140 };
-          break;
+        // break;
         case "Uranus":
           return { x: 430, y: 140 };
-          break;
+        // break;
         case "Neptune":
           return { x: 340, y: 90 };
-          break;
+        // break;
         case "Pluto":
           return { x: 285, y: 15 };
-          break;
+        // break;
         case "Ascendant":
           return { x: 300, y: -65 };
-          break;
+        // break;
         case "Descendant":
           return { x: 340, y: -150 };
-          break;
+        // break;
         case "Moon":
           return { x: 430, y: -190 };
-          break;
+        // break;
         case "Sun":
           return { x: 515, y: -190 };
-          break;
+        // break;
         case "Mercury":
           return { x: 590, y: -140 };
-          break;
+        // break;
         case "Venus":
           return { x: 635, y: -65 };
-          break;
+        // break;
         default:
           console.log("default");
-          break;
+        // break;
       }
     }
   };
@@ -63,43 +63,43 @@ const ChartImage = ({ player }) => {
       switch (planet) {
         case "Mars":
           return { x: 254, y: 65 };
-          break;
+        // break;
         case "Jupiter":
           return { x: 266, y: -16 };
-          break;
+        // break;
         case "Saturn":
           return { x: 231, y: -112 };
-          break;
+        // break;
         case "Uranus":
           return { x: -190, y: 195 };
-          break;
+        // break;
         case "Neptune":
           return { x: -100, y: 205 };
-          break;
+        // break;
         case "Pluto":
           return { x: -26, y: 179 };
-          break;
+        // break;
         case "Ascendant":
           return { x: 69, y: 107 };
-          break;
+        // break;
         case "Descendant":
           return { x: 93, y: 14 };
-          break;
+        // break;
         case "Moon":
           return { x: 71, y: -87 };
-          break;
+        // break;
         case "Sun":
           return { x: -17, y: 184 };
-          break;
+        // break;
         case "Mercury":
           return { x: 102, y: 192 };
-          break;
+        // break;
         case "Venus":
           return { x: 139, y: 204 };
-          break;
+        // break;
         default:
           console.log("default");
-          break;
+        // break;
       }
     }
   };
@@ -111,43 +111,43 @@ const ChartImage = ({ player }) => {
       switch (planet) {
         case "Mars":
           return "rotate(24)";
-          break;
+        // break;
         case "Jupiter":
           return "rotate(50)";
-          break;
+        // break;
         case "Saturn":
           return "rotate(80)";
-          break;
+        // break;
         case "Uranus":
           return "rotate(-69)";
-          break;
+        // break;
         case "Neptune":
           return "rotate(-42)";
-          break;
+        // break;
         case "Pluto":
           return "rotate(-21)";
-          break;
+        // break;
         case "Ascendant":
           return "rotate(15)";
-          break;
+        // break;
         case "Descendant":
           return "rotate(42)";
-          break;
+        // break;
         case "Moon":
           return "rotate(71)";
-          break;
+        // break;
         case "Sun":
           return "rotate(-69)";
-          break;
+        // break;
         case "Mercury":
           return "rotate(-34)";
-          break;
+        // break;
         case "Venus":
           return "rotate(-22)";
-          break;
+        // break;
         default:
           console.log("default");
-          break;
+        // break;
       }
     }
   };

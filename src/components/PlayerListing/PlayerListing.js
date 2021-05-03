@@ -1,26 +1,22 @@
 import React, { useContext } from "react";
 import "./PlayerListing.scss";
-import ChartList from "./../../components/ChartList/ChartList";
+// import ChartList from "./../../components/ChartList/ChartList";
 import ChartImage from "./../ChartImage/ChartImage";
 import IconList from "./../../components/IconList/IconList";
 import { makeStyles } from "@material-ui/core/styles";
 import { PlayersContext } from "./../../contexts/players.context";
 import { UtilitiesContext } from "./../../contexts/utilities.context";
-import { GameContext } from "./../../contexts/game.context";
+// import { GameContext } from "./../../contexts/game.context";
 
 const useStyles = makeStyles({
+  playerContainer: {
+    padding: "0 15px",
+  },
+
   listGroupItem: {
-    padding: "7px 15px 15px",
     border: "1px black solid",
     borderRadius: 15,
     backgroundColor: "hsla(19, 90%, 62%, 50%)",
-    maxWidth: "45%",
-  },
-
-  playerContainer: {
-    display: "flex",
-    justifyContent: "center",
-    width: "100%",
   },
 
   nameContainer: {
@@ -36,8 +32,7 @@ const useStyles = makeStyles({
 
 const PlayerListing = ({ player }) => {
   const classes = useStyles();
-  const { alreadyCalled } = useContext(GameContext);
-  // console.log(alreadyCalled);
+  // const { alreadyCalled } = useContext(GameContext);
   const { deletePlayer } = useContext(PlayersContext);
   const { useToggle } = useContext(UtilitiesContext);
   const [isOn, toggleIsOn] = useToggle();

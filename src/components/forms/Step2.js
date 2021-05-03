@@ -10,8 +10,8 @@ import { GEO_API_KEY } from "./../../config";
 import { UtilitiesContext } from "../../contexts/utilities.context";
 
 const Step2 = (props) => {
-  const { register, setValue, handleSubmit, errors, control } = useForm();
-  const { state, actions } = useStateMachine({ updateAction });
+  const { setValue, handleSubmit, errors, control } = useForm();
+  const { actions } = useStateMachine({ updateAction });
   const { makeCall } = useContext(UtilitiesContext);
   const { addToast } = useToasts();
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import AriesWord from "./Words/AriesWord";
 import GeminiWord from "./Words/GeminiWord";
@@ -31,7 +31,7 @@ const SignWord = ({ sign, font, x, y, transform, className }) => {
               transform={transform}
             />
           );
-          break;
+        // break;
         case "Taurus":
           return (
             <TaurusWord
@@ -42,7 +42,7 @@ const SignWord = ({ sign, font, x, y, transform, className }) => {
               transform={transform}
             />
           );
-          break;
+        // break;
         case "Gemini":
           return (
             <GeminiWord
@@ -53,7 +53,7 @@ const SignWord = ({ sign, font, x, y, transform, className }) => {
               transform={transform}
             />
           );
-          break;
+        // break;
         case "Cancer":
           return (
             <CancerWord
@@ -64,7 +64,7 @@ const SignWord = ({ sign, font, x, y, transform, className }) => {
               transform={transform}
             />
           );
-          break;
+        // break;
         case "Leo":
           return (
             <LeoWord
@@ -75,7 +75,7 @@ const SignWord = ({ sign, font, x, y, transform, className }) => {
               transform={transform}
             />
           );
-          break;
+        // break;
         case "Virgo":
           return (
             <VirgoWord
@@ -86,7 +86,7 @@ const SignWord = ({ sign, font, x, y, transform, className }) => {
               transform={transform}
             />
           );
-          break;
+        // break;
         case "Libra":
           return (
             <LibraWord
@@ -97,7 +97,7 @@ const SignWord = ({ sign, font, x, y, transform, className }) => {
               transform={transform}
             />
           );
-          break;
+        // break;
         case "Scorpio":
           return (
             <ScorpioWord
@@ -108,7 +108,7 @@ const SignWord = ({ sign, font, x, y, transform, className }) => {
               transform={transform}
             />
           );
-          break;
+        // break;
         case "Sagittarius":
           return (
             <SagittariusWord
@@ -119,7 +119,7 @@ const SignWord = ({ sign, font, x, y, transform, className }) => {
               transform={transform}
             />
           );
-          break;
+        // break;
         case "Capricorn":
           return (
             <CapricornWord
@@ -130,7 +130,7 @@ const SignWord = ({ sign, font, x, y, transform, className }) => {
               transform={transform}
             />
           );
-          break;
+        // break;
         case "Aquarius":
           return (
             <AquariusWord
@@ -141,7 +141,7 @@ const SignWord = ({ sign, font, x, y, transform, className }) => {
               transform={transform}
             />
           );
-          break;
+        // break;
         case "Pisces":
           return (
             <PiscesWord
@@ -152,7 +152,7 @@ const SignWord = ({ sign, font, x, y, transform, className }) => {
               transform={transform}
             />
           );
-          break;
+        // break;
         default:
           console.log("default");
           break;

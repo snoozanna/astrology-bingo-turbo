@@ -18,1126 +18,1126 @@ const ChartTemplate = ({ box = "-30 -30 1060 1060", children }) => {
             cy="498.5"
             r="495.71"
             stroke="#000"
-            stroke-width="1.914"
+            strokeWidth="1.914"
           />
           <circle
             cx="498.68"
             cy="501.66"
             r="411.6"
             stroke="#1d1d1b"
-            stroke-width="6"
+            strokeWidth="6"
           />
         </g>
         <text
           transform="rotate(82.75 -294.441 291.786)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           P
         </text>
         <text
           transform="rotate(80.62 -317.211 304.402)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           l
         </text>
         <text
           transform="rotate(79.2 -330.395 310.24)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           u
         </text>
         <text
           transform="rotate(77.08 -353.564 322.403)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           t
         </text>
         <text
           transform="rotate(75.67 -368.85 330.046)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           o
         </text>
         <text
           transform="rotate(74.27 -388.049 342.358)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(72.87 -402.524 348.16)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(71.48 -417.492 354.12)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="matrix(.33 .94 -.94 .33 54.86 649.23)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(63.86 -500.17 372.802)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(58 -620.584 460.37)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(56 -654.282 471.969)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           N
         </text>
         <text
           transform="rotate(53 -712.9 504.725)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           e
         </text>
         <text
           transform="matrix(.63 .78 -.78 .63 128.11 785)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           p
         </text>
         <text
           transform="rotate(49.5 -798.026 551.801)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           t
         </text>
         <text
           transform="matrix(.68 .74 -.74 .68 147.48 808.31)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           u
         </text>
         <text
           transform="rotate(45.38 -902.89 602.458)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           n
         </text>
         <text
           transform="matrix(.74 .68 -.68 .74 173.36 835.2)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           e
         </text>
         <text
           transform="rotate(41.26 -1031.117 668.622)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(37.11 -1173.792 708.942)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(32.23 -1421.222 871.43)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(31.53 -1461.205 894.784)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(30.12 -1543.336 930.76)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(29.42 -1589.145 957.054)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(28.71 -1637.451 984.945)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(27.3 -1737.205 1028.988)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(26.59 -1793.023 1060.792)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(24.46 -1972.469 1132.639)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           U
         </text>
         <text
           transform="matrix(.93 .38 -.38 .93 314.75 928.62)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           r
         </text>
         <text
           transform="rotate(20.17 -2461.137 1386.407)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           a
         </text>
         <text
           transform="rotate(18.02 -2791.023 1548.78)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           n
         </text>
         <text
           transform="rotate(15.86 -3212.659 1763.96)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           u
         </text>
         <text
           transform="rotate(14 -3704.492 2036.395)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           s
         </text>
         <text
           transform="rotate(10.06 -5223.942 2693.084)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(.64 -86183.023 40016.252)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(-6.54 8702.743 -4300.45)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(-7.96 7193.837 -3499.215)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           S
         </text>
         <text
           transform="rotate(-10.09 5723.174 -2758.323)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           a
         </text>
         <text
           transform="rotate(-11.5 5029.144 -2434.936)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           t
         </text>
         <text
           transform="rotate(-13.62 4297.223 -2030)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           u
         </text>
         <text
           transform="rotate(-15.73 3748.828 -1757.648)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           r
         </text>
         <text
           transform="rotate(-17.83 3332.847 -1535.827)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           n
         </text>
         <text
           transform="rotate(-18.52 3209.598 -1517.034)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="matrix(.94 -.33 .33 .94 648.68 940.73)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(-20 3006.45 -1398.215)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(-21.3 2819.187 -1294.902)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(-21.6 2764.913 -1287.827)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="matrix(.92 -.4 .4 .92 677.05 930.09)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(-24.07 2516.243 -1140.577)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(-24.76 2450.39 -1112.024)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(-26.14 2332.187 -1042.555)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(-26.82 2276.614 -1018.888)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(-27.51 2222.773 -995.99)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(-28.88 2127.23 -939.182)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(-29.57 2080.465 -919.653)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="matrix(.86 -.5 .5 .86 731.35 903.2)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="matrix(.85 -.52 .52 .85 737.9 899.43)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(-31.8 1932.126 -857.512)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(-32.9 1896.207 -828.513)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(-33.9 1826.545 -797.62)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(-35 1793.2 -773.024)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(-35.73 1747.838 -754.527)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(-37 1699.085 -726.555)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           J
         </text>
         <text
           transform="matrix(.78 -.63 .63 .78 785.24 867.14)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           u
         </text>
         <text
           transform="rotate(-41.19 1537.96 -636.3)"
-          font-size="34.454"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.454"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           p
         </text>
         <text
           transform="rotate(-43.25 1469.963 -605.029)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           i
         </text>
         <text
           transform="rotate(-44.62 1429.572 -581.861)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           t
         </text>
         <text
           transform="matrix(.69 -.72 .72 .69 828.75 828.73)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           e
         </text>
         <text
           transform="rotate(-48 1343.393 -535.73)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           r
         </text>
         <text
           transform="rotate(-52.89 1237.039 -450.652)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(-57.77 1125.913 -433.198)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(-58.47 1112.453 -428.5)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(-59.88 1090.023 -412.583)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(-60.58 1077.418 -408.118)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(-61.29 1064.871 -403.732)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(-62.7 1044.47 -388.925)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(-63.41 1032.547 -384.826)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(-64.12 1020.934 -380.746)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(-65.54 1002.202 -366.973)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(-66.25 991.109 -363.185)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(-68.39 966.738 -340.91)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           M
         </text>
         <text
           transform="rotate(-71.26 925.78 -327.881)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           a
         </text>
         <text
           transform="rotate(-73.42 900.42 -313.586)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           r
         </text>
         <text
           transform="rotate(-74.87 882.532 -306.378)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           s
         </text>
         <text
           transform="rotate(-79.21 846.526 -268.814)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(-89.36 762.964 -210.75)"
-          font-size="34.455"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="34.455"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="matrix(.09 -1 1 .09 49.67 476.31)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           A
         </text>
         <text
           transform="rotate(-82.74 283.28 197.132)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           s
         </text>
         <text
           transform="matrix(.16 -.99 .99 .16 53.53 440.82)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           c
         </text>
         <text
           transform="rotate(-79 287.024 180.366)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           e
         </text>
         <text
           transform="rotate(-76.96 288.786 169.365)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           n
         </text>
         <text
           transform="rotate(-74.79 289.707 156.378)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           d
         </text>
         <text
           transform="rotate(-72.61 290.643 142.616)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           a
         </text>
         <text
           transform="rotate(-70.44 292.948 130.046)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           n
         </text>
         <text
           transform="rotate(-68.26 294.105 114.967)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           t
         </text>
         <text
           transform="rotate(-63.92 309.259 102.074)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(-58.89 301.42 40.368)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(-58 301.707 31.615)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(-56.04 308.136 20.806)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           D
         </text>
         <text
           transform="rotate(-53 311.055 -9.785)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           e
         </text>
         <text
           transform="rotate(-51.9 308.482 -29.1)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           c
         </text>
         <text
           transform="rotate(-49.67 314.543 -51.062)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           e
         </text>
         <text
           transform="rotate(-47.57 318.207 -76.2)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           n
         </text>
         <text
           transform="matrix(.7 -.71 .71 .7 171.89 196.86)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           d
         </text>
         <text
           transform="matrix(.73 -.69 .69 .73 184.75 183.86)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           a
         </text>
         <text
           transform="rotate(-41.31 327.704 -173.39)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           n
         </text>
         <text
           transform="matrix(.77 -.63 .63 .77 209.61 161.48)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           t
         </text>
         <text
           transform="rotate(-37.86 334.246 -240.814)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(-35.12 348.288 -278.422)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(-32.38 347.71 -375.918)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(-31.01 354.166 -409.466)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="matrix(.86 -.5 .5 .86 267.82 120.1)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(-29.64 357.044 -459.653)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(-28.27 364.258 -500.38)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(-27.1 365.897 -536.025)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(-26.91 368.183 -559.894)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="matrix(.9 -.43 .43 .9 299.79 102.72)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(-24.86 379.112 -645.026)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(-24.5 384.297 -678.91)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(-21.44 406.084 -797.04)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           M
         </text>
         <text
           transform="rotate(-18.7 424.228 -1013.325)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           o
         </text>
         <text
           transform="rotate(-16.64 445.087 -1205.525)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           o
         </text>
         <text
           transform="rotate(-14 490.477 -1523.149)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           n
         </text>
         <text
           transform="rotate(-9.72 593.352 -2304.888)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(.83 -3613.685 31195.479)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(8.1 -143.873 3983.777)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(8.1 -155.783 3767.252)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="matrix(.98 .18 -.18 .98 570.71 62.18)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           S
         </text>
         <text
           transform="rotate(12.31 -8.518 2756.395)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           u
         </text>
         <text
           transform="rotate(15.21 44.204 2299.997)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           n
         </text>
         <text
           transform="rotate(18.11 80.65 1989.352)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(27.1 154.285 1396.193)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(34.67 161.31 1269.508)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="matrix(.82 .58 -.58 .82 756.83 137.81)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(35.9 159.153 1241.527)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(38.92 177.63 1160.905)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           M
         </text>
         <text
           transform="rotate(41.73 179.552 1121.292)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           e
         </text>
         <text
           transform="rotate(43.83 184.007 1085.953)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           r
         </text>
         <text
           transform="rotate(45.22 185.382 1067.5)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           c
         </text>
         <text
           transform="rotate(47.3 190.124 1035.59)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           u
         </text>
         <text
           transform="rotate(49.38 192.348 1010.86)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           r
         </text>
         <text
           transform="matrix(.63 .77 -.77 .63 843.4 217.29)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           y
         </text>
         <text
           transform="rotate(56 211.189 916.538)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(61.04 202.194 899.458)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(62.6 204.986 881.087)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(63.09 204.923 881.504)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(63.9 203.983 874.777)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(65.14 207.408 864.58)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(65.8 208.22 862.56)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(67.88 213.151 839.748)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           V
         </text>
         <text
           transform="rotate(69.93 212.948 828.745)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           e
         </text>
         <text
           transform="rotate(72 215.186 815.865)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           n
         </text>
         <text
           transform="rotate(74.05 215.653 803.585)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           u
         </text>
         <text
           transform="rotate(76.1 216.565 793.01)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         >
           s
         </text>
         <text
           transform="rotate(82.37 238.32 738.713)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <text
           transform="rotate(94.39 249.946 684.089)"
-          font-size="33.112"
-          font-family="WolpePegasus-Bold,Wolpe Pegasus"
-          font-weight="700"
+          fontSize="33.112"
+          fontFamily="WolpePegasus-Bold,Wolpe Pegasus"
+          fontWeight="700"
         ></text>
         <g clip-path="url(#a)" fill="none">
-          <path stroke="#1d1d1b" stroke-width="6" d="M498.36 0v497.71" />
+          <path stroke="#1d1d1b" strokeWidth="6" d="M498.36 0v497.71" />
           <path
             stroke="#000"
-            stroke-width=".334"
+            strokeWidth=".334"
             d="M500.79 499.93V997M498.33 499.93V997M495.93 499.93V997"
           />
         </g>
         <path
           fill="none"
           stroke="#000"
-          stroke-width=".334"
+          strokeWidth=".334"
           d="M992.5 504.46H4.87M992.5 502H4.87M992.5 499.6H4.87M772.39 84.59L231.22 917.92M770.33 83.25L229.16 916.58M768.32 81.94L227.15 915.28M495.6 503.32L63.01 258.58M496.81 501.19L64.22 256.44M497.99 499.1L65.4 254.35"
         />
         <path
           fill="none"
           stroke="#1d1d1b"
-          stroke-width="2.229"
+          strokeWidth="2.229"
           d="M929.3 745.44l-78.79-44.58"
         />
         <path
           fill="none"
           stroke="#000"
-          stroke-width=".334"
+          strokeWidth=".334"
           d="M746.29 927.78L244.56 76.02M748.4 926.53L246.68 74.77M750.47 925.31L248.75 73.55"
         />
         <path
           fill="none"
           stroke="#1d1d1b"
-          stroke-width="6"
+          strokeWidth="6"
           d="M60.99 729.78l439.44-228.76"
         />
         <g clip-path="url(#a)" fill="#1d1d1b">
@@ -1148,13 +1148,13 @@ const ChartTemplate = ({ box = "-30 -30 1060 1060", children }) => {
         <path
           fill="none"
           stroke="#1d1d1b"
-          stroke-width="6"
+          strokeWidth="6"
           d="M926.55 744.29L495.96 500.67"
         />
         <path
           fill="none"
           stroke="#000"
-          stroke-width=".334"
+          strokeWidth=".334"
           d="M498.73 500.03l438.84-228.44M499.86 502.21L938.7 273.77M500.97 504.34L939.81 275.9"
         />
         <g clip-path="url(#b)">
@@ -1168,7 +1168,7 @@ const ChartTemplate = ({ box = "-30 -30 1060 1060", children }) => {
             r="38.17"
             fill="none"
             stroke="#1d1d1b"
-            stroke-width="2"
+            strokeWidth="2"
           />
         </g>
         <path

@@ -37,10 +37,11 @@ const NavDrawer = () => {
         <List>
           {[
             { text: "Home", to: "/" },
+            { text: "Login", to: "/login" },
             { text: "Add Birth Chart", to: "/add-birth-chart" },
+            { text: "My Birth Chart", to: "/my-birth-chart" },
             { text: "Generator", to: "/generator" },
             { text: "Game", to: "/public-display" },
-            { text: "My Birth Chart", to: "/my-birth-chart" },
             { text: "In play", to: "/in-play" },
           ].map(({ text, to }) => (
             <ListItem button component={NavLink} to={to} key={text}>

@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { useForm, Controller } from "react-hook-form";
 import { withRouter } from "react-router-dom";
 import { useStateMachine } from "little-state-machine";
 import updateAction from "./updateAction.js";
-import { Button, TextField } from "@material-ui/core";
-import { useToasts } from "react-toast-notifications";
+import { TextField } from "@material-ui/core";
+
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -15,11 +15,14 @@ const schema = yup.object().shape({
 });
 
 const Step1 = (props) => {
-  const [populated, setPopulated] = useState(false);
-  const { register, handleSubmit, errors, control } = useForm({
+  // const [populated, setPopulated] = useState(false);
+  const { handleSubmit, control } = useForm({
     resolver: yupResolver(schema),
     mode: "onChange",
   });
+  const {
+    formState: { errors },
+  } = useForm();
   const { actions, state } = useStateMachine({ updateAction });
   console.log(state.data);
   const onSubmit = (data) => {
@@ -35,56 +38,64 @@ const Step1 = (props) => {
   // }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <h2>What's your name?</h2>
+    <>
+      <p>hello</p>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <h2>What's your name?</h2>
 
-      <div className="formRow">
+        <div className="formRow">
+          <Controller
+            name="firstName"
+            control={control}
+            rules={{ required: true }}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                id="firstName"
+                label="First Name"
+                error={!!errors.firstName}
+                helperText={errors.firstName && errors.firstName.message}
+              />
+            )}
+          />
+
+          <Controller
+            name="lastName"
+            control={control}
+            rules={{ required: true }}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                error={!!errors.lastName}
+                helperText={errors.lastName && errors.lastName.message}
+                id="lastName"
+                label="Last Name"
+              />
+            )}
+          />
+        </div>
+
         <Controller
-          as={TextField}
-          // disabled
-          error={!!errors.firstName}
-          helperText={errors.firstName && errors.firstName.message}
-          id="firstName"
-          name="firstName"
-          label="First Name"
+          name="email"
           control={control}
           rules={{ required: true }}
-        />
+          render={({ field }) => (
+            <TextField
+              {...field}
+              error={!!errors.email}
+              helperText={errors.email && errors.email.message}
+              type="email"
+              id="email"
+              label="Email"
+            />
+          )}
 
-        {/* <Controller
-          render={({ field }) => <TextField {...field} />}
-          name="TextField"
-          control={control}
-        /> */}
-
-        <Controller
-          as={TextField}
           // disabled
-          error={!!errors.lastName}
-          helperText={errors.lastName && errors.lastName.message}
-          name="lastName"
-          id="lastName"
-          label="Last Name"
-          control={control}
-          rules={{ required: true }}
         />
-      </div>
 
-      <Controller
-        as={TextField}
-        // disabled
-        error={!!errors.email}
-        helperText={errors.email && errors.email.message}
-        type="email"
-        id="email"
-        name="email"
-        label="Email"
-        control={control}
-        rules={{ required: true }}
-      />
-
-      <input type="submit" />
-    </form>
+        <input type="submit" />
+      </form>
+    </>
   );
 };
 

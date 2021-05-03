@@ -1,7 +1,5 @@
 import React, { useContext } from "react";
 import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
 import SignSymbol from "../ChartList/SignSymbol";
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -9,7 +7,6 @@ import { useSpring, animated } from "react-spring";
 // import { Dimensions } from "react-native";
 
 import { BirthChartContext } from "../../contexts/birthchart.context";
-import { GameContext } from "../../contexts/game.context";
 
 const useStyles = makeStyles({
   orb: {
@@ -46,7 +43,7 @@ const chooseColor = () => {
     "peachpuff",
   ];
   const random = Math.floor(Math.random() * colors.length);
-  console.log(colors[random]);
+
   return colors[random];
 };
 
@@ -58,24 +55,25 @@ const chooseScale = () => {
 };
 
 // chooseX
-console.log("screen width", window.screen.availWidth);
 
 const chooseX = () => {
   // const randomX = Math.floor(Math.random() * window.screen.availWidth);
   const randomX = Math.floor(Math.random() * 100);
-  console.log("random x ", randomX);
   return randomX;
 };
-
-chooseX();
 
 // chooseY
 
 const chooseY = () => {
   // const randomY = Math.floor(Math.random() * window.screen.availHeight);
   const randomY = Math.floor(Math.random() * 100);
-  console.log("random x ", randomY);
   return randomY;
+};
+
+const chooseDelay = () => {
+  // const randomY = Math.floor(Math.random() * window.screen.availHeight);
+  const randomDelay = Math.floor(Math.random() * 300);
+  return randomDelay;
 };
 // console.log("screen height", window.screen.availHeight);
 
@@ -87,7 +85,7 @@ const PlayerOrb = ({ player }) => {
   const props = useSpring({
     config: { duration: 6000 },
     loop: { reverse: true },
-    delay: 200,
+    delay: chooseDelay(),
     from: {
       opacity: 0,
       rotateZ: 360,

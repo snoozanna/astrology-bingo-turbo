@@ -10,14 +10,15 @@ import { GameContext } from "./../../contexts/game.context";
 
 const useStyles = makeStyles({
   signSymbol: {
-    width: 45,
+    width: 30,
     margin: "auto",
   },
 
   listGroup: {
     display: "grid",
     gridTemplateColumns: "repeat(4, 1fr)",
-    gridGap: 15,
+    gridGap: 5,
+    padding: 10,
   },
 
   listItem: {
