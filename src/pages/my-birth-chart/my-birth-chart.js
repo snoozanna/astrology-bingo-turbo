@@ -5,6 +5,7 @@ import Header from "../../components/Header/Header";
 import NavIcon from "../../components/NavIcon/NavIcon";
 import ChartList from "../../components/ChartList/ChartList";
 import ChartImage from "../../components/ChartImage/ChartImage";
+
 import { UtilitiesContext } from "./../../contexts/utilities.context";
 
 const useStyles = makeStyles((theme) => ({

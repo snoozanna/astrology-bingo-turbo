@@ -9,10 +9,23 @@ import { useSpring, animated } from "react-spring";
 import { BirthChartContext } from "../../contexts/birthchart.context";
 
 const useStyles = makeStyles({
+  ownerName: {
+    position: "absolute",
+    fontSize: "3rem",
+    fontWeight: "bold",
+    maxWidth: "min-content",
+    display: "flex",
+    left: 120,
+    top: 60,
+    zIndex: 1,
+    color: "ivory",
+  },
   orb: {
     border: "black solid 1px",
     padding: "80px",
     borderRadius: "50%",
+    position: "relative",
+    backgroundColor: "teal",
   },
 
   signSymbol: {
@@ -104,10 +117,13 @@ const PlayerOrb = ({ player }) => {
     },
   });
   const classes = useStyles();
-
+  console.log("player", player);
   return (
     <>
       <animated.div style={props} className={classes.orb}>
+        <div className={classes.ownerName}>
+          <p>{player.ownerName}</p>
+        </div>
         <List className={classes.listGroup}>
           {Object.entries(player).map(([key, value]) => {
             if (!BirthChart.planets.includes(key)) {
@@ -126,6 +142,7 @@ const PlayerOrb = ({ player }) => {
                   sign={sign}
                   planet={planet}
                   className={classes.orbSymbol}
+                  fill={"hsla(254, 16%, 84%, 30%"}
                 />
               </>
             );

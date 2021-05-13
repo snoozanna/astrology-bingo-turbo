@@ -20,7 +20,7 @@ const useStyles = makeStyles({
   },
 });
 
-const SignSymbol = ({ sign, width, x, y }) => {
+const SignSymbol = ({ sign, width, x, y, fill = "#000" }) => {
   const classes = useStyles();
   const getIconComponent = (sign) => {
     if (!sign) {
@@ -34,6 +34,7 @@ const SignSymbol = ({ sign, width, x, y }) => {
               x={x}
               y={y}
               className={classes.signSymbol}
+              fill={fill}
             />
           );
         // break;
@@ -44,6 +45,7 @@ const SignSymbol = ({ sign, width, x, y }) => {
               x={x}
               y={y}
               className={classes.signSymbol}
+              fill={fill}
             />
           );
         // break;
@@ -54,6 +56,7 @@ const SignSymbol = ({ sign, width, x, y }) => {
               x={x}
               y={y}
               className={classes.signSymbol}
+              fill={fill}
             />
           );
         // break;
@@ -64,12 +67,19 @@ const SignSymbol = ({ sign, width, x, y }) => {
               x={x}
               y={y}
               className={classes.signSymbol}
+              fill={fill}
             />
           );
         // break;
         case "Leo":
           return (
-            <LeoIcon width={width} x={x} y={y} className={classes.signSymbol} />
+            <LeoIcon
+              width={width}
+              x={x}
+              y={y}
+              className={classes.signSymbol}
+              fill={fill}
+            />
           );
         // break;
         case "Virgo":
@@ -79,6 +89,7 @@ const SignSymbol = ({ sign, width, x, y }) => {
               x={x}
               y={y}
               className={classes.signSymbol}
+              fill={fill}
             />
           );
         // break;
@@ -89,6 +100,7 @@ const SignSymbol = ({ sign, width, x, y }) => {
               x={x}
               y={y}
               className={classes.signSymbol}
+              fill={fill}
             />
           );
         // break;
@@ -99,6 +111,7 @@ const SignSymbol = ({ sign, width, x, y }) => {
               x={x}
               y={y}
               className={classes.signSymbol}
+              fill={fill}
             />
           );
         // break;
@@ -109,6 +122,7 @@ const SignSymbol = ({ sign, width, x, y }) => {
               x={x}
               y={y}
               className={classes.signSymbol}
+              fill={fill}
             />
           );
         // break;
@@ -119,6 +133,7 @@ const SignSymbol = ({ sign, width, x, y }) => {
               x={x}
               y={y}
               className={classes.signSymbol}
+              fill={fill}
             />
           );
         // break;
@@ -129,6 +144,7 @@ const SignSymbol = ({ sign, width, x, y }) => {
               x={x}
               y={y}
               className={classes.signSymbol}
+              fill={fill}
             />
           );
         // break;
@@ -139,6 +155,7 @@ const SignSymbol = ({ sign, width, x, y }) => {
               x={x}
               y={y}
               className={classes.signSymbol}
+              fill={fill}
             />
           );
         // break;
