@@ -15,8 +15,7 @@ const useStyles = makeStyles({
   HeaderContainer: {
     flexGrow: 1,
     backgroundColor: "rgb(213, 123, 214)",
-
-    // display: "none",
+    // backgroundColor: "transparent",
   },
 
   menuButton: {
@@ -35,35 +34,35 @@ export default function Header({ pageName }) {
   return (
     <>
       <NavDrawer />
-      <AppBar position="static" className={classes.HeaderContainer}>
-        <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
-            onClick={toggle}
-          >
-            <MenuIcon />
-          </IconButton>
-          <h1 className={classes.title} variant="h6" noWrap>
-            {pageName}
-          </h1>
-          <div
-            className={classes.user}
-            style={{ position: "absolute", right: "15px" }}
-          >
-            {user && (
-              <>
-                <span style={{ marginRight: "15px" }}>Hello Admin</span>
-                <Button variant="outlined" color="secondary" onClick={logout}>
-                  Log out
-                </Button>
-              </>
-            )}
-          </div>
-        </Toolbar>
-      </AppBar>
+      {/* <AppBar position="static" className={classes.HeaderContainer}> */}
+      <Toolbar>
+        <IconButton
+          edge="start"
+          className={classes.menuButton}
+          color="inherit"
+          aria-label="open drawer"
+          onClick={toggle}
+        >
+          <MenuIcon />
+        </IconButton>
+        <h1 className={classes.title} variant="h6" noWrap>
+          {pageName}
+        </h1>
+        <div
+          className={classes.user}
+          style={{ position: "absolute", right: "15px" }}
+        >
+          {user && (
+            <>
+              <span style={{ marginRight: "15px" }}>Hello Admin</span>
+              <Button variant="outlined" color="secondary" onClick={logout}>
+                Log out
+              </Button>
+            </>
+          )}
+        </div>
+      </Toolbar>
+      {/* </AppBar> */}
     </>
   );
 }

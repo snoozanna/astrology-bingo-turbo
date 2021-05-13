@@ -113,7 +113,7 @@ const PlayerOrb = ({ player }) => {
             if (!BirthChart.planets.includes(key)) {
               return null;
             }
-
+            // console.log("player", player);
             const sign = value;
             const planet = key;
             // console.log("planet,sign", planet, sign);
@@ -122,6 +122,7 @@ const PlayerOrb = ({ player }) => {
             return (
               <>
                 <SignSymbol
+                  key={sign}
                   sign={sign}
                   planet={planet}
                   className={classes.orbSymbol}

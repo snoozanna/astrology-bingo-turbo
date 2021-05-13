@@ -10,6 +10,7 @@ function AddChart() {
     <>
       <div className="App">
         <Header pageName="Add Birth Chart"></Header>
+        
         <main>
           <div className="formContainer">{/* <BirthDataForm /> */}</div>
           <Form />

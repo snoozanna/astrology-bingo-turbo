@@ -17,7 +17,7 @@ const useStyles = makeStyles({
   },
 
   homeTitle: {
-    fontSize: "18rem",
+    fontSize: "15rem",
     position: "absolute",
     color: "hsla(313, 96%, 98%, 0.4)",
     margin: "auto",
@@ -36,8 +36,8 @@ function Home() {
           <div className="playerOrbContainer">
             <ul className={classes.listGroup}>
               {players.map((player) => (
-                // console.log("player", player),
-                <PlayerOrb player={player.chartData} />
+                // console.log("player", player._id),
+                <PlayerOrb player={player.chartData} key={player._id} />
               ))}
             </ul>
           </div>

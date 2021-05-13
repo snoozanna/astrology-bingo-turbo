@@ -16,13 +16,15 @@ const schema = yup.object().shape({
 
 const Step1 = (props) => {
   // const [populated, setPopulated] = useState(false);
-  const { handleSubmit, control } = useForm({
+  const {
+    handleSubmit,
+    formState: { errors },
+    control,
+  } = useForm({
     resolver: yupResolver(schema),
     mode: "onChange",
   });
-  const {
-    formState: { errors },
-  } = useForm();
+
   const { actions, state } = useStateMachine({ updateAction });
   console.log(state.data);
   const onSubmit = (data) => {

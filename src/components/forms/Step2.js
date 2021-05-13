@@ -10,7 +10,13 @@ import { GEO_API_KEY } from "./../../config";
 import { UtilitiesContext } from "../../contexts/utilities.context";
 
 const Step2 = (props) => {
-  const { setValue, handleSubmit, errors, control } = useForm();
+  const {
+    setValue,
+    handleSubmit,
+    formState: { errors },
+    control,
+  } = useForm();
+
   const { actions } = useStateMachine({ updateAction });
   const { makeCall } = useContext(UtilitiesContext);
   const { addToast } = useToasts();
@@ -95,14 +101,18 @@ const Step2 = (props) => {
       <h2>Where were you born?</h2>
 
       <Controller
-        as={TextField}
-        error={!!errors.location}
-        helperText={errors.location && errors.location.message}
-        id="location"
         name="location"
-        label="Location"
         control={control}
         rules={{ required: true }}
+        render={({ field }) => (
+          <TextField
+            {...field}
+            id="location"
+            label="Location"
+            error={!!errors.location}
+            helperText={errors.location && errors.location.message}
+          />
+        )}
       />
 
       <Button
@@ -120,28 +130,36 @@ const Step2 = (props) => {
 
       <div id="location-choices"></div>
       <Controller
-        as={TextField}
         disabled
-        error={!!errors.latitude}
-        helperText={errors.latitude && errors.latitude.message}
-        id="latitude"
-        type="number"
         name="latitude"
-        placeholder="Latitude"
         control={control}
         rules={{ required: true }}
+        render={({ field }) => (
+          <TextField
+            {...field}
+            id="latitude"
+            placeholder="Latitude"
+            type="number"
+            error={!!errors.latitude}
+            helperText={errors.latitude && errors.latitude.message}
+          />
+        )}
       />
       <Controller
-        as={TextField}
         disabled
-        error={!!errors.longitude}
-        helperText={errors.longitude && errors.longitude.message}
-        id="longitude"
         name="longitude"
-        placeholder="Longitude"
-        type="number"
         control={control}
         rules={{ required: true }}
+        render={({ field }) => (
+          <TextField
+            {...field}
+            id="longitude"
+            placeholder="Longitude"
+            type="number"
+            error={!!errors.longitude}
+            helperText={errors.longitude && errors.longitude.message}
+          />
+        )}
       />
       <input type="submit" />
     </form>

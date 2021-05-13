@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useForm, Controller } from "react-hook-form";
 import { withRouter } from "react-router-dom";
 import { useStateMachine } from "little-state-machine";
@@ -7,15 +7,15 @@ import { Button, TextField } from "@material-ui/core";
 import { useToasts } from "react-toast-notifications";
 import { TIME_API_KEY } from "./../../config";
 
-import { PlayersContext } from "./../../contexts/players.context";
-import { UtilitiesContext } from "../../contexts/utilities.context";
-
-
-
 const Step3 = (props) => {
-  const { register, setValue, handleSubmit, errors, control } = useForm();
+  const {
+    setValue,
+    handleSubmit,
+    formState: { errors },
+    control,
+  } = useForm();
   const { state, actions } = useStateMachine({ updateAction });
-  const { makeCall } = useContext(UtilitiesContext);
+  // const { makeCall } = useContext(UtilitiesContext);
   const { addToast } = useToasts();
 
   const onSubmit = (data) => {
@@ -65,20 +65,23 @@ const Step3 = (props) => {
       <h2>When were you born?</h2>
 
       <Controller
-        as={TextField}
-        // disabled
-        error={!!errors.datetime}
-        helperText={errors.datetime && errors.email.datetime}
-        id="dtob"
-        label="Date and time of birth"
-        type="datetime-local"
         name="datetime"
-        defaultValue="1989-12-05T10:25"
         control={control}
-        InputLabelProps={{
-          shrink: true,
-        }}
         rules={{ required: true }}
+        render={({ field }) => (
+          <TextField
+            {...field}
+            id="dtob"
+            label="Date and time of birth"
+            type="datetime-local"
+            defaultValue="1989-12-05T10:25"
+            error={!!errors.datetime}
+            helperText={errors.datetime && errors.email.datetime}
+            InputLabelProps={{
+              shrink: true,
+            }}
+          />
+        )}
       />
       <Button
         variant="contained"
@@ -98,16 +101,20 @@ const Step3 = (props) => {
               <input type="text" id="firstName" name="firstName" ref={register} />
               {errors.firstName && "Title name is required"} */}
       <Controller
-        as={TextField}
         // disabled
-        error={!!errors.utcoffset}
-        helperText={errors.utcoffset && errors.utcoffset.message}
-        id="utcoffset"
-        type="number"
         name="utcoffset"
-        placeholder="UTC offset"
         control={control}
         rules={{ required: true }}
+        render={({ field }) => (
+          <TextField
+            {...field}
+            id="utcoffset"
+            type="number"
+            placeholder="UTC offset"
+            error={!!errors.utcoffset}
+            helperText={errors.utcoffset && errors.utcoffset.message}
+          />
+        )}
       />
       <input type="submit" />
     </form>
