@@ -9,29 +9,32 @@ import { UtilitiesContext } from "./../../contexts/utilities.context";
 // import { GameContext } from "./../../contexts/game.context";
 
 const useStyles = makeStyles({
-  playerContainer: {
-    padding: "0 15px",
-  },
-
-  listGroupItem: {
-    border: "1px black solid",
-    borderRadius: 15,
-    backgroundColor: "hsla(19, 90%, 62%, 50%)",
-  },
-
-  nameContainer: {
-    display: "flex",
-    justifyContent: "center",
-    fontSize: "1.3rem",
-  },
-
-  firstName: {
-    marginInlineEnd: 4,
-  },
+  // playerContainer: {
+  //   padding: "0 15px",
+  // },
+  // listGroupItem: {
+  //   border: "1px black solid",
+  //   borderRadius: 15,
+  //   backgroundColor: "hsla(19, 90%, 62%, 50%)",
+  // },
+  // nameContainer: {
+  //   display: "flex",
+  //   justifyContent: "center",
+  //   fontSize: "1.3rem",
+  // },
+  // firstName: {
+  //   marginInlineEnd: 4,
+  // },
+  // button: {
+  //   marginInlineEnd: 5,
+  // },
+  // deleteBtn: {
+  //   backgroundColor: "#f12e40ad",
+  // },
 });
 
 const PlayerListing = ({ player }) => {
-  const classes = useStyles();
+  // const classes = useStyles();
   // const { alreadyCalled } = useContext(GameContext);
   const { deletePlayer } = useContext(PlayersContext);
   const { useToggle } = useContext(UtilitiesContext);
@@ -39,9 +42,9 @@ const PlayerListing = ({ player }) => {
 
   return (
     <>
-      <li key={player._id} className={classes.listGroupItem}>
-        <div className={classes.nameContainer}>
-          <h3 className={classes.firstName}>{player.firstName}</h3>
+      <li key={player._id} className={"listGroupItem"}>
+        <div className={"nameContainer"}>
+          <h3 className={"firstName"}>{player.firstName}</h3>
           <h3>{player.lastName}</h3>
         </div>
         <p>
@@ -52,9 +55,20 @@ const PlayerListing = ({ player }) => {
             <IconList player={player.chartData} />
           )}
         </p>
-        <button onClick={() => deletePlayer(player._id)}>Delete</button>
-        <button onClick={() => toggleIsOn()}>Show Full Chart</button>
-        <button onClick={() => {}}>Print Chart</button>
+        <div className={"btnContainer"}>
+          <button
+            className={"deleteBtn btn"}
+            onClick={() => deletePlayer(player._id)}
+          >
+            X
+          </button>
+          <button className={"btn"} onClick={() => toggleIsOn()}>
+            Toggle Chart
+          </button>
+          <button className={"btn"} onClick={() => {}}>
+            Print
+          </button>
+        </div>
       </li>
     </>
   );

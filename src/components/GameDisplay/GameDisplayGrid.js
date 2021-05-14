@@ -20,6 +20,7 @@ const useStyles = makeStyles({
   head: {
     backgroundColor: "hsl(258.75,53.33%,94.12%)",
     textAlign: "center",
+    fontSize: "2vw",
   },
   calledItem: {
     textAlign: "center",
