@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 import { BirthChartContext } from "./birthchart.context";
-import { getRandomIntInclusive } from "./utilities.context";
+import { getRandomIntInclusive } from "./../utils/utils";
 
 export const GameContext = createContext({
   getRandomPlanet: () => {},

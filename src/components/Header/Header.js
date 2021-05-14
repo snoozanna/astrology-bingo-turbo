@@ -45,7 +45,7 @@ export default function Header({ pageName }) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
+          <Typography className={classes.title} variant="h6" component="h1" noWrap>
             {pageName}
           </Typography>
         </Toolbar>

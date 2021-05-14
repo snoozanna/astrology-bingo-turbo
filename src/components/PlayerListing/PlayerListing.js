@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import "./PlayerListing.scss";
-import ChartList from "./../../components/ChartList/ChartList";
+// import ChartList from "./../../components/ChartList/ChartList";
 import ChartImage from "./../ChartImage/ChartImage";
 import IconList from "./../../components/IconList/IconList";
 import { makeStyles } from "@material-ui/core/styles";
 import { PlayersContext } from "./../../contexts/players.context";
-import { UtilitiesContext } from "./../../contexts/utilities.context";
+// import { UtilitiesContext } from "./../../contexts/utilities.context";
 import { GameContext } from "./../../contexts/game.context";
 import { useToggle } from "./../../utils/utils";
 
@@ -22,7 +22,7 @@ const useStyles = makeStyles({
 
 const PlayerListing = ({ player }) => {
   const classes = useStyles();
-  const { alreadyCalled } = useContext(GameContext);
+  // const { alreadyCalled } = useContext(GameContext);
   // console.log(alreadyCalled);
   const { deletePlayer } = useContext(PlayersContext);
   const [isOn, toggleIsOn] = useToggle();

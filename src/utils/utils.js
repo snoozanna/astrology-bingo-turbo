@@ -1,5 +1,10 @@
-import React, { createContext, useState, useCallback } from "react";
-import { useToasts } from "react-toast-notifications";
+import React, { useState, useCallback } from "react";
+// import { useToasts } from "react-toast-notifications";
+
+import { 
+  GEO_API_KEY,
+  // TIME_API_KEY
+} from "../config";
 
   
 
@@ -311,62 +316,4 @@ import { useToasts } from "react-toast-notifications";
     return [value, toggle];
   }
 
-  export async function getGeo(placename) {
-    const GEO_API_URL = `https://maps.googleapis.com/maps/api/geocode/json?address=${placename.location}&key=${GEO_API_KEY}`;
-
-    const { results } = await makeCall(GEO_API_URL);
-
-    // Show a list or warn no match and reset
-    if (!results?.length) {
-      // addToast({
-      //   html: `<h2>Error</h2><p>${placename} Not found</p>`,
-      //   classes: ["toast", "error"],
-      // });
-      return;
-    }
-
-    
-
-    const choicesMount = document.getElementById("location-choices");
-    const select = document.createElement("select");
-    const holdingOption = document.createElement("option");
-    holdingOption.textContent = "Choose your location";
-    holdingOption.setAttribute("disabled", "disabled");
-    holdingOption.setAttribute("selected", "selected");
-    holdingOption.setAttribute("value", "");
-    select.append(holdingOption);
-
-    for (const [idx, val] of results.entries()) {
-      const opt = document.createElement("option");
-      opt.textContent = val.formatted_address;
-      opt.setAttribute("value", idx);
-      select.append(opt);
-    }
-
-    select.addEventListener("change", (e) => {
-      const {
-        geometry: {
-          location: { lat, lng },
-        },
-      } = results[e.target.value];
-
-      setValue("latitude", lat);
-      setValue("longitude", lng);
-      console.log(lat, lng);
-
-      locationForm.reset();
-      locationForm.setAttribute("disabled", "disabled");
-    });
-
-    choicesMount.innerHTML = "";
-    choicesMount.append(select);
-
-    const lbl = document.createElement("label");
-    lbl.textContent = "Choose your location";
-
-    choicesMount.append(lbl);
-
-    // const elems = document.querySelectorAll("select");
-    // const options = {};
-    // M.FormSelect.init(elems, options);
-  }
+  
