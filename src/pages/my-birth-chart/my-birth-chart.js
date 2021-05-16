@@ -1,12 +1,36 @@
 import React, { useContext } from "react";
 import "./my-birth-chart.scss";
+import { makeStyles } from "@material-ui/core/styles";
 import Header from "../../components/Header/Header";
+import NavIcon from "../../components/NavIcon/NavIcon";
 import ChartList from "../../components/ChartList/ChartList";
 import ChartImage from "../../components/ChartImage/ChartImage";
 import { useToggle } from "./../../utils/utils";
 
+const useStyles = makeStyles((theme) => ({
+  mainContainer: {
+    display: "flex",
+    flexFlow: "row-reverse",
+    padding: 15,
+    justifyContent: "space-around",
+    alignItems: "center",
+  },
+
+  myBirthChartContainer: {
+    width: "80vh",
+    maxHeight: "100vh",
+  },
+  ownerContainer: {
+    border: "black solid 1px",
+    borderRadius: "1rem",
+    height: "fit-content",
+    padding: 15,
+  },
+}));
+
 function MyBirthChart() {
   const [isOn, toggleIsOn] = useToggle();
+  const classes = useStyles();
 
   const aliceBasic = {
     location: "liverpool uk",
@@ -48,22 +72,27 @@ function MyBirthChart() {
     <>
       <div className="App">
         <Header pageName="My Birth Chart" />
+        {/* <NavIcon pageName="Homepage" /> */}
         <main>
-          <h2>{aliceBasic.chartData.ownerName}</h2>
-          <p>Born: {aliceBasic.chartData.birthday}</p>
-          <p>{aliceBasic.chartData.time}</p>
-          <p>
-            Lat: {aliceBasic.chartData.latitude.toFixed()} Long:{" "}
-            {aliceBasic.chartData.longitude.toFixed()}
-          </p>
-          <div className="myBirthChartContainer">
-            {isOn ? (
-              <ChartList player={aliceBasic.chartData} />
-            ) : (
-              <ChartImage player={aliceBasic.chartData} />
-            )}
+          <div className={classes.mainContainer}>
+            <div className={classes.ownerContainer}>
+              <h2>{aliceBasic.chartData.ownerName}</h2>
+              <p>Born: {aliceBasic.chartData.birthday}</p>
+              <p>{aliceBasic.chartData.time}</p>
+              <p>
+                Lat: {aliceBasic.chartData.latitude.toFixed()} Long:{" "}
+                {aliceBasic.chartData.longitude.toFixed()}
+              </p>
+              <button onClick={() => toggleIsOn()}>Toggle Chart</button>
+            </div>
+            <div className={classes.myBirthChartContainer}>
+              {isOn ? (
+                <ChartList player={aliceBasic.chartData} />
+              ) : (
+                <ChartImage player={aliceBasic.chartData} />
+              )}
+            </div>
           </div>
-          <button onClick={() => toggleIsOn()}>Show Chart</button>
         </main>
       </div>
     </>

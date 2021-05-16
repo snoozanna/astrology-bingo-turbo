@@ -4,3 +4,5 @@
 
 export const GEO_API_KEY = "AIzaSyBRNa4FzlJkG1uhDvAHaB2SRbit53wq6L8";
 export const TIME_API_KEY = "AIzaSyCVeMcz7k47EOLRUjdYKecPFJylBFdpdms";
+
+export const FIREBASE_API_KEY = "AIzaSyDt33A_WcPQ4uHoxhVQMAJlw9AtwXRnMM8";

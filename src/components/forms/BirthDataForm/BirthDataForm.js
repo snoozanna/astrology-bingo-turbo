@@ -9,7 +9,7 @@ import {
   InputLabel,
   FormControl,
 } from "@material-ui/core";
-import { useToasts } from 'react-toast-notifications';
+import { useToasts } from "react-toast-notifications";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, Controller } from "react-hook-form";
 import { getGeo, findUTCOffset } from "./calls";
@@ -137,34 +137,35 @@ function BirthDataForm({ initialValues }) {
     const locationSearchTerm = getValues("locationSearchTerm");
     // console.log('locationSearchTerm', locationSearchTerm);
     try {
-    const places = await getGeo(locationSearchTerm);
-    updateState({ possibleLocations: places });
+      const places = await getGeo(locationSearchTerm);
+      updateState({ possibleLocations: places });
     } catch (err) {
-    addToast({
-      html: `<h2>Error retrieving location</h2><p>${err.message}</p>`,
-      classes: ["toast", "error"],
-    });
+      addToast({
+        html: `<h2>Error retrieving location</h2><p>${err.message}</p>`,
+        classes: ["toast", "error"],
+      });
     }
   };
 
-
-
   const getUTC = async () => {
     try {
-    const offset = await findUTCOffset(
-      getValues("datetime"),
-      getValues("latitude"),
-      getValues("longitude")
-    );
-    console.log('osset', offset);
-    setValue("utcoffset", offset, { shouldDirty: true, shouldValidate: true });
-    } catch(err) {
+      const offset = await findUTCOffset(
+        getValues("datetime"),
+        getValues("latitude"),
+        getValues("longitude"),
+      );
+      console.log("offset", offset);
+      setValue("utcoffset", offset, {
+        shouldDirty: true,
+        shouldValidate: true,
+      });
+    } catch (err) {
       addToast({
         html: `<h2>Error getting UTC</h2><p>${err.message}</p>`,
         classes: ["toast", "error"],
       });
     }
-  }
+  };
 
   const chooseLocation = (loc_id) => {
     console.log("loc_id", loc_id);
@@ -179,7 +180,10 @@ function BirthDataForm({ initialValues }) {
     } = selectedLocation;
     console.log("selectedLocation", selectedLocation);
 
+    const placename = selectedLocation.formatted_address;
+
     setValue("location", loc_id, { shouldDirty: true, shouldValidate: true });
+    setValue("placename", placename);
     setValue("latitude", lat, { shouldDirty: true, shouldValidate: true });
     setValue("longitude", lng, { shouldDirty: true, shouldValidate: true });
 
@@ -188,7 +192,6 @@ function BirthDataForm({ initialValues }) {
       // chosenLocation: selectedLocation,
     });
   };
-
 
   //FINAL SUBMIT
   const onSubmit = async (formValues) => {
@@ -230,8 +233,6 @@ function BirthDataForm({ initialValues }) {
       }
     }
   });
-
-
 
   // Form Parts
 

@@ -1,21 +1,19 @@
 import React, { useContext } from "react";
-import "./Header.scss";
+import "./NavIcon.scss";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import NavDrawer from "../NavDrawer/NavDrawer";
-import AppBar from "@material-ui/core/AppBar";
-import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { MenuContext } from "../../contexts/menu.context";
-import { AuthContext } from "./../../contexts/auth.context";
 
 const useStyles = makeStyles({
   HeaderContainer: {
     flexGrow: 1,
     backgroundColor: "rgb(213, 123, 214)",
-    // backgroundColor: "transparent",
+
+    // display: "none",
   },
 
   menuButton: {
@@ -27,9 +25,8 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Header({ pageName }) {
+export default function NavIcon({ pageName }) {
   const { toggle } = useContext(MenuContext);
-  const { user, logout } = useContext(AuthContext);
   const classes = useStyles();
   return (
     <>
@@ -45,22 +42,6 @@ export default function Header({ pageName }) {
         >
           <MenuIcon />
         </IconButton>
-        <h1 className={classes.title} variant="h6" noWrap>
-          {pageName}
-        </h1>
-        <div
-          className={classes.user}
-          style={{ position: "absolute", right: "15px" }}
-        >
-          {user && (
-            <>
-              <span style={{ marginRight: "15px" }}>Hello Admin</span>
-              <Button variant="outlined" color="secondary" onClick={logout}>
-                Log out
-              </Button>
-            </>
-          )}
-        </div>
       </Toolbar>
       {/* </AppBar> */}
     </>

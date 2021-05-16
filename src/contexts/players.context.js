@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 import { useToasts } from "react-toast-notifications";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 import { BirthChartContext } from "./birthchart.context";
 import { TIME_API_KEY } from "./../config";
 import ChartImage from "../components/ChartImage/ChartImage";
@@ -119,36 +119,6 @@ export const PlayersProvider = (props) => {
       setLoaded("true");
     }
   };
-  // async function getBirthChart(
-  //   fetchURL = "",
-  //   renderFn,
-  //   { firstname, lastname },
-  // ) {
-  //   try {
-  //     const response = await fetch(fetchURL); // because of weird python formatting
-  //     //handle bad responses
-  //     if (!response.ok) throw response;
-  //     let chartData = await response.json();
-  //     chartData = JSON.parse(chartData); // twice because stupid python
-  //     // console.log("chartData", chartData);
-  //     chartData.Ascendant = chartData.Asc;
-  //     chartData.Descendant = BirthChart.descDict[chartData.Ascendant];
-  //     delete chartData.Asc;
-
-  //     chartData.ownerName = `${firstname} ${lastname}`;
-
-  //     // console.log("chartData", chartData);
-  //     const player = new Player({ chartData });
-  //     renderFn(player);
-  //     bingoGameController.addPlayer(player);
-  //   } catch (err) {
-  //     console.log(err);
-  //     M.toast({
-  //       html: `<h2>Error with Python server</h2><p>${err.message}</p>`,
-  //       classes: ["toast", "error"],
-  //     });
-  //   }
-  // }
 
   const addPlayer = async (formData) => {
     let newPlayer = {
@@ -201,33 +171,6 @@ export const PlayersProvider = (props) => {
     });
   };
 
-  // ADD PLAYER WITH API
-  // const addPlayer = async (formData) => {
-  //   try {
-  //     const response = await fetch(API_ENDPOINT, {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         // 'Content-Type': 'application/x-www-form-urlencoded',
-  //       },
-  //       body: JSON.stringify(formData),
-  //     });
-  //     if (response.status !== 201) {
-  //       throw response;
-  //     }
-  //     const savedPlayer = await response.json();
-  //     console.log("got data", savedPlayer);
-  //     setPlayers([...players, savedPlayer]);
-  //     addToast(`Saved ${savedPlayer.firstName} ${savedPlayer.lastName}`, {
-  //       appearance: "success",
-  //     });
-  //   } catch (err) {
-  //     console.log(err);
-  //     addToast(`Error ${err.message || err.statusText}`, {
-  //       appearance: "error",
-  //     });
-  //   }
-  // };
 
   const showChart = ({ player }, format = "list" | "image") => {
     console.log("player", player);

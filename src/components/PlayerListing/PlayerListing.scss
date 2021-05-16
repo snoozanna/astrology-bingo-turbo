@@ -1,15 +1,30 @@
 @import "./../../styles/_variables";
 
 .playerContainer {
-  display: flex;
-  justify-content: center;
-  width: 100%;
+  padding: 0 15px;
 }
+
+.listGroupItem {
+  border: 1px black solid;
+  border-radius: 15px;
+  background-color: hsl(30, 53%, 80%);
+}
+
 .nameContainer {
   display: flex;
   justify-content: center;
+  font-size: 1.3rem;
 }
 
-.first.name {
-  margin-inline-end: 10px;
+.firstName {
+  margin-inline-end: 4px;
+}
+
+button {
+  margin-inline-end: 5px;
+}
+
+.deleteBtn {
+  background-color: rgb(237, 105, 136);
+  color: #fff;
 }
