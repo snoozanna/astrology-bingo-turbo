@@ -9099,11 +9099,6 @@ listenercount@~1.0.1:
   resolved "https://registry.yarnpkg.com/listenercount/-/listenercount-1.0.1.tgz#84c8a72ab59c4725321480c975e6508342e70937"
   integrity sha1-hMinKrWcRyUyFIDJdeZQg0LnCTc=
 
-little-state-machine@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/little-state-machine/-/little-state-machine-4.1.0.tgz#8ca1eae22ea2408e97dc82097b4aa3fe1f96a199"
-  integrity sha512-JeWPyIwnhYGheF10h8DY9+OnEwJ0waRzyXP/WclB3Bqg5v1+xwruXTtDvTow/69ZBAuRlYT5Apl+I8TN+HMp9g==
-
 load-json-file@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/load-json-file/-/load-json-file-1.1.0.tgz#956905708d58b4bab4c2261b04f59f31c99374c0"

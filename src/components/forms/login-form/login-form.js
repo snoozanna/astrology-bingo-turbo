@@ -56,7 +56,7 @@ function LoginForm() {
     reset(resetValues);
   };
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={() => handleSubmit(onSubmit)}>
       {error && <p className="error">error.message || error.status</p>}
       {loading && <LinearProgress />}
       <div className={classes.formRow}>
@@ -99,7 +99,7 @@ function LoginForm() {
           variant="contained"
           color="primary"
           className={classes.button}
-          disabled={!formState.isValid}
+          // disabled={!formState.isValid}
         >
           Login
         </Button>
