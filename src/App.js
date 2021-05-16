@@ -42,45 +42,49 @@ function App() {
     <Router>
       <ThemeProvider theme={theme}>
         <ToastProvider autoDismiss={true}>
-          {/* <AuthProvider> */}
-          <BirthChartProvider>
-            <PlayersProvider>
-              <GameProvider>
-                <MenuProvider>
-                  <Switch>
-                    <Route exact path="/" component={Home} />
-                    <Route exact path="/login" component={Login} />
-                    {/* <ProtectedRoute
+          <AuthProvider>
+            <BirthChartProvider>
+              <PlayersProvider>
+                <GameProvider>
+                  <MenuProvider>
+                    <Switch>
+                      <Route exact path="/" component={Home} />
+                      <Route exact path="/login" component={Login} />
+                      <ProtectedRoute
+                        exact
+                        path="/add-birth-chart"
+                        component={AddChart}
+                      />
+                      {/* <Route
                         exact
                         path="/add-birth-chart"
                         component={AddChart}
                       /> */}
-                    <Route exact path="/add-birth-chart" component={AddChart} />
 
-                    {/* <ProtectedRoute
+                      <ProtectedRoute
+                        exact
+                        path="/my-birth-chart"
+                        component={MyBirthChart}
+                      />
+                      {/* <Route
                         exact
                         path="/my-birth-chart"
                         component={MyBirthChart}
                       /> */}
-                    <Route
-                      exact
-                      path="/my-birth-chart"
-                      component={MyBirthChart}
-                    />
-                    <Route exact path="/in-play" component={InPlay} />
-                    <Route exact path="/generator" component={Generator} />
-                    <Route
-                      exact
-                      path="/public-display"
-                      component={PublicDisplay}
-                    />
-                    <Route path="*" component={NotFound} />
-                  </Switch>
-                </MenuProvider>
-              </GameProvider>
-            </PlayersProvider>
-          </BirthChartProvider>
-          {/* </AuthProvider> */}
+                      <Route exact path="/in-play" component={InPlay} />
+                      <Route exact path="/generator" component={Generator} />
+                      <Route
+                        exact
+                        path="/public-display"
+                        component={PublicDisplay}
+                      />
+                      <Route path="*" component={NotFound} />
+                    </Switch>
+                  </MenuProvider>
+                </GameProvider>
+              </PlayersProvider>
+            </BirthChartProvider>
+          </AuthProvider>
         </ToastProvider>
       </ThemeProvider>
     </Router>
