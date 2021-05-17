@@ -41,55 +41,50 @@ function LoginForm() {
     password: yup.string().required().min(2).max(20),
   });
 
-  const { handleSubmit, control, reset, formState } = useForm({
+  const { handleSubmit, control, reset, errors, formState } = useForm({
     resolver: yupResolver(schema),
     mode: "onChange",
   });
-  const {
-    formState: { errors },
-  } = useForm();
+  // const { errors } = useForm();
 
-  // console.log("errors", errors);
+  console.log("errors", errors);
   const onSubmit = async (creds) => {
+    debugger;
+    console.log("form submit");
     console.log("creds", creds);
     login(creds);
     reset(resetValues);
   };
   return (
-    <form onSubmit={() => handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       {error && <p className="error">error.message || error.status</p>}
       {loading && <LinearProgress />}
       <div className={classes.formRow}>
         <Controller
+          as={<TextField helperText={errors.email && errors.email.message} />}
+          error={!!errors.email}
+          id="email"
           name="email"
-          control={control}
+          label="Email"
           fullWidth
-          render={({ field }) => (
-            <TextField
-              {...field}
-              id="email"
-              label="Email"
-              error={!!errors.firstName}
-              helperText={errors.email && errors.email.message}
-            />
-          )}
+          control={control}
         />
       </div>
       <div className={classes.formRow}>
         <Controller
-          name="password"
-          control={control}
-          fullWidth
-          render={({ field }) => (
+          as={
             <TextField
-              {...field}
-              id="password"
-              label="Password"
-              type="password"
-              error={!!errors.password}
               helperText={errors.password && errors.password.message}
             />
-          )}
+          }
+          error={!!errors.password}
+          helperText={errors.password && errors.password.message}
+          id="password"
+          type="password"
+          name="password"
+          label="Password"
+          fullWidth
+          control={control}
         />
       </div>
       <div className={classes.formRow}>
@@ -99,7 +94,7 @@ function LoginForm() {
           variant="contained"
           color="primary"
           className={classes.button}
-          // disabled={!formState.isValid}
+          disabled={!formState.isValid}
         >
           Login
         </Button>
