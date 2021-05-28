@@ -49,7 +49,6 @@ function LoginForm() {
 
   console.log("errors", errors);
   const onSubmit = async (creds) => {
-    debugger;
     console.log("form submit");
     console.log("creds", creds);
     login(creds);

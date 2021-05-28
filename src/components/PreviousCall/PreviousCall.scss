@@ -1,0 +1,37 @@
+.prevCallContainer {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 20px;
+  height: 20vh;
+}
+
+.prevCallTitle {
+  text-align: start;
+}
+
+.prevCallItem {
+  background-color: #ffdd7f;
+  border: solid black 1px;
+  border-radius: 10px;
+  padding: 0 2rem;
+    min-width: 10rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.prevCallContainer.call {
+  display: flex;
+  flex-direction: column;
+}
+.prevCallContainer .planet,
+.prevCallContainer .sign {
+  font-size: 2rem;
+}
+
+.prevCallContainer span {
+  margin-block-end: 5px;
+}

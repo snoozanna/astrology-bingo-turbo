@@ -42,34 +42,36 @@ const PlayerListing = ({ player }) => {
 
   return (
     <>
-      <li key={player._id} className={"listGroupItem"}>
-        <div className={"nameContainer"}>
-          <h3 className={"firstName"}>{player.firstName}</h3>
-          <h3>{player.lastName}</h3>
-        </div>
-        <p>
-          Chart:
-          {isOn ? (
-            <ChartImage player={player.chartData} />
-          ) : (
-            <IconList player={player.chartData} />
-          )}
-        </p>
-        <div className={"btnContainer"}>
-          <button
-            className={"deleteBtn btn"}
-            onClick={() => deletePlayer(player._id)}
-          >
-            X
-          </button>
-          <button className={"btn"} onClick={() => toggleIsOn()}>
-            Toggle Chart
-          </button>
-          <button className={"btn"} onClick={() => {}}>
-            Print
-          </button>
-        </div>
-      </li>
+      <ul>
+        <li key={player._id} className={"listGroupItem"}>
+          <div className={"nameContainer"}>
+            <h3 className={"firstName"}>{player.firstName}</h3>
+            <h3>{player.lastName}</h3>
+          </div>
+          <p>
+            Chart:
+            {isOn ? (
+              <ChartImage player={player.chartData} />
+            ) : (
+              <IconList player={player.chartData} />
+            )}
+          </p>
+          <div className={"btnContainer"}>
+            <button
+              className={"deleteBtn btn"}
+              onClick={() => deletePlayer(player._id)}
+            >
+              X
+            </button>
+            <button className={"btn"} onClick={() => toggleIsOn()}>
+              Toggle Chart
+            </button>
+            <button className={"btn"} onClick={() => {}}>
+              Print
+            </button>
+          </div>
+        </li>
+      </ul>
     </>
   );
 };
