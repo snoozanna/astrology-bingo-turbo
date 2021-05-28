@@ -1,8 +1,6 @@
 import React from "react";
 import BirthDataForm from "../../components/forms/BirthDataForm/BirthDataForm";
 import Header from "./../../components/Header/Header";
-// import Step1 from "./../../components/forms/Step1";
-// import Form from "./../../components/forms/FormRouter";
 import "./add-birth-chart.scss";
 
 function AddChart() {

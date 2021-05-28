@@ -8,7 +8,7 @@ import { PlayersContext } from "./../../contexts/players.context";
 import { useToggle } from "./../../utils/utils";
 // import { GameContext } from "./../../contexts/game.context";
 
-const useStyles = makeStyles({
+// const useStyles = makeStyles({
   // playerContainer: {
   //   padding: "0 15px",
   // },
@@ -31,13 +31,12 @@ const useStyles = makeStyles({
   // deleteBtn: {
   //   backgroundColor: "#f12e40ad",
   // },
-});
+// });
 
 const PlayerListing = ({ player }) => {
   // const classes = useStyles();
   // const { alreadyCalled } = useContext(GameContext);
   const { deletePlayer } = useContext(PlayersContext);
-  // const { useToggle } = useContext(UtilitiesContext);
   const [isOn, toggleIsOn] = useToggle();
 
   return (

@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
-import { isElement } from "./../utils/utils";
-import SignSymbol from "./../components/ChartList/SignSymbol";
+
 
 export const BirthChartContext = createContext({
   BirthChart: () => {},
@@ -198,13 +197,11 @@ export const BirthChartProvider = (props) => {
     static signArr = (data) => {
       const arr = [];
       console.log("data", data);
-      Object.entries(data.data).map(([key, value]) => {
+      Object.entries(data.data).forEach(([key, value]) => {
         if (BirthChart.planets.includes(key)) {
           const { sign } = value;
           console.log("sign", sign);
           arr.push(sign);
-        } else {
-          return null;
         }
       });
       console.log("arr", arr);

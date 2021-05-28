@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
+import React from "react";
 import "./my-birth-chart.scss";
 import { makeStyles } from "@material-ui/core/styles";
 import Header from "../../components/Header/Header";
-import NavIcon from "../../components/NavIcon/NavIcon";
+// import NavIcon from "../../components/NavIcon/NavIcon";
 import ChartList from "../../components/ChartList/ChartList";
 import ChartImage from "../../components/ChartImage/ChartImage";
 import { useToggle } from "./../../utils/utils";

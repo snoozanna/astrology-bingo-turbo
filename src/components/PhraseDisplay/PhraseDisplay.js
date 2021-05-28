@@ -44,9 +44,7 @@ const PhraseDisplay = ({ planet, sign }) => {
     return catchPhraseDict[planet][sign];
   };
   return (
-    <>
-      <h3>{getCatchPhrase(planet, sign)}</h3>
-    </>
+    <h3>{getCatchPhrase(planet, sign)}</h3>
   );
 };
 

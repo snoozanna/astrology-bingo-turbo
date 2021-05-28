@@ -90,7 +90,7 @@ const chooseDelay = () => {
 };
 // console.log("screen height", window.screen.availHeight);
 
-const PlayerOrb = ({ player }) => {
+const PlayerOrb = ({ player, key }) => {
   const { BirthChart } = useContext(BirthChartContext);
   // console.log("alreadyCalled", alreadyCalled);
 
@@ -119,8 +119,7 @@ const PlayerOrb = ({ player }) => {
   const classes = useStyles();
   console.log("player", player);
   return (
-    <>
-      <animated.div style={props} className={classes.orb}>
+      <animated.div style={props} className={classes.orb} key={key}>
         <div className={classes.ownerName}>
           <p>{player.ownerName}</p>
         </div>
@@ -149,7 +148,6 @@ const PlayerOrb = ({ player }) => {
           })}
         </List>
       </animated.div>
-    </>
   );
 };
 

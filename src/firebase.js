@@ -1,9 +1,7 @@
-// import * as firebase from "firebase";
-import firebase from "firebase/app";
-import { FIREBASE_API_KEY } from "./../config";
+import * as firebase from "firebase";
 
 const firebaseConfig = {
-  apiKey: FIREBASE_API_KEY,
+  apiKey: "AIzaSyDt33A_WcPQ4uHoxhVQMAJlw9AtwXRnMM8",
   authDomain: "astrology-bingo-turbo.firebaseapp.com",
   databaseURL:
     "https://astrology-bingo-turbo-default-rtdb.europe-west1.firebasedatabase.app",
@@ -15,6 +13,6 @@ const firebaseConfig = {
 };
 
 const app = firebase.initializeApp(firebaseConfig);
-// const firestore = firebase.firestore();
-// export { firestore };
+const firestore = firebase.firestore();
+export { firestore };
 export default app;
