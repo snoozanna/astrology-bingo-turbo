@@ -44,7 +44,6 @@ const PlayerListing = ({ player }) => {
   const [isOn, toggleIsOn] = useToggle();
 
   return (
-    <>
       <li key={player._id} className={"listGroupItem"}>
         <div className={"nameContainer"}>
           <h3 className={"firstName"}>
@@ -75,7 +74,6 @@ const PlayerListing = ({ player }) => {
           </Button>
         </div>
       </li>
-    </>
   );
 };
 

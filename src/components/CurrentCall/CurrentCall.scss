@@ -1,0 +1,38 @@
+.callContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // height: 80vh;
+  justify-content: space-evenly;
+}
+
+.callTitle {
+  text-align: start;
+}
+
+.callItem {
+  background-color: aquamarine;
+  border: solid black 1px;
+  border-radius: 10px;
+  padding: 3rem;
+  width: 60%;
+  // height: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.callContainer .call {
+  display: flex;
+  flex-direction: column;
+}
+.callContainer .planet {
+  font-size: 4rem;
+}
+.callContainer .sign {
+  font-size: 4rem;
+}
+
+.callContainer span {
+  margin-block-end: 15px;
+}

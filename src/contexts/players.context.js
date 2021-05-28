@@ -6,6 +6,7 @@ import { BirthChartContext } from "./birthchart.context";
 import { TIME_API_KEY } from "./../config";
 import ChartImage from "../components/ChartImage/ChartImage";
 import ChartList from "./../components/ChartList/ChartList";
+
 // import cloneDeep from 'lodash.cloneDeep'
 
 const playerCollectionName = "players";
@@ -13,6 +14,7 @@ const playerCollectionName = "players";
 //we provide empty fn as defaults so it doesn't break the app if forget to pass a fn
 export const PlayersContext = createContext({
   addPlayer: () => {},
+  updatePlayer: () => {},
   createBirthChartURL: () => {},
   fetchBirthChart: () => {},
   deletePlayer: () => {},
@@ -133,14 +135,15 @@ export const PlayersProvider = (props) => {
     // console.log("params", params);
 
     const fetchURL = `http://localhost:8000/formatData?date=${dob}&time=${tob}&location1=${latitude}&location2=${longitude}&utc=${utcoffset}&action=`;
-    console.log("fetchURL", fetchURL);
+    // console.log("fetchURL", fetchURL);
     return fetchURL;
   };
 
   const fetchBirthChart = async (fetchURL, { firstName, lastName }) => {
     // console.log('loading', loading);
-    // console.log('error', error);
-    if (loading || loaded || error) {
+    // console.log("error", error);
+    // if (loading || loaded || error) {
+    if (loading || error) {
       return;
     } else {
       setLoading(true);
@@ -154,7 +157,6 @@ export const PlayersProvider = (props) => {
       let chartData = await response.json();
       chartData = JSON.parse(chartData);
       chartData.Ascendant = chartData.Asc;
-
       chartData.Descendant = BirthChart.descDict[chartData.Ascendant];
       delete chartData.Asc;
       chartData.ownerName = `${firstName} ${lastName}`;
@@ -173,6 +175,7 @@ export const PlayersProvider = (props) => {
     console.log("new player", newPlayer);
     const fetchURL = createBirthChartURL(newPlayer);
     console.log("URL", fetchURL);
+<<<<<<< HEAD
     try {
       const fetchData = await fetchBirthChart(fetchURL, newPlayer);
       console.log("fetchData", fetchData);
@@ -188,17 +191,46 @@ export const PlayersProvider = (props) => {
       });
     } catch (err) {
       addToast(err.message, {
+=======
+    const fetchData = await fetchBirthChart(fetchURL, newPlayer);
+    console.log("fetchData", fetchData);
+    newPlayer.chartData = fetchData;
+    console.log("new player with chart", JSON.stringify(newPlayer));
+    // setPlayers([...players, newPlayer]);
+    // addToast(`Saved ${newPlayer.firstName} ${newPlayer.lastName}`, {
+    //   appearance: "success",
+    // });
+    try {
+      collection.add(newPlayer);
+      addToast(`Added ${newPlayer.firstName} ${newPlayer.lastName}`, {
+        appearance: "success",
+      });
+    } catch (err) {
+      console.log(err);
+      addToast(`Error Adding ${newPlayer.firstName} ${newPlayer.lastName}`, {
+>>>>>>> fdcd9649e04e0ba675f95b255eeb4ed74a2a61b9
         appearance: "error",
       });
     }
   };
 
   //TODO UPDATE PLAYER
+  const updatePlayer = async (original, updates) => {
+    console.log("updateItem", original, updates);
+
+    collection.doc(original._id).update(updates);
+
+    addToast(`Updated ${original.firstName} ${original.lastName}`, {
+      appearance: "success",
+    });
+  };
 
   const deletePlayer = async (id) => {
     // Get index
-    console.log("trying to delete player");
+    debugger;
+    console.log("deleting player with id", id);
     const index = players.findIndex((player) => player._id === id);
+<<<<<<< HEAD
 
     if (index === -1) {
       addToast(`Error: Failed to find player id: ${id}`, {
@@ -222,6 +254,61 @@ export const PlayersProvider = (props) => {
         appearance: "error",
       });
     }
+=======
+    const deletedPlayer = players[index];
+    console.log(deletedPlayer.firstName);
+    try {
+      collection
+        .doc(id)
+        .delete()
+        .then((...args) => {
+          console.log("args", args);
+          addToast(
+            `Deleted ${deletedPlayer.firstName} ${deletedPlayer.lastName}`,
+            {
+              appearance: "success",
+            },
+          );
+        })
+        .catch((...error) => {
+          console.log("error", error);
+          addToast(
+            `Error deleting ${deletedPlayer.firstName} ${deletedPlayer.lastName}`,
+            {
+              appearance: "error",
+            },
+          );
+        });
+    } catch (err) {
+      console.error(err);
+      addToast(
+        `Error deleting ${deletedPlayer.firstName} ${deletedPlayer.lastName}`,
+        {
+          appearance: "error",
+        },
+      );
+    }
+
+    // console.log("trying to delete player");
+    // const index = players.findIndex((player) => player._id === id);
+    // const deletedPlayer = players[index];
+
+    // if (index === -1) {
+    //   addToast(`Error: Failed to delete player id: ${id}`, {
+    //     appearance: "error",
+    //   });
+    //   return;
+    // }
+    // // recreate the players array without that color
+    // const updatedPlayers = [
+    //   ...players.slice(0, index),
+    //   ...players.slice(index + 1),
+    // ];
+    // setPlayers(updatedPlayers);
+    // addToast(`Deleted ${deletedPlayer.firstName} ${deletedPlayer.lastName}`, {
+    //   appearance: "success",
+    // });
+>>>>>>> fdcd9649e04e0ba675f95b255eeb4ed74a2a61b9
   };
 
   const deleteAllPlayers = () => {
@@ -232,7 +319,11 @@ export const PlayersProvider = (props) => {
     });
   };
 
+<<<<<<< HEAD
   const showChart = ({ player }, format = "list") => {
+=======
+  const showChart = ({ player }, format = "list" | "image") => {
+>>>>>>> fdcd9649e04e0ba675f95b255eeb4ed74a2a61b9
     console.log("player", player);
     console.log("format", format);
     if (format === "list") {
@@ -250,6 +341,7 @@ export const PlayersProvider = (props) => {
     <PlayersContext.Provider
       value={{
         addPlayer,
+        updatePlayer,
         deletePlayer,
         deleteAllPlayers,
         createBirthChartURL,

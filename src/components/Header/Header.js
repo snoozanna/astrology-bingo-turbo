@@ -37,7 +37,6 @@ export default function Header({ pageName }) {
   return (
     <>
       <NavDrawer />
-      {/* <AppBar position="static" className={classes.HeaderContainer}> */}
       <Toolbar>
         <IconButton
           edge="start"
@@ -65,7 +64,6 @@ export default function Header({ pageName }) {
           )}
         </div>
       </Toolbar>
-      {/* </AppBar> */}
     </>
   );
 }
