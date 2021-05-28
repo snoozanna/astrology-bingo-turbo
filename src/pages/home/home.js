@@ -55,7 +55,7 @@ function Home() {
             <ul className={classes.listGroup}>
               {players.map((player) => (
                 // console.log("player", player._id),
-                <PlayerOrb player={player.chartData} key={player._id} />
+                <li key={player._id}><PlayerOrb player={player.chartData} /></li>
               ))}
             </ul>
           </div>

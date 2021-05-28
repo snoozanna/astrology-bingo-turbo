@@ -3,6 +3,7 @@ import Header from "./../../components/Header/Header";
 import PlayerListing from "./../../components/PlayerListing/PlayerListing";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
+import { v4 as uuidv4 } from 'uuid';
 
 import { PlayersContext } from "./../../contexts/players.context";
 
@@ -25,7 +26,6 @@ function InPlay() {
   const classes = useStyles();
 
   return (
-    <>
       <div className="App">
         <Header pageName="Birth Charts in play" />
         <main>
@@ -34,7 +34,7 @@ function InPlay() {
             <Grid container spacing={3}>
               {players.map((player) => (
                 // console.log("player", player),
-                <Grid item xs={6} sm={4}>
+                <Grid key={uuidv4()} item xs={6} sm={4}>
                   <PlayerListing player={player} />
                 </Grid>
               ))}
@@ -44,7 +44,6 @@ function InPlay() {
           <button onClick={() => deleteAllPlayers}>Delete all players</button>
         </main>
       </div>
-    </>
   );
 }
 

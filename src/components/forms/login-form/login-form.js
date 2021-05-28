@@ -1,5 +1,6 @@
 import React, { useContext /* useState,  useEffect */ } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import ErrorBoundary from "./../../ErrorBoundary/ErrorBoundary";
 import {
   Button,
   TextField,
@@ -31,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 function LoginForm() {
   const classes = useStyles();
   const { login, loading, error } = useContext(AuthContext);
-  const resetValues = {
+  const defaultValues = {
     email: "",
     password: "",
   };
@@ -44,62 +45,69 @@ function LoginForm() {
   const { handleSubmit, control, reset, errors, formState } = useForm({
     resolver: yupResolver(schema),
     mode: "onChange",
+    reValidateMode: "onChange",
+    defaultValues,
   });
-  // const { errors } = useForm();
 
-  console.log("errors", errors);
+  // console.log("errors", errors);
+  
   const onSubmit = async (creds) => {
-    debugger;
     console.log("form submit");
     console.log("creds", creds);
     login(creds);
-    reset(resetValues);
+    reset(defaultValues);
   };
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      {error && <p className="error">error.message || error.status</p>}
-      {loading && <LinearProgress />}
-      <div className={classes.formRow}>
+    <ErrorBoundary>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        {error && <p className="error">{error.message || error.status}</p>}
+        {loading && <LinearProgress />}
+        <div className={classes.formRow}>
         <Controller
-          as={<TextField helperText={errors.email && errors.email.message} />}
-          error={!!errors.email}
-          id="email"
-          name="email"
-          label="Email"
-          fullWidth
-          control={control}
-        />
-      </div>
-      <div className={classes.formRow}>
-        <Controller
-          as={
-            <TextField
-              helperText={errors.password && errors.password.message}
-            />
-          }
-          error={!!errors.password}
-          helperText={errors.password && errors.password.message}
-          id="password"
-          type="password"
-          name="password"
-          label="Password"
-          fullWidth
-          control={control}
-        />
-      </div>
-      <div className={classes.formRow}>
-        <Button onClick={() => reset(resetValues)}>Reset</Button>
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          className={classes.button}
-          disabled={!formState.isValid}
-        >
-          Login
-        </Button>
-      </div>
-    </form>
+            as={TextField}
+            type="email"
+            // disabled
+            error={!!errors?.email}
+            helperText={errors?.email?.message}
+            id="email"
+            name="email"
+            label="Email"
+            control={control}
+            rules={{ required: true }}
+            className={classes.formRowItem}
+          />
+        </div>
+        <div className={classes.formRow}>
+          <Controller
+            as={TextField}
+            type="password"
+            // disabled
+            error={!!errors?.password}
+            helperText={errors?.password?.message}
+            id="password"
+            name="password"
+            label="Passord"
+            control={control}
+            rules={{ required: true }}
+            className={classes.formRowItem}
+          />
+        </div>
+
+        <div className={classes.formRow}>
+          <Button onClick={() => reset(defaultValues)}>Reset</Button>
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            className={classes.button}
+            disabled={!formState.isValid}
+          >
+            Login
+          </Button>
+        </div>
+      </form>
+    </ErrorBoundary>
   );
 }
 

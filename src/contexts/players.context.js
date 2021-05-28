@@ -26,41 +26,41 @@ export const PlayersContext = createContext({
 
 export const PlayersProvider = (props) => {
   const [players, setPlayers] = useState([
-    {
-      location: "leeds",
-      firstName: "Robert",
-      lastName: "De Niro",
-      email: "rob@rob.com",
-      datetime: "1967-08-01T09:01",
-      utcoffset: 1,
-      latitude: 53.8007554,
-      longitude: -1.5490774,
-      _id: "34dde",
-      chartData: {
-        Sun: "Leo",
-        Moon: "Gemini",
-        Mercury: "Cancer",
-        Venus: "Virgo",
-        Mars: "Scorpio",
-        Jupiter: "Leo",
-        Saturn: "Aries",
-        Uranus: "Virgo",
-        Neptune: "Scorpio",
-        Pluto: "Virgo",
-        Chiron: "Pisces",
-        "North Node": "Taurus",
-        "South Node": "Scorpio",
-        Syzygy: "Capricorn",
-        "Pars Fortuna": "Cancer",
-        birthday: "1967/08/01",
-        time: "0901",
-        latitude: 53.8007554,
-        longitude: -1.5490774,
-        Ascendant: "Virgo",
-        Descendant: "Pisces",
-        ownerName: "Robert De Niro",
-      },
-    },
+    // {
+    //   location: "leeds",
+    //   firstName: "Robert",
+    //   lastName: "De Niro",
+    //   email: "rob@rob.com",
+    //   datetime: "1967-08-01T09:01",
+    //   utcoffset: 1,
+    //   latitude: 53.8007554,
+    //   longitude: -1.5490774,
+    //   _id: "34dde",
+    //   chartData: {
+    //     Sun: "Leo",
+    //     Moon: "Gemini",
+    //     Mercury: "Cancer",
+    //     Venus: "Virgo",
+    //     Mars: "Scorpio",
+    //     Jupiter: "Leo",
+    //     Saturn: "Aries",
+    //     Uranus: "Virgo",
+    //     Neptune: "Scorpio",
+    //     Pluto: "Virgo",
+    //     Chiron: "Pisces",
+    //     "North Node": "Taurus",
+    //     "South Node": "Scorpio",
+    //     Syzygy: "Capricorn",
+    //     "Pars Fortuna": "Cancer",
+    //     birthday: "1967/08/01",
+    //     time: "0901",
+    //     latitude: 53.8007554,
+    //     longitude: -1.5490774,
+    //     Ascendant: "Virgo",
+    //     Descendant: "Pisces",
+    //     ownerName: "Robert De Niro",
+    //   },
+    // },
   ]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -68,13 +68,32 @@ export const PlayersProvider = (props) => {
   const { addToast } = useToasts();
 
   useEffect(() => {
+    // Get initial data
     db.collection(playerCollectionName).get().then((snapshot) => {
     console.log("snapshot", snapshot);
     setPlayers(
       snapshot.docs.map((doc) => Object.assign({ id: doc.id }, doc.data()))
     );
   })
-  .catch(err => console.log(err));
+  .catch(err => {
+    console.log(err);
+    addToast(err.message, {
+      appearance: "error",
+    });
+  });
+
+    // Watch the collection
+    db.collection(playerCollectionName).onSnapshot((snapshot) => {
+    console.log("snapshot", snapshot);
+    let changes = snapshot.docChanges();
+    for (const change of changes) {
+      if (change.type === "added") {
+        console.log('added', change)
+      } else if (change.type === "removed") {
+        console.log("removed", change);
+      }
+    }
+  });
   }, []);
 
   

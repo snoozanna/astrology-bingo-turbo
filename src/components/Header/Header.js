@@ -1,11 +1,14 @@
 import React, { useContext } from "react";
 import "./Header.scss";
-import Toolbar from "@material-ui/core/Toolbar";
+import {
+  Toolbar,
+  Typography,
+  // AppBar,
+  Button,
+} from "@material-ui/core/";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import NavDrawer from "../NavDrawer/NavDrawer";
-import AppBar from "@material-ui/core/AppBar";
-import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { MenuContext } from "../../contexts/menu.context";
@@ -45,9 +48,9 @@ export default function Header({ pageName }) {
         >
           <MenuIcon />
         </IconButton>
-        <h1 className={classes.title} variant="h6" noWrap>
+        <Typography className={classes.title} variant="h6" component="h1" noWrap>
           {pageName}
-        </h1>
+        </Typography>
         <div
           className={classes.user}
           style={{ position: "absolute", right: "15px" }}

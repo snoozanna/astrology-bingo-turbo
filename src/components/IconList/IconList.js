@@ -7,6 +7,7 @@ import SignSymbol from "../ChartList/SignSymbol";
 import { makeStyles } from "@material-ui/core/styles";
 import { BirthChartContext } from "../../contexts/birthchart.context";
 import { GameContext } from "./../../contexts/game.context";
+import { v4 as uuidv4 } from 'uuid';
 
 const useStyles = makeStyles({
   signSymbol: {
@@ -24,7 +25,7 @@ const useStyles = makeStyles({
   listItem: {
     margin: "auto",
     maxWidth: "fit-content",
-    padding: "7 15 15",
+    padding: "7px 15px 15px",
     border: "1px black solid",
     borderRadius: 15,
     // backgroundColor: "lavender",
@@ -33,7 +34,7 @@ const useStyles = makeStyles({
   alreadyCalled: {
     margin: "auto",
     maxWidth: "fit-content",
-    padding: "7 15 15",
+    padding: "7px 15px 15px",
     border: "1px black solid",
     borderRadius: 15,
     backgroundColor: "#E31C79",
@@ -69,22 +70,14 @@ const IconList = ({ player }) => {
   };
 
   return (
-    <>
       <List className={classes.listGroup}>
-        {Object.entries(player).map(([key, value]) => {
-          if (!BirthChart.planets.includes(key)) {
+        {Object.entries(player).map(([planet, sign]) => {
+          if (!BirthChart.planets.includes(planet)) {
             return null;
           }
-
-          const sign = value;
-          const planet = key;
-          // console.log("planet,sign", planet, sign);
-
-          // console.log(checkCall(planet, sign));
           return (
-            <>
-              {/* <ListItem className={classes.listItem}> */}
               <ListItem
+              key={uuidv4()}
                 className={`${
                   checkCall(planet, sign)
                     ? classes.alreadyCalled
@@ -95,11 +88,9 @@ const IconList = ({ player }) => {
                   <SignSymbol sign={sign} planet={planet} />
                 </ListItemIcon>
               </ListItem>
-            </>
           );
         })}
       </List>
-    </>
   );
 };
 
