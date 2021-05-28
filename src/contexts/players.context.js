@@ -1,10 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { firestore as db } from "./../firebase";
 import { useToasts } from "react-toast-notifications";
-<<<<<<< Updated upstream
-import { v4 as uuidv4 } from "uuid";
-=======
->>>>>>> Stashed changes
+// import { v4 as uuidv4 } from "uuid";
 import { BirthChartContext } from "./birthchart.context";
 import { TIME_API_KEY } from "./../config";
 import ChartImage from "../components/ChartImage/ChartImage";
@@ -29,7 +26,6 @@ export const PlayersContext = createContext({
 
 export const PlayersProvider = (props) => {
   const [players, setPlayers] = useState([
-<<<<<<< Updated upstream
     {
       location: "leeds",
       firstName: "Robert",
@@ -65,51 +61,12 @@ export const PlayersProvider = (props) => {
         ownerName: "Robert De Niro",
       },
     },
-=======
-    // {
-    //   location: "leeds",
-    //   firstName: "Robert",
-    //   lastName: "De Niro",
-    //   email: "rob@rob.com",
-    //   datetime: "1967-08-01T09:01",
-    //   utcoffset: 1,
-    //   latitude: 53.8007554,
-    //   longitude: -1.5490774,
-    //   _id: "34dde",
-    //   chartData: {
-    //     Sun: "Leo",
-    //     Mercury: "Cancer",
-    //     Venus: "Virgo",
-    //     Mars: "Scorpio",
-    //     Jupiter: "Leo",
-    //     Saturn: "Aries",
-    //     Uranus: "Virgo",
-    //     Neptune: "Scorpio",
-    //     Pluto: "Virgo",
-    //     Chiron: "Pisces",
-    //     "North Node": "Taurus",
-    //     "South Node": "Scorpio",
-    //     Syzygy: "Capricorn",
-    //     "Pars Fortuna": "Cancer",
-    //     birthday: "1967/08/01",
-    //     time: "0901",
-    //     latitude: 53.8007554,
-    //     longitude: -1.5490774,
-    //     Ascendant: "Virgo",
-    //     Descendant: "Pisces",
-    //     Moon: "Gemini",
-    //     ownerName: "Robert De Niro",
-    //   },
-    // },
->>>>>>> Stashed changes
   ]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const { addToast } = useToasts();
 
-<<<<<<< Updated upstream
-=======
   useEffect(() => {
     db.collection(playerCollectionName).get().then((snapshot) => {
     console.log("snapshot", snapshot);
@@ -137,7 +94,6 @@ export const PlayersProvider = (props) => {
 
 
   // const { uuidv4 } = useContext(UtilitiesContext);
->>>>>>> Stashed changes
   const { BirthChart } = useContext(BirthChartContext);
   const createBirthChartURL = ({
     datetime,
@@ -257,11 +213,7 @@ export const PlayersProvider = (props) => {
     });
   };
 
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
-  const showChart = ({ player }, format = "list" | "image") => {
+  const showChart = ({ player }, format = "list") => {
     console.log("player", player);
     console.log("format", format);
     if (format === "list") {

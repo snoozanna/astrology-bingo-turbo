@@ -1,10 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 import { BirthChartContext } from "./birthchart.context";
-<<<<<<< Updated upstream
 import { getRandomIntInclusive } from "./../utils/utils";
-=======
-import { getRandomIntInclusive } from "./../utilities";
->>>>>>> Stashed changes
 
 export const GameContext = createContext({
   getRandomPlanet: () => {},
