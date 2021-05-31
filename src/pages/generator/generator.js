@@ -21,51 +21,45 @@ const useStyles = makeStyles({
 
 function Generator() {
   const classes = useStyles();
-  const { pick, alreadyCalled } = useContext(GameContext);
-  let p = "Mars";
-  let s = "Leo";
+  const { pick, alreadyCalled, reset } = useContext(GameContext);
+
 
   const getPlanet = (alreadyCalled) => {
+    let lastPlanet = ""
     if (alreadyCalled.length > 0) {
-      // debugger;
-      let lastPlanet = alreadyCalled[alreadyCalled.length - 1].planet;
-      p = lastPlanet;
-      return p;
+      lastPlanet = alreadyCalled[alreadyCalled.length - 1].planet;
     }
-    return p;
+    return lastPlanet;
   };
-  getPlanet(alreadyCalled);
+  const p = getPlanet(alreadyCalled);
 
   const getSign = (alreadyCalled) => {
+    let lastSign = "";
     if (alreadyCalled.length > 0) {
-      let lastSign = alreadyCalled[alreadyCalled.length - 1].sign;
-      s = lastSign;
+      lastSign = alreadyCalled[alreadyCalled.length - 1].sign;
     }
-    return s;
+    return lastSign;
   };
-  getSign(alreadyCalled);
+  const s = getSign(alreadyCalled);
 
-  let pp = "";
-  let ps = "";
   const getPreviousPlanet = (alreadyCalled) => {
+    let previousPlanet = "";
     if (alreadyCalled.length > 1) {
       // debugger;
-      let previousPlanet = alreadyCalled[alreadyCalled.length - 2].planet;
-      pp = previousPlanet;
-      return pp;
+      previousPlanet = alreadyCalled[alreadyCalled.length - 2].planet;
     }
-    return pp;
+    return previousPlanet;
   };
-  getPreviousPlanet(alreadyCalled);
+  const pp = getPreviousPlanet(alreadyCalled);
 
   const getPreviousSign = (alreadyCalled) => {
+    let previousSign = "";
     if (alreadyCalled.length > 1) {
-      let previousSign = alreadyCalled[alreadyCalled.length - 2].sign;
-      ps = previousSign;
+      previousSign = alreadyCalled[alreadyCalled.length - 2].sign;
     }
-    return ps;
+    return previousSign;
   };
-  getPreviousSign(alreadyCalled);
+  const ps = getPreviousSign(alreadyCalled);
 
   return (
     <>
@@ -75,15 +69,15 @@ function Generator() {
           {/* <div className="controlsContainer"> */}
           {/* <PhraseDisplay planet={"Jupiter"} sign={"Saturn"} /> */}
           <div className="callBtnContainer">
-            <button className="callBtn" onClick={() => pick()}>
+            <button className="callBtn" onClick={pick}>
               CALL
             </button>
           </div>
-          <div className="resetBtn">
+          <div className="resetBtn" onClick={reset}>
             <button>RESET GAME</button>
           </div>
 
-          <PreviousCall planet={pp} sign={ps} />
+          {ps && pp && <PreviousCall planet={pp} sign={ps} />}
           <PhraseDisplay planet={p} sign={s} />
           {/* </div> */}
           {/* <div className="callsContainer"> */}

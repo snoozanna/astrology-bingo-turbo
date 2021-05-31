@@ -1,6 +1,10 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useState } from "react";
+import { firestore as db } from "./../firebase";
 import { signs, planets } from "./../constants";
 import { getRandomIntInclusive } from "./../utils/utils";
+
+const PICKED_COLLECTION_NAME = 'picked';
+const POTENTIAL_PICKS_COLLECTION_NAME = 'potential-picks';
 
 export const GameContext = createContext({
   getRandomPlanet: () => {},
@@ -14,7 +18,7 @@ export const GameProvider = (props) => {
   const [alreadyCalled, setAlreadyCalled] = useState([]);
   const [potentialCallList, setPotentialCallList] = useState([]);
 
-//create an array of potentials then save to context
+  //create an array of potentials then save to context
   if (!potentialCallList.length) {
     const calls = [];
     for (const sign of signs) {
@@ -48,7 +52,7 @@ export const GameProvider = (props) => {
 
     // Find the object
     const pickedItemIndex = potentialCallList.findIndex(
-      ({ sign, planet }) => sign === picked.sign && planet === picked.planet,
+      ({ sign, planet }) => sign === picked.sign && planet === picked.planet
     );
 
     // Todo  move from 'potentialCallList' to 'alreadyCalled'
@@ -65,12 +69,17 @@ export const GameProvider = (props) => {
     // this.save();
   };
 
+  const reset = () => {
+    setAlreadyCalled([]);
+  };
+
   return (
     <GameContext.Provider
       value={{
         getRandomPlanet,
         getRandomSign,
         pick,
+        reset,
         alreadyCalled,
         potentialCallList,
       }}

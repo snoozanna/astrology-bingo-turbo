@@ -1,57 +1,53 @@
 import React, { useContext } from "react";
 import "./public-display.scss";
 import Header from "./../../components/Header/Header";
-import GameDisplayGrid from "./../../components/GameDisplay/GameDisplayGrid.js";
+// import GameDisplayGrid from "./../../components/GameDisplay/GameDisplayGrid.js";
 import CurrentCall from "./../../components/CurrentCall/CurrentCall.js";
 import PreviousCall from "../../components/PreviousCall/PreviousCall";
 import { GameContext } from "./../../contexts/game.context";
 
 function PublicDisplay() {
   const { alreadyCalled } = useContext(GameContext);
-  let p = "";
-  let s = "";
+  console.log("alreadyCalled", alreadyCalled);
+  // debugger;
 
   const getPlanet = (alreadyCalled) => {
+    let lastPlanet = "";
     if (alreadyCalled.length > 0) {
-      // debugger;
-      let lastPlanet = alreadyCalled[alreadyCalled.length - 1].planet;
-      p = lastPlanet;
-      return p;
+      lastPlanet = alreadyCalled[alreadyCalled.length - 1].planet;
     }
-    return p;
+    return lastPlanet;
   };
-  getPlanet(alreadyCalled);
+  const p = getPlanet(alreadyCalled);
 
   const getSign = (alreadyCalled) => {
+    let lastSign = "";
     if (alreadyCalled.length > 0) {
-      let lastSign = alreadyCalled[alreadyCalled.length - 1].sign;
-      s = lastSign;
+      lastSign = alreadyCalled[alreadyCalled.length - 1].sign;
     }
-    return s;
+    return lastSign;
   };
-  getSign(alreadyCalled);
+  const s = getSign(alreadyCalled);
 
-  let pp = "Mars";
-  let ps = "Leo";
   const getPreviousPlanet = (alreadyCalled) => {
+    let previousPlanet = "";
     if (alreadyCalled.length > 1) {
       // debugger;
-      let previousPlanet = alreadyCalled[alreadyCalled.length - 2].planet;
-      pp = previousPlanet;
-      return pp;
+      previousPlanet = alreadyCalled[alreadyCalled.length - 2].planet;
     }
-    return pp;
+    return previousPlanet;
   };
-  getPreviousPlanet(alreadyCalled);
+  const pp = getPreviousPlanet(alreadyCalled);
 
   const getPreviousSign = (alreadyCalled) => {
+    let previousSign = "";
     if (alreadyCalled.length > 1) {
-      let previousSign = alreadyCalled[alreadyCalled.length - 2].sign;
-      ps = previousSign;
+      previousSign = alreadyCalled[alreadyCalled.length - 2].sign;
     }
-    return ps;
+    return previousSign;
   };
-  getPreviousSign(alreadyCalled);
+  const ps = getPreviousSign(alreadyCalled);
+
   return (
     <>
       <div className="App">
@@ -59,7 +55,7 @@ function PublicDisplay() {
         <main className="gameContainer">
           {/* <GameDisplayGrid /> */}
           <CurrentCall planet={p} sign={s} />
-          <PreviousCall planet={pp} sign={ps} />
+          {ps && pp && <PreviousCall planet={pp} sign={ps} />}
         </main>
       </div>
     </>

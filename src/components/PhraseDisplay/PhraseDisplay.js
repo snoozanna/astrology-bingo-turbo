@@ -11,6 +11,11 @@ import { catchPhraseDict } from "./../../utils/utils";
 const PhraseDisplay = ({ planet, sign }) => {
   // console.log("from phrase display", planet, sign);
 
+  if(!planet && !sign){
+    console.log(`No planet and sign provided`);
+    return null;
+  }
+
   const getCatchPhrase = (planet, sign) => {
     // debugger;
     if (typeof planet !== "string") {
