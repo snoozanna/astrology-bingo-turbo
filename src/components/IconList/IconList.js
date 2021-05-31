@@ -5,7 +5,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import SignSymbol from "../ChartList/SignSymbol";
 import { makeStyles } from "@material-ui/core/styles";
-import { BirthChartContext } from "../../contexts/birthchart.context";
+import { signs, planets } from "./../../constants";
 import { GameContext } from "./../../contexts/game.context";
 import { v4 as uuidv4 } from 'uuid';
 
@@ -50,7 +50,6 @@ const useStyles = makeStyles({
 
 const IconList = ({ player }) => {
   const { alreadyCalled } = useContext(GameContext);
-  const { BirthChart } = useContext(BirthChartContext);
   // console.log("alreadyCalled", alreadyCalled);
 
   const classes = useStyles();
@@ -72,7 +71,7 @@ const IconList = ({ player }) => {
   return (
       <List className={classes.listGroup}>
         {Object.entries(player).map(([planet, sign]) => {
-          if (!BirthChart.planets.includes(planet)) {
+          if (!planets.includes(planet)) {
             return null;
           }
           return (

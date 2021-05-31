@@ -44,9 +44,9 @@ const PlayerListing = ({ player }) => {
   const [isOn, toggleIsOn] = useToggle();
 
   return (
-      <li key={player._id} className={"listGroupItem"}>
-        <div className={"nameContainer"}>
-          <h3 className={"firstName"}>
+      <div key={player._id} className="listGroupItem">
+        <div className="nameContainer">
+          <h3 className="firstName">
           <span className={classes.block}>{player.firstName}</span>
           <span className={classes.block}>{player.lastName}</span>
           </h3>
@@ -59,21 +59,21 @@ const PlayerListing = ({ player }) => {
             <IconList player={player.chartData} />
           )}
         </div>
-        <div className={"btnContainer"}>
+        <div className="btnContainer">
           <Button
-            className={"deleteBtn btn"}
+            className="deleteBtn btn"
             onClick={() => deletePlayer(player._id)}
           >
             &times;
           </Button>
-          <Button className={"btn"} onClick={() => toggleIsOn()}>
+          <Button className="btn" onClick={() => toggleIsOn()}>
             Toggle Chart
           </Button>
-          <Button className={"btn"} onClick={() => {}}>
+          <Button className="btn" onClick={() => {}}>
             Print
           </Button>
         </div>
-      </li>
+      </div>
   );
 };
 

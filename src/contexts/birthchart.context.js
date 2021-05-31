@@ -1,13 +1,11 @@
-import React, { createContext, useContext, useState } from "react";
-import { v4 as uuidv4 } from 'uuid';
-
+import React, { createContext } from "react";
+import { signs, planets } from "./../constants";
 
 export const BirthChartContext = createContext({
   BirthChart: () => {},
 });
 
 export const BirthChartProvider = (props) => {
-
   /****************************************************************
    * Constructor for a basic birthchart
    * Holds static dictionaries; imagery and birthchart data
@@ -33,7 +31,7 @@ export const BirthChartProvider = (props) => {
       Ascendant,
       Descendant,
       Moon,
-      _id = uuidv4(),
+      _id,
       image = null,
     }) {
       // console.log("chart", arguments[0]);
@@ -164,7 +162,6 @@ export const BirthChartProvider = (props) => {
             }
           : Moon;
 
-      this._id = _id;
     }
 
     markCalled({ planet: p, sign }) {
@@ -174,7 +171,7 @@ export const BirthChartProvider = (props) => {
       }
     }
     unMarkCalled() {
-      for (const planet of BirthChart.planets) {
+      for (const planet of planets) {
         this[planet].called = false;
       }
     }
@@ -197,8 +194,8 @@ export const BirthChartProvider = (props) => {
     static signArr = (data) => {
       const arr = [];
       console.log("data", data);
-      Object.entries(data.data).forEach(([key, value]) => {
-        if (BirthChart.planets.includes(key)) {
+      Object.entries(data.data).forEach(([planet, value]) => {
+        if (planets.includes(planet)) {
           const { sign } = value;
           console.log("sign", sign);
           arr.push(sign);
@@ -207,51 +204,6 @@ export const BirthChartProvider = (props) => {
       console.log("arr", arr);
       return arr;
     };
-
-    static descDict = Object.freeze({
-      Aries: "Libra",
-      Taurus: "Scorpio",
-      Gemini: "Sagittarius",
-      Cancer: "Capricorn",
-      Leo: "Aquarius",
-      Virgo: "Pisces",
-      Libra: "Aries",
-      Scorpio: "Taurus",
-      Sagittarius: "Gemini",
-      Capricorn: "Cancer",
-      Aquarius: "Leo",
-      Pisces: "Virgo",
-    });
-
-    static signs = Object.freeze([
-      "Aries",
-      "Taurus",
-      "Gemini",
-      "Cancer",
-      "Leo",
-      "Virgo",
-      "Libra",
-      "Scorpio",
-      "Sagittarius",
-      "Capricorn",
-      "Aquarius",
-      "Pisces",
-    ]);
-
-    static planets = Object.freeze([
-      "Sun",
-      "Mercury",
-      "Venus",
-      "Mars",
-      "Jupiter",
-      "Saturn",
-      "Uranus",
-      "Neptune",
-      "Pluto",
-      "Ascendant",
-      "Descendant",
-      "Moon",
-    ]);
   }
 
   return (

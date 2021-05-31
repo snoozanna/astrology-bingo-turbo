@@ -137,7 +137,8 @@ function BirthDataForm({ initialValues }) {
     const locationSearchTerm = getValues("locationSearchTerm");
     // console.log('locationSearchTerm', locationSearchTerm);
     try {
-      const places = await getGeo(locationSearchTerm);
+      const { results: places } = await getGeo(locationSearchTerm);
+      console.log("places", places);
       updateState({ possibleLocations: places });
     } catch (err) {
       addToast({
@@ -152,7 +153,7 @@ function BirthDataForm({ initialValues }) {
       const offset = await findUTCOffset(
         getValues("datetime"),
         getValues("latitude"),
-        getValues("longitude"),
+        getValues("longitude")
       );
       console.log("offset", offset);
       setValue("utcoffset", offset, {
@@ -197,7 +198,9 @@ function BirthDataForm({ initialValues }) {
   const onSubmit = async (formValues) => {
     console.log("formValues", formValues);
 
-    formValues._id = id; // pulled from the URL using router 'useParams' hook
+    if (id) {
+      formValues._id = id; // pulled from the URL using router 'useParams' hook
+    }
 
     if (populated) {
       const updates = {};
@@ -305,7 +308,7 @@ function BirthDataForm({ initialValues }) {
         />
 
         <Button
-          onClick={() => getLocations()}
+          onClick={getLocations}
           type="button"
           variant="contained"
           color="primary"

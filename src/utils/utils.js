@@ -1,7 +1,7 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useReducer } from "react";
 // import { useToasts } from "react-toast-notifications";
 
-// import { 
+// import {
 //   // GEO_API_KEY,
 //   // TIME_API_KEY
 // } from "../config";
@@ -221,39 +221,81 @@ export function deepFreeze(object) {
 
 //TODO work out why M is undefined
 
-export const makeCall = async (url = "", options = {}) => {
-  try {
-    const response = await fetch(url, options);
-    if (!response.ok) {
-      throw response;
-    }
-    const data = await response.json();
-    return data;
-  } catch (err) {
-    // addToast({
-    //   html: `<h2>Error</h2><p>${err.message}</p>`,
-    //   classes: ["toast", "error"],
-    // });
-    return err;
+export const useFetch = async (
+  url = "",
+  options = {
+    headers: {
+      "Content-Type": "application/json",
+    },
   }
-};
+) => {
+  const initialState = {
+    error: null,
+    loading: false,
+    loaded: false,
+    data: null,
+  };
 
-// async function makeCall(url = "", options = {}) {
-//   try {
-//     const response = await fetch(url, options);
-//     if (!response.ok) {
-//       throw response;
-//     }
-//     const data = await response.json();
-//     return data;
-//   } catch (err) {
-//     addToast(({
-//       html: `<h2>Error</h2><p>${err.message}</p>`,
-//       classes: ["toast", "error"],
-//     });
-//     return err;
-//   }
-// }
+  const callStates = {
+    loading: 'loading',
+    error: 'error',
+    loaded: 'loaded',
+  };
+
+  const reducer = (state, action) => {
+    switch (action.type) {
+      case callStates.loading:
+        return {
+          loading: true,
+        };
+      case callStates.error:
+        return {
+          loading: false,
+          loaded: true,
+          error: action.payload,
+        };
+      case callStates.loaded:
+        return {
+          loaded: true,
+          data: action.payload,
+        };
+      default:
+        console.log(
+          `Unrecognised value: ${action.type} passed to useFetch reducer`
+        );
+        return state;
+    }
+  };
+
+  const [state, dispatch] = useState(reducer, initialState);
+
+  const { error, loading, loaded, data } = state;
+
+
+
+  useEffect(() => {
+    if (!loading) {
+      dispatch({ type: callStates.loading });
+      (async () => {
+        try {
+          const response = await fetch(url, options);
+          if (!response.ok) {
+            throw response;
+          }
+          const data = await response.json();
+          console.log('data', data);
+          
+          dispatch({ type: callStates.loaded, payload: data });
+        } catch (err) {
+          dispatch({ type: callStates.error, payload: err });
+          return err;
+        }
+      })();
+    }
+  }, [callStates.error, callStates.loaded, callStates.loading, loading, options, url]);
+
+  return { error, loading, loaded, data };
+};
 
 export function connectToWebSocket(
   socketURL = "ws://localhost:3001/",
@@ -267,7 +309,7 @@ export function connectToWebSocket(
   errorHandler = function errorHandler(err) {
     console.log(err);
   },
-  closeHandler,
+  closeHandler
 ) {
   // let i = 1;
   // Create WebSocket connection.

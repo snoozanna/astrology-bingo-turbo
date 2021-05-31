@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState } from "react";
-import { BirthChartContext } from "./birthchart.context";
+import { signs, planets } from "./../constants";
 import { getRandomIntInclusive } from "./../utils/utils";
 
 export const GameContext = createContext({
@@ -11,15 +11,14 @@ export const GameContext = createContext({
 });
 
 export const GameProvider = (props) => {
-  const { BirthChart } = useContext(BirthChartContext);
   const [alreadyCalled, setAlreadyCalled] = useState([]);
   const [potentialCallList, setPotentialCallList] = useState([]);
 
 //create an array of potentials then save to context
   if (!potentialCallList.length) {
     const calls = [];
-    for (const sign of BirthChart.signs) {
-      for (const planet of BirthChart.planets) {
+    for (const sign of signs) {
+      for (const planet of planets) {
         calls.push({ planet, sign });
       }
     }
@@ -27,15 +26,15 @@ export const GameProvider = (props) => {
   }
 
   const getRandomPlanet = () => {
-    const Rn = getRandomIntInclusive(0, BirthChart.planets.length - 1);
-    let planetToCall = BirthChart.planets[Rn];
+    const Rn = getRandomIntInclusive(0, planets.length - 1);
+    let planetToCall = planets[Rn];
     // console.log("planetToCall", planetToCall);
     return planetToCall;
   };
 
   const getRandomSign = () => {
-    const Rn = getRandomIntInclusive(0, BirthChart.signs.length - 1);
-    let signToCall = BirthChart.signs[Rn];
+    const Rn = getRandomIntInclusive(0, signs.length - 1);
+    let signToCall = signs[Rn];
     // console.log("signToCall", signToCall);
     return signToCall;
   };

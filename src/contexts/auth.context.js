@@ -16,14 +16,12 @@ export const AuthContext = createContext({
 });
 
 export const AuthProvider = (props) => {
-  // const [user, setUser] = useState(false);
+
   const [user, loading, error] = useAuthState(firebase.auth());
   const history = useHistory();
-  // console.log('history', history);
-  // console.log('user', user);
+
   const { addToast } = useToasts();
-  // const login = (user) => setUser(user);
-  // const logout = () => setUser(null);
+
 
   const login = ({ email, password }) => {
     console.log(email, password);

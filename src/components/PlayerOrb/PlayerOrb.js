@@ -7,7 +7,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useSpring, animated } from "react-spring";
 // import { Dimensions } from "react-native";
 
-import { BirthChartContext } from "../../contexts/birthchart.context";
+import { planets } from "./../../constants";
 
 const useStyles = makeStyles({
   ownerName: {
@@ -92,7 +92,6 @@ const chooseDelay = () => {
 // console.log("screen height", window.screen.availHeight);
 
 const PlayerOrb = ({ player }) => {
-  const { BirthChart } = useContext(BirthChartContext);
   // console.log("alreadyCalled", alreadyCalled);
 
   //orbs randomly change size, colour, move around
@@ -126,7 +125,7 @@ const PlayerOrb = ({ player }) => {
         </div>
         <List className={classes.listGroup}>
           {Object.entries(player).map(([planet, sign]) => {
-            if (!BirthChart.planets.includes(planet)) {
+            if (!planets.includes(planet)) {
               return null;
             }
             // console.log("player", player);

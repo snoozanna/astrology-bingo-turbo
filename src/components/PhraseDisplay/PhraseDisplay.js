@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import "./PhraseDisplay.scss";
-import { BirthChartContext } from "./../../contexts/birthchart.context";
+import { signs, planets } from "./../../constants";
 import { catchPhraseDict } from "./../../utils/utils";
 // import { makeStyles } from "@material-ui/core/styles";
 
@@ -9,7 +9,6 @@ import { catchPhraseDict } from "./../../utils/utils";
 // }));
 
 const PhraseDisplay = ({ planet, sign }) => {
-  const { BirthChart } = useContext(BirthChartContext);
   // console.log("from phrase display", planet, sign);
 
   const getCatchPhrase = (planet, sign) => {
@@ -26,17 +25,17 @@ const PhraseDisplay = ({ planet, sign }) => {
       );
     }
 
-    if (!BirthChart.planets.includes(planet)) {
+    if (!planets.includes(planet)) {
       throw new Error(
-        `Planet supplied to getCatchPhrase must be a recognised planet (One of ${BirthChart.planets.join(
+        `Planet supplied to getCatchPhrase must be a recognised planet (One of ${planets.join(
           ", ",
         )}). Received ${planet}`,
       );
     }
 
-    if (!BirthChart.signs.includes(sign)) {
+    if (!signs.includes(sign)) {
       throw new Error(
-        `Planet supplied to getCatchPhrase must be a recognised sign (One of ${BirthChart.signs.join(
+        `Planet supplied to getCatchPhrase must be a recognised sign (One of ${signs.join(
           ", ",
         )}). Received ${sign}`,
       );

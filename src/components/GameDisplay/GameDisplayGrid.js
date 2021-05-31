@@ -8,7 +8,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 
-import { BirthChartContext } from "./../../contexts/birthchart.context";
+import { signs, planets } from "./../../constants";
 import { GameContext } from "./../../contexts/game.context";
 
 const useStyles = makeStyles({
@@ -37,7 +37,6 @@ const useStyles = makeStyles({
 
 const GameDisplayGrid = () => {
   const classes = useStyles();
-  const { BirthChart } = useContext(BirthChartContext);
   const { alreadyCalled } = useContext(GameContext);
 
   const checkCall = (planet, sign) => {
@@ -89,8 +88,6 @@ const GameDisplayGrid = () => {
         <Text alreadyCalled={alreadyCalled} mySign={sign} myPlanet={planet} />
       </TableCell>
     );
-
-    return ControlledCell;
   };
 
   // useEffect(() => {
@@ -103,7 +100,7 @@ const GameDisplayGrid = () => {
         <TableHead className={classes.head}>
           <TableRow>
             <TableCell> </TableCell>
-            {BirthChart.planets.map((planet) => (
+            {planets.map((planet) => (
               <TableCell key={planet} className={classes.head}>
                 {planet}{" "}
               </TableCell>
@@ -111,7 +108,7 @@ const GameDisplayGrid = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {BirthChart.signs.map((sign) => (
+          {signs.map((sign) => (
             <TableRow key={sign}>
               <TableCell
                 component="th"
@@ -121,7 +118,7 @@ const GameDisplayGrid = () => {
               >
                 {sign}
               </TableCell>
-              {BirthChart.planets.map((planet) => (
+              {planets.map((planet) => (
                 // <TableCell sign={sign} planet={planet}>
                 //   <Text
                 //     alreadyCalled={alreadyCalled}

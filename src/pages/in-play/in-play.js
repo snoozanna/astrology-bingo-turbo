@@ -31,17 +31,17 @@ function InPlay() {
         <main>
           <div className={classes.playersContainer}>
             {/* <ul className={classes.listGroup}> */}
-            <Grid container spacing={3}>
+            <Grid container spacing={3} component="ul">
               {players.map((player) => (
                 // console.log("player", player),
-                <Grid key={uuidv4()} item xs={6} sm={4}>
+                <Grid key={uuidv4()} item xs={6} sm={4} component="li">
                   <PlayerListing player={player} />
                 </Grid>
               ))}
             </Grid>
             {/* </ul> */}
           </div>
-          <button onClick={() => deleteAllPlayers}>Delete all players</button>
+          <button onClick={deleteAllPlayers}>Delete all players</button>
         </main>
       </div>
   );

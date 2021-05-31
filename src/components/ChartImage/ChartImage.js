@@ -4,9 +4,8 @@ import ChartTemplate from "../ChartTemplate/ChartTemplate";
 import SignSymbol from "../ChartList/SignSymbol";
 import SignWord from "../ChartList/SignWord";
 
-import { BirthChartContext } from "../../contexts/birthchart.context";
+import { signs, planets } from "./../../constants";
 const ChartImage = ({ player }) => {
-  const { BirthChart } = useContext(BirthChartContext);
 
   const getIconLocation = (planet) => {
     if (!planet) {
@@ -131,11 +130,9 @@ const ChartImage = ({ player }) => {
   return (
     <>
       <ChartTemplate>
-        {Object.entries(player).map(([key, value]) => {
-          if (BirthChart.planets.includes(key)) {
+        {Object.entries(player).map(([planet, sign]) => {
+          if (planets.includes(planet)) {
             // console.log(key, value);
-            const sign = value;
-            const planet = key;
             // console.log("planet", planet);
             return (
               <>
