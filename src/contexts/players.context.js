@@ -2,7 +2,7 @@ import React, { createContext, useState, useEffect } from "react";
 import { firestore as db } from "./../firebase";
 import { useToasts } from "react-toast-notifications";
 import { TIME_API_KEY } from "./../config";
-import { descDict } from './../constants';
+import { descDict } from "./../constants";
 import ChartImage from "../components/ChartImage/ChartImage";
 import ChartList from "./../components/ChartList/ChartList";
 
@@ -51,9 +51,8 @@ export const PlayersProvider = (props) => {
     };
 
     // if(!players.length){
-      getPlayers();
+    getPlayers();
     // }
-    
 
     // Watch the collection
     db.collection(playerCollectionName).onSnapshot((snapshot) => {
@@ -75,7 +74,7 @@ export const PlayersProvider = (props) => {
       }
     });
   }, []); // ignore exhaustive deps. we only want this to run once
-
+ 
   // const { BirthChart } = useContext(BirthChartContext);
   const createBirthChartURL = ({
     datetime,
@@ -120,7 +119,7 @@ export const PlayersProvider = (props) => {
       console.log("birthChartData", birthChartData);
       newPlayer.chartData = JSON.parse(birthChartData);
       console.log("new player with chart", newPlayer);
-      debugger;
+      // debugger;
       newPlayer.chartData.Ascendant = newPlayer.chartData.Asc;
       delete newPlayer.chartData.Asc;
       newPlayer.chartData.Descendant = descDict[newPlayer.chartData.Ascendant];
@@ -152,7 +151,7 @@ export const PlayersProvider = (props) => {
         } ${updates.lastName ? updates.lastName : original.lastName}`,
         {
           appearance: "success",
-        }
+        },
       );
     } catch (err) {
       console.log("updatePlayer err", err);
@@ -164,7 +163,7 @@ export const PlayersProvider = (props) => {
 
   const deletePlayer = async (id) => {
     // Get index
-    debugger;
+    // debugger;
     console.log("deleting player with id", id);
     const index = players.findIndex((player) => player._id === id);
 
@@ -194,7 +193,7 @@ export const PlayersProvider = (props) => {
 
   const deleteAllPlayers = () => {
     const consent = window.confirm(
-      "Are you sure you want to delete all the players?"
+      "Are you sure you want to delete all the players?",
     );
     if (consent) {
       for (const player of players) {
