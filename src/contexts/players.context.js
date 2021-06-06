@@ -143,7 +143,7 @@ export const PlayersProvider = (props) => {
         } ${updates.lastName ? updates.lastName : original.lastName}`,
         {
           appearance: "success",
-        }
+        },
       );
     } catch (err) {
       console.log("updatePlayer err", err);
@@ -155,7 +155,7 @@ export const PlayersProvider = (props) => {
 
   const deletePlayer = async (id) => {
     // Get index
-    debugger;
+    // debugger;
     console.log("deleting player with id", id);
     const index = players.findIndex((player) => player._id === id);
 
@@ -185,7 +185,7 @@ export const PlayersProvider = (props) => {
 
   const deleteAllPlayers = async () => {
     const consent = window.confirm(
-      "Are you sure you want to delete all the players?"
+      "Are you sure you want to delete all the players?",
     );
     if (consent) {
       await clearCollection(players, PLAYER_COLLECTION_NAME);
