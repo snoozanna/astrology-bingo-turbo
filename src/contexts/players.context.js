@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
-import { firestore as db } from "./../firebase";
+// import { firestore as db } from "./../firebase";
 import {
   clearCollection,
   addOne,

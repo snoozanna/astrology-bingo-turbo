@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect, useCallback } from "react";
-import { firestore as db } from "./../firebase";
+// import { firestore as db } from "./../firebase";
 import { signs, planets } from "./../constants";
 import { getRandomIntInclusive } from "./../utils/utils";
 import {clearCollection, addOne, addMany, getCollection, deleteOne, bindListeners} from './../utils/firebase.utils';
