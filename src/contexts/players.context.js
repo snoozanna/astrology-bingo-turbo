@@ -1,14 +1,24 @@
 import React, { createContext, useState, useEffect } from "react";
 import { firestore as db } from "./../firebase";
+import {
+  clearCollection,
+  addOne,
+  getCollection,
+  updateOne,
+  deleteOne,
+  bindListeners,
+} from "./../utils/firebase.utils";
 import { useToasts } from "react-toast-notifications";
 import { TIME_API_KEY } from "./../config";
-import { descDict } from './../constants';
+import { descDict } from "./../constants";
 import ChartImage from "../components/ChartImage/ChartImage";
 import ChartList from "./../components/ChartList/ChartList";
 
+const ASTRO_SERVER = process.env.ASTRO_SERVER || "http://localhost:8000";
+
 // import cloneDeep from 'lodash.cloneDeep'
 
-const playerCollectionName = "players";
+const PLAYER_COLLECTION_NAME = "players";
 
 //we provide empty fn as defaults so it doesn't break the app if forget to pass a fn
 export const PlayersContext = createContext({
@@ -34,14 +44,14 @@ export const PlayersProvider = (props) => {
     // Get initial data
     const getPlayers = async () => {
       try {
-        const snapshot = await db.collection(playerCollectionName).get();
-        console.log("snapshot", snapshot);
-        const newPlayers = snapshot.docs.map((doc) => {
-          console.log("new id", doc.id);
-          return { _id: doc.id, ...doc.data() };
-        });
+        const newPlayers = await getCollection(PLAYER_COLLECTION_NAME);
+        console.log(
+          "🚀 ~ file: players.context.js ~ line 41 ~ getPlayers ~ newPlayers",
+          newPlayers
+        );
 
         setPlayers(newPlayers);
+        bindListeners(PLAYER_COLLECTION_NAME);
       } catch (err) {
         console.log(err);
         addToast(err.message, {
@@ -51,30 +61,11 @@ export const PlayersProvider = (props) => {
     };
 
     // if(!players.length){
-      getPlayers();
+    getPlayers();
     // }
-    
 
     // Watch the collection
-    db.collection(playerCollectionName).onSnapshot((snapshot) => {
-      console.log("snapshot", snapshot);
-      let changes = snapshot.docChanges();
-      for (const change of changes) {
-        switch (change.type) {
-          case "added":
-            console.log("added", change);
-            getPlayers();
-            break;
-          case "removed":
-            console.log("removed", change, change.doc.id);
-            getPlayers();
-            break;
-          default:
-            return;
-        }
-      }
-    });
-  }, []); // ignore exhaustive deps. we only want this to run once
+  }, [addToast]); // ignore exhaustive deps. we only want this to run once
 
   // const { BirthChart } = useContext(BirthChartContext);
   const createBirthChartURL = ({
@@ -93,7 +84,7 @@ export const PlayersProvider = (props) => {
     params.append("timestamp", timestamp);
     params.append("key", TIME_API_KEY);
 
-    const fetchURL = `http://localhost:8000/formatData?date=${dob}&time=${tob}&location1=${latitude}&location2=${longitude}&utc=${utcoffset}&action=`;
+    const fetchURL = `${ASTRO_SERVER}/formatData?date=${dob}&time=${tob}&location1=${latitude}&location2=${longitude}&utc=${utcoffset}&action=`;
 
     return fetchURL;
   };
@@ -120,13 +111,13 @@ export const PlayersProvider = (props) => {
       console.log("birthChartData", birthChartData);
       newPlayer.chartData = JSON.parse(birthChartData);
       console.log("new player with chart", newPlayer);
-      debugger;
+      // debugger;
       newPlayer.chartData.Ascendant = newPlayer.chartData.Asc;
       delete newPlayer.chartData.Asc;
       newPlayer.chartData.Descendant = descDict[newPlayer.chartData.Ascendant];
       // chartData.ownerName = `${firstName} ${lastName}`;
 
-      const docRef = await db.collection(playerCollectionName).add(newPlayer);
+      const docRef = await addOne(newPlayer, PLAYER_COLLECTION_NAME);
       console.log("docRef", docRef);
       console.log("Document written with ID: ", docRef.id);
 
@@ -145,7 +136,7 @@ export const PlayersProvider = (props) => {
   const updatePlayer = async (original, updates) => {
     console.log("updateItem", original, updates);
     try {
-      await db.collection.doc(original.id).update(updates);
+      await updateOne(original._id, updates, PLAYER_COLLECTION_NAME);
       addToast(
         `Updated ${
           updates.firstName ? updates.firstName : original.firstName
@@ -178,7 +169,7 @@ export const PlayersProvider = (props) => {
     const deletedPlayer = players[index];
 
     try {
-      await db.collection(playerCollectionName).doc(id).delete();
+      await deleteOne(id, PLAYER_COLLECTION_NAME);
 
       console.log("Document successfully deleted!");
       addToast(`Deleted ${deletedPlayer.firstName} ${deletedPlayer.lastName}`, {
@@ -192,14 +183,12 @@ export const PlayersProvider = (props) => {
     }
   };
 
-  const deleteAllPlayers = () => {
+  const deleteAllPlayers = async () => {
     const consent = window.confirm(
       "Are you sure you want to delete all the players?"
     );
     if (consent) {
-      for (const player of players) {
-        deletePlayer(player._id);
-      }
+      await clearCollection(players, PLAYER_COLLECTION_NAME);
     }
   };
 

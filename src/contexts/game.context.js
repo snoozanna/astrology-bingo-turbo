@@ -1,10 +1,12 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect, useCallback } from "react";
 import { firestore as db } from "./../firebase";
 import { signs, planets } from "./../constants";
 import { getRandomIntInclusive } from "./../utils/utils";
+import {clearCollection, addOne, addMany, getCollection, deleteOne, bindListeners} from './../utils/firebase.utils';
+import { useToasts } from "react-toast-notifications";
 
-const PICKED_COLLECTION_NAME = 'picked';
-const POTENTIAL_PICKS_COLLECTION_NAME = 'potential-picks';
+const PICKED_COLLECTION_NAME = "picked";
+const POTENTIAL_PICKS_COLLECTION_NAME = "potential-picks";
 
 export const GameContext = createContext({
   getRandomPlanet: () => {},
@@ -15,19 +17,73 @@ export const GameContext = createContext({
 });
 
 export const GameProvider = (props) => {
+  const { addToast } = useToasts();
+
   const [alreadyCalled, setAlreadyCalled] = useState([]);
   const [potentialCallList, setPotentialCallList] = useState([]);
 
-  //create an array of potentials then save to context
-  if (!potentialCallList.length) {
+  const getFullCallsList = () => {
     const calls = [];
     for (const sign of signs) {
       for (const planet of planets) {
         calls.push({ planet, sign });
       }
     }
-    setPotentialCallList(calls);
-  }
+    return calls;
+  };
+
+  // CALLS
+  // Load all possible calls to firestore
+  const upload = useCallback(async () => {
+    try {
+      await addMany(getFullCallsList(), POTENTIAL_PICKS_COLLECTION_NAME);
+      console.log("Potential calls loaded to firestore");
+    } catch (err) {
+      console.log(`Error loading calls to firestore: ${err.message}`);
+    }
+  }, []);
+
+  // GET calls list
+  const getCalls = useCallback(async () => {
+    try {
+      const calls = await getCollection(POTENTIAL_PICKS_COLLECTION_NAME);
+      console.log('calls successfully loaded', calls);
+      setPotentialCallList(calls);
+    } catch (err) {
+      console.log(err);
+      addToast(err.message, {
+        appearance: "error",
+      });
+    }
+  }, [addToast]);
+
+  // PICKS
+  const getPicks = useCallback(async () => {
+    try {
+      const picks = await getCollection(PICKED_COLLECTION_NAME);
+      console.log('picks', picks);
+      setAlreadyCalled(picks);
+    } catch (err) {
+      console.log(err);
+      addToast(err.message, {
+        appearance: "error",
+      });
+    }
+  }, [addToast]);
+
+  useEffect(() => {
+    (async () => {
+      await upload();
+      await getCalls();
+      await getPicks();
+
+      // react if calls change in firestore
+      bindListeners(POTENTIAL_PICKS_COLLECTION_NAME);
+
+      // react if picks changed in firestore
+      bindListeners(PICKED_COLLECTION_NAME)
+    })();
+  }, [getCalls, getPicks, upload]);
 
   const getRandomPlanet = () => {
     const Rn = getRandomIntInclusive(0, planets.length - 1);
@@ -43,34 +99,41 @@ export const GameProvider = (props) => {
     return signToCall;
   };
 
-  const pick = (picked = {}) => {
-    // console.log("in app.pick", picked, `appId: ${this._id}`);
-    if (!picked.planet) {
-      picked.planet = getRandomPlanet();
-      picked.sign = getRandomSign();
+  const pick = async (
+    pickedItem = {
+      planet: getRandomPlanet(),
+      sign: getRandomSign(),
     }
-
-    // Find the object
-    const pickedItemIndex = potentialCallList.findIndex(
-      ({ sign, planet }) => sign === picked.sign && planet === picked.planet
+  ) => {
+    // Find the item
+    const pickedCall = potentialCallList.find(
+      ({ sign, planet }) =>
+        sign === pickedItem.sign && planet === pickedItem.planet
     );
 
-    // Todo  move from 'potentialCallList' to 'alreadyCalled'
-    //Todo set State with new potentialcall list?
-    const pickedItem = potentialCallList.splice(pickedItemIndex, 1)[0];
-    pickedItem.callPosition = alreadyCalled.length + 1;
+    const pickedCallWithoutId = { ...pickedCall};
+    delete pickedCallWithoutId._id;
 
-    setAlreadyCalled([...alreadyCalled, pickedItem]);
-
-    // for (const player of players) {
-    //   player.markCalled(pickedItem);
-    // }
-
-    // this.save();
+    try {
+      await Promise.all([
+        addOne(pickedCallWithoutId, PICKED_COLLECTION_NAME),
+        deleteOne(pickedCall._id, POTENTIAL_PICKS_COLLECTION_NAME),
+      ]);
+    } catch (err) {
+      console.log(err);
+      addToast(err.message, {
+        appearance: "error",
+      });
+    }
   };
 
-  const reset = () => {
-    setAlreadyCalled([]);
+  const reset = async () => {
+    const consent = window.confirm("Are you sure you want to reset?");
+    if (consent) {
+      await clearCollection(alreadyCalled, PICKED_COLLECTION_NAME);
+      await clearCollection(potentialCallList, POTENTIAL_PICKS_COLLECTION_NAME);
+      await upload();
+    }
   };
 
   return (

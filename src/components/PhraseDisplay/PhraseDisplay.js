@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import "./PhraseDisplay.scss";
-import { signs, planets } from "./../../constants";
-import { catchPhraseDict } from "./../../utils/utils";
+import { signs, planets, catchPhraseDict } from "./../../constants";
 // import { makeStyles } from "@material-ui/core/styles";
 
 // const useStyles = makeStyles((theme) => ({
