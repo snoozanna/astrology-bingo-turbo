@@ -8,7 +8,11 @@ import ChartList from "./../components/ChartList/ChartList";
 
 // import cloneDeep from 'lodash.cloneDeep'
 
+// THIS IS THE SPREADSHEET CONNECTED TO THE FORM
 const playerCollectionName = "players";
+
+// THIS IS THE SPREADSHEET CONNECTED TO THE ZAP
+// const playerCollectionName = "celebs";
 
 //we provide empty fn as defaults so it doesn't break the app if forget to pass a fn
 export const PlayersContext = createContext({
@@ -40,7 +44,13 @@ export const PlayersProvider = (props) => {
           console.log("new id", doc.id);
           return { _id: doc.id, ...doc.data() };
         });
-
+        for (const player of newPlayers) {
+          if (!player.chartData) {
+            console.log(player, "this one has no chart");
+            updatePlayer(player);
+            // return { _id: doc.id, ...doc.data() };
+          }
+        }
         setPlayers(newPlayers);
       } catch (err) {
         console.log(err);
@@ -74,7 +84,7 @@ export const PlayersProvider = (props) => {
       }
     });
   }, []); // ignore exhaustive deps. we only want this to run once
- 
+
   // const { BirthChart } = useContext(BirthChartContext);
   const createBirthChartURL = ({
     datetime,
