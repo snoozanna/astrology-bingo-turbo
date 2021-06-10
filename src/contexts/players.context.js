@@ -20,6 +20,9 @@ const ASTRO_SERVER = process.env.ASTRO_SERVER || "http://localhost:8000";
 
 const PLAYER_COLLECTION_NAME = "players";
 
+// THIS IS THE SPREADSHEET CONNECTED TO THE ZAP
+// const playerCollectionName = "celebs";
+
 //we provide empty fn as defaults so it doesn't break the app if forget to pass a fn
 export const PlayersContext = createContext({
   addPlayer: () => {},

@@ -5,14 +5,14 @@ import { PlayersContext } from "./../contexts/players.context";
 // MOVE CELEBS TO PLAYERS
 // on admin page, a button which says load celebs
 // loops over the documents in collection celebs
-// addPlayer for each of them (they are copied from celebs to players)
+// updatePlayer for each of them (they are copied from celebs to players)
 //set it up so can import different spreadsheets
 
 const dataCollectionName = "celebs";
 
 export const DataImport = () => {
   const { addToast } = useToasts();
-  const { addPlayer } = useContext(PlayersContext);
+  const { updatePlayer } = useContext(PlayersContext);
   const [data, setData] = useState([]);
 
   useEffect(() => {
