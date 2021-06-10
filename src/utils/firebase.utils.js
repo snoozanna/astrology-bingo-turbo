@@ -2,13 +2,14 @@ import { firestore as db } from "./../firebase";
 
 // CRUD
 // Create
-const addOne = async (data, collectionName) => {
-  if (!data) {
+const addOne = (data, collectionName) => {
+  /* If we had typescript we could avoid this. It's verbose but there to help in the future */
+  if (!data  || !Object.isObject(data)) {
     throw new Error(
       `No data provided to firebase addOne. Instead received ${data}`
     );
   }
-  if (!collectionName) {
+  if (!collectionName || typeof collectionName !== "string") {
     throw new Error(
       `No collectionName provided to firebase addOne. Instead received ${collectionName}`
     );
@@ -22,15 +23,17 @@ const addOne = async (data, collectionName) => {
   }
 };
 
-const addMany = async (data = [], collectionName) => {
-  if (!collectionName || typeof collectionName !== 'string') {
+const addMany = (data = [], collectionName) => {
+  if (!collectionName || typeof collectionName !== "string") {
     throw new Error(
       `No collection name provided to firebase addMany. Instead received ${collectionName}`
     );
   }
-  if(!Array.isArray(data)) {
+  if (!Array.isArray(data)) {
     throw new Error(
-      `Improper data provided to firebase addMany. Received ${JSON.stringify(data)}`
+      `Improper data provided to firebase addMany. Received ${JSON.stringify(
+        data
+      )}`
     );
   }
   const promises = [];
@@ -41,7 +44,7 @@ const addMany = async (data = [], collectionName) => {
 };
 
 // Read
-const getOne = async (id, collectionName) => {
+const getOne = (id, collectionName) => {
   if (!id) {
     throw new Error(
       `No collection name provided to firebase getOne. Instead received ${id}`
@@ -60,7 +63,7 @@ const getOne = async (id, collectionName) => {
   }
 };
 
-const getMany = async (ids = [], collectionName) => {
+const getMany = (ids = [], collectionName) => {
   const promises = [];
   for (const id of ids) {
     promises.push(getOne(id, collectionName));
@@ -78,13 +81,15 @@ const getCollection = async (collectionName) => {
 };
 
 // Update
-const updateOne = async (id, updates, collectionName) => {
+const updateOne = (id, updates, collectionName) => {
   if (!id || typeof id !== "string") {
     throw new Error(`Improper id passed to updateOne: received ${id}`);
   }
   if (!updates || !Object.isObject(updates)) {
     throw new Error(
-      `Improper updates name passed to updateOne: received ${JSON.stringify(updates)}`
+      `Improper updates name passed to updateOne: received ${JSON.stringify(
+        updates
+      )}`
     );
   }
   if (!collectionName || typeof updates !== "string") {
@@ -92,25 +97,25 @@ const updateOne = async (id, updates, collectionName) => {
       `Improper collection name passed to updateOne: received ${collectionName}`
     );
   }
-  delete updates.id;
+  delete updates._id;
   return db.collection(collectionName).doc(id).update(updates);
 };
 
 // 'updates' must contain the id
-const updateMany = async (updates = [], collectionName) => {
+const updateMany = (updates = [], collectionName) => {
   const promises = [];
   for (const update of updates) {
-    promises.push(updateOne(update.id, update, collectionName));
+    promises.push(updateOne(update._id, update, collectionName));
   }
   return Promise.all(promises);
 };
 
 // Delete
-const deleteOne = async (id, collectionName) => {
+const deleteOne = (id, collectionName) => {
   return db.collection(collectionName).doc(id).delete();
 };
 
-const deleteMany = async (ids = [], collectionName) => {
+const deleteMany = (ids = [], collectionName) => {
   if (!collectionName) {
     throw new Error(
       `No collection name passed to deleteMany: received ${collectionName}`
@@ -119,7 +124,9 @@ const deleteMany = async (ids = [], collectionName) => {
 
   if (!Array.isArray(ids)) {
     throw new Error(
-      `deleteMany requires an array of string ids: received ${JSON.stringify(ids)}`
+      `deleteMany requires an array of string ids: received ${JSON.stringify(
+        ids
+      )}`
     );
   }
 
@@ -130,10 +137,12 @@ const deleteMany = async (ids = [], collectionName) => {
   return Promise.all(promises);
 };
 
-const clearCollection = async (localCollection, collectionName) => {
-  if (!localCollection || Array.isArray(localCollection)) {
+const clearCollection = (localCollection, collectionName) => {
+  if (!Array.isArray(localCollection)) {
     throw new Error(
-      `Improper localCollection name passed to clearCollection: received ${JSON.stringify(localCollection)}`
+      `Improper localCollection name passed to clearCollection: received ${JSON.stringify(
+        localCollection
+      )}`
     );
   }
   if (!collectionName) {
@@ -154,31 +163,35 @@ const clearCollection = async (localCollection, collectionName) => {
   }
 };
 
-const bindListeners = async (
+const bindListeners = (
   collection_name,
   { add, remove } = {
     add: () => {},
-    remove: () => {}
+    remove: () => {},
   }
-  ) => {
-  const snapshot = await db.collection(collection_name);
-    console.log("snapshot", snapshot);
-    let changes = snapshot.docChanges();
-    for (const change of changes) {
-      switch (change.type) {
-        case "added":
-          console.log("added", change);
-          add()
-          break;
-        case "removed":
-          console.log("removed", change, change.doc.id);
-          remove();
-          break;
-        default:
-          return;
+) => {
+  return db
+    .collection(collection_name)
+    // .get()
+    .onSnapshot((snapshot) => {
+      console.log("snapshot", snapshot);
+      let changes = snapshot.docChanges();
+      for (const change of changes) {
+        switch (change.type) {
+          case "added":
+            console.log("added", change);
+            add();
+            break;
+          case "removed":
+            console.log("removed", change, change.doc.id);
+            remove();
+            break;
+          default:
+            return;
+        }
       }
-    }
-}
+    });
+};
 
 export {
   addOne,

@@ -69,12 +69,12 @@ function Generator() {
           {/* <div className="controlsContainer"> */}
           {/* <PhraseDisplay planet={"Jupiter"} sign={"Saturn"} /> */}
           <div className="callBtnContainer">
-            <button className="callBtn" onClick={pick}>
+            <button className="callBtn" onClick={() => pick()}>
               CALL
             </button>
           </div>
-          <div className="resetBtn" onClick={reset}>
-            <button>RESET GAME</button>
+          <div className="resetBtn">
+            <button onClick={reset}>RESET GAME</button>
           </div>
 
           {ps && pp && <PreviousCall planet={pp} sign={ps} />}

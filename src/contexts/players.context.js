@@ -6,7 +6,7 @@ import {
   getCollection,
   updateOne,
   deleteOne,
-  bindListeners,
+  // bindListeners,
 } from "./../utils/firebase.utils";
 import { useToasts } from "react-toast-notifications";
 import { TIME_API_KEY } from "./../config";
@@ -41,8 +41,10 @@ export const PlayersProvider = (props) => {
   const [players, setPlayers] = useState([]);
 
   useEffect(() => {
+
     // Get initial data
     const getPlayers = async () => {
+      console.log('running setup players');
       try {
         const newPlayers = await getCollection(PLAYER_COLLECTION_NAME);
         console.log(
@@ -51,7 +53,7 @@ export const PlayersProvider = (props) => {
         );
 
         setPlayers(newPlayers);
-        bindListeners(PLAYER_COLLECTION_NAME);
+        // bindListeners(PLAYER_COLLECTION_NAME);
       } catch (err) {
         console.log(err);
         addToast(err.message, {

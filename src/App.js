@@ -10,7 +10,7 @@ import {
 import { MenuProvider } from "./contexts/menu.context";
 import { ToastProvider } from "react-toast-notifications";
 import { PlayersProvider } from "./contexts/players.context";
-import { BirthChartProvider } from "./contexts/birthchart.context";
+// import { BirthChartProvider } from "./contexts/birthchart.context";
 import { GameProvider } from "./contexts/game.context";
 import { AuthProvider } from "./contexts/auth.context";
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
@@ -43,7 +43,7 @@ function App() {
       <ThemeProvider theme={theme}>
         <ToastProvider autoDismiss={true}>
           <AuthProvider>
-            <BirthChartProvider>
+            {/* <BirthChartProvider> */}
               <PlayersProvider>
                 <GameProvider>
                   <MenuProvider>
@@ -83,7 +83,7 @@ function App() {
                   </MenuProvider>
                 </GameProvider>
               </PlayersProvider>
-            </BirthChartProvider>
+            {/* </BirthChartProvider> */}
           </AuthProvider>
         </ToastProvider>
       </ThemeProvider>

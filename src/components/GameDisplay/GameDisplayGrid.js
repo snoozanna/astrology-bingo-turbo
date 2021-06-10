@@ -53,11 +53,12 @@ const GameDisplayGrid = () => {
     }
   };
 
-  ///TODO
+  //TODO
 
   const Text = ({ alreadyCalled, myPlanet, mySign }) => {
-    for (const [key, value] of Object.entries(alreadyCalled)) {
-      const { planet, sign } = value;
+    console.log('alreadyCalled', alreadyCalled);
+    for (const pick of alreadyCalled) {
+      const { planet, sign } = pick;
       if (planet === myPlanet && sign === mySign) {
         return (
           <p className={classes.callTextContainer}>
@@ -127,6 +128,7 @@ const GameDisplayGrid = () => {
                 //   />
                 // </TableCell>
                 <ControlledCell
+                  key={planet}
                   alreadyCalled={alreadyCalled}
                   mySign={sign}
                   myPlanet={planet}
