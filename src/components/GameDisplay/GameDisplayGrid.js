@@ -56,7 +56,7 @@ const GameDisplayGrid = () => {
   //TODO
 
   const Text = ({ alreadyCalled, myPlanet, mySign }) => {
-    console.log('alreadyCalled', alreadyCalled);
+    // console.log('alreadyCalled', alreadyCalled);
     for (const pick of alreadyCalled) {
       const { planet, sign } = pick;
       if (planet === myPlanet && sign === mySign) {
@@ -79,6 +79,7 @@ const GameDisplayGrid = () => {
     mySign,
     sign,
     planet,
+    children
   }) => {
     return (
       <TableCell
@@ -86,7 +87,7 @@ const GameDisplayGrid = () => {
         planet={planet}
         className={checkCall(planet, sign) ? classes.calledItem : ""}
       >
-        <Text alreadyCalled={alreadyCalled} mySign={sign} myPlanet={planet} />
+        {children}
       </TableCell>
     );
   };
@@ -120,13 +121,6 @@ const GameDisplayGrid = () => {
                 {sign}
               </TableCell>
               {planets.map((planet) => (
-                // <TableCell sign={sign} planet={planet}>
-                //   <Text
-                //     alreadyCalled={alreadyCalled}
-                //     mySign={sign}
-                //     myPlanet={planet}
-                //   />
-                // </TableCell>
                 <ControlledCell
                   key={planet}
                   alreadyCalled={alreadyCalled}
@@ -134,7 +128,9 @@ const GameDisplayGrid = () => {
                   myPlanet={planet}
                   sign={sign}
                   planet={planet}
-                />
+                >
+                  <Text alreadyCalled={alreadyCalled} mySign={sign} myPlanet={planet} />
+                </ControlledCell>
               ))}
             </TableRow>
           ))}

@@ -25,11 +25,12 @@ const useStyles = makeStyles({
 
   listItem: {
     gridGap: 15,
-    justifyContent: "spaceBetween",
+    justifyContent: "space-between",
     marginBlockEnd: 10,
     marginInlineEnd: 10,
     padding: 1,
     maxWidth: "22%",
+    flexWrap: 'wrap',
   },
 });
 
@@ -39,15 +40,15 @@ const ChartList = ({ player }) => {
   return (
     <>
       <List className={classes.listGroup}>
-        {Object.entries(player).map(([planet, sign]) => {
+        {Object.entries(player).map(([planet, sign], i) => {
           // console.log("key", key, "value", value);
-          if (planets.includes(planet)) {
+          if (!planets.includes(planet)) return null;
             // const { icon } = value;
   
             // console.log("sign", sign);
             // console.log("icon", icon);
             return (
-              <ListItem className={classes.listItem}>
+              <ListItem className={classes.listItem} key={i}>
                 <div className={classes.chartListItem}>
                   <div className="planetListItem">{planet} :</div>
                   <div className="signListItem">{sign} </div>
@@ -57,9 +58,6 @@ const ChartList = ({ player }) => {
                 </ListItemIcon>
               </ListItem>
             );
-          } else {
-            return null;
-          }
         })}
       </List>
     </>

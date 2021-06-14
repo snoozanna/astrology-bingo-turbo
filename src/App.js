@@ -3,14 +3,12 @@ import "./styles/App.scss";
 import {
   BrowserRouter as Router,
   Route,
-  // Redirect,
   Switch,
 } from "react-router-dom";
 
 import { MenuProvider } from "./contexts/menu.context";
 import { ToastProvider } from "react-toast-notifications";
 import { PlayersProvider } from "./contexts/players.context";
-// import { BirthChartProvider } from "./contexts/birthchart.context";
 import { GameProvider } from "./contexts/game.context";
 import { AuthProvider } from "./contexts/auth.context";
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
@@ -43,47 +41,40 @@ function App() {
       <ThemeProvider theme={theme}>
         <ToastProvider autoDismiss={true}>
           <AuthProvider>
-            {/* <BirthChartProvider> */}
-              <PlayersProvider>
-                <GameProvider>
-                  <MenuProvider>
-                    <Switch>
-                      <Route exact path="/" component={Home} />
-                      <Route exact path="/login" component={Login} />
-                      <ProtectedRoute
-                        exact
-                        path="/add-birth-chart"
-                        component={AddChart}
-                      />
-                      {/* <Route
-                        exact
-                        path="/add-birth-chart"
-                        component={AddChart}
-                      /> */}
+            <PlayersProvider>
+              <GameProvider>
+                <MenuProvider>
+                  <Switch>
+                  
+                    <Route exact path="/" component={Home} />
+                    <Route exact path="/login" component={Login} />
 
-                      <ProtectedRoute
-                        exact
-                        path="/my-birth-chart"
-                        component={MyBirthChart}
-                      />
-                      {/* <Route
-                        exact
-                        path="/my-birth-chart"
-                        component={MyBirthChart}
-                      /> */}
-                      <Route exact path="/in-play" component={InPlay} />
-                      <Route exact path="/generator" component={Generator} />
-                      <Route
-                        exact
-                        path="/public-display"
-                        component={PublicDisplay}
-                      />
-                      <Route path="*" component={NotFound} />
-                    </Switch>
-                  </MenuProvider>
-                </GameProvider>
-              </PlayersProvider>
-            {/* </BirthChartProvider> */}
+                    <ProtectedRoute
+                      exact
+                      path="/add-birth-chart"
+                      component={AddChart}
+                    />
+
+                    <ProtectedRoute
+                      exact
+                      path="/my-birth-chart"
+                      component={MyBirthChart}
+                    />
+
+                    <Route exact path="/in-play" component={InPlay} />
+                    <Route exact path="/generator" component={Generator} />
+
+                    <Route
+                      exact
+                      path="/public-display"
+                      component={PublicDisplay}
+                    />
+
+                    <Route path="*" component={NotFound} />
+                  </Switch>
+                </MenuProvider>
+              </GameProvider>
+            </PlayersProvider>
           </AuthProvider>
         </ToastProvider>
       </ThemeProvider>

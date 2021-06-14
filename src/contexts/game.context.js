@@ -1,40 +1,67 @@
 import React, { createContext, useState, useEffect, useCallback } from "react";
+import localForage from "localforage";
 // import { firestore as db } from "./../firebase";
 import { signs, planets } from "./../constants";
 import { getRandomIntInclusive } from "./../utils/utils";
 import {
   clearCollection,
-  addOne,
+  // addOne,
   addMany,
   getCollection,
-  deleteOne,
+  // deleteOne,
   bindListeners,
+  swap,
 } from "./../utils/firebase.utils";
+import {
+  addToLocal,
+  removeFromLocal,
+  updateInLocal,
+  // getFromLocalById,
+} from "./../utils/state.utils";
 import { useToasts } from "react-toast-notifications";
 
-const PICKED_COLLECTION_NAME = "picked";
-const POTENTIAL_PICKS_COLLECTION_NAME = "potential-picks";
+const {
+  PICKED_COLLECTION_NAME = "picked",
+  AVAILABLE_CALLS_COLLECTION_NAME = "potential-picks",
+} = process.env;
 
 export const GameContext = createContext({
   getRandomPlanet: () => {},
   getRandomSign: () => {},
   pick: () => {},
-  alreadyCalled: [],
+  alreadyCalledList: [],
   potentialCallList: [],
 });
 
 export const GameProvider = (props) => {
   const { addToast } = useToasts();
 
-  const [initialised, setIntialised] = useState(() => {
-    const isInitialised = Boolean(localStorage.getItem('initialised'));
-    if(!isInitialised) {
-      localStorage.setItem('initialised', true);
-    }
-    return isInitialised;
-  });
-  const [alreadyCalled, setAlreadyCalled] = useState([]);
+  // Initial state
+  const [initialised, setIntialised] = useState(false);
   const [potentialCallList, setPotentialCallList] = useState([]);
+  const [alreadyCalledList, setAlreadyCalledList] = useState([]);
+
+  // Populate from local state
+
+  const populateFromLocalRecords = async () => {
+    const initd = await localForage.getItem("initialised");
+    console.log("initd", initd);
+    if (initd) {
+      setIntialised(Boolean(initd));
+    }
+
+    const calls = await localForage.getItem("calls");
+    console.log("calls", calls);
+    if (calls) {
+      setPotentialCallList(calls);
+    }
+
+    const picks = await localForage.getItem("picks");
+    console.log("picks", picks);
+    if (picks) {
+      setAlreadyCalledList(picks);
+    }
+  };
 
   const getFullCallsList = () => {
     const calls = [];
@@ -48,14 +75,17 @@ export const GameProvider = (props) => {
 
   // CALLS
   // Load all possible calls to firestore
-  const upload = useCallback(async () => {
+  const populateFirebase = useCallback(async () => {
     const data = getFullCallsList();
-    console.log("🚀 ~ file: game.context.js ~ line 46 ~ upload ~ data", data)
-    console.log('UPLOADING...', data.length);
+    console.log(
+      "🚀 ~ file: game.context.js ~ line 46 ~ populateFirebase ~ data",
+      data
+    );
+    console.log("UPLOADING...", data.length);
     try {
-      const calls = await getCollection(POTENTIAL_PICKS_COLLECTION_NAME);
-      await clearCollection(calls, POTENTIAL_PICKS_COLLECTION_NAME);
-      await addMany(data, POTENTIAL_PICKS_COLLECTION_NAME);
+      const calls = await getCollection(AVAILABLE_CALLS_COLLECTION_NAME);
+      await clearCollection(calls, AVAILABLE_CALLS_COLLECTION_NAME);
+      await addMany(data, AVAILABLE_CALLS_COLLECTION_NAME);
       console.log("Potential calls loaded to firestore");
     } catch (err) {
       console.log(`Error loading calls to firestore: ${err.message}`);
@@ -65,7 +95,7 @@ export const GameProvider = (props) => {
   // GET calls list
   const getCalls = useCallback(async () => {
     try {
-      const calls = await getCollection(POTENTIAL_PICKS_COLLECTION_NAME);
+      const calls = await getCollection(AVAILABLE_CALLS_COLLECTION_NAME);
       console.log("calls successfully loaded", calls);
       setPotentialCallList(calls);
     } catch (err) {
@@ -81,7 +111,7 @@ export const GameProvider = (props) => {
     try {
       const picks = await getCollection(PICKED_COLLECTION_NAME);
       console.log("picks", picks);
-      setAlreadyCalled(picks);
+      setAlreadyCalledList(picks);
     } catch (err) {
       console.log(err);
       addToast(err.message, {
@@ -92,34 +122,55 @@ export const GameProvider = (props) => {
 
   useEffect(() => {
     (async () => {
-      console.log('running setup game');
-      if(!initialised) {
-        await upload();
+      // One time setup stuff
+      console.log("running setup game");
+      debugger;
+      if (!initialised) {
+        await populateFirebase();
+        await localForage.setItem("initialised", true);
+        await localForage.setItem("calls", []);
+        await localForage.setItem("picks", []);
         setIntialised(true);
-        localStorage.getItem('initialised', true);
       }
-      
+
+      // Fast get from Local
+      await populateFromLocalRecords();
+
+      // Get from FireStore
       await getCalls();
+      await localForage.setItem("calls", potentialCallList);
+      console.log("calls in context", potentialCallList);
+
       await getPicks();
+      await localForage.setItem("picks", alreadyCalledList);
+      console.log("picks in context", alreadyCalledList);
 
-      // react if calls change in firestore
-      await bindListeners(POTENTIAL_PICKS_COLLECTION_NAME, {
-        add: () => {
+      // Bind to FireStore for live updates
 
+      // Calls
+      await bindListeners(AVAILABLE_CALLS_COLLECTION_NAME, {
+        add: (doc) => {
+          addToLocal(setPotentialCallList, doc);
         },
-        remove: () => {
-
-        }
+        update: (doc) => {
+          updateInLocal(setPotentialCallList, doc);
+        },
+        remove: (doc) => {
+          removeFromLocal(setPotentialCallList, doc.id);
+        },
       });
 
-      // react if picks changed in firestore
+      // Picks
       await bindListeners(PICKED_COLLECTION_NAME, {
-        add: () => {
-
+        add: (doc) => {
+          addToLocal(setAlreadyCalledList, doc);
         },
-        remove: () => {
-
-        }
+        update: (doc) => {
+          updateInLocal(setAlreadyCalledList, doc);
+        },
+        remove: (doc) => {
+          removeFromLocal(setAlreadyCalledList, doc);
+        },
       });
     })();
   }, []);
@@ -138,40 +189,24 @@ export const GameProvider = (props) => {
     return signToCall;
   };
 
-  const pick = async (
-    pickedItem = {
-      planet: getRandomPlanet(),
-      sign: getRandomSign(),
-    }
-  ) => {
-    // Find the item
-    const pickedCall = potentialCallList.find(
-      ({ sign, planet }) =>
-        sign === pickedItem.sign && planet === pickedItem.planet
+  const pick = async () => {
+    const idx = getRandomIntInclusive(0, potentialCallList.length - 1);
+    const pickedItem = potentialCallList[idx];
+    swap(
+      pickedItem._id,
+      AVAILABLE_CALLS_COLLECTION_NAME,
+      PICKED_COLLECTION_NAME
     );
-
-    const pickedCallWithoutId = { ...pickedCall };
-    delete pickedCallWithoutId._id;
-
-    try {
-      await Promise.all([
-        addOne(pickedCallWithoutId, PICKED_COLLECTION_NAME),
-        deleteOne(pickedCall._id, POTENTIAL_PICKS_COLLECTION_NAME),
-      ]);
-    } catch (err) {
-      console.log(err);
-      addToast(err.message, {
-        appearance: "error",
-      });
-    }
   };
 
   const reset = async () => {
     const consent = window.confirm("Are you sure you want to reset?");
     if (consent) {
-      await clearCollection(alreadyCalled, PICKED_COLLECTION_NAME);
-      await clearCollection(potentialCallList, POTENTIAL_PICKS_COLLECTION_NAME);
-      await upload();
+      return Promise.All([
+        clearCollection(alreadyCalledList, PICKED_COLLECTION_NAME),
+        clearCollection(potentialCallList, AVAILABLE_CALLS_COLLECTION_NAME),
+        populateFirebase(),
+      ]);
     }
   };
 
@@ -182,7 +217,7 @@ export const GameProvider = (props) => {
         getRandomSign,
         pick,
         reset,
-        alreadyCalled,
+        alreadyCalled: alreadyCalledList,
         potentialCallList,
       }}
     >

@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import {FBDocToObj} from './../../utils/firebase.utils';
 import "./generator.scss";
 import Header from "./../../components/Header/Header";
 import GameDisplayGrid from "./../../components/GameDisplay/GameDisplayGrid.js";
@@ -21,8 +22,9 @@ const useStyles = makeStyles({
 
 function Generator() {
   const classes = useStyles();
-  const { pick, alreadyCalled, reset } = useContext(GameContext);
+  const { pick, alreadyCalled:fbac, reset } = useContext(GameContext);
 
+  const alreadyCalled = fbac.map(FBDocToObj);
 
   const getPlanet = (alreadyCalled) => {
     let lastPlanet = ""

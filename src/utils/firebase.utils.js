@@ -1,10 +1,12 @@
 import { firestore as db } from "./../firebase";
 
+const FBDocToObj = (doc) => ({ ...doc.data(), _id: doc.id });
+
 // CRUD
 // Create
-const addOne = (data, collectionName) => {
+const addOne = async (data, collectionName) => {
   /* If we had typescript we could avoid this. It's verbose but there to help in the future */
-  if (!data  || !Object.isObject(data)) {
+  if (!data || !Object.isObject(data)) {
     throw new Error(
       `No data provided to firebase addOne. Instead received ${data}`
     );
@@ -23,7 +25,7 @@ const addOne = (data, collectionName) => {
   }
 };
 
-const addMany = (data = [], collectionName) => {
+const addMany = async (data = [], collectionName) => {
   if (!collectionName || typeof collectionName !== "string") {
     throw new Error(
       `No collection name provided to firebase addMany. Instead received ${collectionName}`
@@ -36,15 +38,22 @@ const addMany = (data = [], collectionName) => {
       )}`
     );
   }
-  const promises = [];
-  for (const item of data) {
-    promises.push(addOne(item, collectionName));
+
+  try {
+    const batch = db.batch();
+    for (const item of data) {
+      const docRef = db.collection(collectionName).doc();
+      batch.set(docRef, item);
+    }
+    return batch.commit();
+  } catch (err) {
+    console.log("Error for addOne: ", err);
+    return Promise.reject(err.message);
   }
-  return Promise.all(promises);
 };
 
 // Read
-const getOne = (id, collectionName) => {
+const getOne = async (id, collectionName) => {
   if (!id) {
     throw new Error(
       `No collection name provided to firebase getOne. Instead received ${id}`
@@ -63,25 +72,34 @@ const getOne = (id, collectionName) => {
   }
 };
 
-const getMany = (ids = [], collectionName) => {
-  const promises = [];
-  for (const id of ids) {
-    promises.push(getOne(id, collectionName));
+const getMany = async (ids = [], collectionName) => {
+  try {
+    const promises = [];
+    for (const id of ids) {
+      promises.push(getOne(id, collectionName));
+    }
+    return Promise.all(promises);
+  } catch (err) {
+    return Promise.reject(err.message);
   }
-  return Promise.all(promises);
 };
 
 const getCollection = async (collectionName) => {
-  const snapshot = await db.collection(collectionName).get();
-  const calls = snapshot.docs.map((doc) => {
-    // console.log("new id", doc.id);
-    return { _id: doc.id, ...doc.data() };
-  });
-  return calls;
+  try {
+    const snapshot = await db.collection(collectionName).get();
+    const calls = snapshot.docs.map((doc) => {
+      // console.log("new id", doc.id);
+      return FBDocToObj(doc);
+    });
+    return calls;
+    // return snapshot.docs;
+  } catch (err) {
+    return Promise.reject(err.message);
+  }
 };
 
 // Update
-const updateOne = (id, updates, collectionName) => {
+const updateOne = async (id, updates, collectionName) => {
   if (!id || typeof id !== "string") {
     throw new Error(`Improper id passed to updateOne: received ${id}`);
   }
@@ -97,25 +115,39 @@ const updateOne = (id, updates, collectionName) => {
       `Improper collection name passed to updateOne: received ${collectionName}`
     );
   }
-  delete updates._id;
-  return db.collection(collectionName).doc(id).update(updates);
+  try {
+    delete updates._id;
+    return db.collection(collectionName).doc(id).update(updates);
+  } catch (err) {
+    return Promise.reject(err.message);
+  }
 };
 
 // 'updates' must contain the id
-const updateMany = (updates = [], collectionName) => {
-  const promises = [];
-  for (const update of updates) {
-    promises.push(updateOne(update._id, update, collectionName));
+const updateMany = async (updates = [], collectionName) => {
+  try {
+    const batch = db.batch();
+    for (const update of updates) {
+      const docRef = db.collection(collectionName).doc(update._id);
+      const { _id, ...change } = update;
+      batch.update(docRef, change);
+    }
+    return batch.commit();
+  } catch (err) {
+    return Promise.reject(err.message);
   }
-  return Promise.all(promises);
 };
 
 // Delete
-const deleteOne = (id, collectionName) => {
-  return db.collection(collectionName).doc(id).delete();
+const deleteOne = async (id, collectionName) => {
+  try {
+    return db.collection(collectionName).doc(id).delete();
+  } catch (err) {
+    return Promise.reject(err.message);
+  }
 };
 
-const deleteMany = (ids = [], collectionName) => {
+const deleteMany = async (ids = [], collectionName) => {
   if (!collectionName) {
     throw new Error(
       `No collection name passed to deleteMany: received ${collectionName}`
@@ -130,14 +162,18 @@ const deleteMany = (ids = [], collectionName) => {
     );
   }
 
-  const promises = [];
-  for (const id of ids) {
-    promises.push(deleteOne(id, collectionName));
+  try {
+    const batch = db.batch();
+    for (const id of ids) {
+      batch.delete(db.collection(collectionName).doc(id));
+    }
+    return batch.commit();
+  } catch (err) {
+    return Promise.reject(err.message);
   }
-  return Promise.all(promises);
 };
 
-const clearCollection = (localCollection, collectionName) => {
+const clearCollection = async (localCollection, collectionName) => {
   if (!Array.isArray(localCollection)) {
     throw new Error(
       `Improper localCollection name passed to clearCollection: received ${JSON.stringify(
@@ -151,11 +187,8 @@ const clearCollection = (localCollection, collectionName) => {
     );
   }
   try {
-    return Promise.all(
-      localCollection.map((item) =>
-        db.collection(collectionName).doc(item._id).delete()
-      )
-    );
+    const ids = localCollection.map(({ _id }) => _id);
+    return deleteMany(ids, collectionName);
   } catch (err) {
     const reason = `Error loading calls to firestore: ${err.message}`;
     console.log(reason);
@@ -163,35 +196,57 @@ const clearCollection = (localCollection, collectionName) => {
   }
 };
 
-const bindListeners = (
+const bindListeners = async (
   collection_name,
-  { add, remove } = {
+  { add, remove, update } = {
     add: () => {},
+    update: () => {},
     remove: () => {},
   }
 ) => {
-  return db
-    .collection(collection_name)
-    // .get()
-    .onSnapshot((snapshot) => {
-      console.log("snapshot", snapshot);
-      let changes = snapshot.docChanges();
-      for (const change of changes) {
-        switch (change.type) {
-          case "added":
-            console.log("added", change);
-            add();
-            break;
-          case "removed":
-            console.log("removed", change, change.doc.id);
-            remove();
-            break;
-          default:
-            return;
+  return (
+    db
+      .collection(collection_name)
+      // .get()
+      .onSnapshot((snapshot) => {
+        // console.log("snapshot", snapshot);
+        let changes = snapshot.docChanges();
+        for (const change of changes) {
+          switch (change.type) {
+            case "added":
+              console.log("added", change.doc.id, change.doc.data());
+              add(change.doc);
+              break;
+            case "MODIFIED":
+              console.log("modified", change.doc.id, change.doc.data());
+              update(change.doc);
+              break;
+            case "removed":
+              console.log("removed", change.doc.id, change.doc.data());
+              remove(change.doc);
+              break;
+            default:
+              return;
+          }
         }
-      }
-    });
+      })
+  );
 };
+
+const swap = async (localDoc, origin, destination) => {
+  try {
+    const batch = db.batch();
+    const originDocRef = await db.collection(origin).doc(localDoc._id);
+    const destinationDocRef = await db.collection(destination).doc(localDoc._id);
+    batch.set(destinationDocRef, localDoc);
+    batch.delete(originDocRef);
+    return batch.commit();
+  } catch (err) {
+    return Promise.reject(err.message);
+  }
+};
+
+
 
 export {
   addOne,
@@ -205,4 +260,6 @@ export {
   deleteMany,
   clearCollection,
   bindListeners,
+  swap,
+  FBDocToObj,
 };

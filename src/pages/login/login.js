@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "./../../contexts/auth.context";
+import { Redirect } from "react-router-dom";
 // import {
 //   Button,
 //   TextField,
@@ -31,6 +33,9 @@ import LoginFrom from "../../components/forms/login-form/login-form";
 
 function Login() {
   // const classes = useStyles();
+  const { user } = useContext(AuthContext);
+
+  if (user) return <Redirect to="/generator" />;
 
   return (
     <div className="App">
