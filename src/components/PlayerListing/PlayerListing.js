@@ -11,7 +11,7 @@ import { useToggle } from "./../../utils/utils";
 
 const useStyles = makeStyles({
   block: {
-    display: 'block',
+    display: "block",
   },
   playerContainer: {
     padding: "0 15px",
@@ -43,37 +43,56 @@ const PlayerListing = ({ player }) => {
   const { deletePlayer } = useContext(PlayersContext);
   const [isOn, toggleIsOn] = useToggle();
 
+  const removeOutline = () => {
+    const outline = document.getElementById("chartTemplate");
+    console.log(outline);
+    // const children = outline.childNodes;
+    // for (const child of children) {
+    //   if (!child.classList.contains("sign")) {
+    //     child.classList.toggle("transparent");
+    //   } else {
+    //     return;
+    //   }
+    // }
+  };
+
+  removeOutline();
+
+  const printChart = () => {
+    window.print();
+  };
+
   return (
-      <div key={player._id} className="listGroupItem">
-        <div className="nameContainer">
-          <h3 className="firstName">
+    <div key={player._id} className="listGroupItem">
+      <div className="nameContainer">
+        <h3 className="firstName">
           <span className={classes.block}>{player.firstName}</span>
           <span className={classes.block}>{player.lastName}</span>
-          </h3>
-        </div>
-        <div>
-          Chart:
-          {isOn ? (
-            <ChartImage player={player.chartData} />
-          ) : (
-            <IconList player={player.chartData} />
-          )}
-        </div>
-        <div className="btnContainer">
-          <Button
-            className="deleteBtn btn"
-            onClick={() => deletePlayer(player._id)}
-          >
-            &times;
-          </Button>
-          <Button className="btn" onClick={() => toggleIsOn()}>
-            Toggle Chart
-          </Button>
-          <Button className="btn" onClick={() => {}}>
-            Print
-          </Button>
-        </div>
+        </h3>
       </div>
+      <div>
+        Chart:
+        {isOn ? (
+          <ChartImage player={player.chartData} />
+        ) : (
+          <IconList player={player.chartData} />
+        )}
+      </div>
+      <div className="btnContainer">
+        <Button
+          className="deleteBtn btn"
+          onClick={() => deletePlayer(player._id)}
+        >
+          &times;
+        </Button>
+        <Button className="btn" onClick={() => toggleIsOn()}>
+          Toggle Chart
+        </Button>
+        <Button className="btn" onClick={() => printChart()}>
+          Print
+        </Button>
+      </div>
+    </div>
   );
 };
 

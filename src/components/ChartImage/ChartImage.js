@@ -6,52 +6,51 @@ import SignWord from "../ChartList/SignWord";
 
 import { signs, planets } from "./../../constants";
 const ChartImage = ({ player }) => {
-
   const getIconLocation = (planet) => {
     if (!planet) {
       throw new Error("Sign not provided. Need planet.");
     }
 
-      switch (planet) {
-        case "Mars":
-          return { x: 650, y: 30 };
+    switch (planet) {
+      case "Mars":
+        return { x: 650, y: 30 };
 
-        case "Jupiter":
-          return { x: 600, y: 100 };
+      case "Jupiter":
+        return { x: 600, y: 100 };
 
-        case "Saturn":
-          return { x: 515, y: 140 };
+      case "Saturn":
+        return { x: 515, y: 140 };
 
-        case "Uranus":
-          return { x: 430, y: 140 };
+      case "Uranus":
+        return { x: 430, y: 140 };
 
-        case "Neptune":
-          return { x: 340, y: 90 };
+      case "Neptune":
+        return { x: 340, y: 90 };
 
-        case "Pluto":
-          return { x: 285, y: 15 };
+      case "Pluto":
+        return { x: 285, y: 15 };
 
-        case "Ascendant":
-          return { x: 300, y: -65 };
+      case "Ascendant":
+        return { x: 300, y: -65 };
 
-        case "Descendant":
-          return { x: 340, y: -150 };
+      case "Descendant":
+        return { x: 340, y: -150 };
 
-        case "Moon":
-          return { x: 430, y: -190 };
+      case "Moon":
+        return { x: 430, y: -190 };
 
-        case "Sun":
-          return { x: 515, y: -190 };
+      case "Sun":
+        return { x: 515, y: -190 };
 
-        case "Mercury":
-          return { x: 590, y: -140 };
+      case "Mercury":
+        return { x: 590, y: -140 };
 
-        case "Venus":
-          return { x: 635, y: -65 };
+      case "Venus":
+        return { x: 635, y: -65 };
 
-        default:
-          console.log(`default case: sign provided was ${planet}`);
-          throw new Error("getIconLocation: Sign not recognised. Need planet.");
+      default:
+        console.log(`default case: sign provided was ${planet}`);
+        throw new Error("getIconLocation: Sign not recognised. Need planet.");
     }
   };
 
@@ -85,7 +84,7 @@ const ChartImage = ({ player }) => {
         case "Venus":
           return { x: 139, y: 204 };
         default:
-                    console.log(`default case: sign provided was ${planet}`);
+          console.log(`default case: sign provided was ${planet}`);
           throw new Error("getWordLocation: Sign not recognised. Need planet.");
       }
     }
@@ -121,7 +120,7 @@ const ChartImage = ({ player }) => {
         case "Venus":
           return "rotate(-22)";
         default:
-                    console.log(`default case: sign provided was ${planet}`);
+          console.log(`default case: sign provided was ${planet}`);
           throw new Error("getWordRotation: Sign not recognised. Need planet.");
       }
     }
