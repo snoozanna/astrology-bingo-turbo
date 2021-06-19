@@ -13,6 +13,24 @@ const {
   CELEB_COLLECTION_NAME,
 } = appConfig;
 
+export const getPlayerBirthChartData = async (newPlayer) => {
+  try {
+    const fetchURL = createBirthChartURL(newPlayer);
+    console.log("URL", fetchURL);
+    const birthChartData = await fetchBirthChart(fetchURL, newPlayer);
+    console.log("birthChartData", birthChartData);
+    const chartData = JSON.parse(birthChartData);
+    // debugger;
+    chartData.Ascendant = chartData.Asc;
+    delete chartData.Asc;
+    chartData.Descendant = descDict[chartData.Ascendant];
+    console.log("new player with chart", newPlayer);
+    return chartData;
+  } catch (err) {
+    return Promise.reject(err.message);
+  }
+};
+
 export const processCeleb = async (celeb) => {
   const place = await getGeo(celeb.locationSearchTerm);
   console.log(
@@ -35,6 +53,7 @@ export const processCeleb = async (celeb) => {
   const offset = await findUTCOffset(celeb.datetime, lat, lng);
 
   celeb.utcoffset = offset;
+  celeb.chartData = await getPlayerBirthChartData(celeb);
   return celeb;
 };
 
@@ -47,22 +66,4 @@ export const processCelebs = async () => {
   const celebsWithBirthChart = await Promise.all(prms);
   const fullCelebs = await addMany(celebsWithBirthChart);
   return fullCelebs;
-};
-
-export const addBirthChartToPlayer = async (newPlayer) => {
-  try {
-    const fetchURL = createBirthChartURL(newPlayer);
-    console.log("URL", fetchURL);
-    const birthChartData = await fetchBirthChart(fetchURL, newPlayer);
-    console.log("birthChartData", birthChartData);
-    newPlayer.chartData = JSON.parse(birthChartData);
-    // debugger;
-    newPlayer.chartData.Ascendant = newPlayer.chartData.Asc;
-    delete newPlayer.chartData.Asc;
-    newPlayer.chartData.Descendant = descDict[newPlayer.chartData.Ascendant];
-    console.log("new player with chart", newPlayer);
-    return newPlayer;
-  } catch (err) {
-    return Promise.reject(err.message);
-  }
 };

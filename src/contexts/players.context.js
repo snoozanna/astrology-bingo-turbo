@@ -12,7 +12,7 @@ import {
 } from "./../utils/firebase.utils";
 
 import { appConfig } from "./../config";
-import { addBirthChartToPlayer } from "../utils/player.utils";
+import { getPlayerBirthChartData } from "../utils/player.utils";
 
 const {
   PLAYER_COLLECTION_NAME,
@@ -64,20 +64,14 @@ export const PlayersProvider = (props) => {
     console.log("new player pre chart", newPlayer);
 
     try {
-      const newPlayerWithBirthchart = await addBirthChartToPlayer(newPlayer);
-
-      const docRef = await addOne(
-        newPlayerWithBirthchart,
-        PLAYER_COLLECTION_NAME
-      );
+      const chartData = await getPlayerBirthChartData(newPlayer);
+      newPlayer.chartData = chartData;
+      const docRef = await addOne(newPlayer, PLAYER_COLLECTION_NAME);
       console.log("Document written with ID: ", docRef.id);
 
-      addToast(
-        `Saved ${newPlayerWithBirthchart.firstName} ${newPlayerWithBirthchart.lastName}`,
-        {
-          appearance: "success",
-        }
-      );
+      addToast(`Saved ${newPlayer.firstName} ${newPlayer.lastName}`, {
+        appearance: "success",
+      });
     } catch (err) {
       console.log("addPlayer err", err);
       addToast(err.message, {
