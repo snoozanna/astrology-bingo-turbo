@@ -53,17 +53,17 @@ const PlayerListing = ({ player }) => {
   const classes = useStyles();
   // const { picks } = useContext(GameContext);
   const { deletePlayer } = useContext(PlayersContext);
-  const [isOn, toggleIsOn] = useToggle();
+  const [chartVisible, toggleChart] = useToggle();
   const [open, setOpen] = useState(false);
   const [outlineVisibility, toggleOutlineVisibility] = useToggle();
 
   const chartRef = useRef();
 
-  const handleOpen = () => {
+  const showModal = () => {
     setOpen(true);
   };
 
-  const handleClose = () => {
+  const hideModal = () => {
     setOpen(false);
   };
 
@@ -78,12 +78,16 @@ const PlayerListing = ({ player }) => {
         </h3>
       </div>
       <ChartImage player={player} />
-      <p>{birthday}</p>
-      <p>{time}</p>
-      <p>
-        lat: {Number(latitude).toFixed(2)}
-        long: {Number(longitude).toFixed(2)}
-      </p>
+      <dl>
+        <dt>Birthday:</dt>
+        <dd>{birthday}</dd>
+        <dt>Time:</dt>
+        <dd>{time}</dd>
+        <dt>Lat:</dt>
+        <dd>{Number(latitude).toFixed(2)}</dd>
+        <dt>Long:</dt>
+        <dd>{Number(longitude).toFixed(2)}</dd>
+      </dl>
     </div>
   );
 
@@ -97,7 +101,7 @@ const PlayerListing = ({ player }) => {
       </div>
       <div>
         Chart:
-        {isOn ? (
+        {chartVisible ? (
           <ChartImage
             player={player}
             ref={chartRef}
@@ -114,29 +118,38 @@ const PlayerListing = ({ player }) => {
         >
           &times;
         </Button>
-        <Button className="btn" onClick={() => toggleIsOn()}>
+        <Button className="btn" onClick={() => toggleChart()}>
           Toggle Chart
         </Button>
-        <Button className="btn" onClick={() => toggleOutlineVisibility()}>
-          Toggle Outline
-        </Button>
-        <ReactToPrint
-          trigger={() => (
-            <Button className="btn" onClick={() => handleOpen()}>
-              Print
-            </Button>
-          )}
-          content={() => chartRef.current}
-        />
+        {chartVisible && (
+          <Button className="btn" onClick={() => toggleOutlineVisibility()}>
+            Toggle Outline
+          </Button>
+        )}
+        {chartVisible && (
+          <ReactToPrint
+            trigger={() => (
+              <Button className="btn">
+                Print
+              </Button>
+            )}
+            content={() => chartRef.current}
+          />
+        )}
+        {!chartVisible && (
+          <Button className="btn" onClick={() => showModal()}>
+            See Details
+          </Button>
+        )}
       </div>
       <Modal
         open={open}
-        onClose={handleClose}
+        onClose={hideModal}
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
       >
         {modalText}
-        {/* <ChartImage player={player.chartData} /> */}
+        {/* <ChartImage player={player} /> */}
       </Modal>
     </div>
   );

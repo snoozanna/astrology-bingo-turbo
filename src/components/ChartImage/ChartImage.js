@@ -1,12 +1,17 @@
-import React, { useContext } from "react";
+import React, { forwardRef } from "react";
 import "./ChartImage.scss";
 import ChartTemplate from "../ChartTemplate/ChartTemplate";
 import SignSymbol from "../ChartList/SignSymbol";
 import SignWord from "../ChartList/SignWord";
 
 import { planets } from "./../../constants";
-const ChartImage = ({ player, showOutline }) => {
-  const {playerChart} = player;
+
+
+const ChartImage = forwardRef(({ player, showOutline }, ref) => {
+  console.log('player', player);
+  const {chartData} = player;
+  console.log('chartData', chartData);
+
   const getIconLocation = (planet) => {
     if (!planet) {
       throw new Error("Sign not provided. Need planet.");
@@ -128,9 +133,9 @@ const ChartImage = ({ player, showOutline }) => {
   };
 
   return (
-    <>
+    <div ref={ref}>
       <ChartTemplate showOutline={showOutline}>
-        {Object.entries(playerChart).map(([planet, sign]) => {
+        {Object.entries(chartData).map(([planet, sign]) => {
           if (planets.includes(planet)) {
             // console.log(key, value);
             // console.log("planet", planet);
@@ -158,8 +163,8 @@ const ChartImage = ({ player, showOutline }) => {
           }
         })}
       </ChartTemplate>
-    </>
+    </div>
   );
-};
+});
 
 export default ChartImage;

@@ -25,13 +25,20 @@ import { PlayersContext } from "./../../contexts/players.context";
 
 const useStyles = makeStyles({
   listGroup: {
-    display: "flex",
-    justifyContent: "center",
-    gridTemplateColumns: "repeat(4, 1fr)",
-    gridGap: 15,
+    display: "grid",
+    gridTemplateColumns: 'repeat(5, 1fr)',
+    // gridAutoRows: '',
+    justifyItems: "center",
+    justifyContent: 'flex-start',
+    alignItems: 'center',
     listStyleType: "none",
     padding: 0,
-    width: "100%",
+    gap: '1rem',
+    width: '100%',
+  },
+
+  listGroupItem: {
+    // width: 'calc(20% - calc(1rem/5))',
   },
 
   homeTitle: {
@@ -55,7 +62,7 @@ function Home() {
             <ul className={classes.listGroup}>
               {players.map((player) => (
                 // console.log("player", player._id),
-                <li key={player._id}><PlayerOrb player={player} /></li>
+                <li key={player._id} className={classes.listGroupItem}><PlayerOrb player={player} /></li>
               ))}
             </ul>
           </div>
