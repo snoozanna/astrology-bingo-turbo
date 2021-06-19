@@ -68,6 +68,17 @@ function MyBirthChart() {
     },
   };
 
+  const {
+    chartData: {
+      ownerName,
+      birthday,
+      time,
+      latitude,
+      longitude,
+
+    }
+  } = aliceBasic;
+
   return (
     <>
       <div className="App">
@@ -76,20 +87,20 @@ function MyBirthChart() {
         <main>
           <div className={classes.mainContainer}>
             <div className={classes.ownerContainer}>
-              <h2>{aliceBasic.chartData.ownerName}</h2>
-              <p>Born: {aliceBasic.chartData.birthday}</p>
-              <p>{aliceBasic.chartData.time}</p>
+              <h2>{ownerName}</h2>
+              <p>Born: {birthday}</p>
+              <p>{time}</p>
               <p>
-                Lat: {aliceBasic.chartData.latitude.toFixed()} Long:{" "}
-                {aliceBasic.chartData.longitude.toFixed()}
+                Lat: {latitude.toFixed()} Long:{" "}
+                {longitude.toFixed()}
               </p>
               <button onClick={() => toggleIsOn()}>Toggle Chart</button>
             </div>
             <div className={classes.myBirthChartContainer}>
               {isOn ? (
-                <ChartList player={aliceBasic.chartData} />
+                <ChartList player={aliceBasic} />
               ) : (
-                <ChartImage player={aliceBasic.chartData} />
+                <ChartImage player={aliceBasic} />
               )}
             </div>
           </div>

@@ -32,6 +32,7 @@ export const getPlayerBirthChartData = async (newPlayer) => {
 };
 
 export const processCeleb = async (celeb) => {
+
   const place = await getGeo(celeb.locationSearchTerm);
   console.log(
     "🚀 ~ file: players.context.js ~ line 43 ~ processCeleb ~ place",
@@ -54,6 +55,7 @@ export const processCeleb = async (celeb) => {
 
   celeb.utcoffset = offset;
   celeb.chartData = await getPlayerBirthChartData(celeb);
+  celeb.score = 0;
   return celeb;
 };
 

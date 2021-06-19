@@ -1,4 +1,3 @@
-
 import { GEO_API_KEY, TIME_API_KEY } from "../config";
 const ASTRO_SERVER = process.env.ASTRO_SERVER || "http://localhost:8000";
 
@@ -30,16 +29,17 @@ export async function getGeo(placename) {
     const response = await fetch(GEO_API_URL);
     if (!response.ok) throw response;
     const data = await response.json();
-    console.log('data', data);
+    console.log("data", data);
     return data;
   } catch (err) {
-    console.log('err', err);
-    return err
+    console.log("err", err);
+    return err;
   }
 }
 
 export function findUTCOffset(datetime, lat, long) {
   const timestamp = Date.parse(datetime) / 1000;
+  if(Number.isNaN(timestamp)) throw new Error(`Bad timestamp value ${datetime}`);
   const fetchURLUTC = `https://maps.googleapis.com/maps/api/timezone/json?location=${lat},${long}&timestamp=${timestamp}&key=${TIME_API_KEY}`;
   return getUTC(fetchURLUTC);
 }

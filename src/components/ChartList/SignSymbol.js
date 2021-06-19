@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import AriesIcon from "./Icons/AriesIcon";
 import GeminiIcon from "./Icons/GeminiIcon";
@@ -133,7 +133,7 @@ const SignSymbol = ({ sign, width, x, y }) => {
         default:
           console.log(`default case: sign provided was ${sign}`);
           throw new Error(
-            "getIconComponent: Sign not recognised. Need planet.",
+            "getIconComponent: Sign not recognised. Need planet."
           );
       }
     }

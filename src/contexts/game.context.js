@@ -1,8 +1,14 @@
-import React, { createContext, useState, useEffect, useCallback } from "react";
+import React, {
+  createContext,
+  useState,
+  useEffect,
+  useCallback,
+  useContext,
+} from "react";
 import localForage from "localforage";
 import { useToasts } from "react-toast-notifications";
 
-import { getRandomIntInclusive } from "./../utils/utils";
+import { getRandomIntInclusive} from "./../utils/utils";
 import {
   clearCollection,
   getCollection,
@@ -20,6 +26,8 @@ import { populateFirebase } from "./../utils/game.utils";
 
 import { appConfig } from "./../config";
 
+import { PlayersContext } from "./players.context";
+
 const { PICKS_COLLECTION_NAME, CALLS_COLLECTION_NAME } = appConfig;
 
 export const INITIALISED_KEY_NAME = "initialised";
@@ -28,10 +36,13 @@ export const GameContext = createContext({
   pick: () => {},
   [PICKS_COLLECTION_NAME]: [],
   [CALLS_COLLECTION_NAME]: [],
+  markCard: () => {},
 });
 
 export const GameProvider = (props) => {
   const { addToast } = useToasts();
+
+  const { updatePlayer } = useContext(PlayersContext);
 
   // Initial state
   const [initialised, setIntialised] = useState(false);
@@ -153,7 +164,7 @@ export const GameProvider = (props) => {
       pickedItem,
     );
     try {
-      return await swap(
+      return swap(
         pickedItem,
         CALLS_COLLECTION_NAME,
         PICKS_COLLECTION_NAME,
@@ -185,16 +196,36 @@ export const GameProvider = (props) => {
     }
   };
 
+  const markCard = async (player) => {
+    const chartDataArray = Object.entries(player.chartData);
+    const updates = {
+      score: player.score,
+      matches: player.matches,
+    };
+    for (const [playerPlanet, playerSign] of chartDataArray) {
+      for (const pick of picks) {
+        if (pick.planet === playerPlanet && pick.sign === playerSign) {
+          // console.log("This has been picked", playerPlanet, playerSign);
+          updates.score += 1;
+          updates.matches.push(pick._id);
+        }
+      }
+    }
+    try {
+      return updatePlayer(player, updates);
+    } catch (err) {
+      console.log("err marking", err);
+    }
+  };
+
   const checkIfPicked = (planet, sign) => {
     // debugger;
     // console.log("picks", picks);
-    if (Array.isArray(picks)) {
-      for (const pick of picks) {
-        // return pick.planet === planet && pick.sign === sign;
-        if (pick.planet === planet && pick.sign === sign) {
-          // console.log("This has been picked", planet, sign);
-          return true;
-        }
+    for (const pick of picks) {
+      // return pick.planet === planet && pick.sign === sign;
+      if (pick.planet === planet && pick.sign === sign) {
+        console.log("This has been picked", planet, sign);
+        return true;
       }
     }
   };
@@ -205,6 +236,7 @@ export const GameProvider = (props) => {
         pick,
         reset,
         checkIfPicked,
+        markCard,
         calls,
         picks,
       }}

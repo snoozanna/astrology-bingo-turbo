@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import "./PhraseDisplay.scss";
 import { signs, planets, catchPhraseDict } from "./../../constants";
 // import { makeStyles } from "@material-ui/core/styles";

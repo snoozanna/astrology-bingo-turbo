@@ -14,13 +14,14 @@ const useStyles = makeStyles({
 });
 
 function InPlay() {
-  const { players, deleteAllPlayers } = useContext(PlayersContext);
+  const { players, deleteAllPlayers, toggleSort } = useContext(PlayersContext);
   const classes = useStyles();
 
   return (
     <div className="App">
       <Header pageName="Birth Charts in play" />
       <main>
+      <div><button onClick={toggleSort}>sort</button></div>
         <div className={classes.playersContainer}>
           <Grid container spacing={3} component="ul">
             {players.map((player) => (

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import React from "react";
+// import { makeStyles } from "@material-ui/core/styles";
 import AriesWord from "./Words/AriesWord";
 import GeminiWord from "./Words/GeminiWord";
 import CancerWord from "./Words/CancerWord";

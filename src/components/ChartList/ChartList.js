@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 import "./ChartList.scss";
 import List from "@material-ui/core/List";
 import { makeStyles } from "@material-ui/core/styles";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
-import { signs, planets } from "./../../constants";
+import { planets } from "./../../constants";
 import SignSymbol from "./SignSymbol";
 
 
