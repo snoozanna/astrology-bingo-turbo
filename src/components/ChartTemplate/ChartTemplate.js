@@ -11,10 +11,10 @@ const ChartTemplate = ({
         <style>
           {
             "\
-        .chartTemplate * {\
-          stroke: none!important;\
-        }\
-      "
+              .chartTemplate * {\
+                stroke: none!important;\
+              }\
+            "
           }
         </style>
       )}

@@ -39,7 +39,7 @@ const useStyles = makeStyles({
   },
   paper: {
     // position: "absolute",
-    width: "50%",
+    width: "40%",
     margin: "auto",
     backgroundColor: "#fff",
     border: "2px solid #000",
@@ -49,7 +49,6 @@ const useStyles = makeStyles({
 });
 
 const PlayerListing = ({ player }) => {
-  console.log(player);
   const classes = useStyles();
   // const { picks } = useContext(GameContext);
   const { deletePlayer } = useContext(PlayersContext);
@@ -72,7 +71,7 @@ const PlayerListing = ({ player }) => {
   const modalText = (
     <div className={classes.paper}>
       <div className="nameContainer">
-        <h3 className="firstName">
+        <h3>
           {player.firstName}
           {player.lastName}
         </h3>
@@ -128,11 +127,7 @@ const PlayerListing = ({ player }) => {
         )}
         {chartVisible && (
           <ReactToPrint
-            trigger={() => (
-              <Button className="btn">
-                Print
-              </Button>
-            )}
+            trigger={() => <Button className="btn">Print</Button>}
             content={() => chartRef.current}
           />
         )}

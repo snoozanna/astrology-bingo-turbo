@@ -15,10 +15,9 @@ import PiscesIcon from "./Icons/PiscesIcon";
 
 const useStyles = makeStyles({
   signSymbol: {
-    width: 45,
+    width: "3vh",
     margin: "auto",
   },
-
 });
 
 const SignSymbol = ({ sign, width, x, y }) => {
@@ -132,8 +131,10 @@ const SignSymbol = ({ sign, width, x, y }) => {
             />
           );
         default:
-                    console.log(`default case: sign provided was ${sign}`);
-          throw new Error("getIconComponent: Sign not recognised. Need planet.");
+          console.log(`default case: sign provided was ${sign}`);
+          throw new Error(
+            "getIconComponent: Sign not recognised. Need planet.",
+          );
       }
     }
   };

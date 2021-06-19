@@ -150,13 +150,13 @@ export const GameProvider = (props) => {
     const pickedItem = calls[idx];
     console.log(
       "🚀 ~ file: game.context.js ~ line 151 ~ pick ~ pickedItem",
-      pickedItem
+      pickedItem,
     );
     try {
       return await swap(
         pickedItem,
         CALLS_COLLECTION_NAME,
-        PICKS_COLLECTION_NAME
+        PICKS_COLLECTION_NAME,
       );
     } catch (err) {
       console.log(err);
@@ -192,7 +192,7 @@ export const GameProvider = (props) => {
       for (const pick of picks) {
         // return pick.planet === planet && pick.sign === sign;
         if (pick.planet === planet && pick.sign === sign) {
-          console.log("This has been picked", planet, sign);
+          // console.log("This has been picked", planet, sign);
           return true;
         }
       }
