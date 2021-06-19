@@ -1,4 +1,5 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useRef } from "react";
+import ReactToPrint from "react-to-print";
 import "./PlayerListing.scss";
 // import ChartList from "./../../components/ChartList/ChartList";
 import ChartImage from "./../ChartImage/ChartImage";
@@ -54,6 +55,9 @@ const PlayerListing = ({ player }) => {
   const { deletePlayer } = useContext(PlayersContext);
   const [isOn, toggleIsOn] = useToggle();
   const [open, setOpen] = useState(false);
+  const [outlineVisibility, toggleOutlineVisibility] = useToggle();
+
+  const chartRef = useRef();
 
   const handleOpen = () => {
     setOpen(true);
@@ -63,6 +67,8 @@ const PlayerListing = ({ player }) => {
     setOpen(false);
   };
 
+  const { birthday, time, latitude, longitude } = player.chartData;
+
   const modalText = (
     <div className={classes.paper}>
       <div className="nameContainer">
@@ -71,34 +77,15 @@ const PlayerListing = ({ player }) => {
           {player.lastName}
         </h3>
       </div>
-      <ChartImage player={player.chartData} />
-      <p>{player.chartData.birthday}</p>
-      <p>{player.chartData.time}</p>
+      <ChartImage player={player} />
+      <p>{birthday}</p>
+      <p>{time}</p>
       <p>
-        lat: {player.chartData.latitude.toFixed(2)} long:{" "}
-        {player.chartData.longitude.toFixed(2)}
+        lat: {Number(latitude).toFixed(2)}
+        long: {Number(longitude).toFixed(2)}
       </p>
     </div>
   );
-
-  const removeOutline = () => {
-    const outline = document.getElementById("chartTemplate");
-    console.log(outline);
-    // const children = outline.childNodes;
-    // for (const child of children) {
-    //   if (!child.classList.contains("sign")) {
-    //     child.classList.toggle("transparent");
-    //   } else {
-    //     return;
-    //   }
-    // }
-  };
-
-  removeOutline();
-
-  const printChart = () => {
-    window.print();
-  };
 
   return (
     <div key={player._id} className="listGroupItem">
@@ -111,7 +98,11 @@ const PlayerListing = ({ player }) => {
       <div>
         Chart:
         {isOn ? (
-          <ChartImage player={player} />
+          <ChartImage
+            player={player}
+            ref={chartRef}
+            showOutline={outlineVisibility}
+          />
         ) : (
           <IconList player={player} />
         )}
@@ -126,9 +117,17 @@ const PlayerListing = ({ player }) => {
         <Button className="btn" onClick={() => toggleIsOn()}>
           Toggle Chart
         </Button>
-        <Button className="btn" onClick={() => handleOpen()}>
-          Print
+        <Button className="btn" onClick={() => toggleOutlineVisibility()}>
+          Toggle Outline
         </Button>
+        <ReactToPrint
+          trigger={() => (
+            <Button className="btn" onClick={() => handleOpen()}>
+              Print
+            </Button>
+          )}
+          content={() => chartRef.current}
+        />
       </div>
       <Modal
         open={open}

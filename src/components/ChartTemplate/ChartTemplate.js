@@ -1,9 +1,29 @@
 import React from "react";
 
-const ChartTemplate = ({ box = "-30 -30 1060 1060", children }) => {
+const ChartTemplate = ({
+  box = "-30 -30 1060 1060",
+  children,
+  showOutline,
+}) => {
   return (
     <>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox={box} id="chartTemplate">
+      {showOutline && (
+        <style>
+          {
+            "\
+        .chartTemplate * {\
+          stroke: none!important;\
+        }\
+      "
+          }
+        </style>
+      )}
+
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox={box}
+        class="chartTemplate"
+      >
         <defs>
           <clipPath id="a" transform="translate(.67 -1)">
             <path fill="none" d="M-1 1h997v997H-1z" />

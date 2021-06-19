@@ -50,18 +50,18 @@ const useStyles = makeStyles({
 const IconList = ({ player }) => {
   const { checkIfPicked } = useContext(GameContext);
   // console.log("picks", picks);
-  const {playerChart} = player;
+  const {chartData} = player;
   const classes = useStyles();
 
   return (
       <List className={classes.listGroup}>
-        {Object.entries(playerChart).map(([planet, sign]) => {
+        {Object.entries(chartData).map(([planet, sign]) => {
           if (!planets.includes(planet)) {
             return null;
           }
           return (
               <ListItem
-              key={player._id}
+              key={`${player._id}-${planet}-${sign}`}
                 className={`${
                   checkIfPicked(planet, sign)
                     ? classes.picked

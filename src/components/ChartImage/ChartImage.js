@@ -5,7 +5,7 @@ import SignSymbol from "../ChartList/SignSymbol";
 import SignWord from "../ChartList/SignWord";
 
 import { planets } from "./../../constants";
-const ChartImage = ({ player }) => {
+const ChartImage = ({ player, showOutline }) => {
   const {playerChart} = player;
   const getIconLocation = (planet) => {
     if (!planet) {
@@ -129,13 +129,13 @@ const ChartImage = ({ player }) => {
 
   return (
     <>
-      <ChartTemplate>
+      <ChartTemplate showOutline={showOutline}>
         {Object.entries(playerChart).map(([planet, sign]) => {
           if (planets.includes(planet)) {
             // console.log(key, value);
             // console.log("planet", planet);
             return (
-              <div key={player._id}>
+              <div key={`${player._id}-${planet}-${sign}`}>
                 <SignSymbol
                   sign={sign}
                   width="60px"
