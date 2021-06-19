@@ -1,13 +1,11 @@
 import React, { useContext } from "react";
-import { v4 as uuidv4 } from 'uuid';
 import List from "@material-ui/core/List";
-import SignSymbol from "../ChartList/SignSymbol";
-
 import { makeStyles } from "@material-ui/core/styles";
 import { useSpring, animated } from "react-spring";
-// import { Dimensions } from "react-native";
 
-import { planets } from "./../../constants";
+import SignSymbol from "../ChartList/SignSymbol";
+import { planets, orbColors } from "./../../constants";
+import { getRandomIntInclusive } from './../../utils/utils';
 
 const useStyles = makeStyles({
   ownerName: {
@@ -46,19 +44,7 @@ const useStyles = makeStyles({
 });
 
 const chooseColor = () => {
-  const colors = [
-    "crimson",
-    "teal",
-    "coral",
-    "hotpink",
-    "skyblue",
-    "salmon",
-    "seagreen",
-    "peachpuff",
-  ];
-  const random = Math.floor(Math.random() * colors.length);
-
-  return colors[random];
+  return orbColors[getRandomIntInclusive(0, orbColors.length)];
 };
 
 // chooseScale
@@ -91,8 +77,8 @@ const chooseDelay = () => {
 };
 // console.log("screen height", window.screen.availHeight);
 
-const PlayerOrb = ({ player }) => {
-  // console.log("alreadyCalled", alreadyCalled);
+const PlayerOrb = ({ player: { _id, chartData }, player }) => {
+  // console.log("picked", picked);
 
   //orbs randomly change size, colour, move around
   const props = useSpring({
@@ -121,24 +107,20 @@ const PlayerOrb = ({ player }) => {
   return (
       <animated.div style={props} className={classes.orb}>
         <div className={classes.ownerName}>
-          <p>{player.ownerName}</p>
+          <p>{player.firstName} {player.lastName}</p>
         </div>
         <List className={classes.listGroup}>
-          {Object.entries(player).map(([planet, sign]) => {
+        {Object.entries(chartData).map(([planet, sign]) => {
             if (!planets.includes(planet)) {
               return null;
             }
-            // console.log("player", player);
-            // console.log("planet,sign", planet, sign);
-
-            // console.log(checkCall(planet, sign));
             return (
                 <SignSymbol
-                  key={uuidv4()}
+                  key={`${planet}-${sign}`}
                   sign={sign}
                   planet={planet}
                   className={classes.orbSymbol}
-                  fill={"hsla(254, 16%, 84%, 30%"}
+                  fill="hsla(254, 16%, 84%, 30%)"
                 />
             );
           })}
@@ -150,8 +132,8 @@ const PlayerOrb = ({ player }) => {
 export default PlayerOrb;
 
 // If player object contains a planet
-//>> if alreadyCalled array contains anything
-//>>>> If planet / sign combo is in alreadyCalled
+//>> if picked array contains anything
+//>>>> If planet / sign combo is in picked
 // >> return sign symbol with pink background
 //>>>> else return normal sign symbol
 // else return nothing

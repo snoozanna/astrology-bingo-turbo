@@ -50,7 +50,7 @@ const useStyles = makeStyles({
 const PlayerListing = ({ player }) => {
   console.log(player);
   const classes = useStyles();
-  // const { alreadyCalled } = useContext(GameContext);
+  // const { picks } = useContext(GameContext);
   const { deletePlayer } = useContext(PlayersContext);
   const [isOn, toggleIsOn] = useToggle();
   const [open, setOpen] = useState(false);

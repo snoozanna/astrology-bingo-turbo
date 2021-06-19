@@ -217,7 +217,7 @@ const bindListeners = async (
               console.log("added", change.doc.id, change.doc.data());
               add(change.doc);
               break;
-            case "MODIFIED":
+            case "modified":
               console.log("modified", change.doc.id, change.doc.data());
               update(change.doc);
               break;
@@ -236,17 +236,19 @@ const bindListeners = async (
 const swap = async (localDoc, origin, destination) => {
   try {
     const batch = db.batch();
-    const originDocRef = await db.collection(origin).doc(localDoc._id);
-    const destinationDocRef = await db.collection(destination).doc(localDoc._id);
+    const { _id: docId } = localDoc;
+
+    const ref = db.collection(origin).doc(docId);
+    batch.delete(ref);
+
+    const destinationDocRef = db.collection(destination).doc();
     batch.set(destinationDocRef, localDoc);
-    batch.delete(originDocRef);
+
     return batch.commit();
   } catch (err) {
     return Promise.reject(err.message);
   }
 };
-
-
 
 export {
   addOne,

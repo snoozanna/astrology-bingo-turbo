@@ -1,17 +1,19 @@
 import { FBDocToObj } from "./../utils/firebase.utils";
 export const addToLocal = (setter, doc) => {
   setter((collection) => {
-    const alreadyThere = collection.find(({ _id }) => doc.id === _id);
-    if (alreadyThere) {
-      // throw new Error(`Item with id ${doc.id} already exists`);
-      console.warn(`Item with id ${doc.id} already exists`);
-      return collection;
+    const idx = collection.findIndex(({ _id }) => doc.id === _id);
+    let newCollection = null;
+    if (idx > -1) {
+      newCollection = [
+        ...collection.slice(0, idx),
+        FBDocToObj(doc),
+        ...collection.slice(idx + 1),
+      ];
+      console.log("updating local");
+    } else {
+      newCollection = [...collection, FBDocToObj(doc)];
+      console.log("adding to local");
     }
-
-    console.log(collection);
-    const newCollection = [...collection, FBDocToObj(doc)];
-    // const newCollection = [...collection, doc];
-    console.log(newCollection);
     return newCollection;
   });
 };

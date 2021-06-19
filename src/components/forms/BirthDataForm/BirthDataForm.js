@@ -12,7 +12,7 @@ import {
 import { useToasts } from "react-toast-notifications";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, Controller } from "react-hook-form";
-import { getGeo, findUTCOffset } from "./calls";
+import { getGeo, findUTCOffset } from "./../../../utils/astro-api.utils";
 import * as yup from "yup";
 import { useParams } from "react-router-dom";
 

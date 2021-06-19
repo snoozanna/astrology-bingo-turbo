@@ -16,6 +16,7 @@ import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import Home from "./pages/home/home.js";
 import NotFound from "./pages/404/404";
 import Login from "./pages/login/login";
+import Controls from "./pages/controls/controls";
 import AddChart from "./pages/add-birth-chart/add-birth-chart.js";
 import InPlay from "./pages/in-play/in-play.js";
 import MyBirthChart from "./pages/my-birth-chart/my-birth-chart.js";
@@ -48,6 +49,7 @@ function App() {
                   
                     <Route exact path="/" component={Home} />
                     <Route exact path="/login" component={Login} />
+                    <Route exact path="/controls" component={Controls} />
 
                     <ProtectedRoute
                       exact

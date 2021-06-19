@@ -7,46 +7,14 @@ import PreviousCall from "../../components/PreviousCall/PreviousCall";
 import { GameContext } from "./../../contexts/game.context";
 
 function PublicDisplay() {
-  const { alreadyCalled } = useContext(GameContext);
-  console.log("alreadyCalled", alreadyCalled);
-  // debugger;
+  const { picks } = useContext(GameContext);
+  console.log("picks", picks);
+  
+  const lastPick = picks[picks.length - 1];
+  const previousPick = picks[picks.length - 2];
 
-  const getPlanet = (alreadyCalled) => {
-    let lastPlanet = "";
-    if (alreadyCalled.length > 0) {
-      lastPlanet = alreadyCalled[alreadyCalled.length - 1].planet;
-    }
-    return lastPlanet;
-  };
-  const p = getPlanet(alreadyCalled);
-
-  const getSign = (alreadyCalled) => {
-    let lastSign = "";
-    if (alreadyCalled.length > 0) {
-      lastSign = alreadyCalled[alreadyCalled.length - 1].sign;
-    }
-    return lastSign;
-  };
-  const s = getSign(alreadyCalled);
-
-  const getPreviousPlanet = (alreadyCalled) => {
-    let previousPlanet = "";
-    if (alreadyCalled.length > 1) {
-      // debugger;
-      previousPlanet = alreadyCalled[alreadyCalled.length - 2].planet;
-    }
-    return previousPlanet;
-  };
-  const pp = getPreviousPlanet(alreadyCalled);
-
-  const getPreviousSign = (alreadyCalled) => {
-    let previousSign = "";
-    if (alreadyCalled.length > 1) {
-      previousSign = alreadyCalled[alreadyCalled.length - 2].sign;
-    }
-    return previousSign;
-  };
-  const ps = getPreviousSign(alreadyCalled);
+  const {planet:p = '', sign:s = ''} = lastPick;
+  const {planet:pp = '', sign:ps = ''} = previousPick;
 
   return (
     <>

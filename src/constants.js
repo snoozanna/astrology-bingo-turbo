@@ -1,17 +1,13 @@
-export const descDict = Object.freeze({
-  Aries: "Libra",
-  Taurus: "Scorpio",
-  Gemini: "Sagittarius",
-  Cancer: "Capricorn",
-  Leo: "Aquarius",
-  Virgo: "Pisces",
-  Libra: "Aries",
-  Scorpio: "Taurus",
-  Sagittarius: "Gemini",
-  Capricorn: "Cancer",
-  Aquarius: "Leo",
-  Pisces: "Virgo",
-});
+export const orbColors = [
+  "crimson",
+  "teal",
+  "coral",
+  "hotpink",
+  "skyblue",
+  "salmon",
+  "seagreen",
+  "peachpuff",
+];
 
 export const signs = Object.freeze([
   "Aries",
@@ -42,6 +38,21 @@ export const planets = Object.freeze([
   "Descendant",
   "Moon",
 ]);
+
+export const descDict = Object.freeze({
+  Aries: "Libra",
+  Taurus: "Scorpio",
+  Gemini: "Sagittarius",
+  Cancer: "Capricorn",
+  Leo: "Aquarius",
+  Virgo: "Pisces",
+  Libra: "Aries",
+  Scorpio: "Taurus",
+  Sagittarius: "Gemini",
+  Capricorn: "Cancer",
+  Aquarius: "Leo",
+  Pisces: "Virgo",
+});
 
 export const catchPhraseDict = {
   Sun: {
