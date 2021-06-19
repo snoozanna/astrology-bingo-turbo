@@ -24,7 +24,7 @@ const useStyles = makeStyles({
   listItem: {
     margin: "auto",
     maxWidth: "fit-content",
-    padding: "7px 15px 15px",
+    // padding: "7px 15px 15px",
     border: "1px black solid",
     borderRadius: 15,
     // backgroundColor: "lavender",
@@ -33,7 +33,7 @@ const useStyles = makeStyles({
   picked: {
     margin: "auto",
     maxWidth: "fit-content",
-    padding: "7px 15px 15px",
+
     border: "1px black solid",
     borderRadius: 15,
     backgroundColor: "#E31C79",

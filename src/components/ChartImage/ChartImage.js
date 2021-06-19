@@ -6,11 +6,10 @@ import SignWord from "../ChartList/SignWord";
 
 import { planets } from "./../../constants";
 
-
 const ChartImage = forwardRef(({ player, showOutline }, ref) => {
-  console.log('player', player);
-  const {chartData} = player;
-  console.log('chartData', chartData);
+  console.log("player", player);
+  const { chartData } = player;
+  console.log("chartData", chartData);
 
   const getIconLocation = (planet) => {
     if (!planet) {
@@ -131,13 +130,12 @@ const ChartImage = forwardRef(({ player, showOutline }, ref) => {
       }
     }
   };
-
+  // debugger;
   return (
     <div ref={ref}>
       <ChartTemplate showOutline={showOutline}>
         {Object.entries(chartData).map(([planet, sign]) => {
           if (planets.includes(planet)) {
-            // console.log(key, value);
             // console.log("planet", planet);
             return (
               <React.Fragment key={`${player._id}-${planet}-${sign}`}>
@@ -168,3 +166,7 @@ const ChartImage = forwardRef(({ player, showOutline }, ref) => {
 });
 
 export default ChartImage;
+
+// pass a prop of outline to <ChartImage/>. if outline is true, remove class of transparent from all the SVG inner components
+// if outline is false, add class of transparent
+// in player listing, use <ChartImage outline={true}
