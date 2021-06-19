@@ -9,6 +9,7 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "concurrently": "^6.2.0",
     "firebase": "^8.6.1",
     "firebase-tools": "^9.10.2",
     "font-awesome": "^4.7.0",
@@ -22,6 +23,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-spring": "^9.1.2",
+    "react-to-print": "^2.12.6",
     "react-toast-notifications": "^2.4.3",
     "typeface-inconsolata": "^1.1.13",
     "uuid": "^8.3.2",
@@ -33,7 +35,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "start:hug": "hug -f ./src/get-birth-chart.py"
+    "start:hug": "hug -f ./src/get-birth-chart.py",
+    "start:dev": "concurrently \"yarn start:hug\" \"yarn start\""
   },
   "eslintConfig": {
     "extends": [

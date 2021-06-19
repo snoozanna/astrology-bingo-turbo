@@ -148,9 +148,16 @@ export const GameProvider = (props) => {
   const pick = async () => {
     const idx = getRandomIntInclusive(0, calls.length - 1);
     const pickedItem = calls[idx];
-    console.log("🚀 ~ file: game.context.js ~ line 151 ~ pick ~ pickedItem", pickedItem)
+    console.log(
+      "🚀 ~ file: game.context.js ~ line 151 ~ pick ~ pickedItem",
+      pickedItem
+    );
     try {
-    return await swap(pickedItem, CALLS_COLLECTION_NAME, PICKS_COLLECTION_NAME);
+      return await swap(
+        pickedItem,
+        CALLS_COLLECTION_NAME,
+        PICKS_COLLECTION_NAME
+      );
     } catch (err) {
       console.log(err);
     }
@@ -159,11 +166,22 @@ export const GameProvider = (props) => {
   const reset = async () => {
     const consent = window.confirm("Are you sure you want to reset?");
     if (consent) {
-      return Promise.all([
-        clearCollection(picks, PICKS_COLLECTION_NAME),
-        clearCollection(calls, CALLS_COLLECTION_NAME),
-        populateFirebase(),
-      ]);
+      addToast(`Resetting game...`, {
+        appearance: "info",
+      });
+      try {
+        const done = await Promise.all([
+          clearCollection(picks, PICKS_COLLECTION_NAME),
+          clearCollection(calls, CALLS_COLLECTION_NAME),
+          populateFirebase(),
+        ]);
+        addToast(`Game reset!`, {
+          appearance: "success",
+        });
+        return done;
+      } catch (err) {
+        return Promise.reject(err.message);
+      }
     }
   };
 

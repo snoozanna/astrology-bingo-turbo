@@ -111,9 +111,9 @@ const PlayerListing = ({ player }) => {
       <div>
         Chart:
         {isOn ? (
-          <ChartImage player={player.chartData} />
+          <ChartImage player={player} />
         ) : (
-          <IconList player={player.chartData} />
+          <IconList player={player} />
         )}
       </div>
       <div className="btnContainer">

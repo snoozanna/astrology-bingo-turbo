@@ -4,8 +4,9 @@ import ChartTemplate from "../ChartTemplate/ChartTemplate";
 import SignSymbol from "../ChartList/SignSymbol";
 import SignWord from "../ChartList/SignWord";
 
-import { signs, planets } from "./../../constants";
+import { planets } from "./../../constants";
 const ChartImage = ({ player }) => {
+  const {playerChart} = player;
   const getIconLocation = (planet) => {
     if (!planet) {
       throw new Error("Sign not provided. Need planet.");
@@ -129,12 +130,12 @@ const ChartImage = ({ player }) => {
   return (
     <>
       <ChartTemplate>
-        {Object.entries(player).map(([planet, sign]) => {
+        {Object.entries(playerChart).map(([planet, sign]) => {
           if (planets.includes(planet)) {
             // console.log(key, value);
             // console.log("planet", planet);
             return (
-              <>
+              <div key={player._id}>
                 <SignSymbol
                   sign={sign}
                   width="60px"
@@ -150,7 +151,7 @@ const ChartImage = ({ player }) => {
                   transform={getWordRotation(planet)}
                   className={planet}
                 />
-              </>
+              </div>
             );
           } else {
             return null;
