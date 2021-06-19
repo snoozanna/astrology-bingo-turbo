@@ -140,10 +140,10 @@ const ChartImage = forwardRef(({ player, showOutline }, ref) => {
             // console.log(key, value);
             // console.log("planet", planet);
             return (
-              <div key={`${player._id}-${planet}-${sign}`}>
+              <React.Fragment key={`${player._id}-${planet}-${sign}`}>
                 <SignSymbol
                   sign={sign}
-                  width="60px"
+                  width="60"
                   x={getIconLocation(planet).x}
                   y={getIconLocation(planet).y}
                   className={planet}
@@ -156,7 +156,7 @@ const ChartImage = forwardRef(({ player, showOutline }, ref) => {
                   transform={getWordRotation(planet)}
                   className={planet}
                 />
-              </div>
+              </React.Fragment>
             );
           } else {
             return null;
