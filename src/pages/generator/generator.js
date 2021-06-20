@@ -49,18 +49,21 @@ function Generator() {
     <>
       <div className="App">
         <Header pageName="Generator (Fig admin view)" />
-        <main>
+        <main className="mainContainer">
           <div className="controlsContainer">
-            <div className="resetBtn">
-              <button onClick={processCelebs}>LOAD CELEBS</button>
-            </div>
-            <div className="resetBtn">
-              <button onClick={reset}>RESET GAME</button>
-            </div>
-            <div className="resetBtn">
-              <button onClick={() => setSeeGrid(!seeGrid)}>
-                SEE {!seeGrid ? "GRID" : "CALL VIEW"}
-              </button>
+            <h3>IMPORTANT CONTROLS</h3>
+            <div class="controlsButtons">
+              <div className="resetBtn">
+                <button onClick={processCelebs}>LOAD CELEBS</button>
+              </div>
+              <div className="resetBtn">
+                <button onClick={reset}>RESET GAME</button>
+              </div>
+              <div className="resetBtn">
+                <button onClick={() => setSeeGrid(!seeGrid)}>
+                  SEE {!seeGrid ? "GRID" : "CALL VIEW"}
+                </button>
+              </div>
             </div>
           </div>
           {/* <PhraseDisplay planet={"Jupiter"} sign={"Saturn"} /> */}
