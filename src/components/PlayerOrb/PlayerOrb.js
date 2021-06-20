@@ -5,7 +5,7 @@ import { useSpring, animated } from "react-spring";
 
 import SignSymbol from "../ChartList/SignSymbol";
 import { planets, orbColors } from "./../../constants";
-import { getRandomIntInclusive } from './../../utils/utils';
+import { getRandomIntInclusive } from "./../../utils/utils";
 
 const useStyles = makeStyles({
   ownerName: {
@@ -20,16 +20,11 @@ const useStyles = makeStyles({
     color: "ivory",
   },
   orb: {
-    border: "black solid 1px",
+    // border: "black solid 1px",
     padding: "80px",
     borderRadius: "50%",
     position: "relative",
     backgroundColor: "teal",
-  },
-
-  signSymbol: {
-    width: 45,
-    margin: "10px auto",
   },
 
   listGroup: {
@@ -37,9 +32,8 @@ const useStyles = makeStyles({
     gridTemplateColumns: "repeat(4, 1fr)",
     gridGap: "40px 15px",
   },
-
-  orbSymbol: {
-    marginInlineEnd: 10,
+  svg: {
+    fill: "#fff",
   },
 });
 
@@ -47,22 +41,17 @@ const chooseColor = () => {
   return orbColors[getRandomIntInclusive(0, orbColors.length)];
 };
 
-// chooseScale
 const chooseScale = () => {
   const randomNumber = Math.random();
   // console.log(randomNumber);
   return randomNumber;
 };
 
-// chooseX
-
 const chooseX = () => {
   // const randomX = Math.floor(Math.random() * window.screen.availWidth);
   const randomX = Math.floor(Math.random() * 100);
   return randomX;
 };
-
-// chooseY
 
 const chooseY = () => {
   // const randomY = Math.floor(Math.random() * window.screen.availHeight);
@@ -87,7 +76,7 @@ const PlayerOrb = ({ player: { _id, chartData }, player }) => {
     delay: chooseDelay(),
     from: {
       opacity: 0,
-      rotateZ: 360,
+      // rotateZ: 360,
       x: chooseX(),
       y: chooseY(),
       backgroundColor: chooseColor(),
@@ -95,7 +84,7 @@ const PlayerOrb = ({ player: { _id, chartData }, player }) => {
     },
     to: {
       opacity: 0.8,
-      rotateZ: 0,
+      // rotateZ: 0,
       x: chooseX(),
       y: chooseY(),
       backgroundColor: chooseColor(),
@@ -105,27 +94,30 @@ const PlayerOrb = ({ player: { _id, chartData }, player }) => {
   const classes = useStyles();
   console.log("player", player);
   return (
-      <animated.div style={props} className={classes.orb}>
-        <div className={classes.ownerName}>
-          <p>{player.firstName} {player.lastName}</p>
-        </div>
-        <List className={classes.listGroup}>
+    <animated.div style={props} className={classes.orb}>
+      <div className={classes.ownerName}>
+        <p>
+          {player.firstName} {player.lastName}
+        </p>
+      </div>
+      <List className={classes.listGroup}>
         {Object.entries(chartData).map(([planet, sign]) => {
-            if (!planets.includes(planet)) {
-              return null;
-            }
-            return (
-                <SignSymbol
-                  key={`${planet}-${sign}`}
-                  sign={sign}
-                  planet={planet}
-                  className={classes.orbSymbol}
-                  fill="hsla(254, 16%, 84%, 30%)"
-                />
-            );
-          })}
-        </List>
-      </animated.div>
+          if (!planets.includes(planet)) {
+            return null;
+          }
+          return (
+            <SignSymbol
+              key={`${planet}-${sign}`}
+              sign={sign}
+              planet={planet}
+              className={classes.orbSymbol}
+              width="50px"
+              fill="hsla(36, 96%, 95%, 40%)"
+            />
+          );
+        })}
+      </List>
+    </animated.div>
   );
 };
 

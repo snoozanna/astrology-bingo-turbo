@@ -9,11 +9,6 @@ import { planets } from "./../../constants";
 import { GameContext } from "./../../contexts/game.context";
 
 const useStyles = makeStyles({
-  signSymbol: {
-    width: 30,
-    margin: "auto",
-  },
-
   listGroup: {
     display: "grid",
     gridTemplateColumns: "repeat(4, 1fr)",
@@ -33,7 +28,6 @@ const useStyles = makeStyles({
   picked: {
     margin: "auto",
     maxWidth: "fit-content",
-
     border: "1px black solid",
     borderRadius: 15,
     backgroundColor: "#E31C79",
@@ -50,33 +44,30 @@ const useStyles = makeStyles({
 const IconList = ({ player }) => {
   const { checkIfPicked } = useContext(GameContext);
   // console.log("picks", picks);
-  const {chartData} = player;
+  const { chartData } = player;
   const classes = useStyles();
 
   return (
-      <List className={classes.listGroup}>
-        {Object.entries(chartData).map(([planet, sign]) => {
-          if (!planets.includes(planet)) {
-            return null;
-          }
-          return (
-              <ListItem
-              key={`${player._id}-${planet}-${sign}`}
-                className={`${
-                  checkIfPicked(planet, sign)
-                    ? classes.picked
-                    : classes.listItem
-                } ${planet.toLowerCase()}`}
-              >
-                <ListItemIcon>
-                  <SignSymbol sign={sign} planet={planet} />
-                </ListItemIcon>
-              </ListItem>
-          );
-        })}
-      </List>
+    <List className={classes.listGroup}>
+      {Object.entries(chartData).map(([planet, sign]) => {
+        if (!planets.includes(planet)) {
+          return null;
+        }
+        return (
+          <ListItem
+            key={`${player._id}-${planet}-${sign}`}
+            className={`${
+              checkIfPicked(planet, sign) ? classes.picked : classes.listItem
+            } ${planet.toLowerCase()}`}
+          >
+            <ListItemIcon>
+              <SignSymbol sign={sign} planet={planet} width="30px"/>
+            </ListItemIcon>
+          </ListItem>
+        );
+      })}
+    </List>
   );
 };
 
 export default IconList;
-

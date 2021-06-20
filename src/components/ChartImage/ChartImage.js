@@ -66,11 +66,11 @@ const ChartImage = forwardRef(({ player, showOutline }, ref) => {
     } else {
       switch (planet) {
         case "Mars":
-          return { x: 254, y: 65 };
+          return { x: 300, y: 65 };
         case "Jupiter":
-          return { x: 266, y: -16 };
+          return { x: 310, y: -16 };
         case "Saturn":
-          return { x: 231, y: -112 };
+          return { x: 275, y: -112 };
         case "Uranus":
           return { x: -190, y: 195 };
         case "Neptune":
@@ -84,11 +84,11 @@ const ChartImage = forwardRef(({ player, showOutline }, ref) => {
         case "Moon":
           return { x: 71, y: -87 };
         case "Sun":
-          return { x: -17, y: 184 };
+          return { x: 30, y: 184 };
         case "Mercury":
-          return { x: 102, y: 192 };
+          return { x: 150, y: 192 };
         case "Venus":
-          return { x: 139, y: 204 };
+          return { x: 190, y: 204 };
         default:
           console.log(`default case: sign provided was ${planet}`);
           throw new Error("getWordLocation: Sign not recognised. Need planet.");

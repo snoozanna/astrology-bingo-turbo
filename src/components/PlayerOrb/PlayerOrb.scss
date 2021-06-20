@@ -1,0 +1,29 @@
+.ownerName {
+  position: absolute;
+  font-size: "3rem";
+  font-weight: "bold";
+  max-width: "min-content";
+  display: "flex";
+  left: 120;
+  top: 60;
+  z-index: 1;
+  color: "ivory";
+}
+
+.orb {
+  border: "black solid 1px";
+  padding: "80px";
+  border-radius: "50%";
+  position: "relative";
+  background-color: "teal";
+}
+
+.listGroup {
+  display: "grid";
+  grid-template-columns: "repeat(4, 1fr)";
+  grid-gap: "40px 15px";
+}
+
+.orbSymbol {
+  display: none;
+}
