@@ -35,7 +35,7 @@ export const processCeleb = async (celeb) => {
   const place = await getGeo(celeb.locationSearchTerm);
   console.log(
     "🚀 ~ file: players.context.js ~ line 43 ~ processCeleb ~ place",
-    place
+    place,
   );
   const { results } = place;
   const {
@@ -58,6 +58,7 @@ export const processCeleb = async (celeb) => {
 };
 
 export const processCelebs = async () => {
+  // debugger;
   const celebs = await getCollection(CELEB_COLLECTION_NAME);
   const prms = [];
   for (const celeb of celebs) {

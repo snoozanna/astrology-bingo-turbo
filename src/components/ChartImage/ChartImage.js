@@ -10,6 +10,7 @@ const ChartImage = forwardRef(({ player, showOutline }, ref) => {
   console.log("player", player);
   const { chartData } = player;
   console.log("chartData", chartData);
+  const { birthday, time, latitude, longitude } = player.chartData;
 
   const getIconLocation = (planet) => {
     if (!planet) {
@@ -161,6 +162,26 @@ const ChartImage = forwardRef(({ player, showOutline }, ref) => {
           }
         })}
       </ChartTemplate>
+      <dl className="detailsContainer">
+        <span className="detailItem">
+          <dt>Birthday:</dt>
+          <dd>{birthday}</dd>
+        </span>
+        <span className="detailItem">
+          <dt>Time:</dt>
+          <dd>{time}</dd>
+        </span>
+        <span className="detailItem">
+          <div className="detailGeog">
+            <dt>Lat:</dt>
+            <dd>{Number(latitude).toFixed(2)}</dd>
+          </div>
+          <div className="detailGeog">
+            <dt>Long:</dt>
+            <dd>{Number(longitude).toFixed(2)}</dd>
+          </div>
+        </span>
+      </dl>
     </div>
   );
 });
