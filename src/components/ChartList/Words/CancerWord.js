@@ -1,6 +1,6 @@
 import React from "react";
 
-const CancerWord = ({ transform, x, y, className, font }) => {
+const CancerWord = ({ transform, x, y, className, font, textAnchor }) => {
   return (
     <>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
@@ -11,6 +11,7 @@ const CancerWord = ({ transform, x, y, className, font }) => {
           x={x}
           y={y}
           className={className}
+          textAnchor={textAnchor}
         >
           Can
         </text>

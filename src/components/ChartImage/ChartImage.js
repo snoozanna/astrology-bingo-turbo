@@ -131,6 +131,42 @@ const ChartImage = forwardRef(({ player, showOutline }, ref) => {
       }
     }
   };
+
+  const getTextAnchor = (planet) => {
+    if (!planet) {
+      throw new Error("Sign not provided. Need planet.");
+    } else {
+      switch (planet) {
+        case "Mars":
+          return "end";
+        case "Jupiter":
+          return "end";
+        case "Saturn":
+          return "end";
+        case "Uranus":
+          return "start";
+        case "Neptune":
+          return "start";
+        case "Pluto":
+          return "start";
+        case "Ascendant":
+          return "start";
+        case "Descendant":
+          return "start";
+        case "Moon":
+          return "start";
+        case "Sun":
+          return "end";
+        case "Mercury":
+          return "end";
+        case "Venus":
+          return "end";
+        default:
+          console.log(`default case: sign provided was ${planet}`);
+          throw new Error("getTextAnchor: Sign not recognised. Need planet.");
+      }
+    }
+  };
   // debugger;
   return (
     <div ref={ref}>
@@ -159,6 +195,7 @@ const ChartImage = forwardRef(({ player, showOutline }, ref) => {
                   y={getWordLocation(planet).y}
                   font="25px"
                   transform={getWordRotation(planet)}
+                  textAnchor={getTextAnchor(planet)}
                   className={planet}
                 />
               </React.Fragment>
