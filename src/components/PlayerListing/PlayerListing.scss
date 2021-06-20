@@ -16,9 +16,10 @@
   font-size: 1.3rem;
 }
 
-.firstName {
-  margin-inline-end: 4px;
+.nameItem:first-child {
+  margin-inline-end: 5px;
 }
+
 
 button {
   margin-inline-end: 5px;
@@ -28,5 +29,3 @@ button {
   background-color: rgb(237, 105, 136);
   color: #fff;
 }
-
-

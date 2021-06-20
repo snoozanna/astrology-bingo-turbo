@@ -8,12 +8,12 @@ const addOne = async (data, collectionName) => {
   /* If we had typescript we could avoid this. It's verbose but there to help in the future */
   if (!data || !Object.isObject(data)) {
     throw new Error(
-      `No data provided to firebase addOne. Instead received ${data}`
+      `No data provided to firebase addOne. Instead received ${data}`,
     );
   }
   if (!collectionName || typeof collectionName !== "string") {
     throw new Error(
-      `No collectionName provided to firebase addOne. Instead received ${collectionName}`
+      `No collectionName provided to firebase addOne. Instead received ${collectionName}`,
     );
   }
 
@@ -28,14 +28,14 @@ const addOne = async (data, collectionName) => {
 const addMany = async (data = [], collectionName) => {
   if (!collectionName || typeof collectionName !== "string") {
     throw new Error(
-      `No collection name provided to firebase addMany. Instead received ${collectionName}`
+      `No collection name provided to firebase addMany. Instead received ${collectionName}`,
     );
   }
   if (!Array.isArray(data)) {
     throw new Error(
       `Improper data provided to firebase addMany. Received ${JSON.stringify(
-        data
-      )}`
+        data,
+      )}`,
     );
   }
 
@@ -56,12 +56,12 @@ const addMany = async (data = [], collectionName) => {
 const getOne = async (id, collectionName) => {
   if (!id) {
     throw new Error(
-      `No collection name provided to firebase getOne. Instead received ${id}`
+      `No collection name provided to firebase getOne. Instead received ${id}`,
     );
   }
   if (!collectionName) {
     throw new Error(
-      `No collection name provided to firebase getOne. Instead received ${collectionName}`
+      `No collection name provided to firebase getOne. Instead received ${collectionName}`,
     );
   }
   try {
@@ -106,13 +106,13 @@ const updateOne = async (id, updates, collectionName) => {
   if (!updates || !Object.isObject(updates)) {
     throw new Error(
       `Improper updates name passed to updateOne: received ${JSON.stringify(
-        updates
-      )}`
+        updates,
+      )}`,
     );
   }
   if (!collectionName || typeof updates !== "string") {
     throw new Error(
-      `Improper collection name passed to updateOne: received ${collectionName}`
+      `Improper collection name passed to updateOne: received ${collectionName}`,
     );
   }
   try {
@@ -150,15 +150,15 @@ const deleteOne = async (id, collectionName) => {
 const deleteMany = async (ids = [], collectionName) => {
   if (!collectionName) {
     throw new Error(
-      `No collection name passed to deleteMany: received ${collectionName}`
+      `No collection name passed to deleteMany: received ${collectionName}`,
     );
   }
 
   if (!Array.isArray(ids)) {
     throw new Error(
       `deleteMany requires an array of string ids: received ${JSON.stringify(
-        ids
-      )}`
+        ids,
+      )}`,
     );
   }
 
@@ -177,13 +177,13 @@ const clearCollection = async (localCollection, collectionName) => {
   if (!Array.isArray(localCollection)) {
     throw new Error(
       `Improper localCollection name passed to clearCollection: received ${JSON.stringify(
-        localCollection
-      )}`
+        localCollection,
+      )}`,
     );
   }
   if (!collectionName) {
     throw new Error(
-      `No collection name passed to clearCollection: received ${collectionName}`
+      `No collection name passed to clearCollection: received ${collectionName}`,
     );
   }
   try {
@@ -202,7 +202,7 @@ const bindListeners = async (
     add: () => {},
     update: () => {},
     remove: () => {},
-  }
+  },
 ) => {
   return (
     db

@@ -50,6 +50,10 @@
 
 // PLAYER DETAILS
 
+.nameContainer.chartImage {
+  display: none;
+}
+
 .detailsContainer {
   display: flex;
   flex-direction: column;
@@ -68,6 +72,23 @@
     display: flex;
   }
   .detailGeog:first-child {
+    margin-inline-end: 5px;
+  }
+}
+
+@media print {
+  .chartImage {
+    padding-top: 100px !important;
+  }
+  .chartImage.nameContainer {
+    display: initial !important;
+  }
+
+  .chartTemplate {
+    width: 100%;
+  }
+
+  .nameItem:first-child {
     margin-inline-end: 5px;
   }
 }

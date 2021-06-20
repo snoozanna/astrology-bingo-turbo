@@ -92,12 +92,10 @@ const PlayerListing = ({ player }) => {
 
   return (
     <div key={player._id} className="listGroupItem">
-      <div className="nameContainer">
-        <h3 className="firstName">
-          <span className={classes.block}>{player.firstName}</span>
-          <span className={classes.block}>{player.lastName}</span>
-        </h3>
-      </div>
+      <h3 className="nameContainer">
+        <span className="nameItem">{player.firstName}</span>
+        <span className="nameItem">{player.lastName}</span>
+      </h3>
       <div>
         {chartVisible ? (
           <ChartImage

@@ -7,9 +7,9 @@ import SignWord from "../ChartList/SignWord";
 import { planets } from "./../../constants";
 
 const ChartImage = forwardRef(({ player, showOutline }, ref) => {
-  console.log("player", player);
+  // console.log("player", player);
   const { chartData } = player;
-  console.log("chartData", chartData);
+  // console.log("chartData", chartData);
   const { birthday, time, latitude, longitude } = player.chartData;
 
   const getIconLocation = (planet) => {
@@ -134,6 +134,12 @@ const ChartImage = forwardRef(({ player, showOutline }, ref) => {
   // debugger;
   return (
     <div ref={ref}>
+      <div className="nameContainer chartImage">
+        <h3 className="firstName">
+          <span className="nameItem">{player.firstName}</span>
+          <span className="nameItem">{player.lastName}</span>
+        </h3>
+      </div>
       <ChartTemplate showOutline={showOutline}>
         {Object.entries(chartData).map(([planet, sign]) => {
           if (planets.includes(planet)) {
