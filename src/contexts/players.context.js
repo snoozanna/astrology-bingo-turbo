@@ -1,11 +1,17 @@
-import React, { createContext, useState, useEffect, useCallback } from "react";
+import React, {
+  createContext,
+  useState,
+  useEffect,
+  useCallback,
+  useContext,
+} from "react";
 import { useToasts } from "react-toast-notifications";
 
 import {
   clearCollection,
   addOne,
   // addMany,
-  getCollection,
+  // getCollection,
   updateOne,
   deleteOne,
   bindListeners,
@@ -15,7 +21,7 @@ import {
   addToLocal,
   updateInLocal,
   removeFromLocal,
-  bulkAddToLocal,
+  // bulkAddToLocal,
 } from "./../utils/state.utils";
 
 import { useToggle } from "./../utils/utils";
@@ -23,9 +29,9 @@ import { useToggle } from "./../utils/utils";
 import { appConfig } from "./../config";
 import { getPlayerBirthChartData } from "../utils/player.utils";
 
+
 const {
-  PLAYER_COLLECTION_NAME,
-  // CELEB_COLLECTION_NAME,
+  PLAYERS_COLLECTION_NAME,
 } = appConfig;
 
 export const PlayersContext = createContext({
@@ -34,11 +40,13 @@ export const PlayersContext = createContext({
   deletePlayer: () => {},
   deleteAllPlayers: () => {},
   toggleSort: () => {},
+  toggleMatchVisibility: () => {},
   error: null,
   players: [],
   loaded: false,
   loading: false,
   sorted: false,
+  matchesVisible: false,
 });
 
 export const PlayersProvider = (props) => {
@@ -46,46 +54,47 @@ export const PlayersProvider = (props) => {
 
   const [players, setPlayers] = useState([]);
   const [sorted, toggleSort] = useToggle();
+  const [matchesVisible, toggleMatchVisibility] = useToggle();
 
-  const getPlayers = useCallback(async () => {
-    console.log("running setup players");
-    let newPlayers = [];
-    try {
-      newPlayers = await getCollection(PLAYER_COLLECTION_NAME);
-      console.log(
-        "🚀 ~ file: players.context.js ~ line 41 ~ getPlayers ~ newPlayers",
-        newPlayers
-      );
+  // const getPlayers = useCallback(async () => {
+  //   console.log("running setup players");
+  //   let newPlayers = [];
+  //   try {
+  //     newPlayers = await getCollection(PLAYERS_COLLECTION_NAME);
+  //     console.log(
+  //       "🚀 ~ file: players.context.js ~ line 41 ~ getPlayers ~ newPlayers",
+  //       newPlayers
+  //     );
 
-      return newPlayers;
-    } catch (err) {
-      console.log(err);
-      addToast(err.message, {
-        appearance: "error",
-      });
-    }
-  }, [addToast]);
+  //     return newPlayers;
+  //   } catch (err) {
+  //     console.log(err);
+  //     addToast(err.message, {
+  //       appearance: "error",
+  //     });
+  //   }
+  // }, [addToast]);
 
   useEffect(() => {
     let unbindPlayers = () => {};
-    
+
     (async () => {
       // Get initial data
-      unbindPlayers = await bindListeners(PLAYER_COLLECTION_NAME, {
+      unbindPlayers = await bindListeners(PLAYERS_COLLECTION_NAME, {
         add: (doc) => {
-          console.log(`adding player ${doc.id}`)
+          console.log(`adding player ${doc.id}`);
           addToLocal(setPlayers, doc);
         },
         update: (doc) => {
-          console.log(`updating player ${doc.id}`)
+          console.log(`updating player ${doc.id}`);
           updateInLocal(setPlayers, doc);
         },
         remove: (doc) => {
-          console.log(`deleting player ${doc.id}`)
+          console.log(`deleting player ${doc.id}`);
           removeFromLocal(setPlayers, doc);
         },
       });
-      
+
       // const p = await getPlayers(appConfig.useCelebs);
       // bulkAddToLocal(setPlayers, p);
     })();
@@ -95,13 +104,16 @@ export const PlayersProvider = (props) => {
   }, []);
 
   useEffect(() => {
+    console.log("sorted var", sorted);
     if (sorted) {
       console.log("sorting", players);
       const sortedPlayers = players.sort(
         (playerA, playerB) => playerA.score - playerB.score
-      );
+      ).reverse();
       setPlayers(sortedPlayers);
       console.log("sorted players", sortedPlayers);
+    } else {
+      // sort by something
     }
   }, [players, sorted]);
 
@@ -111,7 +123,9 @@ export const PlayersProvider = (props) => {
     try {
       const chartData = await getPlayerBirthChartData(newPlayer);
       newPlayer.chartData = chartData;
-      const docRef = await addOne(newPlayer, PLAYER_COLLECTION_NAME);
+      newPlayer.score = 0;
+      newPlayer.matches = [];
+      const docRef = await addOne(newPlayer, PLAYERS_COLLECTION_NAME);
       console.log("Document written with ID: ", docRef.id);
 
       addToast(`Saved ${newPlayer.firstName} ${newPlayer.lastName}`, {
@@ -127,12 +141,12 @@ export const PlayersProvider = (props) => {
 
   //TODO UPDATE PLAYER
   const updatePlayer = async (player, updates) => {
-    console.log("updateItem", player, updates);
+    console.log("updatePlayer", player, updates);
     try {
       const result = await updateOne(
         player._id,
         updates,
-        PLAYER_COLLECTION_NAME
+        PLAYERS_COLLECTION_NAME
       );
       addToast(
         `Updated ${updates.firstName ? updates.firstName : player.firstName} ${
@@ -161,7 +175,7 @@ export const PlayersProvider = (props) => {
         throw new Error(`Failed to find player id: ${id}`);
       }
 
-      await deleteOne(id, PLAYER_COLLECTION_NAME);
+      await deleteOne(id, PLAYERS_COLLECTION_NAME);
 
       const deletedPlayer = players[index];
 
@@ -185,7 +199,7 @@ export const PlayersProvider = (props) => {
       addToast(`Deleting all players`, {
         appearance: "info",
       });
-      await clearCollection(players, PLAYER_COLLECTION_NAME);
+      await clearCollection(players, PLAYERS_COLLECTION_NAME);
       addToast(`All players deleted`, {
         appearance: "success",
       });
@@ -200,9 +214,11 @@ export const PlayersProvider = (props) => {
         deletePlayer,
         deleteAllPlayers,
         toggleSort,
+        toggleMatchVisibility,
         error: null,
         players,
         sorted,
+        matchesVisible,
       }}
     >
       {props.children}

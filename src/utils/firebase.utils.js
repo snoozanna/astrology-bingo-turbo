@@ -86,6 +86,7 @@ const getCollection = async (collectionName="") => {
 
 // Update
 const updateOne = async (id='', updates={}, collectionName='') => {
+  console.log(`in updateOne: id: ${id}, updates: ${JSON.stringify(updates)}, collectionName: ${collectionName}`);
   try {
     delete updates._id;
     return db.collection(collectionName).doc(id).update(updates);
@@ -172,7 +173,7 @@ const bindListeners = async (
       .collection(collection_name)
       // .get()
       .onSnapshot((snapshot) => {
-        debugger;
+        // debugger;
         // console.log("snapshot", snapshot);
         let changes = snapshot.docChanges();
         for (const change of changes) {

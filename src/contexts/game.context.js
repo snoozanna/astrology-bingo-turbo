@@ -17,6 +17,11 @@ import {
 } from "./../utils/firebase.utils";
 
 import {
+  resetPlayerScores,
+  removeCelebs,
+} from './../utils/player.utils';
+
+import {
   bulkAddToLocal,
   addToLocal,
   removeFromLocal,
@@ -38,61 +43,102 @@ export const GameContext = createContext({
   [PICKS_COLLECTION_NAME]: [],
   [CALLS_COLLECTION_NAME]: [],
   markCard: () => {},
+  markPlayers: () => {},
 });
 
 export const GameProvider = (props) => {
   const { addToast } = useToasts();
 
-  const { updatePlayer } = useContext(PlayersContext);
+  const { updatePlayer, players } = useContext(PlayersContext);
 
   // Initial state
   const [initialised, setIntialised] = useState(false);
+  const [won, setWon] = useState(false);
   const [calls, setCalls] = useState([]);
   const [picks, setPicks] = useState([]);
 
-  // Populate from local state
-
-  const populateFromLocalRecords = async () => {
-    const localCalls = await localForage.getItem(CALLS_COLLECTION_NAME);
-    console.log(`Stored ${CALLS_COLLECTION_NAME}`, localCalls);
-    if (localCalls) {
-      setCalls(localCalls);
+  const markCard = async (player) => {
+    const chartDataArray = Object.entries(player.chartData);
+    const updates = {
+      score: player.score,
+      matches: player.matches,
+    };
+    for (const [playerPlanet, playerSign] of chartDataArray) {
+      for (const pick of picks) {
+        if (pick.planet === playerPlanet && pick.sign === playerSign) {
+          // console.log("This has been picked", playerPlanet, playerSign);
+          updates.score += 1;
+          updates.matches.push(pick._id); // check!
+        }
+      }
+    }
+    if (updates.score === 12) {
+      addToast(`${player.firstName} ${player.firstName} HAS WON!!!!`, {
+        appearance: "success",
+      });
+      setWon(true);
     }
 
-    const localPicks = await localForage.getItem(PICKS_COLLECTION_NAME);
-    console.log(`Stored ${PICKS_COLLECTION_NAME}`, localPicks);
-    if (localPicks) {
-      setPicks(localPicks);
+    if (player.score === updates.score) return;
+    
+    try {
+      return updatePlayer(player, updates);
+    } catch (err) {
+      console.log("err marking", err);
     }
   };
 
-  // GET calls list
-  const getCalls = useCallback(async () => {
-    try {
-      const fb_calls = await getCollection(CALLS_COLLECTION_NAME);
-      console.log(`${CALLS_COLLECTION_NAME} successfully loaded`, fb_calls);
-      return fb_calls;
-    } catch (err) {
-      console.log(err);
-      addToast(err.message, {
-        appearance: "error",
-      });
+  const markPlayers = (players) => {
+    for(const player of players) {
+      markCard(player);
     }
-  }, [addToast]);
+  }
+
+
+
+  // Populate from local state (optional for speed)
+
+  // const populateFromLocalRecords = async () => {
+  //   const localCalls = await localForage.getItem(CALLS_COLLECTION_NAME);
+  //   console.log(`Stored ${CALLS_COLLECTION_NAME}`, localCalls);
+  //   if (localCalls) {
+  //     setCalls(localCalls);
+  //   }
+
+  //   const localPicks = await localForage.getItem(PICKS_COLLECTION_NAME);
+  //   console.log(`Stored ${PICKS_COLLECTION_NAME}`, localPicks);
+  //   if (localPicks) {
+  //     setPicks(localPicks);
+  //   }
+  // };
+
+  // GET calls list
+  // const getCalls = useCallback(async () => {
+  //   try {
+  //     const fb_calls = await getCollection(CALLS_COLLECTION_NAME);
+  //     console.log(`${CALLS_COLLECTION_NAME} successfully loaded`, fb_calls);
+  //     return fb_calls;
+  //   } catch (err) {
+  //     console.log(err);
+  //     addToast(err.message, {
+  //       appearance: "error",
+  //     });
+  //   }
+  // }, [addToast]);
 
   // PICKS
-  const getPicks = useCallback(async () => {
-    try {
-      const fb_picks = await getCollection(PICKS_COLLECTION_NAME);
-      console.log(`${PICKS_COLLECTION_NAME} successfully loaded`, fb_picks);
-      return fb_picks;
-    } catch (err) {
-      console.log(err);
-      addToast(err.message, {
-        appearance: "error",
-      });
-    }
-  }, [addToast]);
+  // const getPicks = useCallback(async () => {
+  //   try {
+  //     const fb_picks = await getCollection(PICKS_COLLECTION_NAME);
+  //     console.log(`${PICKS_COLLECTION_NAME} successfully loaded`, fb_picks);
+  //     return fb_picks;
+  //   } catch (err) {
+  //     console.log(err);
+  //     addToast(err.message, {
+  //       appearance: "error",
+  //     });
+  //   }
+  // }, [addToast]);
 
   useEffect(() => {
     let unbindCalls = () => {};
@@ -118,22 +164,25 @@ export const GameProvider = (props) => {
       unbindPicks = await bindListeners(PICKS_COLLECTION_NAME, {
         add: (doc) => {
           addToLocal(setPicks, doc);
+          markPlayers(players);
         },
         update: (doc) => {
           updateInLocal(setPicks, doc);
+          // markPlayers(players); // can be used if we give picks full CRUD functionality
         },
         remove: (doc) => {
           removeFromLocal(setPicks, doc);
+          // markPlayers(players); // here too...
         },
       });
 
       // Check if initialised previously and set if so
-      const initd = await localForage.getItem(INITIALISED_KEY_NAME);
+      const initd = localStorage.getItem(INITIALISED_KEY_NAME);
       console.log("initd", initd);
 
       // If not then initialise
       if (!initd) {
-        await localForage.setItem(INITIALISED_KEY_NAME, true);
+        localStorage.setItem(INITIALISED_KEY_NAME, true);
         await localForage.setItem(CALLS_COLLECTION_NAME, []);
         await localForage.setItem(PICKS_COLLECTION_NAME, []);
         await populateFirebase();
@@ -186,6 +235,8 @@ export const GameProvider = (props) => {
           clearCollection(picks, PICKS_COLLECTION_NAME),
           clearCollection(calls, CALLS_COLLECTION_NAME),
           populateFirebase(),
+          resetPlayerScores(players),
+          removeCelebs(),
         ]);
         addToast(`Game reset!`, {
           appearance: "success",
@@ -197,27 +248,7 @@ export const GameProvider = (props) => {
     }
   };
 
-  const markCard = async (player) => {
-    const chartDataArray = Object.entries(player.chartData);
-    const updates = {
-      score: player.score,
-      matches: player.matches,
-    };
-    for (const [playerPlanet, playerSign] of chartDataArray) {
-      for (const pick of picks) {
-        if (pick.planet === playerPlanet && pick.sign === playerSign) {
-          // console.log("This has been picked", playerPlanet, playerSign);
-          updates.score += 1;
-          updates.matches.push(pick._id);
-        }
-      }
-    }
-    try {
-      return updatePlayer(player, updates);
-    } catch (err) {
-      console.log("err marking", err);
-    }
-  };
+
 
   const checkIfPicked = (planet, sign) => {
     // debugger;
@@ -225,7 +256,7 @@ export const GameProvider = (props) => {
     for (const pick of picks) {
       // return pick.planet === planet && pick.sign === sign;
       if (pick.planet === planet && pick.sign === sign) {
-        console.log("This has been picked", planet, sign);
+        // console.log("This has been picked", planet, sign);
         return true;
       }
     }
@@ -238,6 +269,7 @@ export const GameProvider = (props) => {
         reset,
         checkIfPicked,
         markCard,
+        markPlayers,
         calls,
         picks,
       }}

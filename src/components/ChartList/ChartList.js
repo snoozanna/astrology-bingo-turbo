@@ -35,12 +35,12 @@ const useStyles = makeStyles({
 });
 
 const ChartList = ({ player }) => {
-
+console.log('in chart list', player);
   const classes = useStyles();
   return (
     <>
       <List className={classes.listGroup}>
-        {Object.entries(player).map(([planet, sign], i) => {
+        {Object.entries(player.chartData).map(([planet, sign], i) => {
           // console.log("key", key, "value", value);
           if (!planets.includes(planet)) return null;
             // const { icon } = value;
@@ -51,7 +51,7 @@ const ChartList = ({ player }) => {
               <ListItem className={classes.listItem} key={i}>
                 <div className={classes.chartListItem}>
                   <div className="planetListItem">{planet} :</div>
-                  <div className="signListItem">{sign} </div>
+                  <div className="signListItem">{sign}</div>
                 </div>
                 <ListItemIcon>
                   <SignSymbol sign={sign} />

@@ -36,7 +36,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "start:hug": "hug -f ./src/get-birth-chart.py",
-    "start:dev": "concurrently \"yarn start:hug\" \"yarn start\""
+    "start:dev": "concurrently \"yarn start:hug\" \"yarn start\"",
+    "serve:prod": "yarn build && npx serve -s build",
+    "start:prod": "concurrently \"yarn start:hug\" \"yarn build && serve:prod\""
   },
   "eslintConfig": {
     "extends": [

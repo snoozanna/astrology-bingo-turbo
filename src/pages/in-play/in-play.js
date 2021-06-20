@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Header from "./../../components/Header/Header";
 import PlayerListing from "./../../components/PlayerListing/PlayerListing";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 
 import { PlayersContext } from "./../../contexts/players.context";
+import { GameContext } from "./../../contexts/game.context";
 
 const useStyles = makeStyles({
   playersContainer: {
@@ -14,20 +15,30 @@ const useStyles = makeStyles({
 });
 
 function InPlay() {
-  const { players, deleteAllPlayers, toggleSort } = useContext(PlayersContext);
-  const classes = useStyles();
+  const { players, deleteAllPlayers, toggleSort, toggleMatchVisibility, matchesVisible } =
+    useContext(PlayersContext);
+  const { markPlayers } = useContext(GameContext);
+  const classes = useStyles();  
+
+  useEffect(() => {
+    markPlayers(players);
+  }, []);
 
   return (
     <div className="App">
       <Header pageName="Birth Charts in play" />
       <main>
-      <div><button onClick={toggleSort}>sort</button></div>
+        <div>
+          <button onClick={toggleSort}>sort</button>
+          <button onClick={toggleMatchVisibility}>{matchesVisible ? 'Hide' : 'Show'} matches</button>
+        </div>
         <div className={classes.playersContainer}>
           <Grid container spacing={3} component="ul">
             {players.map((player) => (
               <Grid key={player._id} item xs={6} sm={4} component="li">
-                <PlayerListing player={player} />
+                <PlayerListing player={player} matchesVisible={matchesVisible} />
               </Grid>
+            
             ))}
           </Grid>
         </div>

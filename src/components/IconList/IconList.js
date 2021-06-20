@@ -47,9 +47,9 @@ const useStyles = makeStyles({
   },
 });
 
-const IconList = ({ player }) => {
+const IconList = ({ player, matchesVisible=false }) => {
   const { checkIfPicked } = useContext(GameContext);
-  // console.log("picks", picks);
+
   const {chartData} = player;
   const classes = useStyles();
 
@@ -63,7 +63,7 @@ const IconList = ({ player }) => {
               <ListItem
               key={`${player._id}-${planet}-${sign}`}
                 className={`${
-                  checkIfPicked(planet, sign)
+                  checkIfPicked(planet, sign) && matchesVisible
                     ? classes.picked
                     : classes.listItem
                 } ${planet.toLowerCase()}`}

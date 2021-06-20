@@ -36,7 +36,7 @@ export const updateInLocal = (setter, doc) => {
     }
     return [
       ...collection.slice(0, idx),
-      ...doc.data(),
+      FBDocToObj(doc),
       ...collection.slice(idx + 1),
     ];
   });

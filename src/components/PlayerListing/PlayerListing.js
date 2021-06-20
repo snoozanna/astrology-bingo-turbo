@@ -8,7 +8,7 @@ import { Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { PlayersContext } from "./../../contexts/players.context";
 import { useToggle } from "./../../utils/utils";
-// import { GameContext } from "./../../contexts/game.context";
+import { GameContext } from "./../../contexts/game.context";
 
 const useStyles = makeStyles({
   block: {
@@ -47,9 +47,8 @@ const useStyles = makeStyles({
   },
 });
 
-const PlayerListing = ({ player }) => {
+const PlayerListing = ({ player, matchesVisible }) => {
   const classes = useStyles();
-  // const { picks } = useContext(GameContext);
   const { deletePlayer } = useContext(PlayersContext);
   const [chartVisible, toggleChart] = useToggle();
   const [outlineVisibility, toggleOutlineVisibility] = useToggle();
@@ -71,9 +70,10 @@ const PlayerListing = ({ player }) => {
             player={player}
             ref={chartRef}
             showOutline={outlineVisibility}
+            matchesVisible={matchesVisible}
           />
         ) : (
-          <IconList player={player} />
+          <IconList player={player} matchesVisible={matchesVisible} />
         )}
       </div>
       <div className="btnContainer">

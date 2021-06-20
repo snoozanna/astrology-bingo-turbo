@@ -3,7 +3,7 @@
  ****************************************************************/
 
 const {
-  PLAYER_COLLECTION_NAME = "players",
+  PLAYERS_COLLECTION_NAME = "players",
   CELEB_COLLECTION_NAME = "celebs",
   PICKS_COLLECTION_NAME = "picks",
   CALLS_COLLECTION_NAME = "calls",
@@ -16,7 +16,7 @@ export const FIREBASE_API_KEY = "AIzaSyDt33A_WcPQ4uHoxhVQMAJlw9AtwXRnMM8";
 
 export const appConfig = {
   useCelebs: false,
-  PLAYER_COLLECTION_NAME,
+  PLAYERS_COLLECTION_NAME,
   CELEB_COLLECTION_NAME,
   PICKS_COLLECTION_NAME,
   CALLS_COLLECTION_NAME,

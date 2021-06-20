@@ -1,4 +1,9 @@
-import { addMany, getCollection, deleteMany } from "./../utils/firebase.utils";
+import {
+  addMany,
+  getCollection,
+  deleteMany,
+  updateMany,
+} from "./../utils/firebase.utils";
 import { descDict } from "./../constants";
 import {
   createBirthChartURL,
@@ -8,10 +13,7 @@ import {
 } from "./../utils/astro-api.utils";
 import { appConfig } from "./../config";
 
-const {
-  PLAYER_COLLECTION_NAME,
-  CELEB_COLLECTION_NAME,
-} = appConfig;
+const { PLAYERS_COLLECTION_NAME, CELEB_COLLECTION_NAME } = appConfig;
 
 export const getPlayerBirthChartData = async (newPlayer) => {
   try {
@@ -57,6 +59,7 @@ export const processCeleb = async (celeb) => {
   celeb.utcoffset = offset;
   celeb.chartData = await getPlayerBirthChartData(celeb);
   celeb.score = 0;
+  celeb.matches = [];
   return celeb;
 };
 
@@ -67,12 +70,27 @@ export const processCelebs = async () => {
     prms.push(processCeleb(celeb));
   }
   const celebsWithBirthChart = await Promise.all(prms);
-  const fullCelebs = await addMany(celebsWithBirthChart, PLAYER_COLLECTION_NAME);
+  const fullCelebs = await addMany(
+    celebsWithBirthChart,
+    PLAYERS_COLLECTION_NAME
+  );
   return fullCelebs;
 };
 
-export const removeCelebs = async (players =[]) => {
+export const removeCelebs = async (players = []) => {
   const celebs = players.filter((player) => player.isCeleb);
-  const celebIdsArray = celebs.map(({_id}) => _id);
-  await deleteMany(celebIdsArray, PLAYER_COLLECTION_NAME);
+  const celebIdsArray = celebs.map(({ _id }) => _id);
+  return deleteMany(celebIdsArray, PLAYERS_COLLECTION_NAME);
+};
+
+export const resetPlayerScores = async (players = []) => {
+  const updates = [];
+  for (const player of players) {
+    updates.push({
+      _id: player._id,
+      score: 0,
+      matches: [],
+    });
+  }
+  await updateMany(updates, PLAYERS_COLLECTION_NAME);
 };
