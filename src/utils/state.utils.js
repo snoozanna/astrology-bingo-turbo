@@ -1,22 +1,23 @@
 import { FBDocToObj } from "./../utils/firebase.utils";
+
 export const addToLocal = (setter, doc) => {
   setter((collection) => {
     const idx = collection.findIndex(({ _id }) => doc.id === _id);
     let newCollection = null;
     if (idx > -1) {
-      newCollection = [
-        ...collection.slice(0, idx),
-        FBDocToObj(doc),
-        ...collection.slice(idx + 1),
-      ];
-      console.log("updating local");
+      console.warn(`duplicate id in addToLocal: ${doc.id}`);
     } else {
-      newCollection = [...collection, FBDocToObj(doc)];
-      console.log("adding to local");
+      const formattedItem = FBDocToObj(doc);
+      newCollection = [...collection, formattedItem];
+      console.log(`adding ${formattedItem._id} to local`);
     }
     return newCollection;
   });
 };
+
+export const bulkAddToLocal = (setter, items=[]) => {
+    setter((collection) => [...collection, ...items]);
+}
 
 export const getFromLocalById = (id, collection) => {
   const doc = collection.find(({ _id }) => _id === id);
@@ -27,6 +28,7 @@ export const getFromLocalById = (id, collection) => {
 };
 
 export const updateInLocal = (setter, doc) => {
+  console.log(`updating ${doc.id} in local`);
   setter((collection) => {
     const idx = collection.findIndex(({ _id }) => _id === doc.id);
     if (idx === -1) {
@@ -41,6 +43,7 @@ export const updateInLocal = (setter, doc) => {
 };
 
 export const removeFromLocal = (setter, { id }) => {
+  console.log(`removing ${id} from local`);
   setter((collection) => {
     const idx = collection.findIndex(({ _id }) => _id === id);
     if (idx === -1) {
@@ -50,7 +53,7 @@ export const removeFromLocal = (setter, { id }) => {
       ...collection.slice(0, idx),
       ...collection.slice(idx + 1),
     ];
-    console.log("updatedCollection", updatedCollection);
+    // console.log("removeFromLocal updatedCollection", updatedCollection);
     return updatedCollection;
   });
 };

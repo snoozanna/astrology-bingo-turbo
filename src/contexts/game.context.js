@@ -8,7 +8,7 @@ import React, {
 import localForage from "localforage";
 import { useToasts } from "react-toast-notifications";
 
-import { getRandomIntInclusive} from "./../utils/utils";
+import { getRandomIntInclusive } from "./../utils/utils";
 import {
   clearCollection,
   getCollection,
@@ -17,6 +17,7 @@ import {
 } from "./../utils/firebase.utils";
 
 import {
+  bulkAddToLocal,
   addToLocal,
   removeFromLocal,
   updateInLocal,
@@ -70,7 +71,7 @@ export const GameProvider = (props) => {
     try {
       const fb_calls = await getCollection(CALLS_COLLECTION_NAME);
       console.log(`${CALLS_COLLECTION_NAME} successfully loaded`, fb_calls);
-      setCalls(fb_calls);
+      return fb_calls;
     } catch (err) {
       console.log(err);
       addToast(err.message, {
@@ -84,7 +85,7 @@ export const GameProvider = (props) => {
     try {
       const fb_picks = await getCollection(PICKS_COLLECTION_NAME);
       console.log(`${PICKS_COLLECTION_NAME} successfully loaded`, fb_picks);
-      setPicks(fb_picks);
+      return fb_picks;
     } catch (err) {
       console.log(err);
       addToast(err.message, {
@@ -94,42 +95,14 @@ export const GameProvider = (props) => {
   }, [addToast]);
 
   useEffect(() => {
+    let unbindCalls = () => {};
+    let unbindPicks = () => {};
     (async () => {
       // One time setup stuff
       console.log("running setup game");
-
-      // Check if initialised previously and set if so
-      const initd = await localForage.getItem(INITIALISED_KEY_NAME);
-      console.log("initd", initd);
-      if (initd) {
-        setIntialised(Boolean(initd));
-      }
-
-      // If not then initialise
-      if (!initialised) {
-        await populateFirebase();
-        await localForage.setItem(INITIALISED_KEY_NAME, true);
-        await localForage.setItem(CALLS_COLLECTION_NAME, []);
-        await localForage.setItem(PICKS_COLLECTION_NAME, []);
-        setIntialised(true);
-      }
-
-      // Fast get from Local
-      await populateFromLocalRecords();
-
-      // Get from FireStore
-      await getCalls();
-      await localForage.setItem(CALLS_COLLECTION_NAME, calls);
-      console.log(`${CALLS_COLLECTION_NAME} in context`, calls);
-
-      await getPicks();
-      await localForage.setItem(PICKS_COLLECTION_NAME, picks);
-      console.log(`${PICKS_COLLECTION_NAME} in context`, picks);
-
       // Bind to FireStore for live updates
-
       // Calls
-      await bindListeners(CALLS_COLLECTION_NAME, {
+      unbindCalls = await bindListeners(CALLS_COLLECTION_NAME, {
         add: (doc) => {
           addToLocal(setCalls, doc);
         },
@@ -142,7 +115,7 @@ export const GameProvider = (props) => {
       });
 
       // Picks
-      await bindListeners(PICKS_COLLECTION_NAME, {
+      unbindPicks = await bindListeners(PICKS_COLLECTION_NAME, {
         add: (doc) => {
           addToLocal(setPicks, doc);
         },
@@ -153,7 +126,39 @@ export const GameProvider = (props) => {
           removeFromLocal(setPicks, doc);
         },
       });
+
+      // Check if initialised previously and set if so
+      const initd = await localForage.getItem(INITIALISED_KEY_NAME);
+      console.log("initd", initd);
+
+      // If not then initialise
+      if (!initd) {
+        await localForage.setItem(INITIALISED_KEY_NAME, true);
+        await localForage.setItem(CALLS_COLLECTION_NAME, []);
+        await localForage.setItem(PICKS_COLLECTION_NAME, []);
+        await populateFirebase();
+        setIntialised(true);
+      }
+
+      // Fast get from Local
+      // await populateFromLocalRecords();
+
+      // Get from FireStore
+      // const c = await getCalls();
+      // bulkAddToLocal(setCalls, c);
+      // await localForage.setItem(CALLS_COLLECTION_NAME, calls);
+      // console.log(`${CALLS_COLLECTION_NAME} in context`, calls);
+
+      // const p = await getPicks();
+      // bulkAddToLocal(setPicks, p);
+      // await localForage.setItem(PICKS_COLLECTION_NAME, picks);
+      // console.log(`${PICKS_COLLECTION_NAME} in context`, picks);
     })();
+
+    return () => {
+      unbindCalls();
+      unbindPicks();
+    };
   }, []);
 
   const pick = async () => {
@@ -161,14 +166,10 @@ export const GameProvider = (props) => {
     const pickedItem = calls[idx];
     console.log(
       "🚀 ~ file: game.context.js ~ line 151 ~ pick ~ pickedItem",
-      pickedItem,
+      pickedItem
     );
     try {
-      return swap(
-        pickedItem,
-        CALLS_COLLECTION_NAME,
-        PICKS_COLLECTION_NAME,
-      );
+      return swap(pickedItem, CALLS_COLLECTION_NAME, PICKS_COLLECTION_NAME);
     } catch (err) {
       console.log(err);
     }

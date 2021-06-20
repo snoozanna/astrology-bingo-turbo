@@ -1,12 +1,13 @@
 import { firestore as db } from "./../firebase";
 
 const FBDocToObj = (doc) => ({ ...doc.data(), _id: doc.id });
+const FBDocToId = (doc) => doc.id;
 
 // CRUD
 // Create
-const addOne = async (data, collectionName) => {
+const addOne = async (data, collectionName="") => {
   /* If we had typescript we could avoid this. It's verbose but there to help in the future */
-  if (!data || !Object.isObject(data)) {
+  if (!data) {
     throw new Error(
       `No data provided to firebase addOne. Instead received ${data}`
     );
@@ -25,12 +26,7 @@ const addOne = async (data, collectionName) => {
   }
 };
 
-const addMany = async (data = [], collectionName) => {
-  if (!collectionName || typeof collectionName !== "string") {
-    throw new Error(
-      `No collection name provided to firebase addMany. Instead received ${collectionName}`
-    );
-  }
+const addMany = async (data = [], collectionName="") => {
   if (!Array.isArray(data)) {
     throw new Error(
       `Improper data provided to firebase addMany. Received ${JSON.stringify(
@@ -47,23 +43,13 @@ const addMany = async (data = [], collectionName) => {
     }
     return batch.commit();
   } catch (err) {
-    console.log("Error for addOne: ", err);
+    console.log("Error for addMany: ", err);
     return Promise.reject(err.message);
   }
 };
 
 // Read
-const getOne = async (id, collectionName) => {
-  if (!id) {
-    throw new Error(
-      `No collection name provided to firebase getOne. Instead received ${id}`
-    );
-  }
-  if (!collectionName) {
-    throw new Error(
-      `No collection name provided to firebase getOne. Instead received ${collectionName}`
-    );
-  }
+const getOne = async (id="", collectionName="") => {
   try {
     return db.collection(collectionName).get(id);
   } catch (err) {
@@ -72,7 +58,7 @@ const getOne = async (id, collectionName) => {
   }
 };
 
-const getMany = async (ids = [], collectionName) => {
+const getMany = async (ids = [], collectionName="") => {
   try {
     const promises = [];
     for (const id of ids) {
@@ -84,14 +70,14 @@ const getMany = async (ids = [], collectionName) => {
   }
 };
 
-const getCollection = async (collectionName) => {
+const getCollection = async (collectionName="") => {
   try {
     const snapshot = await db.collection(collectionName).get();
-    const calls = snapshot.docs.map((doc) => {
+    const docs = snapshot.docs.map((doc) => {
       // console.log("new id", doc.id);
       return FBDocToObj(doc);
     });
-    return calls;
+    return docs;
     // return snapshot.docs;
   } catch (err) {
     return Promise.reject(err.message);
@@ -99,22 +85,7 @@ const getCollection = async (collectionName) => {
 };
 
 // Update
-const updateOne = async (id, updates, collectionName) => {
-  if (!id || typeof id !== "string") {
-    throw new Error(`Improper id passed to updateOne: received ${id}`);
-  }
-  if (!updates || !Object.isObject(updates)) {
-    throw new Error(
-      `Improper updates name passed to updateOne: received ${JSON.stringify(
-        updates
-      )}`
-    );
-  }
-  if (!collectionName || typeof updates !== "string") {
-    throw new Error(
-      `Improper collection name passed to updateOne: received ${collectionName}`
-    );
-  }
+const updateOne = async (id='', updates={}, collectionName='') => {
   try {
     delete updates._id;
     return db.collection(collectionName).doc(id).update(updates);
@@ -124,7 +95,7 @@ const updateOne = async (id, updates, collectionName) => {
 };
 
 // 'updates' must contain the id
-const updateMany = async (updates = [], collectionName) => {
+const updateMany = async (updates = [], collectionName="") => {
   try {
     const batch = db.batch();
     for (const update of updates) {
@@ -139,7 +110,7 @@ const updateMany = async (updates = [], collectionName) => {
 };
 
 // Delete
-const deleteOne = async (id, collectionName) => {
+const deleteOne = async (id="", collectionName="") => {
   try {
     return db.collection(collectionName).doc(id).delete();
   } catch (err) {
@@ -147,13 +118,7 @@ const deleteOne = async (id, collectionName) => {
   }
 };
 
-const deleteMany = async (ids = [], collectionName) => {
-  if (!collectionName) {
-    throw new Error(
-      `No collection name passed to deleteMany: received ${collectionName}`
-    );
-  }
-
+const deleteMany = async (ids = [], collectionName="") => {
   if (!Array.isArray(ids)) {
     throw new Error(
       `deleteMany requires an array of string ids: received ${JSON.stringify(
@@ -173,7 +138,8 @@ const deleteMany = async (ids = [], collectionName) => {
   }
 };
 
-const clearCollection = async (localCollection, collectionName) => {
+const clearCollection = async (localCollection=[], collectionName="") => {
+  debugger;
   if (!Array.isArray(localCollection)) {
     throw new Error(
       `Improper localCollection name passed to clearCollection: received ${JSON.stringify(
@@ -181,13 +147,10 @@ const clearCollection = async (localCollection, collectionName) => {
       )}`
     );
   }
-  if (!collectionName) {
-    throw new Error(
-      `No collection name passed to clearCollection: received ${collectionName}`
-    );
-  }
+
   try {
-    const ids = localCollection.map(({ _id }) => _id);
+    const snapshot = await db.collection(collectionName).get();
+    const ids = snapshot.docs.map(FBDocToId);
     return deleteMany(ids, collectionName);
   } catch (err) {
     const reason = `Error loading calls to firestore: ${err.message}`;
@@ -209,6 +172,7 @@ const bindListeners = async (
       .collection(collection_name)
       // .get()
       .onSnapshot((snapshot) => {
+        debugger;
         // console.log("snapshot", snapshot);
         let changes = snapshot.docChanges();
         for (const change of changes) {
@@ -264,4 +228,5 @@ export {
   bindListeners,
   swap,
   FBDocToObj,
+  FBDocToId,
 };

@@ -8,12 +8,17 @@ import {
   getCollection,
   updateOne,
   deleteOne,
-  // bindListeners,
+  bindListeners,
 } from "./../utils/firebase.utils";
 
 import {
-  useToggle
-} from './../utils/utils';
+  addToLocal,
+  updateInLocal,
+  removeFromLocal,
+  bulkAddToLocal,
+} from "./../utils/state.utils";
+
+import { useToggle } from "./../utils/utils";
 
 import { appConfig } from "./../config";
 import { getPlayerBirthChartData } from "../utils/player.utils";
@@ -52,8 +57,7 @@ export const PlayersProvider = (props) => {
         newPlayers
       );
 
-      setPlayers(newPlayers);
-      // bindListeners(PLAYER_COLLECTION_NAME);
+      return newPlayers;
     } catch (err) {
       console.log(err);
       addToast(err.message, {
@@ -63,16 +67,41 @@ export const PlayersProvider = (props) => {
   }, [addToast]);
 
   useEffect(() => {
-    // Get initial data
-    getPlayers(appConfig.useCelebs);
-  }, [addToast, getPlayers]);
+    let unbindPlayers = () => {};
+    
+    (async () => {
+      // Get initial data
+      unbindPlayers = await bindListeners(PLAYER_COLLECTION_NAME, {
+        add: (doc) => {
+          console.log(`adding player ${doc.id}`)
+          addToLocal(setPlayers, doc);
+        },
+        update: (doc) => {
+          console.log(`updating player ${doc.id}`)
+          updateInLocal(setPlayers, doc);
+        },
+        remove: (doc) => {
+          console.log(`deleting player ${doc.id}`)
+          removeFromLocal(setPlayers, doc);
+        },
+      });
+      
+      // const p = await getPlayers(appConfig.useCelebs);
+      // bulkAddToLocal(setPlayers, p);
+    })();
+    return () => {
+      unbindPlayers();
+    };
+  }, []);
 
   useEffect(() => {
-    if(sorted) {
-      console.log('sorting', players)
-      const sortedPlayers = players.sort((playerA, playerB) => playerA.score - playerB.score);
+    if (sorted) {
+      console.log("sorting", players);
+      const sortedPlayers = players.sort(
+        (playerA, playerB) => playerA.score - playerB.score
+      );
       setPlayers(sortedPlayers);
-      console.log('sorted players', sortedPlayers);
+      console.log("sorted players", sortedPlayers);
     }
   }, [players, sorted]);
 
@@ -100,11 +129,15 @@ export const PlayersProvider = (props) => {
   const updatePlayer = async (player, updates) => {
     console.log("updateItem", player, updates);
     try {
-      const result = await updateOne(player._id, updates, PLAYER_COLLECTION_NAME);
+      const result = await updateOne(
+        player._id,
+        updates,
+        PLAYER_COLLECTION_NAME
+      );
       addToast(
-        `Updated ${
-          updates.firstName ? updates.firstName : player.firstName
-        } ${updates.lastName ? updates.lastName : player.lastName}`,
+        `Updated ${updates.firstName ? updates.firstName : player.firstName} ${
+          updates.lastName ? updates.lastName : player.lastName
+        }`,
         {
           appearance: "success",
         }
@@ -158,8 +191,6 @@ export const PlayersProvider = (props) => {
       });
     }
   };
-
- 
 
   return (
     <PlayersContext.Provider

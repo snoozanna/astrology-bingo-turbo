@@ -1,4 +1,4 @@
-import { addMany, getCollection } from "./../utils/firebase.utils";
+import { addMany, getCollection, deleteMany } from "./../utils/firebase.utils";
 import { descDict } from "./../constants";
 import {
   createBirthChartURL,
@@ -9,7 +9,7 @@ import {
 import { appConfig } from "./../config";
 
 const {
-  // PLAYER_COLLECTION_NAME,
+  PLAYER_COLLECTION_NAME,
   CELEB_COLLECTION_NAME,
 } = appConfig;
 
@@ -32,6 +32,7 @@ export const getPlayerBirthChartData = async (newPlayer) => {
 };
 
 export const processCeleb = async (celeb) => {
+  celeb.isCeleb = true;
 
   const place = await getGeo(celeb.locationSearchTerm);
   console.log(
@@ -66,6 +67,12 @@ export const processCelebs = async () => {
     prms.push(processCeleb(celeb));
   }
   const celebsWithBirthChart = await Promise.all(prms);
-  const fullCelebs = await addMany(celebsWithBirthChart);
+  const fullCelebs = await addMany(celebsWithBirthChart, PLAYER_COLLECTION_NAME);
   return fullCelebs;
+};
+
+export const removeCelebs = async (players =[]) => {
+  const celebs = players.filter((player) => player.isCeleb);
+  const celebIdsArray = celebs.map(({_id}) => _id);
+  await deleteMany(celebIdsArray, PLAYER_COLLECTION_NAME);
 };

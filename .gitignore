@@ -23,5 +23,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+lines.txt
+
 # Python
-**/__pycache__/
+**/__pycache__
+
+

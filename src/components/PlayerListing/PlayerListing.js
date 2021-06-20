@@ -1,10 +1,9 @@
-import React, { useContext, useState, useRef } from "react";
+import React, { useContext, useRef } from "react";
 import ReactToPrint from "react-to-print";
 import "./PlayerListing.scss";
 // import ChartList from "./../../components/ChartList/ChartList";
 import ChartImage from "./../ChartImage/ChartImage";
 import IconList from "./../../components/IconList/IconList";
-import Modal from "@material-ui/core/Modal";
 import { Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { PlayersContext } from "./../../contexts/players.context";
@@ -53,42 +52,9 @@ const PlayerListing = ({ player }) => {
   // const { picks } = useContext(GameContext);
   const { deletePlayer } = useContext(PlayersContext);
   const [chartVisible, toggleChart] = useToggle();
-  const [open, setOpen] = useState(false);
   const [outlineVisibility, toggleOutlineVisibility] = useToggle();
 
   const chartRef = useRef();
-
-  const showModal = () => {
-    setOpen(true);
-  };
-
-  const hideModal = () => {
-    setOpen(false);
-  };
-
-  const { birthday, time, latitude, longitude } = player.chartData;
-
-  const modalText = (
-    <div className={classes.paper}>
-      <div className="nameContainer">
-        <h3>
-          {player.firstName}
-          {player.lastName}
-        </h3>
-      </div>
-      <ChartImage player={player} />
-      <dl>
-        <dt>Birthday:</dt>
-        <dd>{birthday}</dd>
-        <dt>Time:</dt>
-        <dd>{time}</dd>
-        <dt>Lat:</dt>
-        <dd>{Number(latitude).toFixed(2)}</dd>
-        <dt>Long:</dt>
-        <dd>{Number(longitude).toFixed(2)}</dd>
-      </dl>
-    </div>
-  );
 
   return (
     <div key={player._id} className="listGroupItem">
@@ -131,21 +97,7 @@ const PlayerListing = ({ player }) => {
             content={() => chartRef.current}
           />
         )}
-        {!chartVisible && (
-          <Button className="btn" onClick={() => showModal()}>
-            See Details
-          </Button>
-        )}
       </div>
-      <Modal
-        open={open}
-        onClose={hideModal}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-      >
-        {modalText}
-        {/* <ChartImage player={player} /> */}
-      </Modal>
     </div>
   );
 };

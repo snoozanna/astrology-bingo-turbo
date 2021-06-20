@@ -9,7 +9,8 @@ import PreviousCall from "../../components/PreviousCall/PreviousCall";
 // import { makeStyles } from "@material-ui/core/styles";
 
 import { GameContext } from "./../../contexts/game.context";
-import {processCelebs} from './../../utils/player.utils';
+import { PlayersContext } from "./../../contexts/players.context";
+import {processCelebs, removeCelebs} from './../../utils/player.utils';
 
 // import classes from "*.module.css";
 
@@ -24,6 +25,7 @@ import {processCelebs} from './../../utils/player.utils';
 function Generator() {
   // const classes = useStyles();
   const { pick, picks, reset } = useContext(GameContext);
+  const { players } = useContext(PlayersContext);
   const [seeGrid, setSeeGrid] = useState(false);
 
   const lastPick = picks[picks.length - 1] || {};
@@ -51,7 +53,10 @@ function Generator() {
         <Header pageName="Generator (Fig admin view)" />
         <main>
           <div className="controlsContainer">
-          <div className="resetBtn">
+            <div className="resetBtn">
+              <button onClick={() => removeCelebs(players)}>REMOVE CELEBS</button>
+            </div>
+            <div className="resetBtn">
               <button onClick={processCelebs}>LOAD CELEBS</button>
             </div>
             <div className="resetBtn">

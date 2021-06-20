@@ -26,15 +26,15 @@ import { PlayersContext } from "./../../contexts/players.context";
 const useStyles = makeStyles({
   listGroup: {
     display: "grid",
-    gridTemplateColumns: 'repeat(5, 1fr)',
+    gridTemplateColumns: "repeat(5, 1fr)",
     // gridAutoRows: '',
     justifyItems: "center",
-    justifyContent: 'flex-start',
-    alignItems: 'center',
+    justifyContent: "flex-start",
+    alignItems: "center",
     listStyleType: "none",
     padding: 0,
-    gap: '1rem',
-    width: '100%',
+    gap: "1rem",
+    width: "100%",
   },
 
   listGroupItem: {
@@ -52,6 +52,7 @@ const useStyles = makeStyles({
 function Home() {
   const classes = useStyles();
   const { players } = useContext(PlayersContext);
+  // debugger;
   return (
     <>
       <div className="App">
@@ -60,9 +61,11 @@ function Home() {
           <h1 className={classes.homeTitle}>ASTROLOGY BINGO</h1>
           <div className="playerOrbContainer">
             <ul className={classes.listGroup}>
-              {players.map((player) => (
+              {players?.map((player) => (
                 // console.log("player", player._id),
-                <li key={player._id} className={classes.listGroupItem}><PlayerOrb player={player} /></li>
+                <li key={player._id} className={classes.listGroupItem}>
+                  <PlayerOrb player={player} />
+                </li>
               ))}
             </ul>
           </div>
