@@ -85,13 +85,13 @@ function MyBirthChart() {
               </p>
               <button onClick={() => toggleIsOn()}>Toggle Chart</button>
             </div>
-            <div className={classes.myBirthChartContainer}>
-              {isOn ? (
-                <ChartList player={aliceBasic.chartData} />
-              ) : (
-                <ChartImage player={aliceBasic.chartData} />
-              )}
-            </div>
+          <div className={classes.myBirthChartContainer}>
+            {isOn ? (
+              <ChartList player={aliceBasic} />
+            ) : (
+              <ChartImage player={aliceBasic} />
+            )}
+          </div>
           </div>
         </main>
       </div>
