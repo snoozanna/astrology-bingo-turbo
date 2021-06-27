@@ -36,7 +36,7 @@ const useStyles = makeStyles({
 
     border: "1px black solid",
     borderRadius: 15,
-    backgroundColor: "#E31C79",
+    backgroundColor: "#E31C79!important",
     "& svg": {
       fill: "#fff",
     },
@@ -48,10 +48,13 @@ const useStyles = makeStyles({
 });
 
 const IconList = ({ player, matchesVisible=false }) => {
-  const { checkIfPicked } = useContext(GameContext);
+  const { picks } = useContext(GameContext);
 
   const {chartData} = player;
   const classes = useStyles();
+
+  const pickedIds = picks.map(pick => pick._id);
+  console.log("🚀 ~ file: IconList.js ~ line 57 ~ IconList ~ pickedIds", pickedIds)
 
   return (
       <List className={classes.listGroup}>
@@ -59,14 +62,16 @@ const IconList = ({ player, matchesVisible=false }) => {
           if (!planets.includes(planet)) {
             return null;
           }
+          {/* console.log('matchesVisible', matchesVisible); */}
           return (
               <ListItem
               key={`${player._id}-${planet}-${sign}`}
                 className={`${
-                  checkIfPicked(planet, sign) && matchesVisible
+                  pickedIds.includes(`${planet}-${sign}`.toLowerCase()) && matchesVisible
                     ? classes.picked
                     : classes.listItem
-                } ${planet.toLowerCase()}`}
+                } ${planet.toLowerCase()} sign-${sign.toLowerCase()}`}
+                title={`${planet.toLowerCase()} ${sign.toLowerCase()}`}
               >
                 <ListItemIcon>
                   <SignSymbol sign={sign} planet={planet} />

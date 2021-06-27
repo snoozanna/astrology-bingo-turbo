@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import NavIcon from "./../../components/NavIcon/NavIcon";
 import { makeStyles } from "@material-ui/core/styles";
+import { NavLink } from "react-router-dom";
 
 import { processCelebs } from './../../utils/player.utils';
 import { GameContext } from "./../../contexts/game.context";
@@ -37,6 +38,7 @@ function Controls() {
             <button onClick={populateFirebase}>Populate</button>
             <button onClick={reset}>Reset</button>
             <button onClick={processCelebs}>Add Celebs</button>
+            <NavLink to="/add-birth-chart/fred-dibnah-1973-01-21t06:11">update</NavLink>
           </div>
         </main>
       </div>

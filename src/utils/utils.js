@@ -179,3 +179,10 @@ export const useToggle = (initialValue = false) => {
   return [value, toggle];
 };
 
+export const trimToLowerCase = (str) => {
+  if(typeof str !== 'string') {
+    console.log(`Expected string in trimToLowerCase, instead received ${str} (${typeof str})`);
+  }
+  return str.trim().toLowerCase();
+}
+

@@ -56,7 +56,7 @@ const PlayerListing = ({ player, matchesVisible }) => {
   const chartRef = useRef();
 
   return (
-    <div key={player._id} className="listGroupItem">
+    <div key={player._id} className={`listGroupItem ${matchesVisible && player.matches === 12 ? 'winner' : ''}`}>
       <div className="nameContainer">
         <h3 className="firstName">
           <span className={classes.block}>{player.firstName}</span>

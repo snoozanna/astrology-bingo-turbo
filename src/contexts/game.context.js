@@ -2,27 +2,29 @@ import React, {
   createContext,
   useState,
   useEffect,
-  useCallback,
+  // useCallback,
   useContext,
 } from "react";
 import localForage from "localforage";
 import { useToasts } from "react-toast-notifications";
-
+import { useLocation } from "react-router-dom";
 import { getRandomIntInclusive } from "./../utils/utils";
 import {
-  clearCollection,
-  getCollection,
+  // clearCollection,
+  // getCollection,
   bindListeners,
   swap,
+  merge,
 } from "./../utils/firebase.utils";
 
 import {
   resetPlayerScores,
-  removeCelebs,
-} from './../utils/player.utils';
+  unmeshCelebs,
+  processCelebs,
+} from "./../utils/player.utils";
 
 import {
-  bulkAddToLocal,
+  // bulkAddToLocal,
   addToLocal,
   removeFromLocal,
   updateInLocal,
@@ -44,43 +46,73 @@ export const GameContext = createContext({
   [CALLS_COLLECTION_NAME]: [],
   markCard: () => {},
   markPlayers: () => {},
+  celebsIncluded: false,
+  removeCelebs: () => {},
+  loadCelebs: () => {},
+  calls: [],
+  picks: [],
+  winners: [],
 });
 
 export const GameProvider = (props) => {
   const { addToast } = useToasts();
+  let location = useLocation();
 
   const { updatePlayer, players } = useContext(PlayersContext);
 
   // Initial state
-  const [initialised, setIntialised] = useState(false);
-  const [won, setWon] = useState(false);
+  // const [initialised, setIntialised] = useState(false);
+  const [winners, setWinners] = useState([]);
   const [calls, setCalls] = useState([]);
   const [picks, setPicks] = useState([]);
+  const [celebsIncluded, setCelebsIncluded] = useState(false);
 
   const markCard = async (player) => {
+    console.log(`Running markCard`);
+    if (!picks.length) return;
+    console.log(`Running markCard for ${player.firstName} ${player.lastName}`);
     const chartDataArray = Object.entries(player.chartData);
+
+    // Checks only last pick. Cannot be used if you add in-game pick CRUD functionality
+    const latestPick = picks[picks.length - 1];
+    const latestPickId = latestPick._id;
+
+    const match = chartDataArray.find(([playerPlanet, playerSign]) => {
+      console.log(`${playerPlanet}-${playerSign}`.toLowerCase(), latestPickId);
+      return `${playerPlanet}-${playerSign}`.toLowerCase() === latestPickId;
+    });
+
+    // Bail if no match
+    if (!match) return;
+
+    // Deal with 1
+    if (player.matches.length[player.matches.length - 1] === latestPickId)
+      return;
+
+    // continue if there is
     const updates = {
-      score: player.score,
-      matches: player.matches,
+      matches: [...player.matches, latestPickId], // 'mars-sagitarius'
     };
-    for (const [playerPlanet, playerSign] of chartDataArray) {
-      for (const pick of picks) {
-        if (pick.planet === playerPlanet && pick.sign === playerSign) {
-          // console.log("This has been picked", playerPlanet, playerSign);
-          updates.score += 1;
-          updates.matches.push(pick._id); // check!
-        }
-      }
-    }
-    if (updates.score === 12) {
+
+    // Dynamic - you can CRUD picks
+    // for (const [playerPlanet, playerSign] of chartDataArray) {
+    //   // [['mars', 'sag']]
+    //   const match = picks.find(
+    //     ({ _id }) => _id === `${playerPlanet}-${playerSign}`
+    //   );
+    //   if (match) {
+    //     // console.log("This has been picked", playerPlanet, playerSign);
+    //     updates.matches.push(match._id); // check!
+    //   }
+    // }
+
+    if (updates.matches.length === 12 && location !== '/public-view') {
       addToast(`${player.firstName} ${player.firstName} HAS WON!!!!`, {
         appearance: "success",
       });
-      setWon(true);
+      setWinners([...winners, player]);
     }
 
-    if (player.score === updates.score) return;
-    
     try {
       return updatePlayer(player, updates);
     } catch (err) {
@@ -89,12 +121,10 @@ export const GameProvider = (props) => {
   };
 
   const markPlayers = (players) => {
-    for(const player of players) {
+    for (const player of players) {
       markCard(player);
     }
-  }
-
-
+  };
 
   // Populate from local state (optional for speed)
 
@@ -141,67 +171,52 @@ export const GameProvider = (props) => {
   // }, [addToast]);
 
   useEffect(() => {
-    let unbindCalls = () => {};
-    let unbindPicks = () => {};
+    // One time setup stuff
+    console.log("running setup game");
+    // Bind to FireStore for live updates
+    // Calls
+    const unbindCalls = bindListeners(CALLS_COLLECTION_NAME, {
+      add: (doc) => {
+        addToLocal(setCalls, doc);
+      },
+      update: (doc) => {
+        updateInLocal(setCalls, doc);
+      },
+      remove: (doc) => {
+        removeFromLocal(setCalls, doc);
+      },
+    });
+
+    // Picks
+    const unbindPicks = bindListeners(PICKS_COLLECTION_NAME, {
+      add: (doc) => {
+        addToLocal(setPicks, doc);
+      },
+      update: (doc) => {
+        updateInLocal(setPicks, doc);
+        // markPlayers(players); // can be used if we give picks full CRUD functionality
+      },
+      remove: (doc) => {
+        removeFromLocal(setPicks, doc);
+        // markPlayers(players); // here too...
+      },
+    });
+
+    // Check if initialised previously and set if so
+    const initd = localStorage.getItem(INITIALISED_KEY_NAME);
+    console.log("initd", initd);
+
     (async () => {
-      // One time setup stuff
-      console.log("running setup game");
-      // Bind to FireStore for live updates
-      // Calls
-      unbindCalls = await bindListeners(CALLS_COLLECTION_NAME, {
-        add: (doc) => {
-          addToLocal(setCalls, doc);
-        },
-        update: (doc) => {
-          updateInLocal(setCalls, doc);
-        },
-        remove: (doc) => {
-          removeFromLocal(setCalls, doc);
-        },
-      });
-
-      // Picks
-      unbindPicks = await bindListeners(PICKS_COLLECTION_NAME, {
-        add: (doc) => {
-          addToLocal(setPicks, doc);
-          markPlayers(players);
-        },
-        update: (doc) => {
-          updateInLocal(setPicks, doc);
-          // markPlayers(players); // can be used if we give picks full CRUD functionality
-        },
-        remove: (doc) => {
-          removeFromLocal(setPicks, doc);
-          // markPlayers(players); // here too...
-        },
-      });
-
-      // Check if initialised previously and set if so
-      const initd = localStorage.getItem(INITIALISED_KEY_NAME);
-      console.log("initd", initd);
-
       // If not then initialise
       if (!initd) {
-        localStorage.setItem(INITIALISED_KEY_NAME, true);
         await localForage.setItem(CALLS_COLLECTION_NAME, []);
         await localForage.setItem(PICKS_COLLECTION_NAME, []);
         await populateFirebase();
-        setIntialised(true);
+        localStorage.setItem(INITIALISED_KEY_NAME, true);
       }
 
       // Fast get from Local
       // await populateFromLocalRecords();
-
-      // Get from FireStore
-      // const c = await getCalls();
-      // bulkAddToLocal(setCalls, c);
-      // await localForage.setItem(CALLS_COLLECTION_NAME, calls);
-      // console.log(`${CALLS_COLLECTION_NAME} in context`, calls);
-
-      // const p = await getPicks();
-      // bulkAddToLocal(setPicks, p);
-      // await localForage.setItem(PICKS_COLLECTION_NAME, picks);
-      // console.log(`${PICKS_COLLECTION_NAME} in context`, picks);
     })();
 
     return () => {
@@ -209,6 +224,11 @@ export const GameProvider = (props) => {
       unbindPicks();
     };
   }, []);
+
+  useEffect(() => {
+    console.log('picks changed, marking players');
+    markPlayers(players);
+  }, [picks]);
 
   const pick = async () => {
     const idx = getRandomIntInclusive(0, calls.length - 1);
@@ -218,7 +238,7 @@ export const GameProvider = (props) => {
       pickedItem
     );
     try {
-      return swap(pickedItem, CALLS_COLLECTION_NAME, PICKS_COLLECTION_NAME);
+      await swap(pickedItem, CALLS_COLLECTION_NAME, PICKS_COLLECTION_NAME);
     } catch (err) {
       console.log(err);
     }
@@ -231,35 +251,51 @@ export const GameProvider = (props) => {
         appearance: "info",
       });
       try {
-        const done = await Promise.all([
-          clearCollection(picks, PICKS_COLLECTION_NAME),
-          clearCollection(calls, CALLS_COLLECTION_NAME),
-          populateFirebase(),
+        await Promise.all([
+          merge(picks, PICKS_COLLECTION_NAME, CALLS_COLLECTION_NAME),
           resetPlayerScores(players),
           removeCelebs(),
         ]);
         addToast(`Game reset!`, {
           appearance: "success",
         });
-        return done;
       } catch (err) {
-        return Promise.reject(err.message);
+        console.log(`Error resetting game: ${err}`);
+        // return Promise.reject(err.message);
       }
     }
   };
 
+  // const checkIfPicked = (planet, sign) => {
+  //   const match = picks.find(({ _id }) => {
+  //     console.log(_id, `${planet}-${sign}`.toLowerCase());
+  //     return _id === `${planet}-${sign}`.toLowerCase();
+  //   });
+  //   return !!match;
+  // };
 
-
-  const checkIfPicked = (planet, sign) => {
-    // debugger;
-    // console.log("picks", picks);
-    for (const pick of picks) {
-      // return pick.planet === planet && pick.sign === sign;
-      if (pick.planet === planet && pick.sign === sign) {
-        // console.log("This has been picked", planet, sign);
-        return true;
-      }
+  const removeCelebs = async () => {
+    if (celebsIncluded) {
+      addToast(`Removing celebrities...`, {
+        appearance: "info",
+      });
+      await unmeshCelebs(players);
+      setCelebsIncluded(false);
+      addToast(`Celebrities removed!`, {
+        appearance: "success",
+      });
     }
+  };
+
+  const loadCelebs = async () => {
+    addToast(`Adding celebrities...`, {
+      appearance: "info",
+    });
+    await processCelebs(players);
+    setCelebsIncluded(true);
+    addToast(`Celebrities Added!`, {
+      appearance: "success",
+    });
   };
 
   return (
@@ -267,11 +303,15 @@ export const GameProvider = (props) => {
       value={{
         pick,
         reset,
-        checkIfPicked,
+        // checkIfPicked,
         markCard,
         markPlayers,
         calls,
         picks,
+        celebsIncluded,
+        removeCelebs,
+        loadCelebs,
+        winners,
       }}
     >
       {props.children}

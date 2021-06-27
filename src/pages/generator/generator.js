@@ -10,7 +10,7 @@ import PreviousCall from "../../components/PreviousCall/PreviousCall";
 
 import { GameContext } from "./../../contexts/game.context";
 import { PlayersContext } from "./../../contexts/players.context";
-import {processCelebs, removeCelebs} from './../../utils/player.utils';
+// import {processCelebs } from './../../utils/player.utils';
 
 // import classes from "*.module.css";
 
@@ -24,8 +24,8 @@ import {processCelebs, removeCelebs} from './../../utils/player.utils';
 
 function Generator() {
   // const classes = useStyles();
-  const { pick, picks, reset } = useContext(GameContext);
-  const { players } = useContext(PlayersContext);
+  const { pick, picks, reset, removeCelebs, celebsIncluded, loadCelebs, winners } = useContext(GameContext);
+  const { players, matchesVisible } = useContext(PlayersContext);
   const [seeGrid, setSeeGrid] = useState(false);
 
   const lastPick = picks[picks.length - 1] || {};
@@ -53,11 +53,12 @@ function Generator() {
         <Header pageName="Generator (Fig admin view)" />
         <main>
           <div className="controlsContainer">
+          <div>Winners: {winners.join(', ')}</div>
+          <div className="resetBtn">
+            <p>Numberof calls: {picks.length}</p>
+          </div>
             <div className="resetBtn">
-              <button onClick={() => removeCelebs(players)}>REMOVE CELEBS</button>
-            </div>
-            <div className="resetBtn">
-              <button onClick={processCelebs}>LOAD CELEBS</button>
+              <button onClick={celebsIncluded ? removeCelebs : loadCelebs}>{celebsIncluded ? 'REMOVE' : 'LOAD'} CELEBS</button>
             </div>
             <div className="resetBtn">
               <button onClick={reset}>RESET GAME</button>

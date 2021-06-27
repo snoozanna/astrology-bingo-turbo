@@ -1,4 +1,4 @@
-import { getRandomIntInclusive } from "./../utils/utils";
+import { getRandomIntInclusive, trimToLowerCase } from "./../utils/utils";
 import { signs, planets } from "./../constants";
 import { clearCollection, addMany, getCollection } from "./firebase.utils";
 import { appConfig } from "./../config";
@@ -23,7 +23,7 @@ const getFullCallsList = () => {
   const calls = [];
   for (const sign of signs) {
     for (const planet of planets) {
-      calls.push({ planet, sign });
+      calls.push({ planet, sign, _id: trimToLowerCase(`${planet}-${sign}`) });
     }
   }
   return calls;

@@ -17,20 +17,20 @@ const useStyles = makeStyles({
 function InPlay() {
   const { players, deleteAllPlayers, toggleSort, toggleMatchVisibility, matchesVisible } =
     useContext(PlayersContext);
-  const { markPlayers } = useContext(GameContext);
+  const { picks } = useContext(GameContext);
   const classes = useStyles();  
 
-  useEffect(() => {
-    markPlayers(players);
-  }, []);
+  // useEffect(() => {
+  //   markPlayers(players);
+  // }, []);
 
   return (
     <div className="App">
       <Header pageName="Birth Charts in play" />
       <main>
         <div>
-          <button onClick={toggleSort}>sort</button>
-          <button onClick={toggleMatchVisibility}>{matchesVisible ? 'Hide' : 'Show'} matches</button>
+          <button disabled={!picks.length} onClick={toggleSort}>sort</button>
+          <button disabled={!picks.length} onClick={toggleMatchVisibility}>{matchesVisible ? 'Hide' : 'Show'} matches</button>
         </div>
         <div className={classes.playersContainer}>
           <Grid container spacing={3} component="ul">

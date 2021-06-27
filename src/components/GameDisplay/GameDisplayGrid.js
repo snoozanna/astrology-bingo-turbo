@@ -29,8 +29,8 @@ const useStyles = makeStyles({
 
 const GameDisplayGrid = () => {
   const classes = useStyles();
-  const { checkIfPicked } = useContext(GameContext);
-
+  const { picks } = useContext(GameContext);
+  const pickedIds = picks.map(pick => pick._id);
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
@@ -56,7 +56,7 @@ const GameDisplayGrid = () => {
                 {sign}
               </TableCell>
               {planets.map((planet) => {
-                const isPicked = checkIfPicked(planet, sign);
+                const isPicked = pickedIds.includes(`${planet}-${sign}`.toLowerCase());
                 return (
                   <ControlledCell key={`${planet}-${sign}`} isPicked={isPicked}>
                     <Text sign={sign} planet={planet} isPicked={isPicked} />

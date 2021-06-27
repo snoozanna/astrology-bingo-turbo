@@ -1,3 +1,4 @@
+import { trimToLowerCase } from "./../utils/utils";
 import {
   addMany,
   getCollection,
@@ -35,12 +36,16 @@ export const getPlayerBirthChartData = async (newPlayer) => {
 
 export const processCeleb = async (celeb) => {
   celeb.isCeleb = true;
-
+  celeb.firstName = celeb.firstName || "";
+  celeb.lastName = celeb.lastName || "";
+  celeb._id = `${trimToLowerCase(celeb.firstName)}${
+    celeb.firstName ? "-" : ""
+  }${trimToLowerCase(celeb.lastName)}`;
   const place = await getGeo(celeb.locationSearchTerm);
-  console.log(
-    "🚀 ~ file: players.context.js ~ line 43 ~ processCeleb ~ place",
-    place
-  );
+  // console.log(
+  //   "🚀 ~ file: players.context.js ~ line 43 ~ processCeleb ~ place",
+  //   place
+  // );
   const { results } = place;
   const {
     place_id,
@@ -58,7 +63,6 @@ export const processCeleb = async (celeb) => {
 
   celeb.utcoffset = offset;
   celeb.chartData = await getPlayerBirthChartData(celeb);
-  celeb.score = 0;
   celeb.matches = [];
   return celeb;
 };
@@ -77,7 +81,7 @@ export const processCelebs = async () => {
   return fullCelebs;
 };
 
-export const removeCelebs = async (players = []) => {
+export const unmeshCelebs = async (players = []) => {
   const celebs = players.filter((player) => player.isCeleb);
   const celebIdsArray = celebs.map(({ _id }) => _id);
   return deleteMany(celebIdsArray, PLAYERS_COLLECTION_NAME);
@@ -88,7 +92,6 @@ export const resetPlayerScores = async (players = []) => {
   for (const player of players) {
     updates.push({
       _id: player._id,
-      score: 0,
       matches: [],
     });
   }

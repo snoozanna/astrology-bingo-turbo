@@ -76,11 +76,13 @@ const defaultValues = {
   longitude: "",
 };
 
-function BirthDataForm({ initialValues }) {
+function BirthDataForm() {
   const classes = useStyles();
   const { addToast } = useToasts();
   const { id } = useParams();
-  const { addPlayer, updatePlayer } = useContext(PlayersContext);
+  const { addPlayer, updatePlayer, players } = useContext(PlayersContext);
+
+  let initialValues = null;
 
   const defaultState = {
     populated: false,
@@ -90,6 +92,13 @@ function BirthDataForm({ initialValues }) {
     locationComplete: false,
     dobComplete: false,
   };
+
+  if (id) {
+    const playerForUpdate = players.find(({ _id }) => _id === id);
+    if (playerForUpdate) {
+      initialValues = playerForUpdate;
+    }
+  }
 
   const [state, setState] = useState(defaultState);
 
@@ -129,8 +138,13 @@ function BirthDataForm({ initialValues }) {
   };
 
   if (initialValues && !populated) {
+    updateState({
+      populated: true,
+      personalDetailsComplete: true,
+      locationComplete: true,
+      dobComplete: true,
+    });
     resetForm(initialValues);
-    updateState({ populated: true });
   }
 
   const getLocations = async () => {
@@ -198,21 +212,19 @@ function BirthDataForm({ initialValues }) {
   const onSubmit = async (formValues) => {
     console.log("formValues", formValues);
 
-    if (id) {
-      formValues._id = id; // pulled from the URL using router 'useParams' hook
-    }
+    // if (id) {
+    //   formValues._id = id; // pulled from the URL using router 'useParams' hook
+    // }
 
     if (populated) {
       const updates = {};
-      for (const key in initialValues) {
-        if (initialValues.hasOwnProperty(key)) {
-          if (initialValues[key] !== formValues[key] && key[0] !== "_") {
-            updates[key] = formValues[key];
+      for (const [key, value] in Object.entries(initialValues)) {
+          if (initialValues[key] !== formValues[key] && key !== "_id") {
+            updates[key] = value;
           }
-        }
       }
       console.log("updates", updates);
-      updatePlayer(id, updates);
+      updatePlayer(initialValues, updates);
     } else {
       addPlayer(formValues);
     }

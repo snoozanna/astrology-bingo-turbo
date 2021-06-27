@@ -24,15 +24,12 @@ import {
   // bulkAddToLocal,
 } from "./../utils/state.utils";
 
-import { useToggle } from "./../utils/utils";
+import { useToggle, trimToLowerCase } from "./../utils/utils";
 
 import { appConfig } from "./../config";
 import { getPlayerBirthChartData } from "../utils/player.utils";
 
-
-const {
-  PLAYERS_COLLECTION_NAME,
-} = appConfig;
+const { PLAYERS_COLLECTION_NAME } = appConfig;
 
 export const PlayersContext = createContext({
   addPlayer: () => {},
@@ -56,60 +53,35 @@ export const PlayersProvider = (props) => {
   const [sorted, toggleSort] = useToggle();
   const [matchesVisible, toggleMatchVisibility] = useToggle();
 
-  // const getPlayers = useCallback(async () => {
-  //   console.log("running setup players");
-  //   let newPlayers = [];
-  //   try {
-  //     newPlayers = await getCollection(PLAYERS_COLLECTION_NAME);
-  //     console.log(
-  //       "🚀 ~ file: players.context.js ~ line 41 ~ getPlayers ~ newPlayers",
-  //       newPlayers
-  //     );
-
-  //     return newPlayers;
-  //   } catch (err) {
-  //     console.log(err);
-  //     addToast(err.message, {
-  //       appearance: "error",
-  //     });
-  //   }
-  // }, [addToast]);
 
   useEffect(() => {
-    let unbindPlayers = () => {};
 
-    (async () => {
-      // Get initial data
-      unbindPlayers = await bindListeners(PLAYERS_COLLECTION_NAME, {
-        add: (doc) => {
-          console.log(`adding player ${doc.id}`);
-          addToLocal(setPlayers, doc);
-        },
-        update: (doc) => {
-          console.log(`updating player ${doc.id}`);
-          updateInLocal(setPlayers, doc);
-        },
-        remove: (doc) => {
-          console.log(`deleting player ${doc.id}`);
-          removeFromLocal(setPlayers, doc);
-        },
-      });
+    return bindListeners(PLAYERS_COLLECTION_NAME, {
+      add: (doc) => {
+        // console.log(`adding player ${doc.id}`);
+        addToLocal(setPlayers, doc);
+      },
+      update: (doc) => {
+        // console.log(`updating player ${doc.id}`);
+        updateInLocal(setPlayers, doc);
+      },
+      remove: (doc) => {
+        // console.log(`deleting player ${doc.id}`);
+        removeFromLocal(setPlayers, doc);
+      },
+    });
 
-      // const p = await getPlayers(appConfig.useCelebs);
-      // bulkAddToLocal(setPlayers, p);
-    })();
-    return () => {
-      unbindPlayers();
-    };
   }, []);
 
   useEffect(() => {
     console.log("sorted var", sorted);
     if (sorted) {
       console.log("sorting", players);
-      const sortedPlayers = players.sort(
-        (playerA, playerB) => playerA.score - playerB.score
-      ).reverse();
+      const sortedPlayers = players
+        .sort(
+          (playerA, playerB) => playerA.matches.length - playerB.matches.length
+        )
+        .reverse();
       setPlayers(sortedPlayers);
       console.log("sorted players", sortedPlayers);
     } else {
@@ -123,10 +95,13 @@ export const PlayersProvider = (props) => {
     try {
       const chartData = await getPlayerBirthChartData(newPlayer);
       newPlayer.chartData = chartData;
-      newPlayer.score = 0;
       newPlayer.matches = [];
-      const docRef = await addOne(newPlayer, PLAYERS_COLLECTION_NAME);
-      console.log("Document written with ID: ", docRef.id);
+      newPlayer._id = `${trimToLowerCase(
+        newPlayer.firstName
+      )}-${trimToLowerCase(newPlayer.lastName)}-${trimToLowerCase(
+        newPlayer.datetime
+      )}`;
+      await addOne(newPlayer, PLAYERS_COLLECTION_NAME);
 
       addToast(`Saved ${newPlayer.firstName} ${newPlayer.lastName}`, {
         appearance: "success",
@@ -139,7 +114,6 @@ export const PlayersProvider = (props) => {
     }
   };
 
-  //TODO UPDATE PLAYER
   const updatePlayer = async (player, updates) => {
     console.log("updatePlayer", player, updates);
     try {

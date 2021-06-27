@@ -2,22 +2,28 @@ import { FBDocToObj } from "./../utils/firebase.utils";
 
 export const addToLocal = (setter, doc) => {
   setter((collection) => {
+    // Avoid duplicates
     const idx = collection.findIndex(({ _id }) => doc.id === _id);
-    let newCollection = null;
+
     if (idx > -1) {
-      console.warn(`duplicate id in addToLocal: ${doc.id}`);
-    } else {
-      const formattedItem = FBDocToObj(doc);
-      newCollection = [...collection, formattedItem];
-      console.log(`adding ${formattedItem._id} to local`);
+      console.warn(`duplicate id in addToLocal: ${doc.id}. Overwriting...`);
+      return [
+        ...collection.slice(0, idx),
+        FBDocToObj(doc),
+        ...collection.slice(idx + 1),
+      ];
     }
+
+    const formattedItem = FBDocToObj(doc);
+    const newCollection = [...collection, formattedItem];
+    // console.log(`adding ${formattedItem._id} to local`);
     return newCollection;
   });
 };
 
-export const bulkAddToLocal = (setter, items=[]) => {
-    setter((collection) => [...collection, ...items]);
-}
+export const bulkAddToLocal = (setter, items = []) => {
+  setter((collection) => [...collection, ...items]);
+};
 
 export const getFromLocalById = (id, collection) => {
   const doc = collection.find(({ _id }) => _id === id);

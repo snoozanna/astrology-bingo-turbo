@@ -53,7 +53,7 @@ function App() {
 
                     <ProtectedRoute
                       exact
-                      path="/add-birth-chart"
+                      path="/add-birth-chart/:id?"
                       component={AddChart}
                     />
 
