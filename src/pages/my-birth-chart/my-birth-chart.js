@@ -3,7 +3,7 @@ import "./my-birth-chart.scss";
 import { makeStyles } from "@material-ui/core/styles";
 import Header from "../../components/Header/Header";
 // import NavIcon from "../../components/NavIcon/NavIcon";
-import ChartList from "../../components/ChartList/ChartList";
+import IconList from "../../components/IconList/IconList";
 import ChartImage from "../../components/ChartImage/ChartImage";
 import { useToggle } from "./../../utils/utils";
 
@@ -98,7 +98,8 @@ function MyBirthChart() {
             </div>
             <div className={classes.myBirthChartContainer}>
               {isOn ? (
-                <ChartList player={aliceBasic} />
+                <IconList player={aliceBasic} />
+                // <ChartList player={aliceBasic} />
               ) : (
                 <ChartImage player={aliceBasic} />
               )}

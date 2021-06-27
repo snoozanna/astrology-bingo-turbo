@@ -14,7 +14,7 @@ import LibraWord from "./Words/LibraWord";
 import PiscesWord from "./Words/PiscesWord";
 // import { ReactComponent as Symbol } from `./../../assets/symbols/${sign}.svg`;
 
-const SignWord = ({ sign, font, x, y, transform, className }) => {
+const SignWord = ({ sign, font, x, y, transform, className, textAnchor }) => {
   // console.log("rotation", transform);
   const getWordComponent = (sign) => {
     if (!sign) {
@@ -29,6 +29,7 @@ const SignWord = ({ sign, font, x, y, transform, className }) => {
               x={x}
               y={y}
               transform={transform}
+              textAnchor={textAnchor}
             />
           );
         case "Taurus":
@@ -39,6 +40,7 @@ const SignWord = ({ sign, font, x, y, transform, className }) => {
               x={x}
               y={y}
               transform={transform}
+              textAnchor={textAnchor}
             />
           );
         case "Gemini":
@@ -49,6 +51,7 @@ const SignWord = ({ sign, font, x, y, transform, className }) => {
               x={x}
               y={y}
               transform={transform}
+              textAnchor={textAnchor}
             />
           );
         case "Cancer":
@@ -59,6 +62,7 @@ const SignWord = ({ sign, font, x, y, transform, className }) => {
               x={x}
               y={y}
               transform={transform}
+              textAnchor={textAnchor}
             />
           );
         case "Leo":
@@ -69,6 +73,7 @@ const SignWord = ({ sign, font, x, y, transform, className }) => {
               x={x}
               y={y}
               transform={transform}
+              textAnchor={textAnchor}
             />
           );
         case "Virgo":
@@ -79,6 +84,7 @@ const SignWord = ({ sign, font, x, y, transform, className }) => {
               x={x}
               y={y}
               transform={transform}
+              textAnchor={textAnchor}
             />
           );
         case "Libra":
@@ -89,6 +95,7 @@ const SignWord = ({ sign, font, x, y, transform, className }) => {
               x={x}
               y={y}
               transform={transform}
+              textAnchor={textAnchor}
             />
           );
         case "Scorpio":
@@ -99,6 +106,7 @@ const SignWord = ({ sign, font, x, y, transform, className }) => {
               x={x}
               y={y}
               transform={transform}
+              textAnchor={textAnchor}
             />
           );
         case "Sagittarius":
@@ -109,6 +117,7 @@ const SignWord = ({ sign, font, x, y, transform, className }) => {
               x={x}
               y={y}
               transform={transform}
+              textAnchor={textAnchor}
             />
           );
         case "Capricorn":
@@ -119,6 +128,7 @@ const SignWord = ({ sign, font, x, y, transform, className }) => {
               x={x}
               y={y}
               transform={transform}
+              textAnchor={textAnchor}
             />
           );
         case "Aquarius":
@@ -129,6 +139,7 @@ const SignWord = ({ sign, font, x, y, transform, className }) => {
               x={x}
               y={y}
               transform={transform}
+              textAnchor={textAnchor}
             />
           );
         case "Pisces":
@@ -139,6 +150,7 @@ const SignWord = ({ sign, font, x, y, transform, className }) => {
               x={x}
               y={y}
               transform={transform}
+              textAnchor={textAnchor}
             />
           );
         default:

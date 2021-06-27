@@ -68,6 +68,7 @@ export const processCeleb = async (celeb) => {
 };
 
 export const processCelebs = async () => {
+  // debugger;
   const celebs = await getCollection(CELEB_COLLECTION_NAME);
   const prms = [];
   for (const celeb of celebs) {

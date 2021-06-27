@@ -9,11 +9,6 @@ import { planets } from "./../../constants";
 import { GameContext } from "./../../contexts/game.context";
 
 const useStyles = makeStyles({
-  signSymbol: {
-    width: 30,
-    margin: "auto",
-  },
-
   listGroup: {
     display: "grid",
     gridTemplateColumns: "repeat(4, 1fr)",
@@ -33,7 +28,6 @@ const useStyles = makeStyles({
   picked: {
     margin: "auto",
     maxWidth: "fit-content",
-
     border: "1px black solid",
     borderRadius: 15,
     backgroundColor: "#E31C79!important",
@@ -62,7 +56,7 @@ const IconList = ({ player, matchesVisible=false }) => {
           if (!planets.includes(planet)) {
             return null;
           }
-          {/* console.log('matchesVisible', matchesVisible); */}
+          /* console.log('matchesVisible', matchesVisible); */
           return (
               <ListItem
               key={`${player._id}-${planet}-${sign}`}
@@ -84,4 +78,3 @@ const IconList = ({ player, matchesVisible=false }) => {
 };
 
 export default IconList;
-

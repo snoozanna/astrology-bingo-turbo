@@ -15,12 +15,11 @@ import PiscesIcon from "./Icons/PiscesIcon";
 
 const useStyles = makeStyles({
   signSymbol: {
-    width: "3vh",
     margin: "auto",
   },
 });
 
-const SignSymbol = ({ sign, width, x, y }) => {
+const SignSymbol = ({ sign, width = "20px", x, y, fill = "black" }) => {
   const classes = useStyles();
   const getIconComponent = (sign) => {
     if (!sign) {
@@ -34,6 +33,7 @@ const SignSymbol = ({ sign, width, x, y }) => {
               x={x}
               y={y}
               className={classes.signSymbol}
+              fill={fill}
             />
           );
         case "Taurus":
@@ -43,6 +43,7 @@ const SignSymbol = ({ sign, width, x, y }) => {
               x={x}
               y={y}
               className={classes.signSymbol}
+              fill={fill}
             />
           );
         case "Gemini":
@@ -52,6 +53,7 @@ const SignSymbol = ({ sign, width, x, y }) => {
               x={x}
               y={y}
               className={classes.signSymbol}
+              fill={fill}
             />
           );
         case "Cancer":
@@ -61,11 +63,18 @@ const SignSymbol = ({ sign, width, x, y }) => {
               x={x}
               y={y}
               className={classes.signSymbol}
+              fill={fill}
             />
           );
         case "Leo":
           return (
-            <LeoIcon width={width} x={x} y={y} className={classes.signSymbol} />
+            <LeoIcon
+              width={width}
+              x={x}
+              y={y}
+              className={classes.signSymbol}
+              fill={fill}
+            />
           );
         case "Virgo":
           return (
@@ -74,6 +83,7 @@ const SignSymbol = ({ sign, width, x, y }) => {
               x={x}
               y={y}
               className={classes.signSymbol}
+              fill={fill}
             />
           );
         case "Libra":
@@ -83,6 +93,7 @@ const SignSymbol = ({ sign, width, x, y }) => {
               x={x}
               y={y}
               className={classes.signSymbol}
+              fill={fill}
             />
           );
         case "Scorpio":
@@ -92,6 +103,7 @@ const SignSymbol = ({ sign, width, x, y }) => {
               x={x}
               y={y}
               className={classes.signSymbol}
+              fill={fill}
             />
           );
         case "Sagittarius":
@@ -101,6 +113,7 @@ const SignSymbol = ({ sign, width, x, y }) => {
               x={x}
               y={y}
               className={classes.signSymbol}
+              fill={fill}
             />
           );
         case "Capricorn":
@@ -110,6 +123,7 @@ const SignSymbol = ({ sign, width, x, y }) => {
               x={x}
               y={y}
               className={classes.signSymbol}
+              fill={fill}
             />
           );
         case "Aquarius":
@@ -119,6 +133,7 @@ const SignSymbol = ({ sign, width, x, y }) => {
               x={x}
               y={y}
               className={classes.signSymbol}
+              fill={fill}
             />
           );
         case "Pisces":
@@ -128,6 +143,7 @@ const SignSymbol = ({ sign, width, x, y }) => {
               x={x}
               y={y}
               className={classes.signSymbol}
+              fill={fill}
             />
           );
         default:

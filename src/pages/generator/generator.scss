@@ -1,3 +1,8 @@
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+}
+
 .generatorContainer {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -5,11 +10,10 @@
   grid-gap: 5%;
   align-items: center;
   justify-content: center;
-  grid-template-areas: 
+  grid-template-areas:
     "call phrase phrase"
     "prev . callBtn"
-    "prev . ."
-  ;
+    "prev . .";
 }
 
 .callContainer {
@@ -51,6 +55,16 @@
 
 .controlsContainer {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
-  justify-content: flex-end;
+  align-items: flex-end;
+  width: 30%;
+  align-self: flex-end;
+  padding: 15px;
+  background-color: pink;
+  border-radius: 10px;
+}
+
+.controlsButtons {
+  display: flex;
 }

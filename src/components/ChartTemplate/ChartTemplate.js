@@ -11,9 +11,33 @@ const ChartTemplate = ({
         <style>
           {
             "\
-              .chartTemplate * {\
+              // .chartTemplate > * {\
+              //   stroke: none!important;\
+              }\
+              svg.chartTemplate > text {\
+                fill:none!important;\
                 stroke: none!important;\
               }\
+              svg.chartTemplate > g {\
+    fill: none!important;\
+    stroke: none!important;\
+}\
+svg.chartTemplate > path{\
+fill:none!important;\
+stroke: none!important;\
+}\
+svg.chartTemplate > g > path{\
+fill:none!important;\
+stroke: none!important;\
+}\
+svg.chartTemplate > g > circle{\
+fill:none!important;\
+stroke: none!important;\
+}\
+svg.chartTemplate line{\
+fill:none!important;\
+stroke: none!important;\
+}\
             "
           }
         </style>

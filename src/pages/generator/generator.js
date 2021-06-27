@@ -51,7 +51,7 @@ function Generator() {
     <>
       <div className="App">
         <Header pageName="Generator (Fig admin view)" />
-        <main>
+        <main className="mainContainer">
           <div className="controlsContainer">
           <div>Winners: {winners.join(', ')}</div>
           <div className="resetBtn">

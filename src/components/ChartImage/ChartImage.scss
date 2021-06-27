@@ -48,25 +48,47 @@
   transform: rotate(80deg);
 }
 
+// PLAYER DETAILS
 
-//removing outline
-
-.transparent {
-  fill: none !important;
-  stroke: transparent !important;
+.nameContainer.chartImage {
+  display: none;
 }
 
-g.transparent > circle {
-  fill: none !important;
-  stroke: transparent !important;
+.detailsContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-g.transparent > path {
-  fill: none !important;
-  stroke: transparent !important;
+.detailItem {
+  display: flex;
+  dt {
+    margin-inline-end: 5px;
+  }
+  dd {
+    margin-inline-start: 0px;
+  }
+  .detailGeog {
+    display: flex;
+  }
+  .detailGeog:first-child {
+    margin-inline-end: 5px;
+  }
 }
 
-g.transparent > line {
-  fill: none !important;
-  stroke: transparent !important;
+@media print {
+  .chartImage {
+    padding-top: 100px !important;
+  }
+  .chartImage.nameContainer {
+    display: initial !important;
+  }
+
+  .chartTemplate {
+    width: 100%;
+  }
+
+  .nameItem:first-child {
+    margin-inline-end: 5px;
+  }
 }

@@ -7,9 +7,10 @@ import SignWord from "../ChartList/SignWord";
 import { planets } from "./../../constants";
 
 const ChartImage = forwardRef(({ player, showOutline }, ref) => {
-  console.log("player", player);
+  // console.log("player", player);
   const { chartData } = player;
-  console.log("chartData", chartData);
+  // console.log("chartData", chartData);
+  const { birthday, time, latitude, longitude } = player.chartData;
 
   const getIconLocation = (planet) => {
     if (!planet) {
@@ -65,11 +66,11 @@ const ChartImage = forwardRef(({ player, showOutline }, ref) => {
     } else {
       switch (planet) {
         case "Mars":
-          return { x: 254, y: 65 };
+          return { x: 300, y: 65 };
         case "Jupiter":
-          return { x: 266, y: -16 };
+          return { x: 310, y: -16 };
         case "Saturn":
-          return { x: 231, y: -112 };
+          return { x: 275, y: -112 };
         case "Uranus":
           return { x: -190, y: 195 };
         case "Neptune":
@@ -83,11 +84,11 @@ const ChartImage = forwardRef(({ player, showOutline }, ref) => {
         case "Moon":
           return { x: 71, y: -87 };
         case "Sun":
-          return { x: -17, y: 184 };
+          return { x: 30, y: 184 };
         case "Mercury":
-          return { x: 102, y: 192 };
+          return { x: 150, y: 192 };
         case "Venus":
-          return { x: 139, y: 204 };
+          return { x: 190, y: 204 };
         default:
           console.log(`default case: sign provided was ${planet}`);
           throw new Error("getWordLocation: Sign not recognised. Need planet.");
@@ -130,9 +131,51 @@ const ChartImage = forwardRef(({ player, showOutline }, ref) => {
       }
     }
   };
+
+  const getTextAnchor = (planet) => {
+    if (!planet) {
+      throw new Error("Sign not provided. Need planet.");
+    } else {
+      switch (planet) {
+        case "Mars":
+          return "end";
+        case "Jupiter":
+          return "end";
+        case "Saturn":
+          return "end";
+        case "Uranus":
+          return "start";
+        case "Neptune":
+          return "start";
+        case "Pluto":
+          return "start";
+        case "Ascendant":
+          return "start";
+        case "Descendant":
+          return "start";
+        case "Moon":
+          return "start";
+        case "Sun":
+          return "end";
+        case "Mercury":
+          return "end";
+        case "Venus":
+          return "end";
+        default:
+          console.log(`default case: sign provided was ${planet}`);
+          throw new Error("getTextAnchor: Sign not recognised. Need planet.");
+      }
+    }
+  };
   // debugger;
   return (
     <div ref={ref}>
+      <div className="nameContainer chartImage">
+        <h3 className="firstName">
+          <span className="nameItem">{player.firstName}</span>
+          <span className="nameItem">{player.lastName}</span>
+        </h3>
+      </div>
       <ChartTemplate showOutline={showOutline}>
         {Object.entries(chartData).map(([planet, sign]) => {
           if (planets.includes(planet)) {
@@ -152,6 +195,7 @@ const ChartImage = forwardRef(({ player, showOutline }, ref) => {
                   y={getWordLocation(planet).y}
                   font="25px"
                   transform={getWordRotation(planet)}
+                  textAnchor={getTextAnchor(planet)}
                   className={planet}
                 />
               </React.Fragment>
@@ -161,6 +205,26 @@ const ChartImage = forwardRef(({ player, showOutline }, ref) => {
           }
         })}
       </ChartTemplate>
+      <dl className="detailsContainer">
+        <span className="detailItem">
+          <dt>Birthday:</dt>
+          <dd>{birthday}</dd>
+        </span>
+        <span className="detailItem">
+          <dt>Time:</dt>
+          <dd>{time}</dd>
+        </span>
+        <span className="detailItem">
+          <div className="detailGeog">
+            <dt>Lat:</dt>
+            <dd>{Number(latitude).toFixed(2)}</dd>
+          </div>
+          <div className="detailGeog">
+            <dt>Long:</dt>
+            <dd>{Number(longitude).toFixed(2)}</dd>
+          </div>
+        </span>
+      </dl>
     </div>
   );
 });

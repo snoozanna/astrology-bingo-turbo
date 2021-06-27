@@ -64,7 +64,6 @@ const PlayerListing = ({ player, matchesVisible }) => {
         </h3>
       </div>
       <div>
-        Chart:
         {chartVisible ? (
           <ChartImage
             player={player}
