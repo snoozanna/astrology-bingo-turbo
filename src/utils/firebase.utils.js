@@ -10,12 +10,12 @@ const addOne = async (data, collectionName = "") => {
   /* If we had typescript we could avoid this. It's verbose but there to help in the future */
   if (!data) {
     throw new Error(
-      `No data provided to firebase addOne. Instead received ${data}`,
+      `No data provided to firebase addOne. Instead received ${data}`
     );
   }
   if (!collectionName || typeof collectionName !== "string") {
     throw new Error(
-      `No collectionName provided to firebase addOne. Instead received ${collectionName}`,
+      `No collectionName provided to firebase addOne. Instead received ${collectionName}`
     );
   }
 
@@ -35,8 +35,8 @@ const addMany = async (data = [], collectionName = "") => {
   if (!Array.isArray(data)) {
     throw new Error(
       `Improper data provided to firebase addMany. Received ${JSON.stringify(
-        data,
-      )}`,
+        data
+      )}`
     );
   }
 
@@ -132,8 +132,8 @@ const deleteMany = async (ids = [], collectionName = "") => {
   if (!Array.isArray(ids)) {
     throw new Error(
       `deleteMany requires an array of string ids: received ${JSON.stringify(
-        ids,
-      )}`,
+        ids
+      )}`
     );
   }
 
@@ -152,8 +152,8 @@ const clearCollection = async (localCollection = [], collectionName = "") => {
   if (!Array.isArray(localCollection)) {
     throw new Error(
       `Improper localCollection name passed to clearCollection: received ${JSON.stringify(
-        localCollection,
-      )}`,
+        localCollection
+      )}`
     );
   }
   try {
@@ -173,35 +173,40 @@ const bindListeners = (
     add: () => {},
     update: () => {},
     remove: () => {},
-  },
+  }
 ) => {
   return (
     db
       .collection(collection_name)
       // .get()
-      .onSnapshot((snapshot) => {
-        // debugger;
-        // console.log("snapshot", snapshot);
-        let changes = snapshot.docChanges();
-        for (const change of changes) {
-          switch (change.type) {
-            case "added":
-              // console.log("added", change.doc.id, change.doc.data());
-              add(change.doc);
-              break;
-            case "modified":
-              // console.log("modified", change.doc.id, change.doc.data());
-              update(change.doc);
-              break;
-            case "removed":
-              // console.log("removed", change.doc.id, change.doc.data());
-              remove(change.doc);
-              break;
-            default:
-              return;
+      .onSnapshot(
+        (snapshot) => {
+          // debugger;
+          // console.log("snapshot", snapshot);
+          let changes = snapshot.docChanges();
+          for (const change of changes) {
+            switch (change.type) {
+              case "added":
+                // console.log("added", change.doc.id, change.doc.data());
+                add(change.doc);
+                break;
+              case "modified":
+                // console.log("modified", change.doc.id, change.doc.data());
+                update(change.doc);
+                break;
+              case "removed":
+                // console.log("removed", change.doc.id, change.doc.data());
+                remove(change.doc);
+                break;
+              default:
+                return;
+            }
           }
+        },
+        (error) => {
+          console.log(`Error setting listeners`, error);
         }
-      })
+      )
   );
 };
 
