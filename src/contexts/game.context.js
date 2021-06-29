@@ -320,7 +320,7 @@ export const GameProvider = (props) => {
     addToast(`Adding celebrities...`, {
       appearance: "info",
     });
-    await processCelebs(players);
+    await processCelebs(picks);
     setCelebsIncluded(true);
     addToast(`Celebrities Added!`, {
       appearance: "success",

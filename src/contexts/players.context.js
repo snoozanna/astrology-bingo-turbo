@@ -79,14 +79,14 @@ export const PlayersProvider = (props) => {
       //     (playerA, playerB) => playerA.matches.length - playerB.matches.length
       //   )
       //   .reverse();
-      // const sortedPlayers = fastSortMatches(players);
-      const sortedPlayers = fastSortJoined(players);
+      const sortedPlayers = fastSortMatches(players);
       console.log("sorted players", sortedPlayers);
       setPlayers(sortedPlayers);
     } else {
       // sort by something
       console.log("unsorting", players);
-      const sortedPlayers = fastSortName(players);
+      // const sortedPlayers = fastSortName(players);
+      const sortedPlayers = fastSortJoined(players);
       console.log("unsorted players", sortedPlayers);
       setPlayers(sortedPlayers);
     }

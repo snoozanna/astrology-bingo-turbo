@@ -42,13 +42,14 @@ const useStyles = makeStyles({
 });
 
 const IconList = ({ player, matchesVisible=false }) => {
-  const { picks } = useContext(GameContext);
+  // const { picks } = useContext(GameContext);
 
-  const {chartData} = player;
+  const {chartData, matches} = player;
   const classes = useStyles();
 
-  const pickedIds = picks.map(pick => pick._id);
+  // const pickedIds = picks.map(pick => pick._id);
   // console.log("🚀 ~ file: IconList.js ~ line 57 ~ IconList ~ pickedIds", pickedIds)
+
 
   return (
       <List className={classes.listGroup}>
@@ -61,7 +62,7 @@ const IconList = ({ player, matchesVisible=false }) => {
               <ListItem
               key={`${player._id}-${planet}-${sign}`}
                 className={`${
-                  pickedIds.includes(`${planet}-${sign}`.toLowerCase()) && matchesVisible
+                  matches.includes(`${planet}-${sign}`.toLowerCase()) && matchesVisible
                     ? classes.picked
                     : classes.listItem
                 } ${planet.toLowerCase()} sign-${sign.toLowerCase()}`}

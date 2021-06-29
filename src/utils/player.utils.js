@@ -34,7 +34,7 @@ export const getPlayerBirthChartData = async (newPlayer) => {
   }
 };
 
-export const processCeleb = async (celeb) => {
+export const processCeleb = async (celeb, picks) => {
   celeb.isCeleb = true;
   celeb.firstName = celeb.firstName || "";
   celeb.lastName = celeb.lastName || "";
@@ -63,17 +63,37 @@ export const processCeleb = async (celeb) => {
 
   celeb.utcoffset = offset;
   celeb.chartData = await getPlayerBirthChartData(celeb);
-  celeb.matches = [];
+
+  // This functionality is repeated in game context, line 85.
+  const pickIds = picks.map(({_id}) => _id);
+  celeb.matches = Object.entries(celeb.chartData)
+  .filter(([playerPlanet]) => {
+    if (
+      playerPlanet === "time" ||
+      playerPlanet === "birthday" ||
+      playerPlanet === "longitude" ||
+      playerPlanet === "latitude"
+    )
+      return false;
+    return true;
+  })
+  .map(([playerPlanet, playerSign]) => {
+    return `${playerPlanet}-${playerSign}`.toLowerCase();
+  })
+  .filter((item) => {
+    return pickIds.includes(item);
+  });
+
   celeb.joined = Date.now();
   return celeb;
 };
 
-export const processCelebs = async () => {
+export const processCelebs = async (picks) => {
   // debugger;
   const celebs = await getCollection(CELEB_COLLECTION_NAME);
   const prms = [];
   for (const celeb of celebs) {
-    prms.push(processCeleb(celeb));
+    prms.push(processCeleb(celeb, picks));
   }
   const celebsWithBirthChart = await Promise.all(prms);
   const fullCelebs = await addMany(

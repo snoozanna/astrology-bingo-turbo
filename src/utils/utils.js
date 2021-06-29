@@ -8,7 +8,6 @@ import {
 import { sort } from "fast-sort";
 
 export const fastSortMatches = (arr = [], asc = false) => {
-  
   return sort(arr)[asc ? "asc" : "desc"]((p) => {
     console.log('sorting matches', p.matches, p._id);
     return p.matches.length;
