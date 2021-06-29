@@ -260,7 +260,7 @@ export const GameProvider = (props) => {
   useEffect(() => {
     console.log("picks changed, marking players");
     markPlayers(players);
-  }, [picks]);
+  }, [picks]); // Leave as is. You don't need to mark the players every time, only when the picks change.
 
   const pick = async () => {
     const idx = getRandomIntInclusive(0, calls.length - 1);
@@ -281,9 +281,9 @@ export const GameProvider = (props) => {
       });
       try {
         await Promise.all([
-          merge(picks, PICKS_COLLECTION_NAME, CALLS_COLLECTION_NAME),
-          resetPlayerScores(players),
           removeCelebs(),
+          resetPlayerScores(players),
+          merge(picks, PICKS_COLLECTION_NAME, CALLS_COLLECTION_NAME),
         ]);
         addToast(`Game reset!`, {
           appearance: "success",
