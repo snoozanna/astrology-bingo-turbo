@@ -39,6 +39,7 @@ const useStyles = makeStyles({
 
   listGroupItem: {
     // width: 'calc(20% - calc(1rem/5))',
+    display: 'flex',
   },
 
   homeTitle: {

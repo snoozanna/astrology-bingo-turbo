@@ -15,7 +15,7 @@ const useStyles = makeStyles({
 });
 
 function InPlay() {
-  const { players, deleteAllPlayers, toggleSort, toggleMatchVisibility, matchesVisible } =
+  const { players, deleteAllPlayers, toggleSort, sorted, toggleMatchVisibility, matchesVisible } =
     useContext(PlayersContext);
   const { picks } = useContext(GameContext);
   const classes = useStyles();  
@@ -28,11 +28,12 @@ function InPlay() {
     <div className="App">
       <Header pageName="Birth Charts in play" />
       <main>
-        <div>
-          <button disabled={!picks.length} onClick={toggleSort}>sort</button>
+        <header>
+          <button disabled={!picks.length} onClick={toggleSort}>{sorted ? 'un' : ''}sort</button>
           <button disabled={!picks.length} onClick={toggleMatchVisibility}>{matchesVisible ? 'Hide' : 'Show'} matches</button>
-        </div>
+        </header>
         <div className={classes.playersContainer}>
+        {JSON.stringify(picks.map(({_id}) => _id))}
           <Grid container spacing={3} component="ul">
             {players.map((player) => (
               <Grid key={player._id} item xs={6} sm={4} component="li">

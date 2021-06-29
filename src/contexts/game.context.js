@@ -71,25 +71,31 @@ export const GameProvider = (props) => {
     console.log(`Running markCard`);
     if (!picks.length) return;
     console.log(`Running markCard for ${player.firstName} ${player.lastName}`);
-    const chartDataArray = Object.entries(player.chartData);
+    const chartDataArray = Object.entries(player.chartData)
+    .filter(([playerPlanet]) => {
+      if(playerPlanet === 'time' || playerPlanet === 'birthday'  || playerPlanet === 'longitude' || playerPlanet === 'latitude') return false;
+      return true;
+    })
+    .map(([playerPlanet, playerSign]) => {
+      return `${playerPlanet}-${playerSign}`.toLowerCase();
+    });
 
     // Checks only last pick. Cannot be used if you add in-game pick CRUD functionality
     const latestPick = picks[picks.length - 1];
     const latestPickId = latestPick._id;
 
-    const match = chartDataArray.find(([playerPlanet, playerSign]) => {
-      console.log(`${playerPlanet}-${playerSign}`.toLowerCase(), latestPickId);
-      return `${playerPlanet}-${playerSign}`.toLowerCase() === latestPickId;
+    const match = chartDataArray.find((sign) => {
+      console.log(sign, latestPickId);
+      return sign === latestPickId;
     });
-
+    // debugger;
     // Bail if no match
     if (!match) return;
 
-    // Deal with 1
-    if (player.matches.length[player.matches.length - 1] === latestPickId)
-      return;
+    // If last match is the same as the last pick (e.g. if already recorded) then skip
+    if (player.matches[player.matches.length - 1] === latestPickId) return;
 
-    // continue if there is
+    // otherwise record the match
     const updates = {
       matches: [...player.matches, latestPickId], // 'mars-sagitarius'
     };

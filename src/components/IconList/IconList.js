@@ -48,7 +48,7 @@ const IconList = ({ player, matchesVisible=false }) => {
   const classes = useStyles();
 
   const pickedIds = picks.map(pick => pick._id);
-  console.log("🚀 ~ file: IconList.js ~ line 57 ~ IconList ~ pickedIds", pickedIds)
+  // console.log("🚀 ~ file: IconList.js ~ line 57 ~ IconList ~ pickedIds", pickedIds)
 
   return (
       <List className={classes.listGroup}>

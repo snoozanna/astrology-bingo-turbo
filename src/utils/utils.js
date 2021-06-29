@@ -1,12 +1,3 @@
-// import { update } from "@react-spring/core";
-// import { firestore as db } from "./../firebase";
-// import { useToasts } from "react-toast-notifications";
-
-// import {
-//   // GEO_API_KEY,
-//   // TIME_API_KEY
-// } from "../config";
-
 import {
   useState,
   useCallback,
@@ -14,6 +5,26 @@ import {
   // useReducer,
 } from "react";
 
+import { sort } from "fast-sort";
+
+export const fastSortMatches = (arr = [], asc = false) => {
+  
+  return sort(arr)[asc ? "asc" : "desc"]((p) => {
+    console.log('sorting matches', p.matches, p._id);
+    return p.matches.length;
+  });
+};
+
+export const fastSortName = (arr = [], asc = true) => {
+  return sort(arr)[asc ? "asc" : "desc"](([
+    p => p.firstName,
+    p => p.lastName
+  ]));
+};
+
+export const fastSortJoined = (arr = [], asc = true) => {
+  return sort(arr)[asc ? "asc" : "desc"]((p) => p.joined);
+};
 
 export function getRandomIntInclusive(min, max) {
   const _min = Math.ceil(min);
@@ -37,7 +48,6 @@ export function deepFreeze(object) {
 
   return Object.freeze(object);
 }
-
 
 // export const useFetch = async (
 //   url = "",
@@ -180,9 +190,10 @@ export const useToggle = (initialValue = false) => {
 };
 
 export const trimToLowerCase = (str) => {
-  if(typeof str !== 'string') {
-    console.log(`Expected string in trimToLowerCase, instead received ${str} (${typeof str})`);
+  if (typeof str !== "string") {
+    console.log(
+      `Expected string in trimToLowerCase, instead received ${str} (${typeof str})`
+    );
   }
   return str.trim().toLowerCase();
-}
-
+};

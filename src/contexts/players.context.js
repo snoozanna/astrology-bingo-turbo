@@ -24,7 +24,7 @@ import {
   // bulkAddToLocal,
 } from "./../utils/state.utils";
 
-import { useToggle, trimToLowerCase } from "./../utils/utils";
+import { useToggle, trimToLowerCase, fastSortMatches, fastSortName } from "./../utils/utils";
 
 import { appConfig } from "./../config";
 import { getPlayerBirthChartData } from "../utils/player.utils";
@@ -53,9 +53,7 @@ export const PlayersProvider = (props) => {
   const [sorted, toggleSort] = useToggle();
   const [matchesVisible, toggleMatchVisibility] = useToggle();
 
-
   useEffect(() => {
-
     return bindListeners(PLAYERS_COLLECTION_NAME, {
       add: (doc) => {
         // console.log(`adding player ${doc.id}`);
@@ -70,24 +68,28 @@ export const PlayersProvider = (props) => {
         removeFromLocal(setPlayers, doc);
       },
     });
-
   }, []);
 
   useEffect(() => {
     console.log("sorted var", sorted);
     if (sorted) {
       console.log("sorting", players);
-      const sortedPlayers = players
-        .sort(
-          (playerA, playerB) => playerA.matches.length - playerB.matches.length
-        )
-        .reverse();
-      setPlayers(sortedPlayers);
+      // const sortedPlayers = players
+      //   .sort(
+      //     (playerA, playerB) => playerA.matches.length - playerB.matches.length
+      //   )
+      //   .reverse();
+      const sortedPlayers = fastSortMatches(players);
       console.log("sorted players", sortedPlayers);
+      setPlayers(sortedPlayers);
     } else {
       // sort by something
+      console.log("unsorting", players);
+      const sortedPlayers = fastSortName(players);
+      console.log("unsorted players", sortedPlayers);
+      setPlayers(sortedPlayers);
     }
-  }, [players, sorted]);
+  }, [sorted]);
 
   const addPlayer = async (newPlayer) => {
     console.log("new player pre chart", newPlayer);
@@ -101,6 +103,7 @@ export const PlayersProvider = (props) => {
       )}-${trimToLowerCase(newPlayer.lastName)}-${trimToLowerCase(
         newPlayer.datetime
       )}`;
+      newPlayer.joined = Date.now();
       await addOne(newPlayer, PLAYERS_COLLECTION_NAME);
 
       addToast(`Saved ${newPlayer.firstName} ${newPlayer.lastName}`, {

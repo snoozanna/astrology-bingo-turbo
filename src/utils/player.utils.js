@@ -64,6 +64,7 @@ export const processCeleb = async (celeb) => {
   celeb.utcoffset = offset;
   celeb.chartData = await getPlayerBirthChartData(celeb);
   celeb.matches = [];
+  celeb.joined = Date.now();
   return celeb;
 };
 
