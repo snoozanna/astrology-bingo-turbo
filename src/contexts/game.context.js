@@ -68,18 +68,34 @@ export const GameProvider = (props) => {
   const [picks, setPicks] = useState([]);
   const [celebsIncluded, setCelebsIncluded] = useState(false);
 
+  useEffect(() => {
+    if (!celebsIncluded) {
+      const hasCelebs = players.find(({ isCeleb }) => isCeleb);
+      console.log("hasCelebs", hasCelebs);
+      if (hasCelebs) {
+        setCelebsIncluded(true);
+      }
+    }
+  }, [celebsIncluded, players]);
+
   const markCard = async (player) => {
     console.log(`Running markCard`);
     if (!picks.length) return;
     console.log(`Running markCard for ${player.firstName} ${player.lastName}`);
     const chartDataArray = Object.entries(player.chartData)
-    .filter(([playerPlanet]) => {
-      if(playerPlanet === 'time' || playerPlanet === 'birthday'  || playerPlanet === 'longitude' || playerPlanet === 'latitude') return false;
-      return true;
-    })
-    .map(([playerPlanet, playerSign]) => {
-      return `${playerPlanet}-${playerSign}`.toLowerCase();
-    });
+      .filter(([playerPlanet]) => {
+        if (
+          playerPlanet === "time" ||
+          playerPlanet === "birthday" ||
+          playerPlanet === "longitude" ||
+          playerPlanet === "latitude"
+        )
+          return false;
+        return true;
+      })
+      .map(([playerPlanet, playerSign]) => {
+        return `${playerPlanet}-${playerSign}`.toLowerCase();
+      });
 
     // Checks only last pick. Cannot be used if you add in-game pick CRUD functionality
     const latestPick = picks[picks.length - 1];
@@ -113,7 +129,7 @@ export const GameProvider = (props) => {
     //   }
     // }
 
-    if (updates.matches.length === 12 && location !== '/public-view') {
+    if (updates.matches.length === 12 && location !== "/public-view") {
       const winMsg = `${player.firstName} ${player.firstName} HAS WON!!!!`;
       console.log(winMsg);
       addToast(winMsg, {
@@ -130,7 +146,9 @@ export const GameProvider = (props) => {
   };
 
   useEffect(() => {
-    const winners = players.filter(({matches}) => matches.length >= 12).map(({_id}) => _id);
+    const winners = players
+      .filter(({ matches }) => matches.length >= 12)
+      .map(({ _id }) => _id);
     setWinners(winners);
   }, []);
 
@@ -240,16 +258,14 @@ export const GameProvider = (props) => {
   }, []);
 
   useEffect(() => {
-    console.log('picks changed, marking players');
+    console.log("picks changed, marking players");
     markPlayers(players);
   }, [picks]);
 
   const pick = async () => {
     const idx = getRandomIntInclusive(0, calls.length - 1);
     const pickedItem = calls[idx];
-    console.log(
-      `picking ${pickedItem._id}`, pickedItem
-    );
+    console.log(`picking ${pickedItem._id}`, pickedItem);
     try {
       await swap(pickedItem, CALLS_COLLECTION_NAME, PICKS_COLLECTION_NAME);
     } catch (err) {

@@ -24,7 +24,7 @@ import {
   // bulkAddToLocal,
 } from "./../utils/state.utils";
 
-import { useToggle, trimToLowerCase, fastSortMatches, fastSortName } from "./../utils/utils";
+import { useToggle, trimToLowerCase, fastSortMatches, fastSortName, fastSortJoined } from "./../utils/utils";
 
 import { appConfig } from "./../config";
 import { getPlayerBirthChartData } from "../utils/player.utils";
@@ -79,7 +79,8 @@ export const PlayersProvider = (props) => {
       //     (playerA, playerB) => playerA.matches.length - playerB.matches.length
       //   )
       //   .reverse();
-      const sortedPlayers = fastSortMatches(players);
+      // const sortedPlayers = fastSortMatches(players);
+      const sortedPlayers = fastSortJoined(players);
       console.log("sorted players", sortedPlayers);
       setPlayers(sortedPlayers);
     } else {
