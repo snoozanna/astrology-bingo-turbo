@@ -35,6 +35,7 @@ import { populateFirebase } from "./../utils/game.utils";
 import { appConfig } from "./../config";
 
 import { PlayersContext } from "./players.context";
+import { _isUndefined } from "gsap/gsap-core";
 
 const { PICKS_COLLECTION_NAME, CALLS_COLLECTION_NAME } = appConfig;
 
@@ -93,7 +94,7 @@ export const GameProvider = (props) => {
     if (!match) return;
 
     // If last match is the same as the last pick (e.g. if already recorded) then skip
-    if (player.matches[player.matches.length - 1] === latestPickId) return;
+    if (player.matches.includes(latestPickId)) return;
 
     // otherwise record the match
     const updates = {
@@ -113,7 +114,9 @@ export const GameProvider = (props) => {
     // }
 
     if (updates.matches.length === 12 && location !== '/public-view') {
-      addToast(`${player.firstName} ${player.firstName} HAS WON!!!!`, {
+      const winMsg = `${player.firstName} ${player.firstName} HAS WON!!!!`;
+      console.log(winMsg);
+      addToast(winMsg, {
         appearance: "success",
       });
       setWinners([...winners, player]);
@@ -125,6 +128,11 @@ export const GameProvider = (props) => {
       console.log("err marking", err);
     }
   };
+
+  useEffect(() => {
+    const winners = players.filter(({matches}) => matches.length >= 12).map(({_id}) => _id);
+    setWinners(winners);
+  }, []);
 
   const markPlayers = (players) => {
     for (const player of players) {
@@ -240,8 +248,7 @@ export const GameProvider = (props) => {
     const idx = getRandomIntInclusive(0, calls.length - 1);
     const pickedItem = calls[idx];
     console.log(
-      "🚀 ~ file: game.context.js ~ line 151 ~ pick ~ pickedItem",
-      pickedItem
+      `picking ${pickedItem._id}`, pickedItem
     );
     try {
       await swap(pickedItem, CALLS_COLLECTION_NAME, PICKS_COLLECTION_NAME);

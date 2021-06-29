@@ -53,7 +53,7 @@ function Generator() {
         <Header pageName="Generator (Fig admin view)" />
         <main className="mainContainer">
           <div className="controlsContainer">
-          <div>Winners: {winners.join(', ')}</div>
+          <div>Winners: {JSON.stringify(winners)}</div>
           <div className="resetBtn">
             <p>Numberof calls: {picks.length}</p>
           </div>
