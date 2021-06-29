@@ -8,11 +8,12 @@ import { Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { PlayersContext } from "./../../contexts/players.context";
 import { useToggle } from "./../../utils/utils";
-import { GameContext } from "./../../contexts/game.context";
+// import { GameContext } from "./../../contexts/game.context";
 
 const useStyles = makeStyles({
   block: {
     display: "block",
+    minHeight: '1.7rem',
   },
   playerContainer: {
     padding: "0 15px",
