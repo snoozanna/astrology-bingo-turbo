@@ -40,7 +40,7 @@ const NavDrawer = () => {
             { text: "Login", to: "/login" },
             { text: "Add Birth Chart", to: "/add-birth-chart" },
             { text: "My Birth Chart", to: "/my-birth-chart" },
-            { text: "Generator", to: "/generator" },
+            { text: "Admin", to: "/admin" },
             { text: "Game", to: "/public-display" },
             { text: "In play", to: "/in-play" },
           ].map(({ text, to }) => (

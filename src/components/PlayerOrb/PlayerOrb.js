@@ -1,46 +1,60 @@
 import React from "react";
 import List from "@material-ui/core/List";
-import { makeStyles } from "@material-ui/core/styles";
-import { useSpring, animated } from "react-spring";
 
+import { useSpring, animated } from "react-spring";
+import "./PlayerOrb.scss"
 import SignSymbol from "../ChartList/SignSymbol";
 import { planets, orbColors } from "./../../constants";
 import { getRandomIntInclusive } from "./../../utils/utils";
 
-const useStyles = makeStyles({
-  ownerName: {
-    position: "absolute",
-    fontSize: "3rem",
-    fontWeight: "bold",
-    maxWidth: "min-content",
-    display: "flex",
-    left: '50%',
-    top: 20,
-    transform: 'translateX(-50%)',
-    zIndex: 1,
-    color: "ivory",
-  },
-  orb: {
-    border: "black solid 1px",
-    top: 0,
-    bottom: 0,
-    padding: "80px",
-    borderRadius: "50%",
-    position: "relative",
-    backgroundColor: "teal",
-    width: '100%',
-    height: '100%',
-  },
 
-  listGroup: {
-    display: "grid",
-    gridTemplateColumns: "repeat(4, 1fr)",
-    gridGap: "40px 15px",
-  },
-  svg: {
-    fill: "#fff",
-  },
-});
+const getOrbIconLocation = (planet) => {
+    if (!planet) {
+      throw new Error("Sign not provided. Need planet.");
+    }
+
+    switch (planet) {
+      case "Mars":
+        return { x: 50, y: -38 };
+
+      case "Jupiter":
+        return { x: 68, y: -32 };
+
+      case "Saturn":
+        return { x: 85, y: 0 };
+
+      case "Uranus":
+        return { x: 78, y: 23 };
+
+      case "Neptune":
+        return { x: 60, y: 36 };
+
+      case "Pluto":
+        return { x: 37, y: 38 };
+
+      case "Ascendant":
+        return { x: 18, y: 26 };
+
+      case "Descendant":
+        return { x: 8, y: 8 };
+
+      case "Moon":
+        return { x: 6, y: -10 };
+
+      case "Sun":
+        return { x: 18, y: -29 };
+
+      case "Mercury":
+        return { x: 35, y: -38 };
+
+      case "Venus":
+        return { x: 80, y: -20 };
+
+      default:
+        console.log(`default case: sign provided was ${planet}`);
+        throw new Error("getIconLocation: Sign not recognised. Need planet.");
+    }
+  };
 
 const chooseColor = () => {
   return orbColors[getRandomIntInclusive(0, orbColors.length)];
@@ -84,7 +98,6 @@ const PlayerOrb = ({ player: { _id, chartData }, player }) => {
       // rotateZ: 360,
       x: chooseX(),
       y: chooseY(),
-      backgroundColor: chooseColor(),
       transform: `scale(${chooseScale()})`,
     },
     to: {
@@ -92,37 +105,57 @@ const PlayerOrb = ({ player: { _id, chartData }, player }) => {
       // rotateZ: 0,
       x: chooseX(),
       y: chooseY(),
-      backgroundColor: chooseColor(),
+
       transform: `scale(${chooseScale()})`,
     },
   });
-  const classes = useStyles();
   console.log("player", player);
   return (
-    <animated.div style={props} className={classes.orb}>
-      <div className={classes.ownerName}>
-        <p>
-          {player.firstName} {player.lastName}
-        </p>
-      </div>
-      <List className={classes.listGroup}>
+    // <animated.div style={props} className="orb">
+    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" className="orb">
+    <defs>
+    <radialGradient id="myGradient" cx="10%" cy="80%" r="120.71067811865476%">
+      <stop offset="0%" stop-color="#1B1464" />
+      <stop offset="100%" stop-color="#FF9472" />
+    </radialGradient>
+  </defs>
+  <circle cx="50" cy="50" r="50" fill="url('#myGradient')">
+       </circle>
         {Object.entries(chartData).map(([planet, sign]) => {
           if (!planets.includes(planet)) {
             return null;
           }
           return (
-            <SignSymbol
-              key={`${planet}-${sign}`}
-              sign={sign}
-              planet={planet}
-              className={classes.orbSymbol}
-              width="50px"
-              fill="hsla(36, 96%, 95%, 40%)"
-            />
+            // <SignSymbol
+            //   key={`${planet}-${sign}`}
+            //   sign={sign}
+            //   planet={planet}
+            //   className="orbSymbol"
+            //   width="50px"
+            //   fill="hsla(36, 96%, 95%, 40%)"
+            // />
+            <React.Fragment key={`${player._id}-${planet}-${sign}`}>
+                <SignSymbol
+                  sign={sign}
+                  width="10"
+                  x={getOrbIconLocation(planet).x}
+                  y={getOrbIconLocation(planet).y}
+                  className={planet}
+                  fill="#fff"
+                />
+              </React.Fragment>
           );
         })}
-      </List>
-    </animated.div>
+     
+  
+        <text className="ownerName" fill="#fff" x="20" y="45">
+          {player.firstName} 
+        </text>
+        <text className="ownerName" fill="#fff" x="30" y="65">
+       {player.lastName}
+        </text>
+      </svg>
+    // </animated.div>
   );
 };
 

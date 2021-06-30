@@ -1,15 +1,15 @@
 import React, { useContext, useState } from "react";
 // import {FBDocToObj} from './../../utils/firebase.utils';
-import "./generator.scss";
-import Header from "./../../components/Header/Header";
-import GameDisplayGrid from "./../../components/GameDisplay/GameDisplayGrid.js";
+import "./admin.scss";
+import Header from "../../components/Header/Header";
+import GameDisplayGrid from "../../components/GameDisplay/GameDisplayGrid.js";
 import PhraseDisplay from "../../components/PhraseDisplay/PhraseDisplay.js";
-import CurrentCall from "./../../components/CurrentCall/CurrentCall";
+import CurrentCall from "../../components/CurrentCall/CurrentCall";
 import PreviousCall from "../../components/PreviousCall/PreviousCall";
 // import { makeStyles } from "@material-ui/core/styles";
 
-import { GameContext } from "./../../contexts/game.context";
-import { PlayersContext } from "./../../contexts/players.context";
+import { GameContext } from "../../contexts/game.context";
+import { PlayersContext } from "../../contexts/players.context";
 // import {processCelebs } from './../../utils/player.utils';
 
 // import classes from "*.module.css";
@@ -22,9 +22,17 @@ import { PlayersContext } from "./../../contexts/players.context";
 //   },
 // });
 
-function Generator() {
+function Admin() {
   // const classes = useStyles();
-  const { pick, picks, reset, removeCelebs, celebsIncluded, loadCelebs, winners } = useContext(GameContext);
+  const {
+    pick,
+    picks,
+    reset,
+    removeCelebs,
+    celebsIncluded,
+    loadCelebs,
+    winners,
+  } = useContext(GameContext);
   const { players, matchesVisible } = useContext(PlayersContext);
   const [seeGrid, setSeeGrid] = useState(false);
 
@@ -53,12 +61,14 @@ function Generator() {
         <Header pageName="Generator (Fig admin view)" />
         <main className="mainContainer">
           <div className="controlsContainer">
-          <div>Winners: {JSON.stringify(winners)}</div>
-          <div className="resetBtn">
-            <p>Numberof calls: {picks.length}</p>
-          </div>
+            <div>Winners: {JSON.stringify(winners)}</div>
             <div className="resetBtn">
-              <button onClick={celebsIncluded ? removeCelebs : loadCelebs}>{celebsIncluded ? 'REMOVE' : 'LOAD'} CELEBS</button>
+              <p>Numberof calls: {picks.length}</p>
+            </div>
+            <div className="resetBtn">
+              <button onClick={celebsIncluded ? removeCelebs : loadCelebs}>
+                {celebsIncluded ? "REMOVE" : "LOAD"} CELEBS
+              </button>
             </div>
             <div className="resetBtn">
               <button onClick={reset}>RESET GAME</button>
@@ -78,4 +88,4 @@ function Generator() {
   );
 }
 
-export default Generator;
+export default Admin;

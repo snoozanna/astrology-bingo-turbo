@@ -1,10 +1,16 @@
-// @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;300;400;600;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap');
 
 // $inconsolata: "Inconsolata, monospace"
 // $font-stack: $inconsolata
 // $primary-color: #333;
 
-$background: rgb(233, 217, 248);
-$orange: hsl(19, 90%, 62%);
-$pink: rgb(213, 123, 214);
-$blue: rgb(95, 180, 217);
+
+$titleFont: url("./../assets/fonts/Chromate-Regular.otf");
+$bodyFont: 'Open Sans', sans-serif;
+
+
+$purple: rgb(112, 15, 181);
+$pink: rgb(225, 29, 202);
+$green: rgb(19,202, 145);
+$orange:rgb(255, 148, 114);
+$paleblue: rgb(143,249, 249)

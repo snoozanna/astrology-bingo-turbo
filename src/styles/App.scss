@@ -2,8 +2,18 @@
 
 body {
   text-align: center;
-  font-family: "Lato", sans-serif;
-  background-color: $background;
+  font-family: $bodyFont;
+}
+
+.App {
+  // background-color: $background;
+  // background-color: rgb(27, 20, 100);
+  background-image: radial-gradient(
+    circle,
+    rgba(27, 20, 100, 1) 0%,
+    rgba(112, 15, 181, 1) 100%
+  );
+  min-height: 100vh;
 }
 
 ul,

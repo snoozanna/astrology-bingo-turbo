@@ -18,7 +18,7 @@ function PublicDisplay() {
 
   return (
     <>
-      <div className="App">
+      <div className="App display">
         <Header pageName="Game" />
         <main className="gameContainer">
           {/* <GameDisplayGrid /> */}

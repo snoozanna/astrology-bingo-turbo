@@ -1,11 +1,6 @@
 .prevCallContainer {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  justify-content: center;
-  flex-direction: column;
-  padding: 0 20px;
-  height: 20vh;
+
+
 }
 
 .prevCallTitle {
@@ -13,11 +8,9 @@
 }
 
 .prevCallItem {
-  background-color: #ffdd7f;
-  border: solid black 1px;
-  border-radius: 10px;
+color: #fff;
   padding: 0 2rem;
-    min-width: 10rem;
+  min-width: 10rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -33,5 +26,5 @@
 }
 
 .prevCallContainer span {
-  margin-block-end: 5px;
+  margin-inline-end: 5px;
 }

@@ -1,0 +1,33 @@
+.App.landing {
+  background-image: url("./../../assets//img/ab-background-icing.png"),
+    radial-gradient(circle, rgba(27, 20, 100, 1) 0%, rgba(112, 15, 181, 1) 100%);
+  background-size: cover;
+}
+
+.landingMain {
+  position: relative;
+}
+.orbGroup {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  justify-items: center;
+  justify-content: flex-start;
+  align-items: center;
+  list-style-type: none;
+  padding: 0;
+  gap: 1rem;
+  width: 100%;
+}
+
+.orbGroupItem {
+  // width: 'calc(20% - calc(1rem/5))',
+  display: flex;
+}
+
+.logoLanding {
+  position: absolute;
+  margin: 0 auto;
+  top: 50%;
+  left: 50%;
+  right: 50%;
+}

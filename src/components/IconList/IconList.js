@@ -41,40 +41,40 @@ const useStyles = makeStyles({
   },
 });
 
-const IconList = ({ player, matchesVisible=false }) => {
+const IconList = ({ player, matchesVisible = false }) => {
   // const { picks } = useContext(GameContext);
 
-  const {chartData, matches} = player;
+  const { chartData, matches } = player;
   const classes = useStyles();
 
   // const pickedIds = picks.map(pick => pick._id);
   // console.log("🚀 ~ file: IconList.js ~ line 57 ~ IconList ~ pickedIds", pickedIds)
 
-
   return (
-      <List className={classes.listGroup}>
-        {Object.entries(chartData).map(([planet, sign]) => {
-          if (!planets.includes(planet)) {
-            return null;
-          }
-          /* console.log('matchesVisible', matchesVisible); */
-          return (
-              <ListItem
-              key={`${player._id}-${planet}-${sign}`}
-                className={`${
-                  matches.includes(`${planet}-${sign}`.toLowerCase()) && matchesVisible
-                    ? classes.picked
-                    : classes.listItem
-                } ${planet.toLowerCase()} sign-${sign.toLowerCase()}`}
-                title={`${planet.toLowerCase()} ${sign.toLowerCase()}`}
-              >
-                <ListItemIcon>
-                  <SignSymbol sign={sign} planet={planet} />
-                </ListItemIcon>
-              </ListItem>
-          );
-        })}
-      </List>
+    <List className={classes.listGroup}>
+      {Object.entries(chartData).map(([planet, sign]) => {
+        if (!planets.includes(planet)) {
+          return null;
+        }
+        /* console.log('matchesVisible', matchesVisible); */
+        return (
+          <ListItem
+            key={`${player._id}-${planet}-${sign}`}
+            className={`${
+              matches.includes(`${planet}-${sign}`.toLowerCase()) &&
+              matchesVisible
+                ? classes.picked
+                : classes.listItem
+            } ${planet.toLowerCase()} sign-${sign.toLowerCase()}`}
+            title={`${planet.toLowerCase()} ${sign.toLowerCase()}`}
+          >
+            <ListItemIcon>
+              <SignSymbol sign={sign} planet={planet} />
+            </ListItemIcon>
+          </ListItem>
+        );
+      })}
+    </List>
   );
 };
 

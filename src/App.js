@@ -1,10 +1,6 @@
 import React from "react";
 import "./styles/App.scss";
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import { MenuProvider } from "./contexts/menu.context";
 import { ToastProvider } from "react-toast-notifications";
@@ -13,21 +9,21 @@ import { GameProvider } from "./contexts/game.context";
 import { AuthProvider } from "./contexts/auth.context";
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
-import Home from "./pages/home/home.js";
+import Landing from "./pages/landing/landing.js";
 import NotFound from "./pages/404/404";
 import Login from "./pages/login/login";
 import Controls from "./pages/controls/controls";
 import AddChart from "./pages/add-birth-chart/add-birth-chart.js";
 import InPlay from "./pages/in-play/in-play.js";
 import MyBirthChart from "./pages/my-birth-chart/my-birth-chart.js";
-import Generator from "./pages/generator/generator.js";
+import Admin from "./pages/admin/admin.js";
 import PublicDisplay from "./pages/public-display/public-display.js";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute.js";
 
 const theme = createMuiTheme({
   typography: {
     fontFamily: [
-      "Lato",
+      "Open Sans",
       "sans-serif",
       '"Apple Color Emoji"',
       '"Segoe UI Emoji"',
@@ -46,8 +42,7 @@ function App() {
               <GameProvider>
                 <MenuProvider>
                   <Switch>
-                  
-                    <Route exact path="/" component={Home} />
+                    <Route exact path="/" component={Landing} />
                     <Route exact path="/login" component={Login} />
                     <Route exact path="/controls" component={Controls} />
 
@@ -64,7 +59,7 @@ function App() {
                     />
 
                     <Route exact path="/in-play" component={InPlay} />
-                    <Route exact path="/generator" component={Generator} />
+                    <Route exact path="/admin" component={Admin} />
 
                     <Route
                       exact

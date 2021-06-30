@@ -149,7 +149,7 @@ const SignSymbol = ({ sign, width = "20px", x, y, fill = "black" }) => {
         default:
           console.log(`default case: sign provided was ${sign}`);
           throw new Error(
-            "getIconComponent: Sign not recognised. Need planet."
+            "getIconComponent: Sign not recognised. Need planet.",
           );
       }
     }
