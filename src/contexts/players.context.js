@@ -32,6 +32,7 @@ import {
   fastSortJoined,
 } from "./../utils/utils";
 
+import { useLocation } from "react-router-dom";
 import { appConfig } from "./../config";
 import { getPlayerBirthChartData } from "../utils/player.utils";
 
@@ -58,6 +59,7 @@ export const PlayersProvider = (props) => {
   const [players, setPlayers] = useState([]);
   const [sorted, toggleSort] = useToggle();
   const [matchesVisible, toggleMatchVisibility] = useToggle();
+  let location = useLocation();
 
   useEffect(() => {
     return bindListeners(PLAYERS_COLLECTION_NAME, {
@@ -115,6 +117,7 @@ export const PlayersProvider = (props) => {
 
       addToast(`Saved ${newPlayer.firstName} ${newPlayer.lastName}`, {
         appearance: "success",
+        placement: "bottom-left",
       });
     } catch (err) {
       console.log("addPlayer err", err);
@@ -132,15 +135,27 @@ export const PlayersProvider = (props) => {
         updates,
         PLAYERS_COLLECTION_NAME,
       );
-      addToast(
-        `Updated ${updates.firstName ? updates.firstName : player.firstName} ${
-          updates.lastName ? updates.lastName : player.lastName
-        }`,
-        {
+
+      if (location.pathname !== "/public-display") {
+        console.log("location", location);
+        const updateMsg = `Updated ${
+          updates.firstName ? updates.firstName : player.firstName
+        } ${updates.lastName ? updates.lastName : player.lastName}`;
+        console.log(updateMsg);
+        addToast(updateMsg, {
           appearance: "success",
           placement: "bottom-left",
-        },
-      );
+        });
+      }
+      // addToast(
+      //   `Updated ${updates.firstName ? updates.firstName : player.firstName} ${
+      //     updates.lastName ? updates.lastName : player.lastName
+      //   }`,
+      //   {
+      //     appearance: "success",
+      //     placement: "bottom-left",
+      //   },
+      // );
       return result;
     } catch (err) {
       console.log("updatePlayer err", err);

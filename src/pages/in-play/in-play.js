@@ -1,4 +1,4 @@
-import React, { useContext} from "react";
+import React, { useContext } from "react";
 import Header from "./../../components/Header/Header";
 import PlayerListing from "./../../components/PlayerListing/PlayerListing";
 import { makeStyles } from "@material-ui/core/styles";
@@ -10,7 +10,6 @@ import { GameContext } from "./../../contexts/game.context";
 const useStyles = makeStyles({
   playersContainer: {
     flexGrow: 1,
-    padding: 15,
   },
 });
 
@@ -35,7 +34,7 @@ function InPlay() {
       <Header pageName="Birth Charts in play" />
       <main>
         <div className="controlsContainer inplay">
-          <div class="controlsWrapper inplay">
+          <div className="controlsWrapper inplay">
             <button disabled={!picks.length} onClick={toggleSort}>
               {sorted ? "un" : ""}sort
             </button>

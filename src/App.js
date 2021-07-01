@@ -37,7 +37,7 @@ function App() {
   return (
     <Router>
       <ThemeProvider theme={theme}>
-        <ToastProvider autoDismiss={true}>
+        <ToastProvider autoDismiss={true} placement={"bottom-left"}>
           <AuthProvider>
             <PlayersProvider>
               <GameProvider>
