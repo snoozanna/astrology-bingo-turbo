@@ -1,0 +1,12 @@
+.controlsContainer.inplay {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.controlsWrapper.inplay {
+  max-width: fit-content;
+}
+
+.controlsWrapper > button:first-child {
+  margin-inline-end: 5px;
+}

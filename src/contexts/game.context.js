@@ -130,7 +130,7 @@ export const GameProvider = (props) => {
     // }
 
     if (updates.matches.length === 12 && location !== "/public-view") {
-      const winMsg = `${player.firstName} ${player.firstName} HAS WON!!!!`;
+      const winMsg = `${player.firstName} ${player.lastName} HAS WON!!!!`;
       console.log(winMsg);
       addToast(winMsg, {
         appearance: "success",

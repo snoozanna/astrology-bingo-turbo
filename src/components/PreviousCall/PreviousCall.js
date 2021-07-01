@@ -7,12 +7,11 @@ const PreviousCall = ({ planet, sign }) => {
   }
   return (
     <div className="prevCallContainer">
-       <h3 className="prevCallItem">
-            <span className="planet">{planet}</span>
-            <span className="sign"> in {sign}</span>
-          </h3>
-      </div>
-
+      <h3 className="prevCallItem">
+        <span className="planet">{planet} in </span>
+        <span className="sign"> {sign}</span>
+      </h3>
+    </div>
   );
 };
 

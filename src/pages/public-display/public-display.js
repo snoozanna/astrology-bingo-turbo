@@ -20,7 +20,7 @@ function PublicDisplay() {
     <>
       <div className="App display">
         <Header pageName="Game" />
-        <main className="gameContainer">
+        <main className="gameContainer ">
           {/* <GameDisplayGrid /> */}
           <CurrentCall planet={p} sign={s} />
           {ps && pp && <PreviousCall planet={pp} sign={ps} />}

@@ -7,6 +7,8 @@
   // font-family: $titleFont;
   justify-content: space-evenly;
   color: #fff;
+  font-family: "Chromate";
+  text-transform: uppercase;
 }
 
 .callTitle {
@@ -14,11 +16,10 @@
 }
 
 .callItem {
-
   padding: 3rem;
   width: 60%;
   // height: 60%;
-  margin-right:25vw;
+  margin-right: 25vw;
   display: flex;
   justify-content: center;
   align-items: center;

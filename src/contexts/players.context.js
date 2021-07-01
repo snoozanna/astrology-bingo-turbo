@@ -24,7 +24,13 @@ import {
   // bulkAddToLocal,
 } from "./../utils/state.utils";
 
-import { useToggle, trimToLowerCase, fastSortMatches, fastSortName, fastSortJoined } from "./../utils/utils";
+import {
+  useToggle,
+  trimToLowerCase,
+  fastSortMatches,
+  fastSortName,
+  fastSortJoined,
+} from "./../utils/utils";
 
 import { appConfig } from "./../config";
 import { getPlayerBirthChartData } from "../utils/player.utils";
@@ -100,9 +106,9 @@ export const PlayersProvider = (props) => {
       newPlayer.chartData = chartData;
       newPlayer.matches = [];
       newPlayer._id = `${trimToLowerCase(
-        newPlayer.firstName
+        newPlayer.firstName,
       )}-${trimToLowerCase(newPlayer.lastName)}-${trimToLowerCase(
-        newPlayer.datetime
+        newPlayer.datetime,
       )}`;
       newPlayer.joined = Date.now();
       await addOne(newPlayer, PLAYERS_COLLECTION_NAME);
@@ -124,7 +130,7 @@ export const PlayersProvider = (props) => {
       const result = await updateOne(
         player._id,
         updates,
-        PLAYERS_COLLECTION_NAME
+        PLAYERS_COLLECTION_NAME,
       );
       addToast(
         `Updated ${updates.firstName ? updates.firstName : player.firstName} ${
@@ -132,7 +138,8 @@ export const PlayersProvider = (props) => {
         }`,
         {
           appearance: "success",
-        }
+          placement: "bottom-left",
+        },
       );
       return result;
     } catch (err) {
@@ -171,7 +178,7 @@ export const PlayersProvider = (props) => {
 
   const deleteAllPlayers = async () => {
     const consent = window.confirm(
-      "Are you sure you want to delete all the players?"
+      "Are you sure you want to delete all the players?",
     );
     if (consent) {
       addToast(`Deleting all players`, {

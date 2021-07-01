@@ -44,11 +44,6 @@ function Admin() {
 
   const CallView = () => (
     <div className="generatorContainer">
-      <div className="callBtnContainer">
-        <button className="callBtn" onClick={() => pick()}>
-          CALL
-        </button>
-      </div>
       <PreviousCall planet={pp} sign={ps} />
       <PhraseDisplay planet={p} sign={s} />
       <CurrentCall planet={p} sign={s} />
@@ -57,30 +52,38 @@ function Admin() {
 
   return (
     <>
-      <div className="App">
-        <Header pageName="Generator (Fig admin view)" />
+      <div className="App admin">
+        <Header pageName="Fig Admin View" />
         <main className="mainContainer">
           <div className="controlsContainer">
-            <div>Winners: {JSON.stringify(winners)}</div>
-            <div className="resetBtn">
-              <p>Numberof calls: {picks.length}</p>
+            <div className="controlsWrapper">
+              <div>Winners: {JSON.stringify(winners)}</div>
+
+              <div>
+                <p>Numberof calls: {picks.length}</p>
+              </div>
+              <div className="controlBtnContainer">
+                <div className="controlBtn">
+                  <button onClick={celebsIncluded ? removeCelebs : loadCelebs}>
+                    {celebsIncluded ? "REMOVE" : "LOAD"} CELEBS
+                  </button>
+                </div>
+                <div className="controlBtn">
+                  <button onClick={reset}>RESET GAME</button>
+                </div>
+              </div>
             </div>
-            <div className="resetBtn">
-              <button onClick={celebsIncluded ? removeCelebs : loadCelebs}>
-                {celebsIncluded ? "REMOVE" : "LOAD"} CELEBS
-              </button>
-            </div>
-            <div className="resetBtn">
-              <button onClick={reset}>RESET GAME</button>
-            </div>
-            <div className="resetBtn">
+            <div className="callWrapper">
+              <div>
+                <button className="callBtn" onClick={() => pick()}>
+                  CALL
+                </button>
+              </div>
               <button onClick={() => setSeeGrid(!seeGrid)}>
                 SEE {!seeGrid ? "GRID" : "CALL VIEW"}
               </button>
             </div>
           </div>
-          {/* <PhraseDisplay planet={"Jupiter"} sign={"Saturn"} /> */}
-
           {seeGrid ? <GameDisplayGrid /> : <CallView />}
         </main>
       </div>

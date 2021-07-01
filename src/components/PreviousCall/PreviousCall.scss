@@ -1,6 +1,6 @@
 .prevCallContainer {
-
-
+  font-family: "Chromate";
+  text-transform: uppercase;
 }
 
 .prevCallTitle {
@@ -8,12 +8,9 @@
 }
 
 .prevCallItem {
-color: #fff;
+  color: #fff;
   padding: 0 2rem;
   min-width: 10rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .prevCallContainer.call {

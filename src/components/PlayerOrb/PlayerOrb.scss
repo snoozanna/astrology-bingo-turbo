@@ -1,28 +1,18 @@
 .ownerName {
-  position: absolute;
-  font-size: 0.8rem;
   font-weight: bold;
-  max-width: min-content;
   display: flex;
   z-index: 1;
   color: ivory;
+  font-size: 0.6em;
 }
 
 .orb {
   position: relative;
-  // background-image: url("./../../assets/img/orb-gradient.png");
-  // background: radial-gradient(
-  //   circle at top right,
-  //   #1B1464, #FF9472);
-  //   box-shadow: 0px 0px 40px 13px #13ca91;
-  // // border-radius:50%;
-width:400px;
-  fill:transparent;
+  width: 200px;
 }
 
-circle {
-    box-shadow: 0px 0px 40px 13px #13ca91;
-
+svg > circle {
+  box-shadow: 0px 0px 40px 13px #13ca91;
 }
 
 .listGroup {

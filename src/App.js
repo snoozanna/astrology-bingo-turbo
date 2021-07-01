@@ -24,6 +24,7 @@ const theme = createMuiTheme({
   typography: {
     fontFamily: [
       "Open Sans",
+      "Chromate",
       "sans-serif",
       '"Apple Color Emoji"',
       '"Segoe UI Emoji"',

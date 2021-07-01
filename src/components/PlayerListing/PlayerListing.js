@@ -11,10 +11,6 @@ import { useToggle } from "./../../utils/utils";
 // import { GameContext } from "./../../contexts/game.context";
 
 const useStyles = makeStyles({
-  block: {
-    display: "block",
-    minHeight: '1.7rem',
-  },
   playerContainer: {
     padding: "0 15px",
   },
@@ -35,7 +31,8 @@ const useStyles = makeStyles({
     marginInlineEnd: 5,
   },
   deleteBtn: {
-    backgroundColor: "#f12e40ad",
+    backgroundColor: "rgb(237, 105, 136)",
+    border: "1px solid black",
   },
   paper: {
     // position: "absolute",
@@ -57,11 +54,16 @@ const PlayerListing = ({ player, matchesVisible }) => {
   const chartRef = useRef();
 
   return (
-    <div key={player._id} className={`listGroupItem ${matchesVisible && player.matches.length >= 12 ? 'winner' : ''}`}>
+    <div
+      key={player._id}
+      className={`listGroupItem ${
+        matchesVisible && player.matches.length >= 12 ? "winner" : ""
+      }`}
+    >
       <div className="nameContainer">
         <h3 className="firstName">
-          <span className={classes.block}>{player.firstName}</span>
-          <span className={classes.block}>{player.lastName}</span>
+          <span className="block">{player.firstName}</span>
+          <span className="block">{player.lastName}</span>
         </h3>
       </div>
       <div>
@@ -78,7 +80,7 @@ const PlayerListing = ({ player, matchesVisible }) => {
       </div>
       <div className="btnContainer">
         <Button
-          className="deleteBtn btn"
+          className={classes.deleteBtn}
           onClick={() => deletePlayer(player._id)}
         >
           &times;

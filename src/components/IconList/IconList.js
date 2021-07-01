@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import "./IconList.scss";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -6,7 +6,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import SignSymbol from "../ChartList/SignSymbol";
 import { makeStyles } from "@material-ui/core/styles";
 import { planets } from "./../../constants";
-import { GameContext } from "./../../contexts/game.context";
+
 
 const useStyles = makeStyles({
   listGroup: {

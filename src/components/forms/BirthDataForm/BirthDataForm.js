@@ -33,8 +33,7 @@ const useStyles = makeStyles((theme) => ({
     marginInlineEnd: 10,
   },
   container: {
-    // display: "flex",
-    // flexWrap: "wrap",
+color: "ivory",
   },
   fieldset: {
     border: "none",
@@ -167,7 +166,7 @@ function BirthDataForm() {
       const offset = await findUTCOffset(
         getValues("datetime"),
         getValues("latitude"),
-        getValues("longitude")
+        getValues("longitude"),
       );
       console.log("offset", offset);
       setValue("utcoffset", offset, {
@@ -219,9 +218,9 @@ function BirthDataForm() {
     if (populated) {
       const updates = {};
       for (const [key, value] in Object.entries(initialValues)) {
-          if (initialValues[key] !== formValues[key] && key !== "_id") {
-            updates[key] = value;
-          }
+        if (initialValues[key] !== formValues[key] && key !== "_id") {
+          updates[key] = value;
+        }
       }
       console.log("updates", updates);
       updatePlayer(initialValues, updates);

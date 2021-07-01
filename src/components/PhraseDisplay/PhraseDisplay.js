@@ -1,16 +1,11 @@
 import React from "react";
 import "./PhraseDisplay.scss";
 import { signs, planets, catchPhraseDict } from "./../../constants";
-// import { makeStyles } from "@material-ui/core/styles";
-
-// const useStyles = makeStyles((theme) => ({
-
-// }));
 
 const PhraseDisplay = ({ planet, sign }) => {
   // console.log("from phrase display", planet, sign);
 
-  if(!planet && !sign){
+  if (!planet && !sign) {
     console.log(`No planet and sign provided`);
     return null;
   }
@@ -48,7 +43,9 @@ const PhraseDisplay = ({ planet, sign }) => {
     return catchPhraseDict[planet][sign];
   };
   return (
-    <h3>{getCatchPhrase(planet, sign)}</h3>
+    <div className="phraseContainer">
+      <h3>{getCatchPhrase(planet, sign)}</h3>
+    </div>
   );
 };
 

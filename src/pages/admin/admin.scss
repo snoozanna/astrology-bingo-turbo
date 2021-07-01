@@ -1,3 +1,7 @@
+.App.admin {
+  padding: 15px;
+}
+
 .mainContainer {
   display: flex;
   flex-direction: column;
@@ -5,66 +9,56 @@
 
 .generatorContainer {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  grid-gap: 5%;
+  grid-template-columns: 1fr 0.25fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-gap: 3%;
   align-items: center;
   justify-content: center;
   grid-template-areas:
-    "call phrase phrase"
-    "prev . callBtn"
-    "prev . .";
+    "phrase phrase phrase"
+    "prev . call";
+  min-height: 60vh;
 }
 
-.callContainer {
-  // grid-column-start: 1;
-  // grid-column-end: 1;
-  // grid-row-start: 1;
-  // grid-row-end: 1;
-  grid-area: call;
-}
-
-.phraseContainer {
-  // grid-column-start: 2;
-  // grid-column-end: span 3;
-  // grid-row-start: 1;
+.generatorContainer .phraseContainer {
   grid-area: phrase;
 }
-.callBtnContainer {
-  // grid-column-start: 3;
-  // grid-column-end: 4;
-  // grid-row-start: 2;
-  grid-area: callBtn;
-  align-self: flex-start;
+
+.generatorContainer .callContainer {
+  grid-area: call;
+  border: 1px solid ivory;
+  border-radius: 15px;
 }
 
-.prevCallContainer {
-  // grid-column-start: 1;
-  // grid-column-end: 1;
-  // grid-row-start: 2;
-  // grid-row-end: 3;
+.generatorContainer .prevCallContainer {
   grid-area: prev;
-  align-self: flex-start;
-  justify-self: center;
+  border: 1px solid ivory;
+  border-radius: 15px;
 }
 
 .callBtn {
-  padding: 30px;
-  font-size: 4rem;
+  padding: 20px;
+  font-size: 2rem;
+  margin-block-end: 5px;
 }
 
 .controlsContainer {
   display: flex;
-  flex-direction: column;
   flex-wrap: wrap;
   align-items: flex-end;
-  width: 30%;
-  align-self: flex-end;
-  padding: 15px;
-  background-color: pink;
-  border-radius: 10px;
+  justify-content: space-between;
+
+  color: black;
 }
 
-.controlsButtons {
+.controlsWrapper,
+.callWrapper {
+  background-color: hsla(239, 100%, 88%, 60%);
+  border-radius: 10px;
+  padding: 15px;
+  margin: 15px;
+}
+
+.controlBtnContainer {
   display: flex;
 }
