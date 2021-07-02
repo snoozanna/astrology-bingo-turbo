@@ -18,6 +18,7 @@ import InPlay from "./pages/in-play/in-play.js";
 import MyBirthChart from "./pages/my-birth-chart/my-birth-chart.js";
 import Admin from "./pages/admin/admin.js";
 import PublicDisplay from "./pages/public-display/public-display.js";
+import PublicGrid from "./pages/public-grid/public-grid";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute.js";
 
 const theme = createMuiTheme({
@@ -67,6 +68,7 @@ function App() {
                       path="/public-display"
                       component={PublicDisplay}
                     />
+                    <Route exact path="/public-grid" component={PublicGrid} />
 
                     <Route path="*" component={NotFound} />
                   </Switch>

@@ -5,9 +5,11 @@ const useStyles = makeStyles({
   callTextContainer: {
     display: "flex",
     flexDirection: "column",
+    color: "#700FB5",
+    fontWeight: "bold",
   },
   callMain: {
-    fontSize: "1.5rem",
+    fontSize: "1.38rem",
   },
 });
 
@@ -16,9 +18,9 @@ const Text = ({ planet, sign, isPicked }) => {
   if (!isPicked) return "";
   return (
     <span className={classes.callTextContainer}>
-      <span className={classes.callMain}>{planet}</span>
-      <span>in</span>
-      <span className={classes.callMain}>{sign}</span>
+      <span className={classes.callMain}>
+        {planet} in {sign}
+      </span>
     </span>
   );
 };

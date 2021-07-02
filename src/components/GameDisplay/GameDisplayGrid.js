@@ -7,7 +7,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-
+import "./GameDisplayGrid.scss";
 import { signs, planets } from "./../../constants";
 import { GameContext } from "./../../contexts/game.context";
 
@@ -16,21 +16,26 @@ import ControlledCell from "./ControlledCell";
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 650,
+    maxHeight: "90vh",
     fontVariantCaps: "all-petite-caps",
     fontSize: "1.5rem",
     textAlign: "center",
   },
   head: {
-    backgroundColor: "hsl(258.75,53.33%,94.12%)",
+    backgroundColor: "#FF9472",
     textAlign: "center",
+    border: "1px solid #700FB5",
+    fontSize: "1.5rem",
+    color: "#fff",
+    fontWeight: "bold",
+    padding: "4px",
   },
 });
 
 const GameDisplayGrid = () => {
   const classes = useStyles();
   const { picks } = useContext(GameContext);
-  const pickedIds = picks.map(pick => pick._id);
+  const pickedIds = picks.map((pick) => pick._id);
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
@@ -56,7 +61,9 @@ const GameDisplayGrid = () => {
                 {sign}
               </TableCell>
               {planets.map((planet) => {
-                const isPicked = pickedIds.includes(`${planet}-${sign}`.toLowerCase());
+                const isPicked = pickedIds.includes(
+                  `${planet}-${sign}`.toLowerCase(),
+                );
                 return (
                   <ControlledCell key={`${planet}-${sign}`} isPicked={isPicked}>
                     <Text sign={sign} planet={planet} isPicked={isPicked} />
