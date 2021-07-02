@@ -14,6 +14,8 @@ const useStyles = makeStyles((theme) => ({
     padding: 15,
     justifyContent: "space-around",
     alignItems: "center",
+    color: "black",
+    backgroundColor: "ivory",
   },
 
   myBirthChartContainer: {
@@ -33,15 +35,15 @@ function MyBirthChart() {
   const classes = useStyles();
 
   const aliceBasic = {
-    location: "liverpool uk",
-    firstName: "Alice",
-    lastName: "Roots",
-    email: "alice@alice.com",
+    longitude: "-2.9915726",
+    latitude: "53.4083714",
+    location: "ChIJt2BwZIrfekgRAW4XP28E3EI",
     datetime: "1990-07-04T18:00",
-    utcoffset: 2,
-    latitude: 53.4083714,
-    longitude: -2.9915726,
-    _id: "619bc",
+    utcoffset: "1",
+    locationSearchTerm: "liverpool uk",
+    email: "alice@alice.com",
+    lastName: "Roots",
+    firstName: "Alice",
     chartData: {
       Sun: "Cancer",
       Moon: "Sagittarius",
@@ -64,43 +66,43 @@ function MyBirthChart() {
       longitude: -2.9915726,
       Ascendant: "Scorpio",
       Descendant: "Taurus",
-      ownerName: "Alice Roots",
     },
+    matches: [],
+    _id: "alice-roots-1990-07-04t18:00",
+    joined: 1625260324975,
   };
 
   const {
-    chartData: {
-      ownerName,
-      birthday,
-      time,
-      latitude,
-      longitude,
-
-    }
+    firstName,
+    lastName,
+    chartData: { birthday, time, latitude, longitude },
   } = aliceBasic;
 
   return (
     <>
-      <div className="App">
+      <div className="App myChart">
         <Header pageName="My Birth Chart" />
         {/* <NavIcon pageName="Homepage" /> */}
         <main>
           <div className={classes.mainContainer}>
             <div className={classes.ownerContainer}>
-              <h2>{ownerName}</h2>
+              <h2>
+                {firstName}
+                {""}
+                {lastName}
+              </h2>
               <p>Born: {birthday}</p>
               <p>{time}</p>
               <p>
-                Lat: {latitude.toFixed()} Long:{" "}
-                {longitude.toFixed()}
+                Lat: {latitude.toFixed()} Long: {longitude.toFixed()}
               </p>
               <button onClick={() => toggleIsOn()}>Toggle Chart</button>
             </div>
             <div className={classes.myBirthChartContainer}>
               {isOn ? (
                 <IconList player={aliceBasic} />
-                // <ChartList player={aliceBasic} />
               ) : (
+                // <ChartList player={aliceBasic} />
                 <ChartImage player={aliceBasic} />
               )}
             </div>

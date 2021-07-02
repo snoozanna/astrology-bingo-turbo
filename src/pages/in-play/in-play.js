@@ -46,14 +46,18 @@ function InPlay() {
         <div className={classes.playersContainer}>
           {/* {JSON.stringify(picks.map(({_id}) => _id))} */}
           <Grid container spacing={3} component="ul">
-            {players.map((player) => (
-              <Grid key={player._id} item xs={6} sm={4} component="li">
-                <PlayerListing
-                  player={player}
-                  matchesVisible={matchesVisible}
-                />
-              </Grid>
-            ))}
+            {players.map(
+              (player) => (
+                (
+                  <Grid key={player._id} item xs={6} sm={4} component="li">
+                    <PlayerListing
+                      player={player}
+                      matchesVisible={matchesVisible}
+                    />
+                  </Grid>
+                )
+              ),
+            )}
           </Grid>
         </div>
         <button onClick={deleteAllPlayers}>Delete all players</button>

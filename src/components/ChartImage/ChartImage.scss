@@ -82,13 +82,21 @@
   }
   .chartImage.nameContainer {
     display: initial !important;
+    color: black;
+    font-size: 3rem;
+    font-family: "Chromate";
+  }
+
+  .detailsContainer {
+    font-size: 1.3rem;
+    color: black;
   }
 
   .chartTemplate {
-    width: 100%;
+    width: 90%;
   }
 
   .nameItem:first-child {
-    margin-inline-end: 5px;
+    margin-inline-end: 8px;
   }
 }

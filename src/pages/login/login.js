@@ -35,7 +35,7 @@ function Login() {
   // const classes = useStyles();
   const { user } = useContext(AuthContext);
 
-  if (user) return <Redirect to="/generator" />;
+  if (user) return <Redirect to="/admin" />;
 
   return (
     <div className="App">

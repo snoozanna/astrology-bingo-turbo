@@ -61,7 +61,7 @@ const PlayerListing = ({ player, matchesVisible }) => {
       }`}
     >
       <div className="nameContainer">
-        <h3 className="firstName">
+        <h3>
           <span className="block">{player.firstName}</span>
           <span className="block">{player.lastName}</span>
         </h3>
