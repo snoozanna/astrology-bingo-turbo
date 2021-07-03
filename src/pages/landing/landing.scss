@@ -1,5 +1,5 @@
 .App.landing {
-  background-image: url("./../../assets//img/ab-background-icing.png"),
+  background-image: url("./../../assets//img/ab-background-logo.png"),
     radial-gradient(circle, rgba(27, 20, 100, 1) 0%, rgba(112, 15, 181, 1) 100%);
   background-size: contain;
 }
@@ -9,7 +9,9 @@
 }
 .orbGroup {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(6, 1fr);
   justify-items: center;
   justify-content: flex-start;
   align-items: center;

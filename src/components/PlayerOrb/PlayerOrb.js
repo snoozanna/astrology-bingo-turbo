@@ -53,9 +53,9 @@ const getOrbIconLocation = (planet) => {
   }
 };
 
-const chooseColor = () => {
-  return orbColors[getRandomIntInclusive(0, orbColors.length)];
-};
+// const chooseColor = () => {
+//   return orbColors[getRandomIntInclusive(0, orbColors.length)];
+// };
 
 const chooseScale = () => {
   const randomNumber = Math.random();
@@ -64,23 +64,25 @@ const chooseScale = () => {
 };
 
 const chooseX = () => {
-  // const randomX = Math.floor(Math.random() * window.screen.availWidth);
   const randomX = Math.floor(Math.random() * 100);
   return randomX;
 };
 
 const chooseY = () => {
-  // const randomY = Math.floor(Math.random() * window.screen.availHeight);
   const randomY = Math.floor(Math.random() * 100);
   return randomY;
 };
 
 const chooseDelay = () => {
-  // const randomY = Math.floor(Math.random() * window.screen.availHeight);
   const randomDelay = Math.floor(Math.random() * 300);
   return randomDelay;
 };
-// console.log("screen height", window.screen.availHeight);
+
+const chooseOpacity = () => {
+  // const randomX = Math.floor(Math.random() * window.screen.availWidth);
+  const randomOp = Math.random();
+  return randomOp;
+};
 
 const PlayerOrb = ({ player: { _id, chartData }, player }) => {
   // console.log("picked", picked);
@@ -91,14 +93,14 @@ const PlayerOrb = ({ player: { _id, chartData }, player }) => {
     loop: { reverse: true },
     delay: chooseDelay(),
     from: {
-      opacity: 0,
+      opacity: chooseOpacity(),
       // rotateZ: 360,
       x: chooseX(),
       y: chooseY(),
       transform: `scale(${chooseScale()})`,
     },
     to: {
-      opacity: 0.8,
+      opacity: chooseOpacity(),
       // rotateZ: 0,
       x: chooseX(),
       y: chooseY(),
@@ -108,72 +110,72 @@ const PlayerOrb = ({ player: { _id, chartData }, player }) => {
   });
 
   return (
-    <animated.div style={props} >
-    <svg
-      viewBox="0 0 100 100"
-      xmlns="http://www.w3.org/2000/svg"
-      className="orb"
-    >
-      <defs>
-        <radialGradient
-          id="myGradient"
-          cx="10%"
-          cy="80%"
-          r="120.71067811865476%"
-        >
-          <stop offset="0%" stopColor="#1B1464" />
-          <stop offset="100%" stopColor="#FF9472" />
-        </radialGradient>
-      </defs>
-      <circle cx="50" cy="50" r="50" fill="url('#myGradient')"></circle>
-      {Object.entries(chartData).map(([planet, sign]) => {
-        if (!planets.includes(planet)) {
-          return null;
-        }
-        return (
-          <React.Fragment key={`${player._id}-${planet}-${sign}`}>
-            <SignSymbol
-              sign={sign}
-              width="10"
-              x={getOrbIconLocation(planet).x}
-              y={getOrbIconLocation(planet).y}
-              className={planet}
-              fill="#fff"
-            />
-          </React.Fragment>
-        );
-      })}
-
+    <animated.div style={props}>
       <svg
-        viewBox="-8 -30 100 100"
+        viewBox="0 0 100 100"
         xmlns="http://www.w3.org/2000/svg"
-        x="15"
-        y="8"
+        className="orb"
       >
-        <text
-          className="ownerName"
-          fill="#fff"
-          x="5"
-          y="6"
-          viewBox="0 0 100 100"
-          textAnchor="center"
-          width="30px"
+        <defs>
+          <radialGradient
+            id="myGradient"
+            cx="10%"
+            cy="80%"
+            r="120.71067811865476%"
+          >
+            <stop offset="0%" stopColor="#1B1464" />
+            <stop offset="100%" stopColor="#FF9472" />
+          </radialGradient>
+        </defs>
+        <circle cx="50" cy="50" r="50" fill="url('#myGradient')"></circle>
+        {Object.entries(chartData).map(([planet, sign]) => {
+          if (!planets.includes(planet)) {
+            return null;
+          }
+          return (
+            <React.Fragment key={`${player._id}-${planet}-${sign}`}>
+              <SignSymbol
+                sign={sign}
+                width="10"
+                x={getOrbIconLocation(planet).x}
+                y={getOrbIconLocation(planet).y}
+                className={planet}
+                fill="#fff"
+              />
+            </React.Fragment>
+          );
+        })}
+
+        <svg
+          viewBox="-8 -30 100 100"
+          xmlns="http://www.w3.org/2000/svg"
+          x="15"
+          y="8"
         >
-          {player.firstName}
-        </text>
-        <text
-          className="ownerName"
-          fill="#fff"
-          x="5"
-          y="24"
-          viewBox="0 0 100 100"
-          textAnchor="start"
-        >
-          {player.lastName}
-        </text>
+          <text
+            className="ownerName"
+            fill="#fff"
+            x="5"
+            y="6"
+            viewBox="0 0 100 100"
+            textAnchor="center"
+            width="30px"
+          >
+            {player.firstName}
+          </text>
+          <text
+            className="ownerName"
+            fill="#fff"
+            x="5"
+            y="24"
+            viewBox="0 0 100 100"
+            textAnchor="start"
+          >
+            {player.lastName}
+          </text>
+        </svg>
       </svg>
-    </svg>
-   </animated.div>
+    </animated.div>
   );
 };
 

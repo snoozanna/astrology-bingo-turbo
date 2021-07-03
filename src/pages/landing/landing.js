@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import NavIcon from "../../components/NavIcon/NavIcon";
 import PlayerOrb from "../../components/PlayerOrb/PlayerOrb";
 // import { makeStyles } from "@material-ui/core/styles";
-import "./landing.scss"
+import "./landing.scss";
 import logo from "../../assets/img/logo/ab-logo-white.png";
 
 import { PlayersContext } from "../../contexts/players.context";
@@ -41,7 +41,7 @@ function Landing() {
         <NavIcon pageName="Landing Page" />
         <main className="landingMain">
           {/* <h1 className={classes.landingTitle}>ASTROLOGY BINGO</h1> */}
-          <img src={logo} alt="Astrology Bingo Logo" className="logoLanding" />
+          {/* <img src={logo} alt="Astrology Bingo Logo" className="logoLanding" /> */}
           <div className="playerOrbContainer">
             <ul className="orbGroup">
               {players?.map((player) => (
