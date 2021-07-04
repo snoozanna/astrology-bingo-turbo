@@ -10,7 +10,7 @@ import { useToggle } from "./../../utils/utils";
 const useStyles = makeStyles((theme) => ({
   mainContainer: {
     display: "flex",
-    flexFlow: "row-reverse",
+    flexDirection: "column",
     padding: 15,
     justifyContent: "space-around",
     alignItems: "center",
@@ -27,6 +27,10 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "1rem",
     height: "fit-content",
     padding: 15,
+  },
+  ownerName: {
+    fontFamily: "Chromate",
+    fontSize: "3rem",
   },
 }));
 
@@ -85,19 +89,9 @@ function MyBirthChart() {
         {/* <NavIcon pageName="Homepage" /> */}
         <main>
           <div className={classes.mainContainer}>
-            <div className={classes.ownerContainer}>
-              <h2>
-                {firstName}
-                {""}
-                {lastName}
-              </h2>
-              <p>Born: {birthday}</p>
-              <p>{time}</p>
-              <p>
-                Lat: {latitude.toFixed()} Long: {longitude.toFixed()}
-              </p>
-              <button onClick={() => toggleIsOn()}>Toggle Chart</button>
-            </div>
+            <h2 className={classes.ownerName}>
+              {firstName} {lastName}
+            </h2>
             <div className={classes.myBirthChartContainer}>
               {isOn ? (
                 <IconList player={aliceBasic} />
