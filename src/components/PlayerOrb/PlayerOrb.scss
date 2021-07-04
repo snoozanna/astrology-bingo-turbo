@@ -12,7 +12,7 @@
 }
 
 svg > circle {
-  box-shadow: 0px 0px 40px 13px #13ca91;
+  filter: url(#orbShadow);
 }
 
 .listGroup {

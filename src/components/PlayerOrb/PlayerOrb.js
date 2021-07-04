@@ -126,6 +126,14 @@ const PlayerOrb = ({ player: { _id, chartData }, player }) => {
             <stop offset="0%" stopColor="#1B1464" />
             <stop offset="100%" stopColor="#FF9472" />
           </radialGradient>
+          <filter id="orbShadow">
+            <feDropShadow
+              dx="0"
+              dy="0"
+              stdDeviation="1"
+              flood-color="#13ca91"
+            />
+          </filter>
         </defs>
         <circle cx="50" cy="50" r="50" fill="url('#myGradient')"></circle>
         {Object.entries(chartData).map(([planet, sign]) => {
@@ -155,10 +163,10 @@ const PlayerOrb = ({ player: { _id, chartData }, player }) => {
           <text
             className="ownerName"
             fill="#fff"
-            x="5"
+            x="25"
             y="6"
             viewBox="0 0 100 100"
-            textAnchor="center"
+            textAnchor="middle"
             width="30px"
           >
             {player.firstName}
@@ -166,10 +174,10 @@ const PlayerOrb = ({ player: { _id, chartData }, player }) => {
           <text
             className="ownerName"
             fill="#fff"
-            x="5"
+            x="25"
             y="24"
             viewBox="0 0 100 100"
-            textAnchor="start"
+            textAnchor="middle"
           >
             {player.lastName}
           </text>
