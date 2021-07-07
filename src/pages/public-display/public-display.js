@@ -11,27 +11,47 @@ function PublicDisplay() {
   console.log("picks", picks);
 
   // TODO
-  //   If (!lastPIck) {}
-  // Then skip the entire block
 
-  const lastPick = picks[picks.length - 1];
-  const previousPick = picks[picks.length - 2];
-
-  const { planet: p = "", sign: s = "" } = lastPick;
-  const { planet: pp = "", sign: ps = "" } = previousPick;
-
-  return (
-    <>
-      <div className="App display">
-        <Header pageName="Game" />
-        <main className="gameContainer ">
-          {/* <GameDisplayGrid /> */}
-          <CurrentCall planet={p} sign={s} />
-          {ps && pp && <PreviousCall planet={pp} sign={ps} />}
-        </main>
-      </div>
-    </>
-  );
+  if (picks.length === 0) {
+    return (
+      <>
+        <div className="App display">
+          <Header pageName="Game" />
+          <main className="gameContainer "></main>
+        </div>
+      </>
+    );
+  } else if (picks.length === 1) {
+    const lastPick = picks[picks.length - 1];
+    const { planet: p = "", sign: s = "" } = lastPick;
+    return (
+      <>
+        <div className="App display">
+          <Header pageName="Game" />
+          <main className="gameContainer ">
+            <CurrentCall planet={p} sign={s} />
+          </main>
+        </div>
+      </>
+    );
+  } else {
+    const lastPick = picks[picks.length - 1];
+    const { planet: p = "", sign: s = "" } = lastPick;
+    const previousPick = picks[picks.length - 2];
+    const { planet: pp = "", sign: ps = "" } = previousPick;
+    return (
+      <>
+        <div className="App display">
+          <Header pageName="Game" />
+          <main className="gameContainer ">
+            {/* <GameDisplayGrid /> */}
+            <CurrentCall planet={p} sign={s} />
+            {ps && pp && <PreviousCall planet={pp} sign={ps} />}
+          </main>
+        </div>
+      </>
+    );
+  }
 }
 
 export default PublicDisplay;
