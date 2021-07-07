@@ -83,7 +83,7 @@ const PlayerListing = ({ player, matchesVisible }) => {
           className={classes.deleteBtn}
           onClick={() => deletePlayer(player._id)}
         >
-          &times;
+          DELETE
         </Button>
         <Button className="btn" onClick={() => toggleChart()}>
           Toggle Chart

@@ -19,7 +19,7 @@ const ChartImage = forwardRef(({ player, showOutline }, ref) => {
 
     switch (planet) {
       case "Mars":
-        return { x: 650, y: 30 };
+        return { x: 650, y: 23 };
 
       case "Jupiter":
         return { x: 600, y: 100 };
@@ -31,7 +31,7 @@ const ChartImage = forwardRef(({ player, showOutline }, ref) => {
         return { x: 430, y: 140 };
 
       case "Neptune":
-        return { x: 340, y: 90 };
+        return { x: 343, y: 94 };
 
       case "Pluto":
         return { x: 285, y: 15 };
@@ -46,10 +46,10 @@ const ChartImage = forwardRef(({ player, showOutline }, ref) => {
         return { x: 430, y: -190 };
 
       case "Sun":
-        return { x: 515, y: -190 };
+        return { x: 520, y: -195 };
 
       case "Mercury":
-        return { x: 590, y: -140 };
+        return { x: 600, y: -145 };
 
       case "Venus":
         return { x: 635, y: -65 };
@@ -66,7 +66,7 @@ const ChartImage = forwardRef(({ player, showOutline }, ref) => {
     } else {
       switch (planet) {
         case "Mars":
-          return { x: 300, y: 65 };
+          return { x: 295, y: 65 };
         case "Jupiter":
           return { x: 310, y: -16 };
         case "Saturn":
@@ -78,15 +78,15 @@ const ChartImage = forwardRef(({ player, showOutline }, ref) => {
         case "Pluto":
           return { x: -26, y: 179 };
         case "Ascendant":
-          return { x: 69, y: 107 };
+          return { x: 62, y: 107 };
         case "Descendant":
           return { x: 93, y: 14 };
         case "Moon":
           return { x: 71, y: -87 };
         case "Sun":
-          return { x: 30, y: 184 };
+          return { x: 28, y: 184 };
         case "Mercury":
-          return { x: 150, y: 192 };
+          return { x: 147, y: 193 };
         case "Venus":
           return { x: 190, y: 204 };
         default:
