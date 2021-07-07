@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 // import {FBDocToObj} from './../../utils/firebase.utils';
 import "./public-grid.scss";
 import Header from "../../components/Header/Header";

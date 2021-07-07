@@ -15,7 +15,7 @@ import { useForm, Controller } from "react-hook-form";
 import { getGeo, findUTCOffset } from "./../../../utils/astro-api.utils";
 import * as yup from "yup";
 import { useParams } from "react-router-dom";
-
+import "./../FormStyles.scss";
 import { PlayersContext } from "../../../contexts/players.context";
 
 const useStyles = makeStyles((theme) => ({
@@ -33,7 +33,12 @@ const useStyles = makeStyles((theme) => ({
     marginInlineEnd: 10,
   },
   container: {
-color: "ivory",
+    backgroundColor: "rgb(185 234 139 / 80%)",
+    maxWidth: "50%",
+    margin: "auto",
+    color: "black",
+    borderRadius: "50%",
+    padding: "10px",
   },
   fieldset: {
     border: "none",
@@ -48,6 +53,7 @@ color: "ivory",
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
     width: 200,
+    color: "ivory",
   },
 }));
 

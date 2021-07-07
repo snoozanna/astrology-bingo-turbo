@@ -2,8 +2,8 @@ import React from "react";
 import { useSpring, animated } from "react-spring";
 import "./PlayerOrb.scss";
 import SignSymbol from "../ChartList/SignSymbol";
-import { planets, orbColors } from "./../../constants";
-import { getRandomIntInclusive } from "./../../utils/utils";
+import { planets } from "./../../constants";
+// import { getRandomIntInclusive } from "./../../utils/utils";
 
 const getOrbIconLocation = (planet) => {
   if (!planet) {

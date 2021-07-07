@@ -2,8 +2,8 @@ import React, {
   createContext,
   useState,
   useEffect,
-  useCallback,
-  useContext,
+  // useCallback,
+  // useContext,
 } from "react";
 import { useToasts } from "react-toast-notifications";
 
@@ -28,7 +28,7 @@ import {
   useToggle,
   trimToLowerCase,
   fastSortMatches,
-  fastSortName,
+  // fastSortName,
   fastSortJoined,
 } from "./../utils/utils";
 

@@ -9,12 +9,16 @@ import { GameContext } from "./../../contexts/game.context";
 function PublicDisplay() {
   const { picks } = useContext(GameContext);
   console.log("picks", picks);
-  
+
+  // TODO
+  //   If (!lastPIck) {}
+  // Then skip the entire block
+
   const lastPick = picks[picks.length - 1];
   const previousPick = picks[picks.length - 2];
 
-  const {planet:p = '', sign:s = ''} = lastPick;
-  const {planet:pp = '', sign:ps = ''} = previousPick;
+  const { planet: p = "", sign: s = "" } = lastPick;
+  const { planet: pp = "", sign: ps = "" } = previousPick;
 
   return (
     <>

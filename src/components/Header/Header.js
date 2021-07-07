@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import "./Header.scss";
 import {
   Toolbar,
   Typography,
@@ -18,7 +17,6 @@ const useStyles = makeStyles({
   HeaderContainer: {
     flexGrow: 1,
     backgroundColor: "rgb(213, 123, 214)",
-    // backgroundColor: "transparent",
   },
 
   menuButton: {
@@ -47,7 +45,12 @@ export default function Header({ pageName }) {
         >
           <MenuIcon />
         </IconButton>
-        <Typography className={classes.title} variant="h6" component="h1" noWrap>
+        <Typography
+          className={classes.title}
+          variant="h6"
+          component="h1"
+          noWrap
+        >
           {pageName}
         </Typography>
         <div

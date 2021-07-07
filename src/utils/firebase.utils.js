@@ -1,5 +1,5 @@
 import { firestore as db } from "./../firebase";
-import { trimToLowerCase } from "./utils";
+// import { trimToLowerCase } from "./utils";
 
 const FBDocToObj = (doc) => ({ ...doc.data(), _id: doc.id });
 const FBDocToId = (doc) => doc.id;

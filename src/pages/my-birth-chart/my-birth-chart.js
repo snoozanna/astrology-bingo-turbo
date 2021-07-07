@@ -79,7 +79,7 @@ function MyBirthChart() {
   const {
     firstName,
     lastName,
-    chartData: { birthday, time, latitude, longitude },
+    // chartData: { birthday, time, latitude, longitude },
   } = aliceBasic;
 
   return (

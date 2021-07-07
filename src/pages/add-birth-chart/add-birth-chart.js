@@ -1,7 +1,6 @@
 import React from "react";
 import BirthDataForm from "../../components/forms/BirthDataForm/BirthDataForm";
 import Header from "./../../components/Header/Header";
-import "./add-birth-chart.scss";
 
 function AddChart() {
   return (

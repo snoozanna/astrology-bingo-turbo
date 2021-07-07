@@ -35,7 +35,7 @@ import { populateFirebase } from "./../utils/game.utils";
 import { appConfig } from "./../config";
 
 import { PlayersContext } from "./players.context";
-import { _isUndefined } from "gsap/gsap-core";
+// import { _isUndefined } from "gsap/gsap-core";
 
 const { PICKS_COLLECTION_NAME, CALLS_COLLECTION_NAME } = appConfig;
 

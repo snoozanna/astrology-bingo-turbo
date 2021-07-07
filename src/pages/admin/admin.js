@@ -9,7 +9,7 @@ import PreviousCall from "../../components/PreviousCall/PreviousCall";
 // import { makeStyles } from "@material-ui/core/styles";
 
 import { GameContext } from "../../contexts/game.context";
-import { PlayersContext } from "../../contexts/players.context";
+// import { PlayersContext } from "../../contexts/players.context";
 // import {processCelebs } from './../../utils/player.utils';
 
 // import classes from "*.module.css";
@@ -33,7 +33,7 @@ function Admin() {
     loadCelebs,
     winners,
   } = useContext(GameContext);
-  const { players, matchesVisible } = useContext(PlayersContext);
+  // const { players, matchesVisible } = useContext(PlayersContext);
   const [seeGrid, setSeeGrid] = useState(false);
 
   const lastPick = picks[picks.length - 1] || {};
