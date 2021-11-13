@@ -20,6 +20,7 @@ export const getPlayerBirthChartData = async (newPlayer) => {
   try {
     const fetchURL = createBirthChartURL(newPlayer);
     console.log("URL", fetchURL);
+    // console.log("newPlayer before chart", newPlayer);
     const birthChartData = await fetchBirthChart(fetchURL, newPlayer);
     console.log("birthChartData", birthChartData);
     const chartData = JSON.parse(birthChartData);
@@ -65,24 +66,24 @@ export const processCeleb = async (celeb, picks) => {
   celeb.chartData = await getPlayerBirthChartData(celeb);
 
   // This functionality is repeated in game context, line 85.
-  const pickIds = picks.map(({_id}) => _id);
+  const pickIds = picks.map(({ _id }) => _id);
   celeb.matches = Object.entries(celeb.chartData)
-  .filter(([playerPlanet]) => {
-    if (
-      playerPlanet === "time" ||
-      playerPlanet === "birthday" ||
-      playerPlanet === "longitude" ||
-      playerPlanet === "latitude"
-    )
-      return false;
-    return true;
-  })
-  .map(([playerPlanet, playerSign]) => {
-    return `${playerPlanet}-${playerSign}`.toLowerCase();
-  })
-  .filter((item) => {
-    return pickIds.includes(item);
-  });
+    .filter(([playerPlanet]) => {
+      if (
+        playerPlanet === "time" ||
+        playerPlanet === "birthday" ||
+        playerPlanet === "longitude" ||
+        playerPlanet === "latitude"
+      )
+        return false;
+      return true;
+    })
+    .map(([playerPlanet, playerSign]) => {
+      return `${playerPlanet}-${playerSign}`.toLowerCase();
+    })
+    .filter((item) => {
+      return pickIds.includes(item);
+    });
 
   celeb.joined = Date.now();
   return celeb;
@@ -98,7 +99,7 @@ export const processCelebs = async (picks) => {
   const celebsWithBirthChart = await Promise.all(prms);
   const fullCelebs = await addMany(
     celebsWithBirthChart,
-    PLAYERS_COLLECTION_NAME
+    PLAYERS_COLLECTION_NAME,
   );
   return fullCelebs;
 };

@@ -87,7 +87,7 @@ export const catchPhraseDict = {
     Aries: "1st amendment, Aries Ascendant",
     Taurus: "Loves pie and we don't mean Pythagorus, Ascendant in Taurus",
     Gemini: "Personality will Multiply, Ascendent in Gemini",
-    Cancer: "Fiercely independent, Leo Ascendant",
+    Cancer: "Crabbies Ginger Ale, Cancer Ascendant",
     Leo: "Fiercely independent, Leo Ascendant",
     Virgo: "Work commitment, Virgo Ascendant",
     Libra: "Balancing Act, Libra Ascendant",

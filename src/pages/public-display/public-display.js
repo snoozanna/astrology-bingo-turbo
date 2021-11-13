@@ -8,7 +8,7 @@ import { GameContext } from "./../../contexts/game.context";
 
 function PublicDisplay() {
   const { picks } = useContext(GameContext);
-  console.log("picks", picks);
+  // console.log("picks", picks);
 
   // TODO
 
@@ -16,7 +16,7 @@ function PublicDisplay() {
     return (
       <>
         <div className="App display">
-          <Header pageName="Game" />
+          <Header pageName="" />
           <main className="gameContainer "></main>
         </div>
       </>

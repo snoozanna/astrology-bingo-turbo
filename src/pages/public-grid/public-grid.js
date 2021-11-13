@@ -8,7 +8,7 @@ function PublicGrid() {
   return (
     <>
       <div className="App grid">
-        <Header pageName="Public Grid" />
+        <Header pageName="" />
         <main className="mainContainer">
           <GameDisplayGrid />
         </main>

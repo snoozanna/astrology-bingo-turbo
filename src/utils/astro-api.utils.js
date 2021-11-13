@@ -24,12 +24,14 @@ export const createBirthChartURL = ({
 
 export async function getGeo(placename) {
   const GEO_API_URL = `https://maps.googleapis.com/maps/api/geocode/json?address=${placename}&key=${GEO_API_KEY}`;
+  console.log("GEO URL", GEO_API_URL);
 
   try {
     const response = await fetch(GEO_API_URL);
     if (!response.ok) throw response;
     const data = await response.json();
-    console.log("data", data);
+    console.log("data from geoAPI", placename, data);
+    console.log("hello");
     return data;
   } catch (err) {
     console.log("err", err);
@@ -39,7 +41,8 @@ export async function getGeo(placename) {
 
 export function findUTCOffset(datetime, lat, long) {
   const timestamp = Date.parse(datetime) / 1000;
-  if(Number.isNaN(timestamp)) throw new Error(`Bad timestamp value ${datetime}`);
+  if (Number.isNaN(timestamp))
+    throw new Error(`Bad timestamp value ${datetime}`);
   const fetchURLUTC = `https://maps.googleapis.com/maps/api/timezone/json?location=${lat},${long}&timestamp=${timestamp}&key=${TIME_API_KEY}`;
   return getUTC(fetchURLUTC);
 }

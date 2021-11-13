@@ -9,7 +9,7 @@ const useStyles = makeStyles({
     fontWeight: "bold",
   },
   callMain: {
-    fontSize: "1.38rem",
+    fontSize: "1.23rem",
   },
 });
 

@@ -102,7 +102,7 @@ export const GameProvider = (props) => {
     const latestPickId = latestPick._id;
 
     const match = chartDataArray.find((sign) => {
-      console.log(sign, latestPickId);
+      // console.log(sign, latestPickId);
       return sign === latestPickId;
     });
     // debugger;

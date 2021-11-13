@@ -3,11 +3,11 @@
     radial-gradient(circle, rgba(27, 20, 100, 1) 0%, rgba(112, 15, 181, 1) 100%);
   background-repeat: no-repeat;
   background-position: center center;
-  // background-size: 100vw;
+  background-size: cover;
   height: 100vh;
   display: grid;
-  grid-template-columns: 21% 38% 17% 10%;
-  grid-template-rows: 20% 40% 10% 20% 10%;
+  grid-template-columns: 17% 38% 35% 15%;
+  grid-template-rows: 20% 40% 15% 15% 10%;
 }
 
 .gameContainer .callContainer {

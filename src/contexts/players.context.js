@@ -136,8 +136,12 @@ export const PlayersProvider = (props) => {
         PLAYERS_COLLECTION_NAME,
       );
 
-      if (location.pathname !== "/public-display") {
-        console.log("location", location);
+      if (
+        location.pathname !== "/public-grid" &&
+        location.pathname !== "/public-display" &&
+        location.pathname !== "/my-birth-chart"
+      ) {
+        // console.log("location", location);
         const updateMsg = `Updated ${
           updates.firstName ? updates.firstName : player.firstName
         } ${updates.lastName ? updates.lastName : player.lastName}`;

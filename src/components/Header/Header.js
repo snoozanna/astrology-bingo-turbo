@@ -59,7 +59,7 @@ export default function Header({ pageName }) {
         >
           {user && (
             <>
-              <span style={{ marginRight: "15px" }}>Hello Admin</span>
+              <span style={{ marginRight: "15px" }}>Hello Fig</span>
               <Button variant="outlined" color="secondary" onClick={logout}>
                 Log out
               </Button>

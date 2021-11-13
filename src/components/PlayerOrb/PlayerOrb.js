@@ -131,7 +131,7 @@ const PlayerOrb = ({ player: { _id, chartData }, player }) => {
               dx="0"
               dy="0"
               stdDeviation="1"
-              flood-color="#13ca91"
+              // flood-color="#13ca91"
             />
           </filter>
         </defs>
