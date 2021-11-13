@@ -13,13 +13,20 @@
   min-width: 10rem;
 }
 
+.prevCallContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
 .prevCallContainer.call {
   display: flex;
   flex-direction: column;
 }
 .prevCallContainer .planet,
 .prevCallContainer .sign {
-  font-size: 4rem;
+  font-size: 3.5rem;
 }
 
 .prevCallContainer span {

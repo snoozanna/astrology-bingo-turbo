@@ -6,20 +6,20 @@
   background-size: cover;
   height: 100vh;
   display: grid;
-  grid-template-columns: 17% 38% 35% 15%;
-  grid-template-rows: 20% 40% 15% 15% 10%;
+  grid-template-columns: 5% 25% 3% 35% 32%;
+  grid-template-rows: 15% 25% 13% 40% 7%;
 }
 
 .gameContainer .callContainer {
+  grid-column-start: 4;
+  grid-column-end: 4;
+  grid-row-start: 4;
+  grid-row-end: 4;
+}
+
+.gameContainer .prevCallContainer {
   grid-column-start: 2;
   grid-column-end: 2;
   grid-row-start: 2;
   grid-row-end: 2;
-}
-
-.gameContainer .prevCallContainer {
-  grid-column-start: 3;
-  grid-column-end: 3;
-  grid-row-start: 4;
-  grid-row-end: 4;
 }
