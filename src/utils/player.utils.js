@@ -12,6 +12,7 @@ import {
   findUTCOffset,
   getGeo,
 } from "./../utils/astro-api.utils";
+import _ from "lodash";
 import { appConfig } from "./../config";
 
 const { PLAYERS_COLLECTION_NAME, CELEB_COLLECTION_NAME } = appConfig;
@@ -93,7 +94,9 @@ export const processCelebs = async (picks) => {
   // debugger;
   const celebs = await getCollection(CELEB_COLLECTION_NAME);
   const prms = [];
+  //TODO I think I need to throttle here
   for (const celeb of celebs) {
+    // _.throttle(prms.push(processCeleb(celeb, picks)), 1000);
     prms.push(processCeleb(celeb, picks));
   }
   const celebsWithBirthChart = await Promise.all(prms);

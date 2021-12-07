@@ -7,6 +7,7 @@ import PhraseDisplay from "../../components/PhraseDisplay/PhraseDisplay.js";
 import CurrentCall from "../../components/CurrentCall/CurrentCall";
 import PreviousCall from "../../components/PreviousCall/PreviousCall";
 // import { makeStyles } from "@material-ui/core/styles";
+import Report from "../../components/Report/Report.js";
 
 import { GameContext } from "../../contexts/game.context";
 // import { PlayersContext } from "../../contexts/players.context";
@@ -35,6 +36,7 @@ function Admin() {
   } = useContext(GameContext);
   // const { players, matchesVisible } = useContext(PlayersContext);
   const [seeGrid, setSeeGrid] = useState(false);
+  const [seeReport, setSeeReport] = useState(false);
 
   const lastPick = picks[picks.length - 1] || {};
   const previousPick = picks[picks.length - 2] || {};
@@ -82,9 +84,13 @@ function Admin() {
               <button onClick={() => setSeeGrid(!seeGrid)}>
                 SEE {!seeGrid ? "GRID" : "CALL VIEW"}
               </button>
+              <button onClick={() => setSeeReport(!seeReport)}>
+                {!seeReport ? "SEE REPORT" : "HIDE REPORT"}
+              </button>
             </div>
           </div>
           {seeGrid ? <GameDisplayGrid /> : <CallView />}
+          {seeReport ? <Report /> : ""}
         </main>
       </div>
     </>

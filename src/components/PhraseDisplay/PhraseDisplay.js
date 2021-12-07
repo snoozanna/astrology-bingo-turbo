@@ -6,7 +6,7 @@ const PhraseDisplay = ({ planet, sign }) => {
   // console.log("from phrase display", planet, sign);
 
   if (!planet && !sign) {
-    console.log(`No planet and sign provided`);
+    // console.log(`No planet and sign provided`);
     return null;
   }
 
