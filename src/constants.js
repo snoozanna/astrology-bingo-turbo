@@ -80,7 +80,7 @@ export const catchPhraseDict = {
     Scorpio: "Orlando Bloom, Scorpio Moon",
     Sagittarius: "Travels in June, Sagittarius Moon",
     Capricorn: "Swampy lagoon, Capricorn Moon",
-    Aquarius: "A bit of a loon, Aquarius Moon",
+    Aquarius: "See you soon, Aquarius Moon",
     Pisces: "Humming a tune, Pisces Moon",
   },
   Ascendant: {
@@ -186,7 +186,7 @@ export const catchPhraseDict = {
   Neptune: {
     Aries: "Covid Immune, Aries Neptune",
     Taurus: "Wake up at Noon, Taurus Neptune",
-    Gemini: "Bday in June, Gemini Neptune",
+    Gemini: "Fruit of the loom, Gemini Neptune",
     Cancer: "Swim to the moon, Cancer Neptune",
     Leo: "A bit of a goon, Leo Neptune",
     Virgo: "Ladies commune, Virgo Neptune",
@@ -209,7 +209,7 @@ export const catchPhraseDict = {
     Sagittarius: "Tasty Prosciutto, Sagittarius Pluto",
     Capricorn: "Saving for a bungalow, Capricorn Pluto",
     Aquarius: "A Silly Dodo, Aquarius Pluto",
-    Pisces: "Mermaid Hoe, Pisces Pluto",
+    Pisces: "Delicious cod roe, Pisces Pluto",
   },
   Descendant: {
     Aries: "Married at first sight, Aries Descendant",

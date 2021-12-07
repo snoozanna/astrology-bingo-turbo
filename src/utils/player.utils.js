@@ -22,7 +22,7 @@ export const getPlayerBirthChartData = async (newPlayer) => {
     console.log("URL", fetchURL);
     // console.log("newPlayer before chart", newPlayer);
     const birthChartData = await fetchBirthChart(fetchURL, newPlayer);
-    console.log("birthChartData", birthChartData);
+    // console.log("birthChartData", birthChartData);
     const chartData = JSON.parse(birthChartData);
     // debugger;
     chartData.Ascendant = chartData.Asc;

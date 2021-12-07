@@ -31,7 +31,7 @@ export async function getGeo(placename) {
     if (!response.ok) throw response;
     const data = await response.json();
     console.log("data from geoAPI", placename, data);
-    console.log("hello");
+    // console.log("hello");
     return data;
   } catch (err) {
     console.log("err", err);
@@ -52,7 +52,7 @@ async function getUTC(currentURL) {
     const response = await fetch(currentURL);
     if (!response.ok) throw response;
     const data = await response.json();
-    console.log("utc data", data);
+    // console.log("utc data", data);
     const offset = data.rawOffset + data.dstOffset;
     const offsetUTC = Math.floor(offset / 60 / 60);
     return offsetUTC;
