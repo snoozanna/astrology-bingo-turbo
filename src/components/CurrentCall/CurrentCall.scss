@@ -27,11 +27,9 @@
   display: flex;
   flex-direction: column;
 }
-.callContainer .planet {
-  font-size: 5.2rem;
-}
+.callContainer .planet,
 .callContainer .sign {
-  font-size: 5.2rem;
+  font-size: 8rem;
 }
 
 .callContainer span {

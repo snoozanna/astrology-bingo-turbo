@@ -79,9 +79,9 @@ export const GameProvider = (props) => {
   }, [celebsIncluded, players]);
 
   const markCard = async (player) => {
-    console.log(`Running markCard`);
+    // console.log(`Running markCard`);
     if (!picks.length) return;
-    console.log(`Running markCard for ${player.firstName} ${player.lastName}`);
+    // console.log(`Running markCard for ${player.firstName} ${player.lastName}`);
     const chartDataArray = Object.entries(player.chartData)
       .filter(([playerPlanet]) => {
         if (
@@ -149,6 +149,7 @@ export const GameProvider = (props) => {
   };
 
   useEffect(() => {
+    console.log("filtering winners through a useEffect");
     const winners = players
       .filter(({ matches }) => matches.length >= 12)
       .map(({ _id }) => _id);
@@ -157,6 +158,9 @@ export const GameProvider = (props) => {
 
   const markPlayers = (players) => {
     for (const player of players) {
+      // console.log(
+      //   `about to run markCard for ${player.firstName} ${player.lastName}`,
+      // );
       markCard(player);
     }
   };

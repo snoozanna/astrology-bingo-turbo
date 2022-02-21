@@ -95,8 +95,15 @@ export const processCelebs = async (picks) => {
   const celebs = await getCollection(CELEB_COLLECTION_NAME);
   const prms = [];
   //TODO I think I need to throttle here
+  // const throtProcessCeleb = (celeb, picks) => {
+  //   _.throttle(processCeleb(celeb, picks), 1000);
+  // };
+
   for (const celeb of celebs) {
-    // _.throttle(prms.push(processCeleb(celeb, picks)), 1000);
+    // prms.push(throtProcessCeleb(celeb, picks));
+    // let throttled = _.throttle(processCeleb(celeb, picks), 1000);
+    // console.log("throttled data", throttled());
+
     prms.push(processCeleb(celeb, picks));
   }
   const celebsWithBirthChart = await Promise.all(prms);

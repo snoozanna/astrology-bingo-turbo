@@ -1,27 +1,55 @@
 .gameContainer {
-  background-image: url("./../../assets/img/pd-icing.png"),
-    radial-gradient(circle, rgba(27, 20, 100, 1) 0%, rgba(112, 15, 181, 1) 100%);
+  background-image: url("./../../assets/img/pd-icing-irl.png"),
+    // background-image: url("./../../assets/img/pd-icing-irl-big.png"),
+    radial-gradient(
+        circle,
+        rgba(27, 20, 100, 1) 0%,
+        rgba(112, 15, 181, 1) 100%
+      );
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
   height: 100vh;
   display: grid;
-  grid-template-columns: 35% 40% 5% 15%;
-  grid-template-rows: 15% 25% 17% 30% 13%;
-  //   grid-template-columns: 5% 25% 3% 35% 32%;
-  // grid-template-rows: 15% 25% 13% 40% 7%;
+  // digital
+  // grid-template-columns: 35% 40% 5% 15%;
+  // grid-template-rows: 15% 25% 17% 30% 13%;
+  // irl
+  grid-template-columns: 5% 25% 3% 35% 32%;
+  grid-template-rows: 15% 25% 13% 40% 7%;
 }
+
+// DIGITAL
+// .gameContainer .callContainer {
+//   grid-column-start: 2;
+//   grid-column-end: 3;
+//   grid-row-start: 4;
+//   grid-row-end: 4;
+// }
+
+// .gameContainer .prevCallContainer {
+//   grid-column-start: 4;
+//   grid-column-end: 5;
+//   grid-row-start: 4;
+//   grid-row-end: 5;
+// }
+
+// IRL
 
 .gameContainer .callContainer {
-  grid-column-start: 2;
-  grid-column-end: 3;
-  grid-row-start: 4;
-  grid-row-end: 4;
-}
-
-.gameContainer .prevCallContainer {
   grid-column-start: 4;
   grid-column-end: 5;
   grid-row-start: 4;
-  grid-row-end: 5;
+  grid-row-end: 4;
+  // max-width: 70%;
+  margin: auto;
+}
+
+.gameContainer .prevCallContainer {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 3;
+
+  margin: auto;
 }

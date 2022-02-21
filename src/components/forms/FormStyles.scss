@@ -1,3 +1,7 @@
-.MuiInput-input {
-  color: "ivory";
+// .MuiInput-input {
+//   color: "ivory";
+// }
+
+label + .MuiInput-formControl {
+  font-size: 1.3rem;
 }

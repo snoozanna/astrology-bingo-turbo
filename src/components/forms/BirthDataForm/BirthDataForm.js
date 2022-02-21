@@ -29,16 +29,24 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     marginBlockEnd: 30,
   },
-  formRowItem: {
+  sectionTitle: {
+    fontSize: "2.4rem",
+    fontFamily: "Chromate",
+    fontVariant: "small-caps",
     marginInlineEnd: 10,
   },
+  formRowItem: {
+    marginInlineEnd: 10,
+    fontSize: "1.8rem",
+  },
   container: {
-    backgroundColor: "rgb(185 234 139 / 80%)",
-    maxWidth: "50%",
+    backgroundColor: "#13ca91;",
+    maxWidth: "70%",
     margin: "auto",
-    color: "black",
-    borderRadius: "50%",
+    borderRadius: "6px",
+    border: "solid ivory 2px",
     padding: "10px",
+    marginBlockStart: "50px",
   },
   fieldset: {
     border: "none",
@@ -215,7 +223,7 @@ function BirthDataForm() {
 
   //FINAL SUBMIT
   const onSubmit = async (formValues) => {
-    console.log("formValues", formValues);
+    // console.log("formValues", formValues);
 
     // if (id) {
     //   formValues._id = id; // pulled from the URL using router 'useParams' hook
@@ -259,7 +267,7 @@ function BirthDataForm() {
   const personalDetailsFields = () => (
     <fieldset id="personal-details" className={classes.fieldset}>
       <legend className={classes.legend}>Personal Details</legend>
-      <Typography component="h2" className={classes.formRowItem}>
+      <Typography component="h2" className={classes.sectionTitle}>
         Personal Details
       </Typography>
       <div className={classes.formRow}>
@@ -308,7 +316,7 @@ function BirthDataForm() {
   const locationFields = () => (
     <fieldset className={classes.fieldset}>
       <legend className={classes.legend}>Location</legend>
-      <Typography component="h2" className={classes.formRowItem}>
+      <Typography component="h2" className={classes.sectionTitle}>
         Where were you born?
       </Typography>
       <div className={classes.formRow}>
@@ -329,13 +337,40 @@ function BirthDataForm() {
           type="button"
           variant="contained"
           color="primary"
-          className={(classes.button, classes.formRowItem)}
+          className={classes.button}
           // disabled={(!dirtyFields.locationSearchTerm && errors.locationSearchTerm)}
         >
           Find Lat/Long
         </Button>
       </div>
       <div className={classes.formRow}>
+        <Controller
+          as={TextField}
+          error={!!errors.latitude}
+          helperText={errors.latitude && errors.latitude.message}
+          id="latitude"
+          type="number"
+          name="latitude"
+          placeholder="Latitude"
+          className={classes.textField}
+          control={control}
+          rules={{ required: true }}
+          readOnly
+        />
+
+        <Controller
+          as={TextField}
+          error={!!errors.longitude}
+          helperText={errors.longitude && errors.longitude.message}
+          id="longitude"
+          name="longitude"
+          placeholder="Longitude"
+          type="number"
+          className={classes.textField}
+          control={control}
+          rules={{ required: true }}
+          readOnly
+        />
         <FormControl disabled={!possibleLocations.length}>
           <Controller
             render={() => (
@@ -373,7 +408,7 @@ function BirthDataForm() {
       </div>
 
       <div className={classes.formRow}>
-        <Controller
+        {/* <Controller
           as={TextField}
           error={!!errors.latitude}
           helperText={errors.latitude && errors.latitude.message}
@@ -399,7 +434,7 @@ function BirthDataForm() {
           control={control}
           rules={{ required: true }}
           readOnly
-        />
+        /> */}
       </div>
     </fieldset>
   );
@@ -407,8 +442,8 @@ function BirthDataForm() {
   const dobFields = () => (
     <fieldset id="dob-details" className={classes.fieldset}>
       <legend className={classes.legend}>Date of birth</legend>
-      <Typography component="h2" className={classes.formRowItem}>
-        When were your born?
+      <Typography component="h2" className={classes.sectionTitle}>
+        When were you born?
       </Typography>
       <div className={classes.formRow}>
         <Controller

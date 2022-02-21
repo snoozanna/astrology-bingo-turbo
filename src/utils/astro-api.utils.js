@@ -24,13 +24,13 @@ export const createBirthChartURL = ({
 
 export async function getGeo(placename) {
   const GEO_API_URL = `https://maps.googleapis.com/maps/api/geocode/json?address=${placename}&key=${GEO_API_KEY}`;
-  console.log("GEO URL", GEO_API_URL);
+  // console.log("GEO URL", GEO_API_URL);
 
   try {
     const response = await fetch(GEO_API_URL);
     if (!response.ok) throw response;
     const data = await response.json();
-    console.log("data from geoAPI", placename, data);
+    // console.log("data from geoAPI", placename, data);
     // console.log("hello");
     return data;
   } catch (err) {

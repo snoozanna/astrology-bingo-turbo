@@ -59,7 +59,7 @@ export const removeFromLocal = (setter, { id }) => {
       ...collection.slice(0, idx),
       ...collection.slice(idx + 1),
     ];
-    // console.log("removeFromLocal updatedCollection", updatedCollection);
+    console.log("removeFromLocal updatedCollection", updatedCollection);
     return updatedCollection;
   });
 };
